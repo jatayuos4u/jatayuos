@@ -11,7 +11,7 @@ A separate project for **Ubuntu 26.04 LTS Resolute Raccoon + Cinnamon**. Creator
 
 ## Build and try
 
-On **Ubuntu Cinnamon 26.04**, run `./build-package.sh`, then `sudo apt install ./dist/jatayu-experience_0.1.0_all.deb`. At the LightDM login screen select **JatayuOS Cinnamon**. This is an add-on for an unmodified Ubuntu Cinnamon installation; its `.deb` can also be installed in a private remaster for testing. Run `python3 tests/check.py` to validate source wiring. For the live wizard, install the relevant language packs and generate the selected UTF-8 locales in the image. The keyboard layout is session-scoped and will need explicit installed-user persistence. The original image can be downloaded and verified from https://cdimage.ubuntu.com/ubuntucinnamon/releases/26.04.1/release/ .
+On **Ubuntu Cinnamon 26.04**, run `./build-package.sh`, then `sudo apt install ./dist/jatayu-experience_0.1.0_all.deb`. At the LightDM login screen select **JatayuOS Cinnamon**. This is an add-on for an unmodified Ubuntu Cinnamon installation; its `.deb` can also be installed in a private remaster for testing. Run `python3 tests/check.py` to validate source wiring. For the live wizard, install the relevant language packs and generate the selected UTF-8 locales in the image. The keyboard layout is session-scoped and will need explicit installed-user persistence. The original image can be downloaded and verified from https://cdimage.ubuntu.com/ubuntucinnamon/releases/resolute/release/ .
 
 ## Release and ISO status
 
