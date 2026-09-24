@@ -16,7 +16,7 @@ project=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 work=$(mktemp -d "$(dirname "$out")/jatayu-iso.XXXXXXXX")
 cleanup() { mountpoint -q "$work/root/dev" && umount -l "$work/root/dev" || :; mountpoint -q "$work/root/proc" && umount -l "$work/root/proc" || :; mountpoint -q "$work/root/sys" && umount -l "$work/root/sys" || :; rm -rf "$work"; }
 trap cleanup EXIT
-url=https://cdimage.ubuntu.com/ubuntucinnamon/releases/26.04.1/release
+url=https://cdimage.ubuntu.com/ubuntucinnamon/releases/resolute/release
 curl -fsSL "$url/SHA256SUMS" -o "$work/SHA256SUMS"
 expected=$(awk -v n="$name" '$2==n || $2=="*"n {print $1}' "$work/SHA256SUMS")
 [[ $expected =~ ^[0-9a-f]{64}$ ]] || { echo 'Official checksum entry missing.' >&2; exit 1; }
