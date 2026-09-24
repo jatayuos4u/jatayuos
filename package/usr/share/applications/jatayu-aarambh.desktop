@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Aarambh
+Comment=JatayuOS welcome and start center
+Exec=/usr/bin/jatayu-app aarambh
+Icon=jatayu
+Terminal=false
+Categories=Utility;

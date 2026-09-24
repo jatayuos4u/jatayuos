@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=About JatayuOS
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app about
+Icon=jatayu
+Terminal=false
+Categories=System;

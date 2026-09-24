@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sanjeevani (Backup)
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app backup
+Icon=document-save
+Terminal=false
+Categories=Utility;

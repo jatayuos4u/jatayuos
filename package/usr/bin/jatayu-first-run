@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+"""Apply original Cinnamon defaults once per user; never override later choices."""
+from pathlib import Path
+import subprocess
+
+marker=Path.home()/'.config/jatayu/desktop-initialized'
+if marker.exists(): raise SystemExit(0)
+def set_value(schema,key,value):
+    subprocess.run(['gsettings','set',schema,key,value],check=True)
+try:
+    # Cinnamon uses left, center and right zones within its bottom panel.
+    set_value('org.cinnamon','panels-enabled',"['1:0:bottom']")
+    set_value('org.cinnamon','enabled-applets',"['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:show-desktop@cinnamon.org:1', 'panel1:center:0:grouped-window-list@cinnamon.org:2', 'panel1:right:0:systray@cinnamon.org:3', 'panel1:right:1:xapp-status@cinnamon.org:4', 'panel1:right:2:network@cinnamon.org:5', 'panel1:right:3:sound@cinnamon.org:6', 'panel1:right:4:power@cinnamon.org:7', 'panel1:right:5:notifications@cinnamon.org:8', 'panel1:right:6:calendar@cinnamon.org:9']")
+    set_value('org.cinnamon.desktop.background','picture-uri',"'file:///usr/share/backgrounds/jatayu/dawn.svg'")
+    marker.parent.mkdir(parents=True,exist_ok=True)
+    marker.write_text('0.1.0\n')
+except (OSError,subprocess.CalledProcessError) as exc:
+    print('Jatayu initial desktop setup failed:',exc)

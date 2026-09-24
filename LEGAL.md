@@ -1,0 +1,9 @@
+# Credits and release conditions
+
+JatayuOS concept, package code, logo and Dawn wallpaper: Copyright (c) 2026 Anup Yadav. Project code and original SVG art in this directory: MIT License (see LICENSE). They are original project assets, not Deepin or Linux Mint copies.
+
+Ubuntu 26.04 LTS is produced by Canonical and Ubuntu contributors. Cinnamon is developed by the Linux Mint team and contributors. Linux, GRUB, LightDM, GTK, GNOME Software, Déjà Dup and other included applications retain their respective copyrights, marks and upstream licenses. An installed system must retain the packaged notices in `/usr/share/doc`, and redistributors must supply the corresponding source and attribution where the component license requires it. JatayuOS is unaffiliated with Canonical, Linux Mint, Indian government websites, Meta or Drik Panchang. External site names are references to those sites only. Third-party logos are not included here.
+
+Canonical's Intellectual Property Rights Policy says that distributing a **modified Ubuntu image associated with Canonical trademarks requires its approval/certification/provision**; its alternative route says to replace the marks and recompile source into your own binaries. See https://canonical.com/legal/intellectual-property-policy . An add-on package installed by an individual on an unmodified Ubuntu image is the current release route. Do not publish a modified Ubuntu Cinnamon ISO merely after changing splash screens or credit text. Obtain qualified legal review and the relevant permissions, or build a compliant independent distribution from appropriately licensed sources before publishing an ISO.
+
+Website references: https://www.india.gov.in/directory , https://www.india.gov.in/calendar , https://www.drikpanchang.com/ . Holiday and tithi data are viewed at the originating site; accuracy and changes are that site's responsibility.

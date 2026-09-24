@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Settings
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app settings
+Icon=preferences-system
+Terminal=false
+Categories=Preferences;

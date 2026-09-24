@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Software Center
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app software
+Icon=system-software-install
+Terminal=false
+Categories=System;

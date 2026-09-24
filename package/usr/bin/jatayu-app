@@ -1,0 +1,85 @@
+#!/usr/bin/python3
+"""Simple launchers with a strict allowlist; no shell invocation."""
+import os
+import platform
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+import tkinter as tk
+from tkinter import messagebox
+
+URLS={'sarkar':'https://www.india.gov.in/directory',
+      'utsav':'https://www.india.gov.in/calendar',
+      'tithi':'https://www.drikpanchang.com/',
+      'help':'https://github.com/jatayuos4u/jatayuos'}
+COMMANDS={'settings': [('cinnamon-settings',)],
+          'bhasha': [('gnome-language-selector',),('cinnamon-settings','region')],
+          'update': [('update-manager',),('gnome-software','--mode=updates')],
+          'backup': [('deja-dup',)],
+          'software': [('gnome-software',),('snap-store',)],
+          'installer': [('ubuntu-desktop-bootstrap',)]}
+def hub(title,description,links):
+    root=tk.Tk();root.title(title);root.geometry('550x440')
+    tk.Label(root,text=title,font=('Sans',20,'bold')).pack(pady=(20,5))
+    tk.Label(root,text=description,wraplength=490).pack(pady=(0,18))
+    for label,url in links:
+        tk.Button(root,text=label,width=42,command=lambda u=url:subprocess.Popen(['xdg-open',u])).pack(pady=4)
+    root.mainloop()
+
+def install_social():
+    providers={'WhatsApp Web':'https://web.whatsapp.com/',
+               'Facebook':'https://www.facebook.com/',
+               'Instagram':'https://www.instagram.com/',
+               'YouTube':'https://www.youtube.com/',
+               'Telegram Web':'https://web.telegram.org/'}
+    root=tk.Tk();root.title('Jatayu Web App shortcuts');root.geometry('480x390')
+    tk.Label(root,text='Choose web shortcuts',font=('Sans',18,'bold')).pack(pady=14)
+    tk.Label(root,text='Shortcuts open each provider in your default browser.\nAn account and internet connection may be needed.').pack(pady=6)
+    selected={name:tk.BooleanVar() for name in providers}
+    for name,flag in selected.items():tk.Checkbutton(root,text=name,variable=flag).pack(anchor='w',padx=75)
+    def save():
+        folder=Path.home()/'.local/share/applications';folder.mkdir(parents=True,exist_ok=True)
+        for name,flag in selected.items():
+            if flag.get():
+                key=name.lower().replace(' ','-')
+                (folder/('jatayu-web-'+key+'.desktop')).write_text(
+                    '[Desktop Entry]\nType=Application\nName='+name+' (web)\nExec=xdg-open '+providers[name]+
+                    '\nIcon=applications-internet\nTerminal=false\nCategories=Network;\n',encoding='utf-8')
+        root.destroy()
+    tk.Button(root,text='Install selected shortcuts',command=save).pack(pady=20)
+    root.mainloop()
+
+def run(action):
+    if action=='aarambh':
+        hub('Aarambh · Start here','Welcome to JatayuOS. Explore your desktop and useful services.',
+            [('Jatayu Help',URLS['help']),('Government services',URLS['sarkar']),
+             ('Indian holidays',URLS['utsav'])]);return
+    if action=='sarkar':
+        hub('Sarkar Setu','Independent directory of official Government of India links. Check the address in your browser.',
+            [('India portal · departments',URLS['sarkar']),
+             ('India Government Directory','https://igod.gov.in/'),
+             ('UMANG services','https://web.umang.gov.in/')]);return
+    if action=='utsav':
+        hub('Utsav · Indian calendar','Holiday dates and tithi depend on location. Select your city on the Panchang site.',
+            [('Government of India holiday calendar',URLS['utsav']),
+             ('Tithi and festivals · Drik Panchang',URLS['tithi'])]);return
+    if action=='social': install_social();return
+    if action in URLS:
+        subprocess.Popen(['xdg-open',URLS[action]]); return
+    if action=='jaan':
+        r=tk.Tk();r.title('Jaanch · System Information');r.geometry('450x180')
+        tk.Label(r,text='JatayuOS · Cinnamon edition',font=('Sans',18)).pack(pady=10)
+        tk.Label(r,text=f'Linux kernel: {platform.release()}\nArchitecture: {platform.machine()}\nBase: Ubuntu 26.04 LTS (Resolute Raccoon)').pack()
+        r.mainloop();return
+    if action=='about':
+        r=tk.Tk();r.withdraw()
+        messagebox.showinfo('About JatayuOS','JatayuOS\nUdaan Aapki, Shakti Bharat Ki\nCreated by Anup Yadav, India\nCinnamon edition based on Ubuntu 26.04 LTS')
+        r.destroy();return
+    for args in COMMANDS.get(action,[]):
+        if shutil.which(args[0]):
+            subprocess.Popen(args);return
+    raise SystemExit('No suitable installed application for '+action)
+if __name__=='__main__':
+    if len(sys.argv)!=2: raise SystemExit('Usage: jatayu-app ACTION')
+    run(sys.argv[1])

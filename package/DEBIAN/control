@@ -1,0 +1,11 @@
+Package: jatayu-experience
+Version: 0.1.0
+Section: misc
+Priority: optional
+Architecture: all
+Maintainer: Anup Yadav <noreply@github.com>
+Depends: cinnamon, lightdm, python3 (>= 3.12), python3-tk, x11-xkb-utils, xdg-utils
+Recommends: language-selector-gnome, update-manager, deja-dup, gnome-software
+Description: JatayuOS Cinnamon experience for Ubuntu 26.04
+ Original JatayuOS desktop branding, optional live-session location wizard,
+ launchers, wallpaper and a three-zone Cinnamon panel preset.

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jaanch
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app jaan
+Icon=computer
+Terminal=false
+Categories=System;

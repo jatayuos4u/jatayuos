@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Help
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app help
+Icon=help-browser
+Terminal=false
+Categories=Documentation;

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=JatayuOS Cinnamon
+Comment=JatayuOS Cinnamon session
+Exec=/usr/bin/jatayu-session
+TryExec=/usr/bin/cinnamon-session
+Type=Application
+DesktopNames=X-Cinnamon;Cinnamon
