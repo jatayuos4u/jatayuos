@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sarkar Setu
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app sarkar
+Icon=applications-internet
+Terminal=false
+Categories=Network;

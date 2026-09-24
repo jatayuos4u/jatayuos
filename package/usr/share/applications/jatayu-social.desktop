@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Web App Shortcuts
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app social
+Icon=applications-internet
+Terminal=false
+Categories=Network;

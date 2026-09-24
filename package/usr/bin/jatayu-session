@@ -1,0 +1,14 @@
+#!/usr/bin/python3
+"""Launch Jatayu's live wizard before Cinnamon starts."""
+import os
+import pathlib
+import subprocess
+import sys
+if pathlib.Path('/run/casper').exists():
+    try:
+        sys.path.insert(0, '/usr/lib/jatayu')
+        from wizard import main
+        main()
+    except Exception as exc:
+        print('Jatayu live setup skipped:', exc, file=sys.stderr)
+os.execvp('cinnamon-session', ['cinnamon-session'])

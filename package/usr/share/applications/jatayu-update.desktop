@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Update
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app update
+Icon=software-update-available
+Terminal=false
+Categories=System;

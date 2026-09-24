@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Bhasha Setu
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app bhasha
+Icon=preferences-desktop-locale
+Terminal=false
+Categories=Preferences;

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=JatayuOS initial desktop setup
+Exec=/usr/bin/jatayu-first-run
+OnlyShowIn=X-Cinnamon;Cinnamon;
+NoDisplay=true

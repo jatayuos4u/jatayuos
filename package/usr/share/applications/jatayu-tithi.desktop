@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Utsav · Tithi
+Comment=JatayuOS launcher
+Exec=/usr/bin/jatayu-app tithi
+Icon=x-office-calendar
+Terminal=false
+Categories=Office;
