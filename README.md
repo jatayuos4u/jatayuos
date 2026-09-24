@@ -15,6 +15,14 @@ On **Ubuntu Cinnamon 26.04**, run `./build-package.sh`, then `sudo apt install .
 
 ## Release and ISO status
 
-**No ISO is included or claimed to have been tested.** The current execution environment cannot fetch Ubuntu mirrors and does not have `xorriso`, `unsquashfs` or QEMU. Use the official unmodified Ubuntu Cinnamon ISO for installation until distribution approval or an independent, policy-compliant rebuild is completed. Consult `LEGAL.md` before sharing a modified ISO.
+**No ISO is included or claimed to have been boot-tested.** The build script below produces a private test image on a Linux host with internet access, at least 40 GiB of free space, and `xorriso`, `squashfs-tools`, `curl` and `dpkg` installed. The official base ISO must be downloaded separately from the Canonical Ubuntu Cinnamon 26.04.1 release page; the script verifies it against the release SHA256SUMS before making changes. It replaces the installed standard squashfs layer with a flattened package-enabled layer and preserves the original boot entries using xorriso. The installed image and installer behavior have not been verified.
+
+```bash
+sudo ./scripts/build-private-test-iso.sh \
+  /path/to/ubuntucinnamon-26.04.1-desktop-amd64.iso \
+  /path/to/jatayuos-26.04.1-private-test-amd64.iso
+```
+
+This local build is for private validation. Boot-test BIOS, UEFI, live desktop, installer, installed system and Windows coexistence before using on real disks. The current execution environment cannot fetch Ubuntu mirrors or run QEMU. Consult `LEGAL.md` before sharing a modified ISO; use the official unmodified Ubuntu Cinnamon ISO for installation until the distribution requirements are addressed.
 
 This preview does **not** yet implement a custom GRUB menu, Plymouth animation, Calamares integration, full desktop launcher renaming, a built-in Panchang calculation, or tested Windows dual boot. The Ubuntu Cinnamon 26.04 image uses `ubuntu-desktop-bootstrap` rather than Calamares. Do not claim these features are ready. Existing data belongs in `/home`; retain the home partition or restore a verified backup before any reinstall. LTS upgrades also need explicit testing and packaging updates, since no distribution can guarantee compatibility across every major release.
