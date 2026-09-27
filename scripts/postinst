@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+# No per-user configuration rewrites; new-user defaults live under /etc/skel.
+if command -v update-desktop-database >/dev/null 2>&1; then update-desktop-database -q || true; fi
+exit 0
+

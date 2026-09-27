@@ -1,0 +1,33 @@
+#!/usr/bin/python3
+"""Narrow root helper. Package choices are fixed, no arbitrary command strings."""
+import os, subprocess, sys
+from pathlib import Path
+CATALOG={
+ 'office':['libreoffice'], 'media':['vlc'], 'graphics':['gimp'],
+ 'drawing':['inkscape'], 'audio':['audacity'], 'video':['kdenlive'],
+ 'developer':['git','build-essential','gdb'], 'printing':['cups','system-config-printer'],
+ 'hindi':['task-hindi','firefox-esr-l10n-hi-in'],
+}
+if os.geteuid()!=0: sys.exit('Administrator authentication is required.')
+os.environ['PATH']='/usr/sbin:/usr/bin:/sbin:/bin'
+os.environ['DEBIAN_FRONTEND']='noninteractive'
+def run(args): subprocess.run(args,check=True)
+action=sys.argv[1] if len(sys.argv)>1 else ''
+try:
+ if action=='refresh' and len(sys.argv)==2: run(['/usr/bin/apt-get','update'])
+ elif action=='install' and len(sys.argv)>2:
+  choices=sys.argv[2:]
+  if not all(x in CATALOG for x in choices): sys.exit('Unrecognized software selection.')
+  run(['/usr/bin/apt-get','update'])
+  packages=sorted({p for c in choices for p in CATALOG[c]})
+  run(['/usr/bin/apt-get','--no-remove','-y','install',*packages])
+ elif action=='live-layout' and len(sys.argv)==4:
+  if 'boot=live' not in Path('/proc/cmdline').read_text().split(): sys.exit('Live session only.')
+  locale,layout=sys.argv[2:]
+  if locale not in {'en_IN.UTF-8','hi_IN.UTF-8'} or layout not in {'us','in'}: sys.exit('Unsupported selection.')
+  run(['/usr/bin/localectl','set-locale','LANG='+locale])
+  run(['/usr/bin/localectl','--no-convert','set-x11-keymap',layout])
+  # Calamares still asks the user to confirm these on its own pages.
+ else: sys.exit('Unsupported privileged action.')
+except subprocess.CalledProcessError as e: sys.exit(e.returncode)
+
