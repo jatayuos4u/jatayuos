@@ -1,0 +1,14 @@
+{
+  "KPlugin": {
+    "Id": "org.jatayu.desktop",
+    "Name": "JatayuOS",
+    "Description": "JatayuOS development layout",
+    "Version": "0.1",
+    "Authors": [
+      {
+        "Name": "Anup Yadav"
+      }
+    ]
+  },
+  "KPackageStructure": "Plasma/LookAndFeel"
+}
