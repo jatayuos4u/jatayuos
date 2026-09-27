@@ -1,0 +1,7 @@
+[Plymouth Theme]
+Name=JatayuOS
+Description=JatayuOS development boot theme
+ModuleName=script
+[script]
+ImageDir=/usr/share/plymouth/themes/jatayu
+ScriptFile=/usr/share/plymouth/themes/jatayu/jatayu.script
