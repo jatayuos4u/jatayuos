@@ -1,0 +1,8 @@
+build/
+out/
+__pycache__/
+*.pyc
+*.iso
+*.deb
+*.log
+JatayuOS-Development-Build-Kit.zip
