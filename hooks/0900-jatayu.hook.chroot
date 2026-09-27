@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+export DEBIAN_FRONTEND=noninteractive
+python3 /usr/share/jatayu/configure-image.py
+sed -i 's/^# *en_IN UTF-8/en_IN UTF-8/;s/^# *hi_IN UTF-8/hi_IN UTF-8/' /etc/locale.gen
+locale-gen
+update-locale LANG=en_IN.UTF-8
+systemctl enable NetworkManager sddm unattended-upgrades
+systemctl disable ssh.service 2>/dev/null || true
+plymouth-set-default-theme jatayu
+update-initramfs -u -k all
+# Retain package legal notices and record exact shipped sources/versions.
+mkdir -p /usr/share/jatayu/notices
+dpkg-query -W -f='${binary:Package}\t${Version}\t${source:Package}\t${source:Version}\n' > /usr/share/jatayu/build-package-manifest.tsv
+python3 - <<'PY'
+from pathlib import Path
+import shutil
+for f in Path('/usr/share/doc').glob('*/copyright'):
+    try: shutil.copyfile(f,Path('/usr/share/jatayu/notices')/(f.parent.name+'.copyright'))
+    except FileNotFoundError: pass
+PY
+apt-get clean
+
