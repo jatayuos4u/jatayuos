@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Tools
+Comment=JatayuOS Jatayu Tools
+Exec=jatayu tools
+Icon=applications-graphics
+Terminal=false
+Categories=Graphics;
+StartupNotify=true

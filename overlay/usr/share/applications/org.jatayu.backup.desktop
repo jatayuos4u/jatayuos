@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Sanjeevani
+Comment=JatayuOS Jatayu Sanjeevani
+Exec=jatayu backup
+Icon=document-save
+Terminal=false
+Categories=System;
+StartupNotify=true

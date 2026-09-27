@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Android Setup
+Comment=JatayuOS Android Setup
+Exec=jatayu android
+Icon=phone
+Terminal=false
+Categories=System;
+StartupNotify=true

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Bhasa Setu
+Comment=JatayuOS Bhasa Setu
+Exec=jatayu language
+Icon=preferences-desktop-locale
+Terminal=false
+Categories=Settings;
+StartupNotify=true

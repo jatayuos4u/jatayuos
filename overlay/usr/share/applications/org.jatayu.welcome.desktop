@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Aarambh
+Comment=JatayuOS Aarambh
+Exec=jatayu welcome
+Icon=start-here
+Terminal=false
+Categories=System;
+StartupNotify=true
