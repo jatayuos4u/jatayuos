@@ -26,7 +26,12 @@ Path(helper).chmod(0o755)
 # Identity: explicitly divert base-files entries rather than unmanaged overwrites.
 identity='NAME="JatayuOS"\nPRETTY_NAME="JatayuOS 0.1 Development (Debian 13)"\nID=jatayuos\nID_LIKE=debian\nVERSION_ID="0.1"\nVERSION="0.1 Development"\nVERSION_CODENAME=trixie\nDEBIAN_CODENAME=trixie\n'
 for p in ['/etc/os-release','/usr/lib/os-release']:
-    subprocess.run(['dpkg-divert','--local','--add','--rename',p],check=True)
+    # live-build/debootstrap already diverts /etc/os-release to its own
+    # .debootstrap path. Preserve that registered diversion; dpkg rejects a
+    # second one with a different target.
+    existing=subprocess.run(['dpkg-divert','--list',p],check=True,capture_output=True,text=True).stdout
+    if not existing.strip():
+        subprocess.run(['dpkg-divert','--local','--add','--rename',p],check=True)
     write(p,identity)
 write('/etc/default/grub.d/jatayu.cfg','GRUB_DISTRIBUTOR="JatayuOS"\nGRUB_DISABLE_OS_PROBER=false\nGRUB_CMDLINE_LINUX_DEFAULT="quiet splash"\n')
 # Live-only installer shortcut creation is delegated to our autostart.
@@ -59,4 +64,3 @@ meta=dst/'metadata.json'
 if meta.exists():
     d=json.loads(meta.read_text());d.setdefault('KPlugin',{}).update({'Id':'jatayu','Name':'JatayuOS (Breeze-derived)'});meta.write_text(json.dumps(d,indent=2))
 print('Jatayu image integration configured. VM installation tests remain required.')
-
