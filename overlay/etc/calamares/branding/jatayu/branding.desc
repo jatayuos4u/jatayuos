@@ -1,0 +1,22 @@
+componentName: jatayu
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 900px,650px
+windowPlacement: center
+strings:
+  productName: JatayuOS
+  shortProductName: JatayuOS
+  version: "0.1 Development"
+  shortVersion: "0.1"
+  versionedName: JatayuOS 0.1 Development
+  shortVersionedName: JatayuOS 0.1
+  bootloaderEntryName: JatayuOS
+images:
+  productLogo: logo.svg
+  productIcon: logo.svg
+  productWelcome: logo.svg
+style:
+  SidebarBackground: "#10212d"
+  SidebarText: "#ffffff"
+  SidebarTextCurrent: "#ffd17b"
