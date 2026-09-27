@@ -1,0 +1,8 @@
+[General]
+ColorScheme=BreezeDark
+BrowserApplication=firefox-esr.desktop
+[KDE]
+LookAndFeelPackage=org.jatayu.desktop
+SingleClick=false
+[Icons]
+Theme=breeze-dark
