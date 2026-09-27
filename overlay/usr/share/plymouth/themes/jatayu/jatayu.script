@@ -1,0 +1,23 @@
+Window.SetBackgroundTopColor(0.025,0.055,0.09);
+Window.SetBackgroundBottomColor(0.025,0.055,0.09);
+title.image = Image.Text("JatayuOS", 1, 0.8, 0.45);
+title.sprite = Sprite(title.image);
+title.sprite.SetPosition(Window.GetWidth()/2-title.image.GetWidth()/2,Window.GetHeight()/2-55,10);
+message.sprite = Sprite();
+fun show_message(text) {
+  message.image = Image.Text(text, 1, 1, 1);
+  message.sprite.SetImage(message.image);
+  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2,Window.GetHeight()/2+20,10);
+}
+fun normal() { show_message("Udaan Aapki. Shakti Bharat Ki."); }
+fun password(prompt, bullets) {
+  text = prompt + " ";
+  for (i=0; i<bullets; i++) text += "*";
+  show_message(text);
+}
+fun question(prompt, entry) { show_message(prompt + " " + entry); }
+Plymouth.SetDisplayNormalFunction(normal);
+Plymouth.SetDisplayPasswordFunction(password);
+Plymouth.SetDisplayQuestionFunction(question);
+Plymouth.SetMessageFunction(show_message);
+normal();
