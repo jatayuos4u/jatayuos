@@ -1,0 +1,52 @@
+name: Manual JatayuOS development ISO
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type BUILD to spend runner minutes on one development ISO'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: jatayu-single-iso
+  cancel-in-progress: false
+jobs:
+  build:
+    if: inputs.confirm == 'BUILD'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fast source preflight
+        run: python3 scripts/preflight.py
+      - name: Check free space
+        run: |
+          df -h .
+          test "$(df --output=avail -k . | tail -1)" -gt 22000000
+      - name: Build once in Debian 13
+        run: |
+          mkdir -p out
+          docker run --rm --privileged --name jatayu-builder \
+            -v "$GITHUB_WORKSPACE:/work" -w /work debian:trixie \
+            bash scripts/build.sh
+      - name: Upload ISO and reports
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: JatayuOS-development-ISO
+          path: |
+            out/*.iso
+            out/SHA256SUMS
+            out/*manifest*
+            out/third-party-notices/
+          compression-level: 0
+          retention-days: 3
+      - name: Upload build log even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: JatayuOS-build-log
+          path: out/build.log
+          if-no-files-found: ignore
+          retention-days: 3
