@@ -4,7 +4,7 @@ JatayuOS — Made In India Operating System.
 
 Prepared for Anup Yadav • Debian 13 Trixie • AMD64 • Firefox ESR
 
-**This archive contains source/configuration, not a finished ISO.** No GitHub Actions build has been triggered. Local ISO assembly was blocked by the execution environment's missing mount/chroot capabilities. No claim is made that the first build will succeed or meet a 2 GB ISO/RAM target.
+**This repository contains source/configuration, not a finished ISO.** The first ISO has not been built or tested. Local ISO assembly was blocked by the execution environment's missing mount/chroot capabilities. No claim is made that the first build will succeed or meet a 2 GB ISO/RAM target.
 
 The kit prepares one integrated development image: KDE Plasma, Firefox ESR, Discover, System Settings, Calamares, firmware, Indian input tools, Jatayu desktop/boot branding configuration, live welcome, Aarambh and the seven utility entry points. Read **docs/STATUS.md** for implemented versus incomplete features before using runner minutes.
 
@@ -12,7 +12,7 @@ The kit prepares one integrated development image: KDE Plasma, Firefox ESR, Disc
 
 Use a dedicated 64-bit Debian 13 installation or VM with working internet. The build must have administrator privileges and support mounts/chroot. Allocate enough disk for downloaded packages, the uncompressed root filesystem and output images; 25 GB free is a working preflight target, not a measured final requirement. Building locally consumes no GitHub Actions minutes.
 
-Extract the kit, open a terminal in its folder, then run:
+Clone this repository (or download its source), open a terminal in its folder, then run:
 
 ```bash
 python3 scripts/preflight.py
@@ -25,9 +25,7 @@ Output is `out/JatayuOS-0.1-dev-amd64.iso`, with `SHA256SUMS`, package/source-ve
 
 ## One manual GitHub Actions build
 
-The source is maintained at https://github.com/jatayuos4u/jatayuos. The workflow is manual-only. No build runs when source is pushed.
-
-The repository's starter README was public on 27 September 2026. Until the original-code licence and distribution review are complete, change it to **Private** in the repository's Settings → General → Danger Zone → Change repository visibility. On your computer, install Git and [GitHub CLI](https://cli.github.com/), run `gh auth login`, extract the whole source ZIP, and run `bash scripts/push-existing-repo.sh` from the extracted `jatayuos-build` folder. The script checks that the account is `jatayuos4u`, the repository is private and still has only its starter README, then pushes the source. It does not dispatch the ISO workflow. Do not paste credentials in chat.
+The source is maintained at https://github.com/jatayuos4u/jatayuos. The repository is private while licensing and distribution are reviewed. The workflow is manual-only. Pushing or editing source does not run a build. The `scripts/push-existing-repo.sh` helper was for the original empty repository and is not needed now.
 
 1. Open **Actions → Manual JatayuOS development ISO → Run workflow** in the repository.
 2. Type `BUILD` in the confirmation input. This starts one job with a **60-minute maximum**, not a guaranteed duration or cost.
