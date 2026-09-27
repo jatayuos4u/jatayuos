@@ -1,0 +1,6 @@
+[kdeglobals][General]
+ColorScheme=BreezeDark
+[kdeglobals][KDE]
+widgetStyle=Breeze
+[plasmarc][Theme]
+name=jatayu
