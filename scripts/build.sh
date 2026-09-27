@@ -12,13 +12,28 @@ exec > >(tee -a out/build.log) 2>&1
 echo "JatayuOS development build started: $(date -u +%FT%TZ)"
 export DEBIAN_FRONTEND=noninteractive
 # Dedicated Debian builder: firmware candidates must be visible to preflight too.
-cat > /etc/apt/sources.list.d/jatayu-build-firmware.sources <<'EOF'
+# The official Trixie container already has a debian.sources file with its own
+# Signed-By keyring. Extend its components instead of adding a duplicate source
+# with a potentially conflicting Signed-By value.
+if [[ -f /etc/apt/sources.list.d/debian.sources ]]; then
+  awk '
+    /^Components:/ {
+      if ($0 !~ /(^|[[:space:]])contrib([[:space:]]|$)/) $0 = $0 " contrib"
+      if ($0 !~ /(^|[[:space:]])non-free-firmware([[:space:]]|$)/) $0 = $0 " non-free-firmware"
+    }
+    { print }
+  ' /etc/apt/sources.list.d/debian.sources > /etc/apt/sources.list.d/debian.sources.jatayu-tmp
+  cat /etc/apt/sources.list.d/debian.sources.jatayu-tmp > /etc/apt/sources.list.d/debian.sources
+  rm /etc/apt/sources.list.d/debian.sources.jatayu-tmp
+else
+  cat > /etc/apt/sources.list.d/jatayu-build-firmware.sources <<'EOF'
 Types: deb
 URIs: https://deb.debian.org/debian
 Suites: trixie
 Components: contrib non-free-firmware
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOF
+fi
 apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml dpkg-dev zstd ca-certificates
 python3 scripts/preflight.py --apt
