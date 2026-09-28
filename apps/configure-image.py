@@ -23,6 +23,15 @@ helper='/usr/share/calamares/helpers/calamares-bootloader-config'
 subprocess.run(['dpkg-divert','--local','--add','--rename',helper],check=True)
 write(helper,'#!/bin/sh\nset -e\ntest -x /usr/sbin/grub-install\ntest -d /usr/lib/grub/x86_64-efi\ntest -d /usr/lib/grub/i386-pc\necho "JatayuOS: platform GRUB binaries are already included for offline installation."\n')
 Path(helper).chmod(0o755)
+# Keep the branded Jatayu installer and hide Debian's duplicate application entry.
+# XDG local applications override the packaged entry without modifying its file.
+for entry in Path('/usr/share/applications').glob('*.desktop'):
+    if entry.name.startswith('org.jatayu.'):
+        continue
+    content=entry.read_text(errors='replace')
+    if any(line.strip().startswith('Name=Install Debian') for line in content.splitlines()):
+        override=Path('/usr/local/share/applications')/entry.name
+        write(override,'[Desktop Entry]\nType=Application\nName=Install Debian\nHidden=true\n')
 # Identity: explicitly divert base-files entries rather than unmanaged overwrites.
 identity='NAME="JatayuOS"\nPRETTY_NAME="JatayuOS 0.1 Development (Debian 13)"\nID=jatayuos\nID_LIKE=debian\nVERSION_ID="0.1"\nVERSION="0.1 Development"\nVERSION_CODENAME=trixie\nDEBIAN_CODENAME=trixie\n'
 for p in ['/etc/os-release','/usr/lib/os-release']:
@@ -43,7 +52,7 @@ write('/etc/sddm.conf.d/20-jatayu.conf','[Theme]\nCurrent=breeze\n[General]\nInp
 # theme when Recommends are disabled and sddm-theme-breeze is omitted.
 if not Path('/usr/share/sddm/themes/breeze/theme.conf').exists():
     raise SystemExit('Breeze SDDM theme missing; install sddm-theme-breeze')
-write('/usr/share/sddm/themes/breeze/theme.conf.user','[General]\nbackground=/usr/share/jatayu/wallpaper.svg\nshowlogo=hidden\n')
+write('/usr/share/sddm/themes/breeze/theme.conf.user','[General]\nbackground=/usr/share/jatayu/wallpaper.jpg\nshowlogo=hidden\n')
 write('/etc/default/zramswap','ALGO=lz4\nPERCENT=50\nPRIORITY=100\n')
 write('/etc/sysctl.d/80-jatayu.conf','vm.swappiness=100\n')
 write('/etc/apt/apt.conf.d/20auto-upgrades','APT::Periodic::Update-Package-Lists "1";\nAPT::Periodic::Unattended-Upgrade "1";\n')

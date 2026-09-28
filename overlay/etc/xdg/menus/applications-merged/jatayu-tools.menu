@@ -1,0 +1,2 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN" "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+<Menu><Name>Applications</Name><Menu><Name>Jatayu Tools</Name><Directory>jatayu-tools.directory</Directory><Include><Category>X-Jatayu-Tools</Category></Include></Menu></Menu>

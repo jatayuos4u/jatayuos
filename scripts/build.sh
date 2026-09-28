@@ -50,7 +50,10 @@ chmod +x build/config/hooks/live/*
 # Preserve their boot logic and replace only the shared artwork.
 mkdir -p build/config/bootloaders
 cp -a /usr/share/live/build/bootloaders/. build/config/bootloaders/
-cp assets/boot-splash.svg build/config/bootloaders/splash.svg
+find build/config/bootloaders -name splash.svg -delete
+for loader in build/config/bootloaders/*; do
+  if [[ -d "$loader" ]]; then cp assets/boot-splash.png "$loader/splash.png"; fi
+done
 cd build
 lb config
 lb build

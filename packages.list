@@ -58,7 +58,6 @@ cryptsetup-initramfs
 rsync
 plymouth
 plymouth-themes
-desktop-base
 fonts-noto-core
 fonts-noto-color-emoji
 fonts-dejavu-core

@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBo
 import engine
 
 ROOT=Path(__file__).resolve().parent
-ASSETS=ROOT if (ROOT/'logo.svg').exists() else ROOT.parent/'assets'
+ASSETS=ROOT if (ROOT/'logo.png').exists() else ROOT.parent/'assets'
 STATE=Path.home()/'.local/state/jatayu'
 CATALOG=[('office','LibreOffice'),('media','VLC media player'),('graphics','GIMP image editor'),('drawing','Inkscape'),('audio','Audacity'),('video','Kdenlive (more RAM recommended)'),('developer','Developer tools: Git, compiler, debugger'),('printing','Printer support'),('hindi','Hindi language packages')]
 STYLE='''QWidget{background:#10212d;color:#eef2f5;font-size:14px} QMainWindow{background:#10212d} QPushButton{background:#203847;border:1px solid #b98e42;border-radius:7px;padding:10px} QPushButton:hover{background:#365268} QPushButton:disabled{color:#71818a;border-color:#465461} QLineEdit,QComboBox,QSpinBox,QPlainTextEdit,QListWidget{background:#192f3e;border:1px solid #526572;border-radius:5px;padding:6px} QLabel#title{font-size:27px;font-weight:bold;color:#ffd17b} QCheckBox{padding:5px}'''
@@ -29,11 +29,11 @@ class Window(QMainWindow):
         super().__init__(); self.mode=mode;self.worker=None;self.proc=None; self.buttons=[]
         titles={'live':'Welcome to JatayuOS','welcome':'Jatayu Welcome','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
         self.setWindowTitle(titles.get(mode,'JatayuOS')); self.resize(760,540 if mode=='live' else 500)
-        self.setWindowIcon(QIcon(str(ASSETS/'logo.svg')))
+        self.setWindowIcon(QIcon(str(ASSETS/'logo.png')))
         central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(28,26,28,24);self.layout.setSpacing(12)
         if mode in ('live','welcome'):
             header=QHBoxLayout()
-            mark=QLabel();mark.setPixmap(QPixmap(str(ASSETS/'logo.svg')).scaled(72,72,Qt.KeepAspectRatio,Qt.SmoothTransformation));header.addWidget(mark)
+            mark=QLabel();mark.setPixmap(QPixmap(str(ASSETS/'logo.png')).scaled(72,72,Qt.KeepAspectRatio,Qt.SmoothTransformation));header.addWidget(mark)
             heading=QVBoxLayout()
             title=QLabel(titles[mode]);title.setObjectName('title');heading.addWidget(title)
             heading.addWidget(QLabel('Udaan Aapki. Shakti Bharat Ki.'))

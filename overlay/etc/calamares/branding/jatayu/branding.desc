@@ -13,9 +13,9 @@ strings:
   shortVersionedName: JatayuOS 0.1
   bootloaderEntryName: JatayuOS
 images:
-  productLogo: logo.svg
-  productIcon: logo.svg
-  productWelcome: logo.svg
+  productLogo: logo.png
+  productIcon: logo.png
+  productWelcome: logo.png
 style:
   SidebarBackground: "#10212d"
   SidebarText: "#ffffff"

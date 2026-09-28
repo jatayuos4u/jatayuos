@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-"""Generate original configuration/artwork; no downloaded artwork is embedded."""
+"""Generate Jatayu desktop configuration from committed owner-approved assets."""
 from pathlib import Path
 import json
 R=Path(__file__).resolve().parents[1]
 def put(name,text):
     p=R/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
-put('assets/logo.svg',"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"256\" height=\"256\" viewBox=\"0 0 256 256\"><rect width=\"256\" height=\"256\" rx=\"48\" fill=\"#10212d\"/><path d=\"M38 111 Q84 43 138 82 Q170 56 220 74 L179 97 L205 114 Q174 145 144 134 Q112 171 56 157 L96 132 Q66 134 38 111Z\" fill=\"#e9b75b\"/><path d=\"M49 174 Q115 205 207 157\" fill=\"none\" stroke=\"#e9b75b\" stroke-width=\"9\" stroke-linecap=\"round\"/><circle cx=\"166\" cy=\"89\" r=\"5\" fill=\"#10212d\"/></svg>")
-put('assets/wallpaper.svg',"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1920\" height=\"1080\" viewBox=\"0 0 1920 1080\"><defs><linearGradient id=\"sky\" x2=\"0\" y2=\"1\"><stop stop-color=\"#102c40\"/><stop offset=\".7\" stop-color=\"#112334\"/><stop offset=\"1\" stop-color=\"#071522\"/></linearGradient></defs><rect width=\"1920\" height=\"1080\" fill=\"url(#sky)\"/><circle cx=\"1500\" cy=\"390\" r=\"230\" fill=\"#d79b54\" opacity=\".8\"/><path d=\"M0 830 Q450 680 780 840 T1920 770 V1080 H0Z\" fill=\"#091923\"/><path d=\"M0 980 Q510 780 1000 925 T1920 850 V1080 H0Z\" fill=\"#0b1c29\"/><path d=\"M910 520 Q1020 465 1115 485 Q1215 415 1330 440 Q1220 470 1170 515 Q1070 570 910 520Z\" fill=\"#0a1b28\" opacity=\".8\"/></svg>")
-put('assets/boot-splash.svg',"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"640\" height=\"480\" viewBox=\"0 0 640 480\"><rect width=\"640\" height=\"480\" fill=\"#091724\"/><circle cx=\"490\" cy=\"175\" r=\"102\" fill=\"#c88c4a\"/><path d=\"M0 365 Q185 300 330 360 T640 330 V480 H0Z\" fill=\"#102b3e\"/><path d=\"M0 425 Q205 345 415 400 T640 370 V480 H0Z\" fill=\"#081923\"/><path d=\"M65 80 Q95 41 124 61 Q151 43 180 55 L154 70 L170 84 Q145 101 128 92 Q105 119 74 107 L94 87Z\" fill=\"#e9b75b\"/><text x=\"65\" y=\"174\" font-family=\"DejaVu Sans,sans-serif\" font-size=\"38\" font-weight=\"bold\" fill=\"#ffffff\">JatayuOS</text><text x=\"66\" y=\"203\" font-family=\"DejaVu Sans,sans-serif\" font-size=\"16\" fill=\"#efc77e\">Udaan Aapki. Shakti Bharat Ki.</text></svg>")
+# The owner-supplied shield is committed as assets/logo.png.
+# The approved 1920x1080 eagle wallpaper is committed as assets/wallpaper.jpg.
+# Bootloader artwork is committed as assets/boot-splash.png.
 # Nine-part Plasma frame, using original simple vector shapes.
 parts=['<svg xmlns="http://www.w3.org/2000/svg" width="140" height="100">','<rect id="center" x="20" y="20" width="60" height="40" fill="#10212d"/>']
 for name,x,y,w,h in [('top',20,10,60,10),('bottom',20,60,60,10),('left',10,20,10,40),('right',80,20,10,40),('topleft',10,10,10,10),('topright',80,10,10,10),('bottomleft',10,60,10,10),('bottomright',80,60,10,10)]:
     parts.append(f'<rect id="{name}" x="{x}" y="{y}" width="{w}" height="{h}" fill="#10212d" stroke="#bc9652" stroke-width="1"/>')
 parts.extend(['<rect id="hint-top-margin" width="1" height="8"/><rect id="hint-bottom-margin" width="1" height="8"/><rect id="hint-left-margin" width="8" height="1"/><rect id="hint-right-margin" width="8" height="1"/>','</svg>'])
 put('assets/panel-background.svg',''.join(parts))
-apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.svg','System;'),('tools','Jatayu Tools','/usr/share/jatayu/logo.svg','System;'),('about','About JatayuOS','/usr/share/jatayu/logo.svg','System;')]
+apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.png','System;'),('tools','Jatayu Tools','/usr/share/jatayu/logo.png','X-Jatayu-Tools;System;'),('about','About JatayuOS','/usr/share/jatayu/logo.png','System;')]
 for mode,title,icon,categories in apps:
     put(f'overlay/usr/share/applications/org.jatayu.{mode}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nComment=JatayuOS {title}\nExec=jatayu {mode}\nIcon={icon}\nTerminal=false\nCategories={categories}\nStartupNotify=true\n')
 for mode in ('update','backup','check','language','portals','android'):
@@ -77,7 +77,7 @@ put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-h
 base='overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/'
 put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS development layout','Version':'0.1','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
 put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[plasmarc][Theme]\nname=default\n')
-put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 48;\npanel.floating = true;\nvar launcher = panel.addWidget(\"org.kde.plasma.kicker\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.svg\");\npanel.addWidget(\"org.kde.plasma.icontasks\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.svg\");\n}\n")
+put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 54;\npanel.floating = false;\nvar launcher = panel.addWidget(\"org.kde.plasma.kickoff\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.png\");\nvar tasks = panel.addWidget(\"org.kde.plasma.icontasks\");\ntasks.currentConfigGroup = [\"General\"];\ntasks.writeConfig(\"launchers\", \"applications:org.kde.dolphin.desktop,applications:firefox-esr.desktop,applications:org.kde.discover.desktop,applications:systemsettings.desktop\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.jpg\");\n}\n")
 brand='overlay/etc/calamares/branding/jatayu/'
 put(brand+'branding.desc','''componentName: jatayu
 welcomeStyleCalamares: true
@@ -94,26 +94,38 @@ strings:
   shortVersionedName: JatayuOS 0.1
   bootloaderEntryName: JatayuOS
 images:
-  productLogo: logo.svg
-  productIcon: logo.svg
-  productWelcome: logo.svg
+  productLogo: logo.png
+  productIcon: logo.png
+  productWelcome: logo.png
 style:
   SidebarBackground: "#10212d"
   SidebarText: "#ffffff"
   SidebarTextCurrent: "#ffd17b"
 ''')
-put(brand+'logo.svg',(R/'assets/logo.svg').read_text())
+
 put('overlay/usr/share/plymouth/themes/jatayu/jatayu.plymouth','[Plymouth Theme]\nName=JatayuOS\nDescription=JatayuOS development boot theme\nModuleName=script\n[script]\nImageDir=/usr/share/plymouth/themes/jatayu\nScriptFile=/usr/share/plymouth/themes/jatayu/jatayu.script\n')
 put('overlay/usr/share/plymouth/themes/jatayu/jatayu.script','''Window.SetBackgroundTopColor(0.025,0.055,0.09);
 Window.SetBackgroundBottomColor(0.025,0.055,0.09);
-title.image = Image.Text("JatayuOS", 1, 0.8, 0.45);
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.sprite.SetPosition(Window.GetWidth()/2-logo.image.GetWidth()/2,Window.GetHeight()/2-logo.image.GetHeight()/2-35,10);
+title.image = Image.Text("JatayuOS", 1, 0.83, 0.43);
 title.sprite = Sprite(title.image);
-title.sprite.SetPosition(Window.GetWidth()/2-title.image.GetWidth()/2,Window.GetHeight()/2-55,10);
+title.sprite.SetPosition(Window.GetWidth()/2-title.image.GetWidth()/2,Window.GetHeight()/2+100,10);
 message.sprite = Sprite();
+tick = 0;
+fun animate() {
+  tick += 1;
+  phase = tick % 80;
+  if (phase < 40) opacity = 0.72 + phase * 0.007;
+  else opacity = 1 - (phase - 40) * 0.007;
+  logo.sprite.SetOpacity(opacity);
+}
+Plymouth.SetRefreshFunction(animate);
 fun show_message(text) {
   message.image = Image.Text(text, 1, 1, 1);
   message.sprite.SetImage(message.image);
-  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2,Window.GetHeight()/2+20,10);
+  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2,Window.GetHeight()/2+145,10);
 }
 fun normal() { show_message("Udaan Aapki. Shakti Bharat Ki."); }
 fun password(prompt, bullets) {
@@ -128,17 +140,26 @@ Plymouth.SetDisplayQuestionFunction(question);
 Plymouth.SetMessageFunction(show_message);
 normal();
 ''')
+put('overlay/etc/xdg/menus/applications-merged/jatayu-tools.menu','''<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN" "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+<Menu><Name>Applications</Name><Menu><Name>Jatayu Tools</Name><Directory>jatayu-tools.directory</Directory><Include><Category>X-Jatayu-Tools</Category></Include></Menu></Menu>
+''')
+put('overlay/usr/share/desktop-directories/jatayu-tools.directory','''[Desktop Entry]
+Type=Directory
+Name=Jatayu Tools
+Icon=/usr/share/jatayu/logo.png
+''')
+
 put('assets/README.txt','''JatayuOS 0.1 development preview
 Created for Anup Yadav. Based on Debian and KDE; Firefox retains Mozilla identity.
 This integrated source kit is not a tested ISO or production release.
-The original code-drawn placeholder artwork is deliberate: approved eagle artwork needs clean source files and rights verification.
-The desktop uses standard Kickoff and a themed panel. Pixel-identical custom menu and angled sections remain pending.
+The supplied Jatayu shield and approved eagle wallpaper are bundled for this owner's development preview.
+The desktop uses Plasma Kickoff, a dark full-width panel, and the Jatayu Tools category.
 Jatayu Welcome and a Jatayu Tools placeholder are supplied. More tools will follow after validation.
 See README.md, docs/STATUS.md and docs/COMPLIANCE.md in the build kit.
 ''')
 put('overlay/usr/share/doc/jatayu-integration/copyright','''JatayuOS integration development source
 Project maintainer: Anup Yadav <jatayuos4u@gmail.com>
-Original code and original placeholder artwork were prepared for this project.
+Original integration code and owner-provided Jatayu visual references were prepared for this project.
 The owner's final publication licence has not yet been selected. This is a private
 development handoff, not a blanket licence for upstream components.
 Debian, KDE, Qt, Calamares, Firefox and all dependencies retain their own licences

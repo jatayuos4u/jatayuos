@@ -6,6 +6,8 @@ mkdir -p "$stage/DEBIAN" "$stage/usr/share/jatayu" "$stage/usr/bin" "$stage/usr/
 cp -a overlay/. "$stage/"
 cp apps/*.py "$stage/usr/share/jatayu/"
 cp assets/* "$stage/usr/share/jatayu/"
+cp assets/logo.png "$stage/etc/calamares/branding/jatayu/logo.png"
+cp assets/plymouth-logo.png "$stage/usr/share/plymouth/themes/jatayu/logo.png"
 cp scripts/jatayu "$stage/usr/bin/jatayu"
 cp scripts/jatayu-admin "$stage/usr/libexec/jatayu-admin"
 cp scripts/postinst "$stage/DEBIAN/postinst"

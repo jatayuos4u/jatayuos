@@ -1,5 +1,7 @@
 name: Manual JatayuOS development ISO
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       confirm:
@@ -13,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: inputs.confirm == 'BUILD'
+    if: github.event_name == 'push' || inputs.confirm == 'BUILD'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:

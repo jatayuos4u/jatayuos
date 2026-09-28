@@ -10,7 +10,7 @@ for f in ROOT.rglob('*.py'):
         except SyntaxError as e: errors.append(str(e))
 for f in [*ROOT.glob('*.sh'),*ROOT.glob('scripts/*.sh'),*ROOT.glob('hooks/*')]:
     if subprocess.run(['bash','-n',str(f)],capture_output=True).returncode: errors.append(f'Shell syntax: {f}')
-for f in ['apps/app.py','apps/engine.py','scripts/jatayu-admin','assets/wallpaper.svg','assets/logo.svg']:
+for f in ['apps/app.py','apps/engine.py','scripts/jatayu-admin','assets/wallpaper.jpg','assets/logo.png','assets/boot-splash.png','assets/plymouth-logo.png']:
     if not (ROOT/f).is_file(): errors.append(f'Missing {f}')
 packages=[s.strip() for s in (ROOT/'packages.list').read_text().splitlines() if s.strip() and not s.startswith('#')]
 for name in ('user-setup','sddm-theme-breeze'):
