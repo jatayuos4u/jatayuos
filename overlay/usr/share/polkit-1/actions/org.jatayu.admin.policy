@@ -1,1 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd"><policyconfig><action id="org.jatayu.admin"><description>Manage selected Jatayu software and live-session settings</description><message>Authentication is required for this Jatayu action</message><defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults><annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate></action></policyconfig>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <action id="org.jatayu.live-layout">
+    <description>Set live-session language and keyboard</description>
+    <message>Set JatayuOS live-session language and keyboard</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>yes</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">live-layout</annotate>
+  </action>
+  <action id="org.jatayu.install">
+    <description>Install selected software</description>
+    <message>Administrator authentication is required to install software</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">install</annotate>
+  </action>
+  <action id="org.jatayu.refresh">
+    <description>Refresh package information</description>
+    <message>Administrator authentication is required to refresh packages</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">refresh</annotate>
+  </action>
+</policyconfig>
