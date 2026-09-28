@@ -46,6 +46,10 @@ cp packages.list build/config/package-lists/jatayu.list.chroot
 cp out/jatayu-integration_*.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
+# The live-build bootloader templates carry Debian's default splash.
+# Preserve their boot logic and replace only the shared artwork.
+cp -a /usr/share/live/build/bootloaders/. build/config/bootloaders/
+cp assets/boot-splash.svg build/config/bootloaders/splash.svg
 cd build
 lb config
 lb build
