@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Jatayu Update
-Comment=JatayuOS Jatayu Update
-Exec=jatayu update
-Icon=system-software-update
-Terminal=false
-Categories=System;
-StartupNotify=true

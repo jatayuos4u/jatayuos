@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Sarkar Setu
-Comment=JatayuOS Sarkar Setu
-Exec=jatayu portals
-Icon=internet-web-browser
-Terminal=false
-Categories=Network;
-StartupNotify=true

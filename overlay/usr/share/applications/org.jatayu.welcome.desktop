@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Aarambh
-Comment=JatayuOS Aarambh
+Name=Jatayu Welcome
+Comment=JatayuOS Jatayu Welcome
 Exec=jatayu welcome
-Icon=start-here
+Icon=/usr/share/jatayu/logo.svg
 Terminal=false
 Categories=System;
 StartupNotify=true

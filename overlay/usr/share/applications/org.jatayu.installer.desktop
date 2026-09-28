@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Install JatayuOS
+Exec=calamares-install-debian
+Icon=drive-harddisk
+Terminal=false
+Categories=System;

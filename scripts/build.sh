@@ -36,6 +36,7 @@ EOF
 fi
 apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml dpkg-dev zstd ca-certificates
+python3 scripts/generate-files.py
 python3 scripts/preflight.py --apt
 bash scripts/package.sh
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
@@ -45,6 +46,11 @@ cp packages.list build/config/package-lists/jatayu.list.chroot
 cp out/jatayu-integration_*.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
+# The live-build bootloader templates carry Debian's default splash.
+# Preserve their boot logic and replace only the shared artwork.
+mkdir -p build/config/bootloaders
+cp -a /usr/share/live/build/bootloaders/. build/config/bootloaders/
+cp assets/boot-splash.svg build/config/bootloaders/splash.svg
 cd build
 lb config
 lb build

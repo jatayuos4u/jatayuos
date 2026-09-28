@@ -3,7 +3,7 @@
 import argparse, json, os, shutil, subprocess, sys
 from pathlib import Path
 from PySide6.QtCore import Qt, QThread, Signal, QProcess, QUrl
-from PySide6.QtGui import QDesktopServices, QIcon
+from PySide6.QtGui import QDesktopServices, QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,QComboBox,QLineEdit,QFileDialog,QMessageBox,QPlainTextEdit,QCheckBox,QSpinBox,QFormLayout,QListWidget,QListWidgetItem)
 import engine
 
@@ -27,26 +27,34 @@ class Worker(QThread):
 class Window(QMainWindow):
     def __init__(self,mode):
         super().__init__(); self.mode=mode;self.worker=None;self.proc=None; self.buttons=[]
-        titles={'live':'Welcome to JatayuOS','welcome':'Aarambh','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
-        self.setWindowTitle(titles.get(mode,'JatayuOS')); self.resize(850,650)
+        titles={'live':'Welcome to JatayuOS','welcome':'Jatayu Welcome','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
+        self.setWindowTitle(titles.get(mode,'JatayuOS')); self.resize(760,540 if mode=='live' else 500)
         self.setWindowIcon(QIcon(str(ASSETS/'logo.svg')))
-        central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(24,24,24,24)
-        title=QLabel(titles.get(mode,'JatayuOS'));title.setObjectName('title');self.layout.addWidget(title)
-        self.text('Udaan Aapki. Shakti Bharat Ki.')
+        central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(28,26,28,24);self.layout.setSpacing(12)
+        if mode in ('live','welcome'):
+            header=QHBoxLayout()
+            mark=QLabel();mark.setPixmap(QPixmap(str(ASSETS/'logo.svg')).scaled(72,72,Qt.KeepAspectRatio,Qt.SmoothTransformation));header.addWidget(mark)
+            heading=QVBoxLayout()
+            title=QLabel(titles[mode]);title.setObjectName('title');heading.addWidget(title)
+            heading.addWidget(QLabel('Udaan Aapki. Shakti Bharat Ki.'))
+            header.addLayout(heading);header.addStretch();self.layout.addLayout(header)
+        else:
+            title=QLabel(titles.get(mode,'JatayuOS'));title.setObjectName('title');self.layout.addWidget(title)
+            self.text('Udaan Aapki. Shakti Bharat Ki.')
         getattr(self,'page_'+mode)()
-        self.log=QPlainTextEdit();self.log.setReadOnly(True);self.log.setMaximumHeight(140);self.layout.addWidget(self.log)
+        self.log=QPlainTextEdit();self.log.setReadOnly(True);self.log.setMaximumHeight(90);self.log.setVisible(False);self.layout.addWidget(self.log)
         self.text('Development preview • Independent project by Anup Yadav • No government affiliation')
 
     def text(self,s):
         w=QLabel(s);w.setWordWrap(True);self.layout.addWidget(w);return w
     def button(self,label,fn):
         w=QPushButton(label);w.clicked.connect(fn);self.layout.addWidget(w);self.buttons.append(w);return w
-    def error(self,s): self.log.appendPlainText('Error: '+s)
+    def error(self,s): self.log.setVisible(True); self.log.appendPlainText('Error: '+s)
     def busy(self,value):
         for b in self.buttons:b.setEnabled(not value)
     def work(self,fn,*args):
         if self.worker and self.worker.isRunning():return
-        self.busy(True);self.log.appendPlainText('Working… Originals will be preserved.')
+        self.busy(True);self.log.setVisible(True);self.log.appendPlainText('Working… Originals will be preserved.')
         self.worker=Worker(fn,*args);self.worker.result.connect(self.log.appendPlainText);self.worker.failed.connect(self.error);self.worker.finished.connect(lambda:self.busy(False));self.worker.start()
     def launch(self,args):
         if not shutil.which(args[0]):return self.error('Not installed: '+args[0])
@@ -57,39 +65,34 @@ class Window(QMainWindow):
         self.proc.readyReadStandardOutput.connect(lambda:self.log.appendPlainText(bytes(self.proc.readAllStandardOutput()).decode(errors='replace')))
         self.proc.finished.connect(lambda code,status:(self.busy(False),self.log.appendPlainText('Completed.' if code==0 else 'Operation failed or authentication was cancelled.')))
         self.proc.errorOccurred.connect(lambda err:(self.busy(False),self.error('Unable to start authenticated operation.')))
-        self.busy(True);self.proc.start('pkexec',['/usr/libexec/jatayu-admin',*args])
+        self.busy(True);self.log.setVisible(True);self.proc.start('pkexec',['/usr/libexec/jatayu-admin',*args])
     def closeEvent(self,e):
         if (self.worker and self.worker.isRunning()) or (self.proc and self.proc.state()!=QProcess.NotRunning):
             QMessageBox.information(self,'Operation in progress','Wait for the active operation to finish before closing.');e.ignore()
         else:e.accept()
 
     def page_live(self):
-        self.setStyleSheet(STYLE+' QMainWindow{border-top:8px solid #f6a34a;border-bottom:8px solid #23834b}')
-        self.text('Choose your language and keyboard. Try the desktop or open the installer. You can continue without internet.')
+        self.text('Choose a language and keyboard, then explore JatayuOS or start installation. Internet is optional.')
         self.lang=QComboBox();self.lang.addItem('English (India)','en_IN.UTF-8');self.lang.addItem('हिन्दी — Hindi','hi_IN.UTF-8');self.layout.addWidget(self.lang)
         self.keys=QComboBox();self.keys.addItem('English (US)','us');self.keys.addItem('Indian layout','in');self.layout.addWidget(self.keys)
-        field=QLineEdit();field.setPlaceholderText('Type here to test your keyboard');self.layout.addWidget(field)
-        self.button('Apply live-session keyboard and locale',lambda:self.admin(['live-layout',self.lang.currentData(),self.keys.currentData()]))
-        self.text('Confirm language and keyboard again in Calamares. The preview interface is currently English; full Hindi translation is pending.')
-        self.button('Network settings (optional)',lambda:self.launch(['systemsettings','kcm_networkmanagement']))
-        self.button('Try JatayuOS — continue to desktop',self.close)
-        self.button('Install JatayuOS…',self.install_os)
-        if not live():self.text('Live-session screen preview. Installation is disabled outside a live boot.')
+        self.button('Apply language and keyboard',lambda:self.admin(['live-layout',self.lang.currentData(),self.keys.currentData()]))
+        self.text('The installer will ask you to confirm these choices.')
+        self.button('Try JatayuOS',self.close)
+        self.button('Install JatayuOS',self.install_os)
+        if not live():self.text('Live-session preview. Installation is available only from the ISO.')
     def install_os(self):
         if not live():return self.error('Installation is only available from the live ISO.')
         if QMessageBox.question(self,'Open installer','Open Calamares? Review its partition summary carefully before approving installation.')==QMessageBox.Yes:
             self.launch(['calamares-install-debian'])
 
     def page_welcome(self):
-        self.text('Choose optional software. Downloads need internet and administrator approval. Nothing is preselected.')
-        self.choices=[]
-        for key,label in CATALOG:
-            c=QCheckBox(label);self.layout.addWidget(c);self.choices.append((key,c))
-        self.button('Install selected software',self.install_selected)
+        self.text('Your desktop is ready. Start with the essentials below.')
+        self.button('User Manual',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'USER-MANUAL.txt'))))
+        self.button('Frequently Asked Questions',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'FAQ.txt'))))
         self.button('Software Center',lambda:self.launch(['plasma-discover']))
+        self.button('System Settings',lambda:self.launch(['systemsettings']))
         self.button('Language and keyboard',lambda:self.launch(['jatayu','language']))
-        self.button('Android setup',lambda:self.launch(['jatayu','android']))
-        self.button('Finish — do not open automatically again',self.finish_welcome)
+        self.button('Do not show on next sign-in',self.finish_welcome)
     def install_selected(self):
         selected=[k for k,c in self.choices if c.isChecked()]
         if not selected:return self.error('Select at least one software group.')
@@ -108,20 +111,8 @@ class Window(QMainWindow):
         p=Path('/var/log/apt/history.log');return p.read_text(errors='replace')[-12000:] if p.exists() else 'No APT history yet.'
 
     def page_tools(self):
-        self.text('Offline image and PDF tools. New outputs only; originals are never overwritten. Use Up/Down to set PDF page or merge order.')
-        self.operation=QComboBox();self.operation.addItems(['Convert / resize / compress image','Images to PDF','Merge PDFs','Compress PDF','PDF to PNG images']);self.layout.addWidget(self.operation)
-        self.files=QListWidget();self.layout.addWidget(self.files)
-        self.button('Add input files',self.add_files)
-        row=QHBoxLayout()
-        for label,delta in [('Move up',-1),('Move down',1)]:
-            b=QPushButton(label);b.clicked.connect(lambda checked=False,d=delta:self.move_file(d));row.addWidget(b)
-        b=QPushButton('Clear');b.clicked.connect(self.files.clear);row.addWidget(b);self.layout.addLayout(row)
-        form=QFormLayout();self.fmt=QComboBox();self.fmt.addItems(['PNG','JPG','WEBP','BMP']);form.addRow('Image output format',self.fmt)
-        self.width=QSpinBox();self.width.setRange(0,8192);self.width.setSpecialValueText('Original width');form.addRow('Maximum width (pixels)',self.width)
-        self.quality=QSpinBox();self.quality.setRange(10,100);self.quality.setValue(85);form.addRow('JPEG/WebP quality',self.quality)
-        self.pdfquality=QComboBox();self.pdfquality.addItems(['ebook','screen','printer']);form.addRow('PDF quality preset',self.pdfquality);self.layout.addLayout(form)
-        self.button('Choose output and run',self.run_tools)
-        self.text('PDF compression may reduce quality. SVG supports self-contained shapes only. This preview processes one image per conversion; multi-image PDF creation is supported.')
+        self.text('Jatayu Tools is being prepared. Verified tools will appear here in later builds.')
+        self.text('For now, use the standard applications in the menu. No additional tool is required to use the desktop.')
     def add_files(self):
         files,_=QFileDialog.getOpenFileNames(self,'Choose input files',str(Path.home()),'Supported documents (*.jpg *.jpeg *.png *.webp *.bmp *.svg *.pdf);;All files (*)')
         for f in files:self.files.addItem(f)
@@ -209,7 +200,14 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('mode',nargs='?',default='welcome',choices=['live','welcome','tools','update','backup','check','language','portals','android','about','autostart']);p.add_argument('--smoke',action='store_true');a=p.parse_args()
     mode=a.mode
     if mode=='autostart':
-        if live():mode='live'
+        if live():
+            desktop=Path.home()/'Desktop';desktop.mkdir(exist_ok=True)
+            for name in ('org.jatayu.installer.desktop','org.jatayu.faq.desktop','org.jatayu.manual.desktop'):
+                source=Path('/usr/share/applications')/name
+                if source.is_file():
+                    target=desktop/name
+                    if not target.exists():shutil.copyfile(source,target);target.chmod(0o755)
+            mode='live'
         elif (STATE/'welcome-complete').exists():return 0
         else:mode='welcome'
     app=QApplication(sys.argv);app.setStyle('Fusion');app.setStyleSheet(STYLE)

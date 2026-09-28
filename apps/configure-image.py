@@ -53,16 +53,4 @@ subprocess.run(['ufw','default','deny','incoming'],check=True)
 subprocess.run(['ufw','default','allow','outgoing'],check=True)
 p=Path('/etc/ufw/ufw.conf');p.write_text(p.read_text().replace('ENABLED=no','ENABLED=yes'))
 subprocess.run(['systemctl','enable','ufw','zramswap'],check=True)
-# A custom theme inherits a complete shipped Breeze style; modifications are
-# limited to the original panel artwork and metadata supplied by Jatayu.
-dst=Path('/usr/share/plasma/desktoptheme/jatayu')
-src=Path('/usr/share/plasma/desktoptheme/default')
-if not src.exists():raise SystemExit('Breeze theme not found; inspect plasma-desktoptheme packaging')
-shutil.copytree(src,dst,dirs_exist_ok=True)
-shutil.copyfile('/usr/share/jatayu/panel-background.svg',dst/'widgets/panel-background.svg')
-old=dst/'widgets/panel-background.svgz'
-if old.exists():old.unlink()
-meta=dst/'metadata.json'
-if meta.exists():
-    d=json.loads(meta.read_text());d.setdefault('KPlugin',{}).update({'Id':'jatayu','Name':'JatayuOS (Breeze-derived)'});meta.write_text(json.dumps(d,indent=2))
 print('Jatayu image integration configured. VM installation tests remain required.')
