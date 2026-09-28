@@ -39,9 +39,11 @@ write('/etc/xdg/autostart/calamares-desktop-icon.desktop','[Desktop Entry]\nType
 for name in ['org.kde.plasma-welcome.desktop','plasma-welcome.desktop']:
     write('/etc/xdg/autostart/'+name,'[Desktop Entry]\nType=Application\nName=Welcome\nHidden=true\n')
 write('/etc/sddm.conf.d/20-jatayu.conf','[Theme]\nCurrent=breeze\n[General]\nInputMethod=\n')
-# Static Breeze login background; no copied login implementation.
-if Path('/usr/share/sddm/themes/breeze').exists():
-    write('/usr/share/sddm/themes/breeze/theme.conf.user','[General]\nbackground=/usr/share/jatayu/wallpaper.svg\nshowlogo=hidden\n')
+# The selected greeter must exist. SDDM silently falls back to its built-in
+# theme when Recommends are disabled and sddm-theme-breeze is omitted.
+if not Path('/usr/share/sddm/themes/breeze/theme.conf').exists():
+    raise SystemExit('Breeze SDDM theme missing; install sddm-theme-breeze')
+write('/usr/share/sddm/themes/breeze/theme.conf.user','[General]\nbackground=/usr/share/jatayu/wallpaper.svg\nshowlogo=hidden\n')
 write('/etc/default/zramswap','ALGO=lz4\nPERCENT=50\nPRIORITY=100\n')
 write('/etc/sysctl.d/80-jatayu.conf','vm.swappiness=100\n')
 write('/etc/apt/apt.conf.d/20auto-upgrades','APT::Periodic::Update-Package-Lists "1";\nAPT::Periodic::Unattended-Upgrade "1";\n')
