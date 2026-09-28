@@ -16,6 +16,48 @@ put('assets/panel-background.svg',''.join(parts))
 apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.svg','System;'),('tools','Jatayu Tools','/usr/share/jatayu/logo.svg','System;'),('about','About JatayuOS','/usr/share/jatayu/logo.svg','System;')]
 for mode,title,icon,categories in apps:
     put(f'overlay/usr/share/applications/org.jatayu.{mode}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nComment=JatayuOS {title}\nExec=jatayu {mode}\nIcon={icon}\nTerminal=false\nCategories={categories}\nStartupNotify=true\n')
+for mode in ('update','backup','check','language','portals','android'):
+    (R/f'overlay/usr/share/applications/org.jatayu.{mode}.desktop').unlink(missing_ok=True)
+for name,title,command,icon in (
+    ('installer','Install JatayuOS','calamares-install-debian','drive-harddisk'),
+    ('faq','JatayuOS FAQ','xdg-open /usr/share/jatayu/FAQ.txt','help-faq'),
+    ('manual','JatayuOS User Manual','xdg-open /usr/share/jatayu/USER-MANUAL.txt','help-contents')):
+    put(f'overlay/usr/share/applications/org.jatayu.{name}.desktop',
+        f'[Desktop Entry]\\nType=Application\\nName={title}\\nExec={command}\\nIcon={icon}\\nTerminal=false\\nCategories=System;\\n')
+put('assets/FAQ.txt',"""JatayuOS FAQ (development preview)
+
+What is JatayuOS?
+An independent Debian 13 desktop with KDE Plasma and Firefox ESR.
+
+Do I need internet to install?
+The installer is designed for offline installation. Back up important data before selecting a disk.
+
+Where are updates?
+Open Discover from the application menu. Debian security updates remain available through APT.
+
+How do I type Hindi?
+Open System Settings for language and keyboard options. Fcitx5 input methods are available; sign out and back in after changing input settings.
+
+Is this affiliated with a government or Debian?
+No. JatayuOS is an independent project. See About JatayuOS and bundled licence notices.
+""")
+put('assets/USER-MANUAL.txt',"""JatayuOS User Manual (development preview)
+
+LIVE SESSION
+Choose language and keyboard in Jatayu Welcome. Use Try JatayuOS to explore or Install JatayuOS to open Calamares. FAQ, User Manual and Installer are also on the live desktop.
+
+INSTALLATION
+Back up existing data. Review the target disk, partition summary and user account carefully in Calamares. After installation, restart and remove the ISO when prompted.
+
+EVERYDAY USE
+The Jatayu icon opens the application menu. Use Discover for software and updates, System Settings to configure the desktop, Dolphin for files, and Firefox ESR for the web.
+
+LANGUAGE
+The first tested choices are English (India) and Hindi. The keyboard layout and display language are separate settings. Additional input methods may require configuring Fcitx5.
+
+SUPPORT
+This is an independent development preview. Read the third-party notices in /usr/share/doc and the source project documentation before redistribution.
+""")
 put('overlay/etc/xdg/autostart/org.jatayu.welcome.desktop','[Desktop Entry]\nType=Application\nName=JatayuOS Welcome\nExec=jatayu autostart\nOnlyShowIn=KDE;\nX-KDE-autostart-phase=2\n')
 put('overlay/usr/share/polkit-1/actions/org.jatayu.admin.policy',"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE policyconfig PUBLIC \"-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN\" \"http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd\">\n<policyconfig>\n  <action id=\"org.jatayu.live-layout\">\n    <description>Set live-session language and keyboard</description>\n    <message>Set JatayuOS live-session language and keyboard</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>yes</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">live-layout</annotate>\n  </action>\n  <action id=\"org.jatayu.install\">\n    <description>Install selected software</description>\n    <message>Administrator authentication is required to install software</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">install</annotate>\n  </action>\n  <action id=\"org.jatayu.refresh\">\n    <description>Refresh package information</description>\n    <message>Administrator authentication is required to refresh packages</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">refresh</annotate>\n  </action>\n</policyconfig>\n")
 put('overlay/etc/skel/.config/kdeglobals','''[General]
@@ -27,7 +69,7 @@ SingleClick=false
 [Icons]
 Theme=breeze-dark
 ''')
-put('overlay/etc/skel/.config/plasmarc','[Theme]\nname=jatayu\n')
+put('overlay/etc/skel/.config/plasmarc','[Theme]\nname=default\n')
 put('overlay/etc/skel/.config/baloofilerc','[Basic Settings]\nIndexing-Enabled=false\n')
 put('overlay/etc/skel/.config/kwinrc','[Plugins]\nblurEnabled=false\ncontrastEnabled=false\n')
 put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-handler/http=firefox-esr.desktop\nx-scheme-handler/https=firefox-esr.desktop\ntext/html=firefox-esr.desktop\n')
@@ -90,7 +132,7 @@ Created for Anup Yadav. Based on Debian and KDE; Firefox retains Mozilla identit
 This integrated source kit is not a tested ISO or production release.
 The original code-drawn placeholder artwork is deliberate: approved eagle artwork needs clean source files and rights verification.
 The desktop uses standard Kickoff and a themed panel. Pixel-identical custom menu and angled sections remain pending.
-All seven Jatayu app entry points are supplied, but scope limits are shown inside each app.
+Jatayu Welcome and a Jatayu Tools placeholder are supplied. More tools will follow after validation.
 See README.md, docs/STATUS.md and docs/COMPLIANCE.md in the build kit.
 ''')
 put('overlay/usr/share/doc/jatayu-integration/copyright','''JatayuOS integration development source
