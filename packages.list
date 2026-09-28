@@ -3,6 +3,7 @@ linux-image-amd64
 live-boot
 live-config
 live-config-systemd
+user-setup
 systemd-sysv
 sudo
 locales
@@ -13,6 +14,7 @@ pkexec
 plasma-desktop
 plasma-workspace
 sddm
+sddm-theme-breeze
 kde-config-sddm
 breeze
 breeze-gtk-theme
@@ -92,4 +94,3 @@ firmware-amd-graphics
 firmware-intel-graphics
 intel-microcode
 amd64-microcode
-
