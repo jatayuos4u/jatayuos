@@ -23,7 +23,7 @@ for name,title,command,icon in (
     ('faq','JatayuOS FAQ','xdg-open /usr/share/jatayu/FAQ.txt','help-faq'),
     ('manual','JatayuOS User Manual','xdg-open /usr/share/jatayu/USER-MANUAL.txt','help-contents')):
     put(f'overlay/usr/share/applications/org.jatayu.{name}.desktop',
-        f'[Desktop Entry]\\nType=Application\\nName={title}\\nExec={command}\\nIcon={icon}\\nTerminal=false\\nCategories=System;\\n')
+        f'[Desktop Entry]\nType=Application\nName={title}\nExec={command}\nIcon={icon}\nTerminal=false\nCategories=System;\n')
 put('assets/FAQ.txt',"""JatayuOS FAQ (development preview)
 
 What is JatayuOS?
@@ -75,7 +75,7 @@ put('overlay/etc/skel/.config/kwinrc','[Plugins]\nblurEnabled=false\ncontrastEna
 put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-handler/http=firefox-esr.desktop\nx-scheme-handler/https=firefox-esr.desktop\ntext/html=firefox-esr.desktop\n')
 base='overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/'
 put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS development layout','Version':'0.1','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
-put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[plasmarc][Theme]\nname=jatayu\n')
+put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[plasmarc][Theme]\nname=default\n')
 put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 48;\npanel.floating = true;\nvar launcher = panel.addWidget(\"org.kde.plasma.kicker\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.svg\");\npanel.addWidget(\"org.kde.plasma.icontasks\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.svg\");\n}\n")
 brand='overlay/etc/calamares/branding/jatayu/'
 put(brand+'branding.desc','''componentName: jatayu
