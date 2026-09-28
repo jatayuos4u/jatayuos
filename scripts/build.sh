@@ -36,6 +36,7 @@ EOF
 fi
 apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml dpkg-dev zstd ca-certificates
+python3 scripts/generate-files.py
 python3 scripts/preflight.py --apt
 bash scripts/package.sh
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
