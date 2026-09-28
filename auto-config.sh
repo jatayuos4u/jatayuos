@@ -15,8 +15,7 @@ lb config noauto \
   --memtest none --iso-volume JATAYUOS_DEV \
   --iso-application 'JatayuOS Development Live' \
   --iso-publisher 'JatayuOS - Anup Yadav - Independent project' \
-  --bootappend-live 'boot=live components quiet splash username=jatayu hostname=jatayuos locales=en_IN.UTF-8 keyboard-layouts=us timezone=Asia/Kolkata' \
+  --bootappend-live 'boot=live components quiet splash username=jatayu user-fullname=JatayuOS hostname=jatayuos locales=en_IN.UTF-8 keyboard-layouts=us timezone=Asia/Kolkata' \
   --chroot-squashfs-compression-type zstd \
   --chroot-squashfs-compression-level 6 \
   --cache true --cache-packages true --checksums sha256 "$@"
-
