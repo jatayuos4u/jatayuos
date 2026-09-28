@@ -48,6 +48,7 @@ cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
 # The live-build bootloader templates carry Debian's default splash.
 # Preserve their boot logic and replace only the shared artwork.
+mkdir -p build/config/bootloaders
 cp -a /usr/share/live/build/bootloaders/. build/config/bootloaders/
 cp assets/boot-splash.svg build/config/bootloaders/splash.svg
 cd build
