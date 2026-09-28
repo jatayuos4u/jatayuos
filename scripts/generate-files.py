@@ -5,17 +5,17 @@ import json
 R=Path(__file__).resolve().parents[1]
 def put(name,text):
     p=R/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
-put('assets/logo.svg','''<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect width="256" height="256" rx="52" fill="#10212d"/><path d="M45 62h166L128 217z" fill="none" stroke="#e5b866" stroke-width="9"/><text x="128" y="151" text-anchor="middle" font-family="sans-serif" font-size="96" fill="#e5b866">J</text></svg>''')
-put('assets/wallpaper.svg','''<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#10293c"/><stop offset="1" stop-color="#050e18"/></linearGradient><linearGradient id="gold"><stop stop-color="#a86f26"/><stop offset="1" stop-color="#ffd88b"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#bg)"/><path d="M0 850 Q600 550 1920 900 M0 910 Q650 600 1920 960" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".5"/><text x="1140" y="435" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="108">JatayuOS</text><text x="1140" y="505" text-anchor="middle" fill="#e5b866" font-family="sans-serif" font-size="30">Udaan Aapki. Shakti Bharat Ki.</text><text x="70" y="1000" fill="#8096a7" font-family="sans-serif" font-size="20">Development artwork • Approved eagle wallpaper awaiting clean source and rights verification</text></svg>''')
+put('assets/logo.svg',"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"256\" height=\"256\" viewBox=\"0 0 256 256\"><rect width=\"256\" height=\"256\" rx=\"48\" fill=\"#10212d\"/><path d=\"M38 111 Q84 43 138 82 Q170 56 220 74 L179 97 L205 114 Q174 145 144 134 Q112 171 56 157 L96 132 Q66 134 38 111Z\" fill=\"#e9b75b\"/><path d=\"M49 174 Q115 205 207 157\" fill=\"none\" stroke=\"#e9b75b\" stroke-width=\"9\" stroke-linecap=\"round\"/><circle cx=\"166\" cy=\"89\" r=\"5\" fill=\"#10212d\"/></svg>")
+put('assets/wallpaper.svg',"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1920\" height=\"1080\" viewBox=\"0 0 1920 1080\"><defs><linearGradient id=\"sky\" x2=\"0\" y2=\"1\"><stop stop-color=\"#102c40\"/><stop offset=\".7\" stop-color=\"#112334\"/><stop offset=\"1\" stop-color=\"#071522\"/></linearGradient></defs><rect width=\"1920\" height=\"1080\" fill=\"url(#sky)\"/><circle cx=\"1500\" cy=\"390\" r=\"230\" fill=\"#d79b54\" opacity=\".8\"/><path d=\"M0 830 Q450 680 780 840 T1920 770 V1080 H0Z\" fill=\"#091923\"/><path d=\"M0 980 Q510 780 1000 925 T1920 850 V1080 H0Z\" fill=\"#0b1c29\"/><path d=\"M910 520 Q1020 465 1115 485 Q1215 415 1330 440 Q1220 470 1170 515 Q1070 570 910 520Z\" fill=\"#0a1b28\" opacity=\".8\"/></svg>")
 # Nine-part Plasma frame, using original simple vector shapes.
 parts=['<svg xmlns="http://www.w3.org/2000/svg" width="140" height="100">','<rect id="center" x="20" y="20" width="60" height="40" fill="#10212d"/>']
 for name,x,y,w,h in [('top',20,10,60,10),('bottom',20,60,60,10),('left',10,20,10,40),('right',80,20,10,40),('topleft',10,10,10,10),('topright',80,10,10,10),('bottomleft',10,60,10,10),('bottomright',80,60,10,10)]:
     parts.append(f'<rect id="{name}" x="{x}" y="{y}" width="{w}" height="{h}" fill="#10212d" stroke="#bc9652" stroke-width="1"/>')
 parts.extend(['<rect id="hint-top-margin" width="1" height="8"/><rect id="hint-bottom-margin" width="1" height="8"/><rect id="hint-left-margin" width="8" height="1"/><rect id="hint-right-margin" width="8" height="1"/>','</svg>'])
 put('assets/panel-background.svg',''.join(parts))
-apps=[('welcome','Aarambh','Start-here','System;'),('update','Jatayu Update','system-software-update','System;'),('backup','Jatayu Sanjeevani','document-save','System;'),('check','Jaanch','dialog-information','System;'),('language','Bhasa Setu','preferences-desktop-locale','Settings;'),('portals','Sarkar Setu','internet-web-browser','Network;'),('tools','Jatayu Tools','applications-graphics','Graphics;'),('android','Android Setup','phone','System;'),('about','About JatayuOS','help-about','System;')]
+apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.svg','System;'),('tools','Jatayu Tools','/usr/share/jatayu/logo.svg','System;'),('about','About JatayuOS','/usr/share/jatayu/logo.svg','System;')]
 for mode,title,icon,categories in apps:
-    put(f'overlay/usr/share/applications/org.jatayu.{mode}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nComment=JatayuOS {title}\nExec=jatayu {mode}\nIcon={icon.lower()}\nTerminal=false\nCategories={categories}\nStartupNotify=true\n')
+    put(f'overlay/usr/share/applications/org.jatayu.{mode}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nComment=JatayuOS {title}\nExec=jatayu {mode}\nIcon={icon}\nTerminal=false\nCategories={categories}\nStartupNotify=true\n')
 put('overlay/etc/xdg/autostart/org.jatayu.welcome.desktop','[Desktop Entry]\nType=Application\nName=JatayuOS Welcome\nExec=jatayu autostart\nOnlyShowIn=KDE;\nX-KDE-autostart-phase=2\n')
 put('overlay/usr/share/polkit-1/actions/org.jatayu.admin.policy',"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE policyconfig PUBLIC \"-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN\" \"http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd\">\n<policyconfig>\n  <action id=\"org.jatayu.live-layout\">\n    <description>Set live-session language and keyboard</description>\n    <message>Set JatayuOS live-session language and keyboard</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>yes</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">live-layout</annotate>\n  </action>\n  <action id=\"org.jatayu.install\">\n    <description>Install selected software</description>\n    <message>Administrator authentication is required to install software</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">install</annotate>\n  </action>\n  <action id=\"org.jatayu.refresh\">\n    <description>Refresh package information</description>\n    <message>Administrator authentication is required to refresh packages</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">refresh</annotate>\n  </action>\n</policyconfig>\n")
 put('overlay/etc/skel/.config/kdeglobals','''[General]
@@ -34,27 +34,7 @@ put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-h
 base='overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/'
 put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS development layout','Version':'0.1','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
 put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[plasmarc][Theme]\nname=jatayu\n')
-put(base+'contents/layouts/org.kde.plasma.desktop-layout.js','''var panel = new Panel;
-panel.location = "bottom";
-panel.height = 52;
-panel.floating = true;
-var launcher = panel.addWidget("org.kde.plasma.kickoff");
-launcher.currentConfigGroup = ["General"];
-launcher.writeConfig("icon", "/usr/share/jatayu/logo.svg");
-launcher.writeConfig("favorites", "org.jatayu.welcome.desktop,org.kde.discover.desktop,systemsettings.desktop,org.jatayu.tools.desktop,firefox-esr.desktop,org.kde.dolphin.desktop");
-var tasks = panel.addWidget("org.kde.plasma.icontasks");
-tasks.currentConfigGroup = ["General"];
-tasks.writeConfig("launchers", "applications:org.kde.dolphin.desktop,applications:firefox-esr.desktop,applications:org.kde.konsole.desktop,applications:org.jatayu.tools.desktop,applications:systemsettings.desktop");
-panel.addWidget("org.kde.plasma.systemtray");
-panel.addWidget("org.kde.plasma.digitalclock");
-panel.addWidget("org.kde.plasma.showdesktop");
-var ds = desktops();
-for (var i=0; i<ds.length; i++) {
-  ds[i].wallpaperPlugin="org.kde.image";
-  ds[i].currentConfigGroup=["Wallpaper","org.kde.image","General"];
-  ds[i].writeConfig("Image","file:///usr/share/jatayu/wallpaper.svg");
-}
-''')
+put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 48;\npanel.floating = true;\nvar launcher = panel.addWidget(\"org.kde.plasma.kicker\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.svg\");\npanel.addWidget(\"org.kde.plasma.icontasks\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.svg\");\n}\n")
 brand='overlay/etc/calamares/branding/jatayu/'
 put(brand+'branding.desc','''componentName: jatayu
 welcomeStyleCalamares: true
