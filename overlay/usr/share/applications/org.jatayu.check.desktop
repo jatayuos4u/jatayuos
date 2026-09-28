@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Jaanch
-Comment=JatayuOS Jaanch
-Exec=jatayu check
-Icon=dialog-information
-Terminal=false
-Categories=System;
-StartupNotify=true
