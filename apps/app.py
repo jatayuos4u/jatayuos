@@ -3,7 +3,7 @@
 import argparse, json, os, shutil, subprocess, sys
 from pathlib import Path
 from PySide6.QtCore import Qt, QThread, Signal, QProcess, QUrl
-from PySide6.QtGui import QDesktopServices, QIcon
+from PySide6.QtGui import QDesktopServices, QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,QComboBox,QLineEdit,QFileDialog,QMessageBox,QPlainTextEdit,QCheckBox,QSpinBox,QFormLayout,QListWidget,QListWidgetItem)
 import engine
 
@@ -27,12 +27,20 @@ class Worker(QThread):
 class Window(QMainWindow):
     def __init__(self,mode):
         super().__init__(); self.mode=mode;self.worker=None;self.proc=None; self.buttons=[]
-        titles={'live':'Welcome to JatayuOS','welcome':'Aarambh','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
+        titles={'live':'Welcome to JatayuOS','welcome':'Jatayu Welcome','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
         self.setWindowTitle(titles.get(mode,'JatayuOS')); self.resize(760,540 if mode=='live' else 500)
         self.setWindowIcon(QIcon(str(ASSETS/'logo.svg')))
-        central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(24,24,24,24)
-        title=QLabel(titles.get(mode,'JatayuOS'));title.setObjectName('title');self.layout.addWidget(title)
-        self.text('Udaan Aapki. Shakti Bharat Ki.')
+        central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(28,26,28,24);self.layout.setSpacing(12)
+        if mode in ('live','welcome'):
+            header=QHBoxLayout()
+            mark=QLabel();mark.setPixmap(QPixmap(str(ASSETS/'logo.svg')).scaled(72,72,Qt.KeepAspectRatio,Qt.SmoothTransformation));header.addWidget(mark)
+            heading=QVBoxLayout()
+            title=QLabel(titles[mode]);title.setObjectName('title');heading.addWidget(title)
+            heading.addWidget(QLabel('Udaan Aapki. Shakti Bharat Ki.'))
+            header.addLayout(heading);header.addStretch();self.layout.addLayout(header)
+        else:
+            title=QLabel(titles.get(mode,'JatayuOS'));title.setObjectName('title');self.layout.addWidget(title)
+            self.text('Udaan Aapki. Shakti Bharat Ki.')
         getattr(self,'page_'+mode)()
         self.log=QPlainTextEdit();self.log.setReadOnly(True);self.log.setMaximumHeight(90);self.log.setVisible(False);self.layout.addWidget(self.log)
         self.text('Development preview • Independent project by Anup Yadav • No government affiliation')
