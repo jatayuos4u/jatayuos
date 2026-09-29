@@ -1,5 +1,8 @@
 name: Manual JatayuOS development ISO
 on:
+  push:
+    branches: [codex/aarambh-waydroid-finalize]
+    paths: [.github/trigger-build-20260929.txt]
   workflow_dispatch:
     inputs:
       confirm:
@@ -13,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: inputs.confirm == 'BUILD'
+    if: github.event_name == 'push' || inputs.confirm == 'BUILD'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
