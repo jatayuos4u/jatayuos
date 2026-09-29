@@ -3,3 +3,4 @@ JatayuOS review build requested 2026-09-29. This marker is the sole push path fo
 Consolidated installer UI and Kavach build 2026-09-29T16:42:03.113Z
 Retry with matching Debian source keyring 2026-09-29T16:44:51.897Z
 Preflight syntax corrected 2026-09-29T16:46:31.645Z
+Final ISO upload retry 2026-09-29T17:12:25.744Z
