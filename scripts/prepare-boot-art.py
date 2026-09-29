@@ -79,6 +79,7 @@ terminal-font: "Unifont Regular 16"
 }
 + progress_bar {
     id = "__timeout__"
+    text = "Booting in %d s"
     left = 18%
     top = 78%
     width = 64%
@@ -95,5 +96,5 @@ grub_cfg = OUT/'grub-pc'/'grub.cfg'
 if not grub_cfg.is_file():
     raise SystemExit('Missing upstream GRUB template')
 with grub_cfg.open('a') as config:
-    config.write('\\nset timeout_style=menu\\nset timeout=8\\n')
+    config.write('\nset timeout_style=menu\nset timeout=8\n')
 print('Rendered 640x480 BIOS and 800x600 UEFI tricolor menus.')
