@@ -72,26 +72,26 @@ class Window(QMainWindow):
         else:e.accept()
 
     def page_live(self):
-        self.text('Choose a language and keyboard, then explore JatayuOS or start installation. Internet is optional.')
-        self.lang=QComboBox();self.lang.addItem('English (India)','en_IN.UTF-8');self.lang.addItem('हिन्दी — Hindi','hi_IN.UTF-8');self.layout.addWidget(self.lang)
-        self.keys=QComboBox();self.keys.addItem('English (US)','us');self.keys.addItem('Indian layout','in');self.layout.addWidget(self.keys)
-        self.button('Apply language and keyboard',lambda:self.admin(['live-layout',self.lang.currentData(),self.keys.currentData()]))
-        self.text('The installer will ask you to confirm these choices.')
+        self.text('Aarambh is your starting point for JatayuOS. Explore the live desktop, review essential help, or begin installation. Internet is optional.')
+        self.text('Made in India • Independent project • Debian 13 + KDE Plasma')
+        self.button('User Manual',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'USER-MANUAL.txt'))))
+        self.button('Frequently Asked Questions',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'FAQ.txt'))))
+        self.button('About JatayuOS',lambda:self.launch(['jatayu','about']))
         self.button('Try JatayuOS',self.close)
         self.button('Install JatayuOS',self.install_os)
         if not live():self.text('Live-session preview. Installation is available only from the ISO.')
     def install_os(self):
         if not live():return self.error('Installation is only available from the live ISO.')
         if QMessageBox.question(self,'Open installer','Open Calamares? Review its partition summary carefully before approving installation.')==QMessageBox.Yes:
-            self.launch(['calamares-install-debian'])
+            self.launch([next((x for x in ('calamares-install-debian','calamares') if shutil.which(x)), 'calamares')])
 
     def page_welcome(self):
-        self.text('Your desktop is ready. Start with the essentials below.')
+        self.text('Aarambh helps you get productive quickly. Open essential help, software and settings from one clean starting point.')
         self.button('User Manual',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'USER-MANUAL.txt'))))
         self.button('Frequently Asked Questions',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'FAQ.txt'))))
         self.button('Software Center',lambda:self.launch(['plasma-discover']))
         self.button('System Settings',lambda:self.launch(['systemsettings']))
-        self.button('Language and keyboard',lambda:self.launch(['jatayu','language']))
+        self.button('About JatayuOS',lambda:self.launch(['jatayu','about']))
         self.button('Do not show on next sign-in',self.finish_welcome)
     def install_selected(self):
         selected=[k for k,c in self.choices if c.isChecked()]
@@ -191,7 +191,7 @@ class Window(QMainWindow):
         return f'RAM: {mem} MiB\nWayland session: {os.environ.get("XDG_SESSION_TYPE")=="wayland"}\nWaydroid installed: {bool(shutil.which("waydroid"))}\nBinder device present: {any(Path(x).exists() for x in ["/dev/binder","/dev/binderfs/binder-control"])}\nThis is a basic check; GPU and app compatibility still require testing.'
 
     def page_about(self):
-        self.text('JatayuOS 0.1 development preview\nCreated by Anup Yadav, India\nBased on Debian 13 with KDE Plasma and Mozilla Firefox ESR.\nContact: jatayuos4u@gmail.com')
+        self.text('JatayuOS 0.1 Development Preview\nMade in India • Created by Anup Yadav\nBuilt on Debian 13 with KDE Plasma and Mozilla Firefox ESR.\nDesigned as a clean, privacy-respecting desktop with familiar Linux foundations and India-first identity.\nContact: jatayuos4u@gmail.com')
         self.text('JatayuOS is independent and is not affiliated with or endorsed by the Government of India or the Debian Project. Debian is a registered trademark owned by Software in the Public Interest, Inc. Other marks belong to their owners.')
         self.button('Open third-party licence files',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile('/usr/share/doc')))
         self.button('Open development notes',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'README.txt'))))
