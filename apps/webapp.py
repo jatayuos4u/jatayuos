@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Standalone windows for the owner's unchanged local HTML tools."""
+"""Standalone windows for Jatayu local HTML apps and approved system actions."""
 import sys
 import subprocess
 from pathlib import Path
