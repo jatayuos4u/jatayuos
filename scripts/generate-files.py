@@ -21,7 +21,7 @@ for mode,title,icon,categories in apps:
 for mode in ('update','backup','check','language','portals','android'):
     (R/f'overlay/usr/share/applications/org.jatayu.{mode}.desktop').unlink(missing_ok=True)
 for name,title,command,icon in (
-    ('installer','Install JatayuOS','jatayu live-install','/usr/share/jatayu/logo.png'),
+    ('installer','Install JatayuOS','pkexec /usr/libexec/jatayu-live-installer','/usr/share/jatayu/logo.png'),
     ('faq','JatayuOS FAQ','xdg-open /usr/share/jatayu/FAQ.txt','help-faq'),
     ('manual','JatayuOS User Manual','xdg-open /usr/share/jatayu/USER-MANUAL.txt','help-contents')):
     put(f'overlay/usr/share/applications/org.jatayu.{name}.desktop',
@@ -105,15 +105,26 @@ style:
   SidebarTextCurrent: "#ffd17b"
 ''')
 
+# Opaque animated dots avoid font glyph sizing and remain clear at low resolutions.
+from PIL import Image, ImageDraw
+for color,name in [('#ff9933','saffron'),('#f5f5f5','white'),('#13884d','green')]:
+    im=Image.new('RGBA',(36,36),(0,0,0,0));ImageDraw.Draw(im).ellipse((2,2,33,33),fill=color)
+    im.save(R/f'assets/plymouth-dot-{name}.png')
 put('overlay/usr/share/plymouth/themes/jatayu/jatayu.plymouth','[Plymouth Theme]\nName=JatayuOS\nDescription=JatayuOS development boot theme\nModuleName=script\n[script]\nImageDir=/usr/share/plymouth/themes/jatayu\nScriptFile=/usr/share/plymouth/themes/jatayu/jatayu.script\n')
 put('overlay/usr/share/plymouth/themes/jatayu/jatayu.script','''Window.SetBackgroundTopColor(0.025,0.055,0.09);
 Window.SetBackgroundBottomColor(0.025,0.055,0.09);
 logo.image = Image("logo.png");
 logo.sprite = Sprite(logo.image);
-logo.sprite.SetPosition(Window.GetWidth()/2-logo.image.GetWidth()/2,Window.GetHeight()/2-logo.image.GetHeight()/2-35,10);
-title.image = Image.Text("JatayuOS", 1, 0.83, 0.43);
-title.sprite = Sprite(title.image);
-title.sprite.SetPosition(Window.GetWidth()/2-title.image.GetWidth()/2,Window.GetHeight()/2+100,10);
+logo.sprite.SetPosition(Window.GetWidth()/2-logo.image.GetWidth()/2, Window.GetHeight()/2-logo.image.GetHeight()/2-47, 10);
+saffron.image = Image("plymouth-dot-saffron.png");
+white.image = Image("plymouth-dot-white.png");
+green.image = Image("plymouth-dot-green.png");
+saffron.sprite = Sprite(saffron.image);
+white.sprite = Sprite(white.image);
+green.sprite = Sprite(green.image);
+saffron.sprite.SetPosition(Window.GetWidth()/2-54, Window.GetHeight()/2+79, 10);
+white.sprite.SetPosition(Window.GetWidth()/2-18, Window.GetHeight()/2+79, 10);
+green.sprite.SetPosition(Window.GetWidth()/2+18, Window.GetHeight()/2+79, 10);
 message.sprite = Sprite();
 tick = 0;
 fun animate() {
@@ -126,33 +137,21 @@ fun animate() {
   white.sprite.SetOpacity(0.45 + ((tick + 15) % 45) / 82);
   green.sprite.SetOpacity(0.45 + ((tick + 30) % 45) / 82);
 }
-saffron.image = Image.Text("●", 1, 0.55, 0.12);
-white.image = Image.Text("●", 1, 1, 1);
-green.image = Image.Text("●", 0.12, 0.66, 0.34);
-saffron.sprite = Sprite(saffron.image);
-white.sprite = Sprite(white.image);
-green.sprite = Sprite(green.image);
-saffron.sprite.SetPosition(Window.GetWidth()/2-42, Window.GetHeight()/2+75, 10);
-white.sprite.SetPosition(Window.GetWidth()/2-8, Window.GetHeight()/2+75, 10);
-green.sprite.SetPosition(Window.GetWidth()/2+26, Window.GetHeight()/2+75, 10);
-Plymouth.SetRefreshFunction(animate);
 fun show_message(text) {
   message.image = Image.Text(text, 1, 1, 1);
   message.sprite.SetImage(message.image);
-  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2,Window.GetHeight()/2+145,10);
+  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2, Window.GetHeight()/2+133, 10);
 }
-fun normal() { show_message("Udaan Aapki. Shakti Bharat Ki."); }
 fun password(prompt, bullets) {
   text = prompt + " ";
   for (i=0; i<bullets; i++) text += "*";
   show_message(text);
 }
 fun question(prompt, entry) { show_message(prompt + " " + entry); }
-Plymouth.SetDisplayNormalFunction(normal);
+Plymouth.SetRefreshFunction(animate);
 Plymouth.SetDisplayPasswordFunction(password);
 Plymouth.SetDisplayQuestionFunction(question);
 Plymouth.SetMessageFunction(show_message);
-normal();
 ''')
 put('overlay/etc/xdg/menus/applications-merged/jatayu-tools.menu','''<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN" "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
 <Menu><Name>Applications</Name><Menu><Name>Jatayu Tools</Name><Directory>jatayu-tools.directory</Directory><Include><Category>X-Jatayu-Tools</Category></Include></Menu></Menu>
@@ -163,6 +162,8 @@ Name=Jatayu Tools
 Icon=/usr/share/jatayu/logo.png
 ''')
 
+for slug,title in [('kavach','Kavach'),('sarkar-setu','Sarkar Setu'),('utsav','Utsav')]:
+    put(f'overlay/usr/share/applications/org.jatayu.{slug}.desktop',f'[Desktop Entry]\\nType=Application\\nName={title}\\nExec=xdg-open /usr/share/jatayu/{slug}.html\\nIcon=applications-internet\\nTerminal=false\\nCategories=X-Jatayu-Tools;Network;\\n')
 put('assets/README.txt','''JatayuOS 0.1 development preview
 Created for Anup Yadav. Based on Debian and KDE; Firefox retains Mozilla identity.
 This integrated source kit is not a tested ISO or production release.
