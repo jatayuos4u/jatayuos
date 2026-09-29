@@ -10,8 +10,9 @@ cp assets/logo.png "$stage/etc/calamares/branding/jatayu/logo.png"
 cp assets/plymouth-logo.png "$stage/usr/share/plymouth/themes/jatayu/logo.png"
 cp scripts/jatayu "$stage/usr/bin/jatayu"
 cp scripts/jatayu-admin "$stage/usr/libexec/jatayu-admin"
+cp scripts/jatayu-live-installer "$stage/usr/libexec/jatayu-live-installer"
 cp scripts/postinst "$stage/DEBIAN/postinst"
-chmod 755 "$stage/usr/bin/jatayu" "$stage/usr/libexec/jatayu-admin" "$stage/DEBIAN/postinst"
+chmod 755 "$stage/usr/bin/jatayu" "$stage/usr/libexec/jatayu-admin" "$stage/usr/libexec/jatayu-live-installer" "$stage/DEBIAN/postinst"
 cat > "$stage/DEBIAN/control" <<'EOF'
 Package: jatayu-integration
 Version: 0.1.0

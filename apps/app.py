@@ -2,7 +2,7 @@
 """Small shared Qt front end for the Jatayu development suite."""
 import argparse, json, os, shutil, subprocess, sys
 from pathlib import Path
-from PySide6.QtCore import Qt, QThread, Signal, QProcess, QUrl
+from PySide6.QtCore import Qt, QThread, Signal, QProcess, QUrl, QTimer
 from PySide6.QtGui import QDesktopServices, QIcon, QPixmap
 from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,QComboBox,QLineEdit,QFileDialog,QMessageBox,QPlainTextEdit,QCheckBox,QSpinBox,QFormLayout,QListWidget,QListWidgetItem)
 import engine
@@ -83,7 +83,12 @@ class Window(QMainWindow):
     def install_os(self):
         if not live():return self.error('Installation is only available from the live ISO.')
         if QMessageBox.question(self,'Open installer','Open Calamares? Review its partition summary carefully before approving installation.')==QMessageBox.Yes:
-            self.launch([next((x for x in ('calamares-install-debian','calamares') if shutil.which(x)), 'calamares')])
+            self.log.setVisible(True);self.log.clear()
+            self.proc=QProcess(self);self.proc.setProcessChannelMode(QProcess.MergedChannels)
+            self.proc.readyReadStandardOutput.connect(lambda:self.log.appendPlainText(bytes(self.proc.readAllStandardOutput()).decode(errors='replace')))
+            self.proc.errorOccurred.connect(lambda err:self.error('Could not start the installer. Check the live-session privileges.'))
+            self.proc.finished.connect(lambda code,status:self.error('Installer exited with code '+str(code)) if code else None)
+            self.proc.start('pkexec',['/usr/libexec/jatayu-live-installer'])
 
     def page_welcome(self):
         self.text('Aarambh helps you get productive quickly. Open essential help, software and settings from one clean starting point.')
@@ -112,8 +117,8 @@ class Window(QMainWindow):
         p=Path('/var/log/apt/history.log');return p.read_text(errors='replace')[-12000:] if p.exists() else 'No APT history yet.'
 
     def page_tools(self):
-        self.text('Jatayu Tools is being prepared. Verified tools will appear here in later builds.')
-        self.text('For now, use the standard applications in the menu. No additional tool is required to use the desktop.')
+        self.text('Jatayu Tools Creative Studio is installed for offline image and PDF work.')
+        self.button('Open Jatayu Tools',lambda:self.launch(['jatayu-tools']))
     def add_files(self):
         files,_=QFileDialog.getOpenFileNames(self,'Choose input files',str(Path.home()),'Supported documents (*.jpg *.jpeg *.png *.webp *.bmp *.svg *.pdf);;All files (*)')
         for f in files:self.files.addItem(f)
@@ -198,13 +203,11 @@ class Window(QMainWindow):
         self.button('Open development notes',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'README.txt'))))
 
 def main():
-    if len(sys.argv)>1 and sys.argv[1]=='live-install':
+    direct_install=len(sys.argv)>1 and sys.argv[1]=='live-install'
+    if direct_install:
         if not live():
             print('Installation is available only from the live ISO.',file=sys.stderr);return 2
-        exe=next((x for x in ('calamares-install-debian','calamares') if shutil.which(x)),None)
-        if not exe:
-            print('Calamares installer is not installed.',file=sys.stderr);return 127
-        subprocess.Popen([exe]);return 0
+        sys.argv[1]='live'
     p=argparse.ArgumentParser();p.add_argument('mode',nargs='?',default='welcome',choices=['live','welcome','tools','update','backup','check','language','portals','android','about','autostart']);p.add_argument('--smoke',action='store_true');a=p.parse_args()
     mode=a.mode
     if mode=='autostart':
@@ -220,6 +223,7 @@ def main():
         else:mode='welcome'
     app=QApplication(sys.argv);app.setStyle('Fusion');app.setStyleSheet(STYLE)
     w=Window(mode);w.show()
+    if direct_install:QTimer.singleShot(0,w.install_os)
     if a.smoke:
         app.processEvents();w.grab().save(os.environ.get('JATAYU_SMOKE_IMAGE','/tmp/jatayu-smoke.png'));w.close();return 0
     return app.exec()

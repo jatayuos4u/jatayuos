@@ -38,31 +38,31 @@ cat > /etc/apt/sources.list.d/jatayu-build-backports.list <<'EOF'
 deb http://deb.debian.org/debian trixie-backports main contrib non-free-firmware
 EOF
 apt-get update
-apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml dpkg-dev zstd ca-certificates
+apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil fonts-dejavu-core dpkg-dev zstd ca-certificates
 python3 scripts/generate-files.py
 python3 scripts/preflight.py --apt
+printf '%s  %s\n' '4634514e641b851369b9cd276f573f68fa75128a38394a6e1722a32b87bd489b' jatayu-tools_2.0.0_all.deb | sha256sum -c -
 bash scripts/package.sh
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
-cp out/jatayu-integration_*.deb build/config/packages.chroot/
+cp out/jatayu-integration_*.deb jatayu-tools_2.0.0_all.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
 # The live-build bootloader templates carry Debian's default splash.
 # Preserve their boot logic and replace only the shared artwork.
 mkdir -p build/config/bootloaders
 cp -a /usr/share/live/build/bootloaders/. build/config/bootloaders/
-find build/config/bootloaders -name splash.svg -delete
-for loader in build/config/bootloaders/*; do
-  if [[ -d "$loader" ]]; then cp assets/boot-splash.png "$loader/splash.png"; fi
-done
+python3 scripts/prepare-boot-art.py
 cd build
 lb config
 lb build
 cd ..
 iso=build/live-image-amd64.hybrid.iso
 test -s "$iso"
+test -x build/chroot/usr/bin/jatayu-tools
+test -x build/chroot/usr/libexec/jatayu-live-installer
 cp "$iso" out/JatayuOS-0.1-dev-amd64.iso
 find build -maxdepth 1 -name '*.packages' -exec cp '{}' out/ \;
 cp build/chroot/usr/share/jatayu/build-package-manifest.tsv out/package-manifest.tsv

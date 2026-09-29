@@ -14,13 +14,14 @@ for name,x,y,w,h in [('top',20,10,60,10),('bottom',20,60,60,10),('left',10,20,10
     parts.append(f'<rect id="{name}" x="{x}" y="{y}" width="{w}" height="{h}" fill="#10212d" stroke="#bc9652" stroke-width="1"/>')
 parts.extend(['<rect id="hint-top-margin" width="1" height="8"/><rect id="hint-bottom-margin" width="1" height="8"/><rect id="hint-left-margin" width="8" height="1"/><rect id="hint-right-margin" width="8" height="1"/>','</svg>'])
 put('assets/panel-background.svg',''.join(parts))
-apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.png','System;'),('tools','Jatayu Tools','/usr/share/jatayu/logo.png','X-Jatayu-Tools;System;'),('about','About JatayuOS','/usr/share/jatayu/logo.png','System;')]
+apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.png','System;'),('tools','Jatayu Tools','jatayu-tools','X-Jatayu-Tools;System;'),('about','About JatayuOS','/usr/share/jatayu/logo.png','System;')]
 for mode,title,icon,categories in apps:
-    put(f'overlay/usr/share/applications/org.jatayu.{mode}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nComment=JatayuOS {title}\nExec=jatayu {mode}\nIcon={icon}\nTerminal=false\nCategories={categories}\nStartupNotify=true\n')
+    command='jatayu-tools' if mode=='tools' else f'jatayu {mode}'
+    put(f'overlay/usr/share/applications/org.jatayu.{mode}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nComment=JatayuOS {title}\nExec={command}\nIcon={icon}\nTerminal=false\nCategories={categories}\nStartupNotify=true\n')
 for mode in ('update','backup','check','language','portals','android'):
     (R/f'overlay/usr/share/applications/org.jatayu.{mode}.desktop').unlink(missing_ok=True)
 for name,title,command,icon in (
-    ('installer','Install JatayuOS','jatayu live-install','drive-harddisk'),
+    ('installer','Install JatayuOS','jatayu live-install','/usr/share/jatayu/logo.png'),
     ('faq','JatayuOS FAQ','xdg-open /usr/share/jatayu/FAQ.txt','help-faq'),
     ('manual','JatayuOS User Manual','xdg-open /usr/share/jatayu/USER-MANUAL.txt','help-contents')):
     put(f'overlay/usr/share/applications/org.jatayu.{name}.desktop',
@@ -45,7 +46,7 @@ No. JatayuOS is an independent project. See About JatayuOS and bundled licence n
 put('assets/USER-MANUAL.txt',"""JatayuOS User Manual (development preview)
 
 LIVE SESSION
-Choose language and keyboard in Jatayu Welcome. Use Try JatayuOS to explore or Install JatayuOS to open Calamares. FAQ, User Manual and Installer are also on the live desktop.
+Use Jatayu Welcome to explore or open the installer. Use Try JatayuOS to explore or Install JatayuOS to open Calamares. FAQ, User Manual and Installer are also on the live desktop.
 
 INSTALLATION
 Back up existing data. Review the target disk, partition summary and user account carefully in Calamares. After installation, restart and remove the ISO when prompted.
@@ -60,7 +61,7 @@ SUPPORT
 This is an independent development preview. Read the third-party notices in /usr/share/doc and the source project documentation before redistribution.
 """)
 put('overlay/etc/xdg/autostart/org.jatayu.welcome.desktop','[Desktop Entry]\nType=Application\nName=JatayuOS Welcome\nExec=jatayu autostart\nOnlyShowIn=KDE;\nX-KDE-autostart-phase=2\n')
-put('overlay/usr/share/polkit-1/actions/org.jatayu.admin.policy',"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE policyconfig PUBLIC \"-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN\" \"http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd\">\n<policyconfig>\n  <action id=\"org.jatayu.live-layout\">\n    <description>Set live-session language and keyboard</description>\n    <message>Set JatayuOS live-session language and keyboard</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>yes</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">live-layout</annotate>\n  </action>\n  <action id=\"org.jatayu.install\">\n    <description>Install selected software</description>\n    <message>Administrator authentication is required to install software</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">install</annotate>\n  </action>\n  <action id=\"org.jatayu.refresh\">\n    <description>Refresh package information</description>\n    <message>Administrator authentication is required to refresh packages</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">refresh</annotate>\n  </action>\n</policyconfig>\n")
+put('overlay/usr/share/polkit-1/actions/org.jatayu.admin.policy',"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE policyconfig PUBLIC \"-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN\" \"http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd\">\n<policyconfig>\n  <action id=\"org.jatayu.live-layout\">\n    <description>Set live-session language and keyboard</description>\n    <message>Set JatayuOS live-session language and keyboard</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>yes</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">live-layout</annotate>\n  </action>\n  <action id=\"org.jatayu.install\">\n    <description>Install selected software</description>\n    <message>Administrator authentication is required to install software</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">install</annotate>\n  </action>\n  <action id=\"org.jatayu.refresh\">\n    <description>Refresh package information</description>\n    <message>Administrator authentication is required to refresh packages</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-admin</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.argv1\">refresh</annotate>\n  </action>\n  <action id=\"org.jatayu.live-installer\">\n    <description>Start Calamares in the JatayuOS live session</description>\n    <message>Start the JatayuOS installer</message>\n    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>yes</allow_active></defaults>\n    <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/libexec/jatayu-live-installer</annotate>\n    <annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>\n  </action>\n</policyconfig>\n")
 put('overlay/etc/skel/.config/kdeglobals','''[General]
 ColorScheme=BreezeDark
 BrowserApplication=firefox-esr.desktop
@@ -68,7 +69,7 @@ BrowserApplication=firefox-esr.desktop
 LookAndFeelPackage=org.jatayu.desktop
 SingleClick=false
 [Icons]
-Theme=breeze-dark
+Theme=Papirus-Dark
 ''')
 put('overlay/etc/skel/.config/plasmarc','[Theme]\nname=default\n')
 put('overlay/etc/skel/.config/baloofilerc','[Basic Settings]\nIndexing-Enabled=false\n')
@@ -76,8 +77,8 @@ put('overlay/etc/skel/.config/kwinrc','[Plugins]\nblurEnabled=false\ncontrastEna
 put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-handler/http=firefox-esr.desktop\nx-scheme-handler/https=firefox-esr.desktop\ntext/html=firefox-esr.desktop\n')
 base='overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/'
 put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS development layout','Version':'0.1','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
-put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[plasmarc][Theme]\nname=default\n')
-put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 54;\npanel.floating = false;\nvar launcher = panel.addWidget(\"org.kde.plasma.kickoff\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.png\");\nvar tasks = panel.addWidget(\"org.kde.plasma.icontasks\");\ntasks.currentConfigGroup = [\"General\"];\ntasks.writeConfig(\"launchers\", \"applications:org.kde.dolphin.desktop,applications:firefox-esr.desktop,applications:org.kde.discover.desktop,applications:systemsettings.desktop\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.jpg\");\n}\n")
+put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[kdeglobals][Icons]\nTheme=Papirus-Dark\n[plasmarc][Theme]\nname=default\n')
+put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 54;\npanel.floating = false;\nvar launcher = panel.addWidget(\"org.kde.plasma.kickoff\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.png\");\nvar tasks = panel.addWidget(\"org.kde.plasma.icontasks\");\ntasks.currentConfigGroup = [\"General\"];\ntasks.writeConfig(\"launchers\", \"applications:org.kde.dolphin.desktop,applications:firefox-esr.desktop,applications:org.kde.discover.desktop,applications:systemsettings.desktop\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.jpg\");\nds[i].writeConfig(\"FillMode\",\"1\");\n}\n")
 brand='overlay/etc/calamares/branding/jatayu/'
 put(brand+'branding.desc','''componentName: jatayu
 welcomeStyleCalamares: true
