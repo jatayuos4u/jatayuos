@@ -5,9 +5,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'assets' / 'india-tricolor.png'
+LOGO = ROOT / 'assets' / 'logo.png'
 OUT = ROOT / 'build' / 'config' / 'bootloaders'
-if not SOURCE.is_file():
-    raise SystemExit('Missing owner-supplied assets/india-tricolor.png')
+if not SOURCE.is_file() or not LOGO.is_file():
+    raise SystemExit('Missing owner-supplied tricolor or Jatayu logo')
 
 def font(size):
     for name in ('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
@@ -32,7 +33,12 @@ def render(size, target):
                            radius=int(.024*w), fill=(6, 21, 32, 210), outline=(249, 196, 95, 240), width=max(2,w//320))
     draw.text((w//2, int(.065*h)), 'MADE IN INDIA', anchor='mt', font=font(round(.055*h)),
               fill=(10, 31, 48, 255), stroke_width=max(1,w//640), stroke_fill=(255, 255, 255, 220))
-    image = Image.alpha_composite(image, layer).convert('RGB')
+    image = Image.alpha_composite(image, layer)
+    with Image.open(LOGO) as source_logo:
+        mark = source_logo.convert('RGBA')
+        mark.thumbnail((round(.15*h), round(.15*h)), Image.Resampling.LANCZOS)
+    image.alpha_composite(mark, ((w-mark.width)//2, round(.17*h)))
+    image = image.convert('RGB')
     target.parent.mkdir(parents=True, exist_ok=True)
     image.save(target, optimize=True)
 
