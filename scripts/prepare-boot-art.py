@@ -71,7 +71,7 @@ terminal-font: "Unifont Regular 16"
     height = 30%
     item_color = "#ffffff"
     item_font = "Unifont Regular 16"
-    selected_item_color = "#ffffff"
+    selected_item_color = "#ffd17b"
     selected_item_font = "Unifont Regular 16"
     item_height = 25
     item_spacing = 6
@@ -89,4 +89,11 @@ terminal-font: "Unifont Regular 16"
     border_color = "#e6bd69"
 }
 ''')
+# Ensure firmware GRUB displays an actual countdown even if the stock template
+# omitted a timeout; this config is shared by the ISO's BIOS/UEFI GRUB paths.
+grub_cfg = OUT/'grub-pc'/'grub.cfg'
+if not grub_cfg.is_file():
+    raise SystemExit('Missing upstream GRUB template')
+with grub_cfg.open('a') as config:
+    config.write('\\nset timeout_style=menu\\nset timeout=8\\n')
 print('Rendered 640x480 BIOS and 800x600 UEFI tricolor menus.')
