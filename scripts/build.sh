@@ -62,6 +62,9 @@ cd ..
 iso=build/live-image-amd64.hybrid.iso
 test -s "$iso"
 test -x build/chroot/usr/bin/jatayu-tools
+chroot build/chroot /usr/bin/python3 -c 'from PySide6.QtWebEngineWidgets import QWebEngineView'
+for slug in kavach sarkar-setu utsav; do test -s "build/chroot/usr/share/jatayu/${slug}.html"; done
+for slug in kavach sarkar-setu utsav; do grep -q "Exec=jatayu-webapp ${slug}" "build/chroot/usr/share/applications/org.jatayu.${slug}.desktop"; done
 chroot build/chroot /usr/bin/env QT_QPA_PLATFORM=offscreen /usr/bin/jatayu-tools --smoke
 test -s build/chroot/tmp/jatayu-tools-smoke.png
 cp build/chroot/tmp/jatayu-tools-smoke.png out/jatayu-tools-smoke.png
