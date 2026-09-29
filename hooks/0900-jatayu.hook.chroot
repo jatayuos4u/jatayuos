@@ -8,6 +8,9 @@ update-locale LANG=en_IN.UTF-8
 systemctl enable NetworkManager sddm unattended-upgrades
 systemctl disable ssh.service 2>/dev/null || true
 plymouth-set-default-theme jatayu
+# Calamares' libpwquality check needs a built CrackLib database in the live image.
+update-cracklib
+test -s /var/cache/cracklib/cracklib_dict.pwd
 update-initramfs -u -k all
 # Retain package legal notices and record exact shipped sources/versions.
 mkdir -p /usr/share/jatayu/notices
