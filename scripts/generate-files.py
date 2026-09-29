@@ -140,7 +140,7 @@ fun animate() {
 fun show_message(text) {
   message.image = Image.Text(text, 1, 1, 1);
   message.sprite.SetImage(message.image);
-  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2, Window.GetHeight()/2+133, 10);
+  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2, Window.GetHeight()/2+165, 10);
 }
 fun password(prompt, bullets) {
   text = prompt + " ";
