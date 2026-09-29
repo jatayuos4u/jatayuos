@@ -34,6 +34,9 @@ Components: contrib non-free-firmware
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOF
 fi
+cat > /etc/apt/sources.list.d/jatayu-build-backports.list <<'EOF'
+deb https://deb.debian.org/debian trixie-backports main contrib non-free-firmware
+EOF
 apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml dpkg-dev zstd ca-certificates
 python3 scripts/generate-files.py
