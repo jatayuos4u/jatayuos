@@ -11,7 +11,7 @@ lb config noauto \
   --mirror-binary-security https://security.debian.org/debian-security/ \
   --debian-installer none --apt-recommends false \
   --firmware-chroot true --firmware-binary true \
-  --security true --updates true --backports false \
+  --security true --updates true --backports true \
   --memtest none --iso-volume JATAYUOS_DEV \
   --iso-application 'JatayuOS Development Live' \
   --iso-publisher 'JatayuOS - Anup Yadav - Independent project' \
