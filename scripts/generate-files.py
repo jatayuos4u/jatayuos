@@ -14,7 +14,7 @@ for name,x,y,w,h in [('top',20,10,60,10),('bottom',20,60,60,10),('left',10,20,10
     parts.append(f'<rect id="{name}" x="{x}" y="{y}" width="{w}" height="{h}" fill="#10212d" stroke="#bc9652" stroke-width="1"/>')
 parts.extend(['<rect id="hint-top-margin" width="1" height="8"/><rect id="hint-bottom-margin" width="1" height="8"/><rect id="hint-left-margin" width="8" height="1"/><rect id="hint-right-margin" width="8" height="1"/>','</svg>'])
 put('assets/panel-background.svg',''.join(parts))
-apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.png','System;'),('tools','Jatayu Tools','jatayu-tools','X-Jatayu-Tools;System;'),('about','About JatayuOS','/usr/share/jatayu/logo.png','System;')]
+apps=[('welcome','Jatayu Welcome','/usr/share/jatayu/logo.png','System;'),('tools','Jatayu Editing Tools','jatayu-tools','X-Jatayu-Tools;System;'),('about','About JatayuOS','/usr/share/jatayu/logo.png','System;')]
 for mode,title,icon,categories in apps:
     command='jatayu-tools' if mode=='tools' else f'jatayu {mode}'
     put(f'overlay/usr/share/applications/org.jatayu.{mode}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nComment=JatayuOS {title}\nExec={command}\nIcon={icon}\nTerminal=false\nCategories={categories}\nStartupNotify=true\n')
@@ -122,7 +122,7 @@ green.image = Image("plymouth-dot-green.png");
 saffron.sprite = Sprite(saffron.image);
 white.sprite = Sprite(white.image);
 green.sprite = Sprite(green.image);
-saffron.sprite.SetPosition(Window.GetWidth()/2-54, Window.GetHeight()/2+79, 10);
+saffron.sprite.SetPosition(Window.GetWidth()/2-54, Window.GetHeight()/2+105, 10);
 white.sprite.SetPosition(Window.GetWidth()/2-18, Window.GetHeight()/2+79, 10);
 green.sprite.SetPosition(Window.GetWidth()/2+18, Window.GetHeight()/2+79, 10);
 message.sprite = Sprite();
@@ -163,7 +163,8 @@ Icon=/usr/share/jatayu/logo.png
 ''')
 
 for slug,title in [('kavach','Kavach'),('sarkar-setu','Sarkar Setu'),('utsav','Utsav')]:
-    put(f'overlay/usr/share/applications/org.jatayu.{slug}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nExec=xdg-open /usr/share/jatayu/{slug}.html\nIcon=applications-internet\nTerminal=false\nCategories=X-Jatayu-Tools;Network;\n')
+    put(f'overlay/usr/share/applications/org.jatayu.{slug}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nExec=jatayu-webapp {slug}\nIcon=applications-internet\nTerminal=false\nCategories=X-Jatayu-Tools;Network;\n')
+put('overlay/etc/skel/.xinputrc','# Let KDE Wayland start Fcitx 5 from Virtual Keyboard.\\nrun_im none\\n')
 put('assets/README.txt','''JatayuOS 0.1 development preview
 Created for Anup Yadav. Based on Debian and KDE; Firefox retains Mozilla identity.
 This integrated source kit is not a tested ISO or production release.
