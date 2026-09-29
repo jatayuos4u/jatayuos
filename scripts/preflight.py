@@ -18,7 +18,7 @@ if deb.is_file() and hashlib.sha256(deb.read_bytes()).hexdigest() != '1482544a10
 for slug in ('kavach','sarkar-setu','utsav'):
     if not (ROOT/f'assets/{slug}.html').is_file(): errors.append(f'Missing web app: {slug}')
     desktop=ROOT/f'overlay/usr/share/applications/org.jatayu.{slug}.desktop'
-    if a.apt and (not desktop.is_file() or f'Exec=xdg-open /usr/share/jatayu/{slug}.html\\n' not in desktop.read_text()):
+    if a.apt and (not desktop.is_file() or f'Exec=xdg-open /usr/share/jatayu/{slug}.html\n' not in desktop.read_text()):
         errors.append(f'Invalid web app launcher: {slug}')
 branding=ROOT/'overlay/etc/calamares/branding/jatayu/branding.desc'
 if a.apt and branding.is_file():
