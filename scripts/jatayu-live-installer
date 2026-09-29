@@ -4,4 +4,5 @@ set -eu
 test "$#" -eq 0 || exit 2
 grep -qw 'boot=live' /proc/cmdline || exit 2
 test -x /usr/bin/calamares || exit 127
+export QT_STYLE_OVERRIDE=Fusion
 exec /usr/bin/calamares
