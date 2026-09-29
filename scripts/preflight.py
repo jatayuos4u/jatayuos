@@ -10,7 +10,7 @@ for f in ROOT.rglob('*.py'):
         except SyntaxError as e: errors.append(str(e))
 for f in [*ROOT.glob('*.sh'),*ROOT.glob('scripts/*.sh'),*ROOT.glob('hooks/*')]:
     if subprocess.run(['bash','-n',str(f)],capture_output=True).returncode: errors.append(f'Shell syntax: {f}')
-for f in ['apps/app.py','apps/engine.py','scripts/jatayu-admin','assets/wallpaper.jpg','assets/logo.png','assets/boot-splash.png','assets/plymouth-logo.png','assets/india-tricolor.png','scripts/prepare-boot-art.py','scripts/jatayu-live-installer','jatayu-tools_2.0.2_all.deb']:
+for f in ['apps/app.py','apps/engine.py','apps/webapp.py','scripts/jatayu-webapp','scripts/jatayu-admin','assets/wallpaper.jpg','assets/logo.png','assets/boot-splash.png','assets/plymouth-logo.png','assets/india-tricolor.png','scripts/prepare-boot-art.py','scripts/jatayu-live-installer','jatayu-tools_2.0.2_all.deb']:
     if not (ROOT/f).is_file(): errors.append(f'Missing {f}')
 deb=ROOT/'jatayu-tools_2.0.2_all.deb'
 if deb.is_file() and hashlib.sha256(deb.read_bytes()).hexdigest() != '1482544a10ec927187566396067d94009eff00b7c4866cf805d809b46f515235':
@@ -18,7 +18,7 @@ if deb.is_file() and hashlib.sha256(deb.read_bytes()).hexdigest() != '1482544a10
 for slug in ('kavach','sarkar-setu','utsav'):
     if not (ROOT/f'assets/{slug}.html').is_file(): errors.append(f'Missing web app: {slug}')
     desktop=ROOT/f'overlay/usr/share/applications/org.jatayu.{slug}.desktop'
-    if a.apt and (not desktop.is_file() or f'Exec=xdg-open /usr/share/jatayu/{slug}.html\n' not in desktop.read_text()):
+    if a.apt and (not desktop.is_file() or f'Exec=jatayu-webapp {slug}\n' not in desktop.read_text()):
         errors.append(f'Invalid web app launcher: {slug}')
 branding=ROOT/'overlay/etc/calamares/branding/jatayu/branding.desc'
 if a.apt and branding.is_file():
