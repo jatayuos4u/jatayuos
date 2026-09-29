@@ -31,6 +31,7 @@ ORANGE = '#e96e29'
 
 QSS = """
 QMainWindow, QWidget#root { background: #f9f8f5; color: #192640; }
+QDialog, QDialog QLabel, QDialog QScrollArea, QDialog QScrollArea QWidget { background: #ffffff; color: #192640; }
 QFileDialog, QFileDialog QWidget, QFileDialog QTreeView, QFileDialog QListView { background: #f9f8f5; color: #192640; }
 QFileDialog QLineEdit, QFileDialog QComboBox { background: white; color: #192640; }
 QFileDialog QPushButton { background: white; color: #192640; border: 1px solid #aab7c3; padding: 5px; }
@@ -58,9 +59,11 @@ QFrame#drop { background: white; border: 2px dashed #c9d3dd; border-radius: 13px
 QFrame#drop[dragging="true"] { background: #f1faf5; border-color: #359165; }
 QFrame#inspector { background: white; border-left: 1px solid #e2e6ea; }
 QFrame#divider { background: #e8edf0; max-height: 1px; min-height: 1px; }
-QTableWidget { background: white; alternate-background-color: #fafbfa; border: none; gridline-color: #e9ecef; selection-background-color: #e4f2e8; }
+QTableWidget { background: white; color: #192640; alternate-background-color: #fafbfa; border: none; gridline-color: #e9ecef; selection-background-color: #dcefe3; selection-color: #192640; }
+QTableWidget::item { color: #192640; }
+QTableWidget::item:selected { background: #dcefe3; color: #192640; }
 QHeaderView::section { background: #f3f5f6; color: #627083; border: none; padding: 7px; font-weight: 600; }
-QLineEdit, QComboBox, QSpinBox { background: white; border: 1px solid #d7dfe5; border-radius: 7px; padding: 6px; min-height: 20px; }
+QLineEdit, QComboBox, QSpinBox { background: white; color: #192640; border: 1px solid #d7dfe5; border-radius: 7px; padding: 6px; min-height: 20px; }
 QComboBox QAbstractItemView { background: white; }
 QProgressBar { border: 0; background: #e5ebef; border-radius: 5px; max-height: 9px; }
 QProgressBar::chunk { background: #359165; border-radius: 5px; }
