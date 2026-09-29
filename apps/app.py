@@ -197,6 +197,13 @@ class Window(QMainWindow):
         self.button('Open development notes',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'README.txt'))))
 
 def main():
+    if len(sys.argv)>1 and sys.argv[1]=='live-install':
+        if not live():
+            print('Installation is available only from the live ISO.',file=sys.stderr);return 2
+        exe=next((x for x in ('calamares-install-debian','calamares') if shutil.which(x)),None)
+        if not exe:
+            print('Calamares installer is not installed.',file=sys.stderr);return 127
+        subprocess.Popen([exe]);return 0
     p=argparse.ArgumentParser();p.add_argument('mode',nargs='?',default='welcome',choices=['live','welcome','tools','update','backup','check','language','portals','android','about','autostart']);p.add_argument('--smoke',action='store_true');a=p.parse_args()
     mode=a.mode
     if mode=='autostart':
