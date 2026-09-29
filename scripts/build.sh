@@ -37,17 +37,36 @@ fi
 cat > /etc/apt/sources.list.d/jatayu-build-backports.list <<'EOF'
 deb http://deb.debian.org/debian trixie-backports main contrib non-free-firmware
 EOF
+# Rebuild only the distribution installer from Debian's source with the
+# reviewable Jatayu UI patch. Its binary is included in the live filesystem.
+cat > /etc/apt/sources.list.d/jatayu-source.sources <<'EOF'
+Types: deb-src
+URIs: https://deb.debian.org/debian
+Suites: trixie
+Components: main
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOF
 apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil fonts-dejavu-core dpkg-dev zstd ca-certificates
 python3 scripts/generate-files.py
 python3 scripts/preflight.py --apt
 printf '%s  %s\n' '1482544a10ec927187566396067d94009eff00b7c4866cf805d809b46f515235' jatayu-tools_2.0.2_all.deb | sha256sum -c -
 bash scripts/package.sh
+apt-get build-dep -y calamares
+mkdir -p out/calamares-src
+(cd out/calamares-src && apt-get source calamares=3.3.14-1)
+calamares_src=out/calamares-src/calamares-3.3.14
+test -f "$calamares_src/debian/changelog"
+python3 scripts/patch-calamares.py "$calamares_src"
+sed -i '1s/(3.3.14-1)/(3.3.14-1+jatayu1)/' "$calamares_src/debian/changelog"
+(cd "$calamares_src" && DEB_BUILD_OPTIONS="nocheck parallel=2" dpkg-buildpackage -b -us -uc -j2)
+test -s out/calamares-src/calamares_3.3.14-1+jatayu1_amd64.deb
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
 cp out/jatayu-integration_*.deb jatayu-tools_2.0.2_all.deb build/config/packages.chroot/
+cp out/calamares-src/calamares_3.3.14-1+jatayu1_amd64.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
 # The live-build bootloader templates carry Debian's default splash.
