@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarkar Setu - Government Services Directory</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --saffron: #FF9933; --saffron-dark: #e68a2e;
+    --green: #138808; --indigo: #1a1a2e;
+    --light-bg: #f8f9fa; --border: #e0e0e0;
+    --shadow: rgba(0,0,0,0.1);
+}
+body { font-family: 'Noto Sans', 'Segoe UI', sans-serif; background: var(--light-bg); color: #333; line-height: 1.6; }
+.header { background: linear-gradient(135deg, var(--saffron), var(--saffron-dark)); color: white; padding: 20px 30px; box-shadow: 0 4px 20px var(--shadow); position: sticky; top: 0; z-index: 1000; }
+.header-main { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1600px; margin: 0 auto; }
+.logo-section { display: flex; align-items: center; gap: 15px; }
+.logo { width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+.brand h1 { font-size: 2em; font-weight: 700; }
+.brand p { font-size: 0.9em; opacity: 0.95; }
+.search-container { position: relative; flex: 1; max-width: 500px; min-width: 300px; }
+.search-input { width: 100%; padding: 14px 50px 14px 20px; border: none; border-radius: 30px; font-size: 1em; }
+.search-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: var(--green); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+.nav-bar { background: rgba(0,0,0,0.1); padding: 0 30px; display: flex; gap: 5px; overflow-x: auto; max-width: 1600px; margin: 0 auto; }
+.nav-item { padding: 15px 20px; background: none; border: none; color: white; cursor: pointer; font-size: 0.9em; white-space: nowrap; border-bottom: 3px solid transparent; }
+.nav-item:hover { background: rgba(255,255,255,0.1); }
+.nav-item.active { border-bottom-color: white; font-weight: 600; }
+.container { max-width: 1600px; margin: 0 auto; padding: 30px; }
+.hero { background: linear-gradient(135deg, var(--indigo), #2d2d44); color: white; padding: 40px; border-radius: 20px; margin-bottom: 30px; text-align: center; }
+.hero h2 { font-size: 2.5em; margin-bottom: 15px; }
+.hero p { font-size: 1.1em; opacity: 0.95; }
+.section { margin-bottom: 40px; }
+.section-title { font-size: 1.8em; color: var(--indigo); margin-bottom: 25px; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.service-card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px var(--shadow); cursor: pointer; transition: all 0.3s; border: 2px solid transparent; text-decoration: none; color: inherit; display: block; }
+.service-card:hover { transform: translateY(-8px); border-color: var(--saffron); }
+.service-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.service-icon { width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 28px; background: linear-gradient(135deg, var(--saffron), var(--saffron-dark)); color: white; }
+.service-title h3 { color: var(--indigo); margin-bottom: 3px; font-size: 1.2em; }
+.service-title p { color: #666; font-size: 0.85em; }
+.service-desc { color: #666; font-size: 0.9em; margin-bottom: 15px; }
+.service-url { font-size: 0.8em; color: var(--green); word-break: break-all; font-family: monospace; background: #f0f0f0; padding: 5px 10px; border-radius: 5px; margin-bottom: 10px; }
+.tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { padding: 4px 12px; border-radius: 15px; font-size: 0.8em; font-weight: 500; }
+.tag.verified { background: #e8f5e9; color: var(--green); }
+.tag.central { background: #e3f2fd; color: #1976d2; }
+.tag.state { background: #fff3e0; color: #f57c00; }
+.tag.ut { background: #f3e5f5; color: #7b1fa2; }
+.tag.master { background: #fce4ec; color: #c2185b; }
+.disclaimer { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px 20px; margin-bottom: 30px; border-radius: 8px; font-size: 0.9em; }
+.master-banner { background: linear-gradient(135deg, #c2185b, #7b1fa2); color: white; padding: 30px; border-radius: 15px; margin-bottom: 30px; text-align: center; }
+.master-banner h2 { margin-bottom: 15px; }
+.master-banner a { display: inline-block; margin-top: 15px; background: white; color: #c2185b; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; }
+.footer { background: var(--indigo); color: white; padding: 30px; margin-top: 60px; text-align: center; }
+@media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } .hero h2 { font-size: 1.8em; } }
+</style>
+</head>
+<body>
+<header class="header">
+    <div class="header-main">
+        <div class="logo-section">
+            <div class="logo">🏛️</div>
+            <div class="brand">
+                <h1>सरकार सेतु</h1>
+                <p>Sarkar Setu - Government Services Directory</p>
+            </div>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search services...">
+            <button class="search-btn" onclick="searchServices()">🔍</button>
+        </div>
+    </div>
+    <nav class="nav-bar">
+        <button class="nav-item active" onclick="filterCategory('all')">All</button>
+        <button class="nav-item" onclick="filterCategory('master')">Master Directory</button>
+        <button class="nav-item" onclick="filterCategory('identity')">Identity</button>
+        <button class="nav-item" onclick="filterCategory('finance')">Finance</button>
+        <button class="nav-item" onclick="filterCategory('travel')">Travel</button>
+        <button class="nav-item" onclick="filterCategory('education')">Education</button>
+        <button class="nav-item" onclick="filterCategory('health')">Health</button>
+        <button class="nav-item" onclick="filterCategory('employment')">Employment</button>
+        <button class="nav-item" onclick="filterCategory('utilities')">Utilities</button>
+        <button class="nav-item" onclick="filterCategory('agriculture')">Agriculture</button>
+        <button class="nav-item" onclick="filterCategory('documents')">Welfare</button>
+        <button class="nav-item" onclick="filterCategory('states')">States/UTs</button>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="disclaimer">
+        <strong>📌 Directory Service:</strong> This app stores no data. All links open official government websites. Last verified: September 2026.
+    </div>
+
+    <div class="master-banner">
+        <h2>🌐 iGOD - Master Government Directory</h2>
+        <p>Official Integrated Government of India Directory - Meta-directory of all govt websites</p>
+        <a href="https://igod.gov.in/" target="_blank" rel="noopener">Visit iGOD →</a>
+    </div>
+
+    <div class="hero">
+        <h2>🇮🇳 Verified Government Services</h2>
+        <p>Access 80+ official government websites in one place</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">🏛️ Government Services</h2>
+        <div class="services-grid" id="servicesGrid"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p><strong>Sarkar Setu</strong> - JatayuOS | Built with 🦅 for Bharat</p>
+    <p style="margin-top: 10px; opacity: 0.8;">© 2026 | All links verified against iGOD and official sources</p>
+</footer>
+
+<script>
+const services = [
+    // ===== MASTER DIRECTORY =====
+    { name: 'iGOD', hindi: 'आई-गॉड', emoji: '🌐', category: 'master', level: 'master', description: 'Integrated Government of India Directory - master meta-directory of all government websites.', url: 'https://igod.gov.in/' },
+    { name: 'National Portal', hindi: 'राष्ट्रीय पोर्टल', emoji: '🏛️', category: 'master', level: 'master', description: 'Official portal of Government of India.', url: 'https://www.india.gov.in/' },
+    { name: 'MyScheme', hindi: 'माई स्कीम', emoji: '🎁', category: 'master', level: 'master', description: 'One-stop platform to discover all government schemes & check eligibility.', url: 'https://www.myscheme.gov.in/' },
+
+    // ===== IDENTITY =====
+    { name: 'Aadhaar (UIDAI)', hindi: 'आधार', emoji: '🆔', category: 'identity', level: 'central', description: 'Download Aadhaar, update details, lock/unlock biometrics.', url: 'https://uidai.gov.in/' },
+    { name: 'MyAadhaar Portal', hindi: 'माय आधार', emoji: '📱', category: 'identity', level: 'central', description: 'Update address, mobile, email, check Aadhaar history online.', url: 'https://myaadhaar.uidai.gov.in/' },
+    { name: 'PAN (NSDL)', hindi: 'पैन (NSDL)', emoji: '💳', category: 'identity', level: 'central', description: 'Apply for new PAN, corrections, reprint via NSDL.', url: 'https://onlineservices.proteantech.in/paam/endUserRegisterContact.html' },
+    { name: 'PAN (UTIITSL)', hindi: 'पैन (UTIITSL)', emoji: '💳', category: 'identity', level: 'central', description: 'Apply for PAN, check status, reprint via UTIITSL.', url: 'https://www.pan.utiitsl.com/PAN_ONLINE/' },
+    { name: 'PAN-Aadhaar Link', hindi: 'पैन-आधार लिंक', emoji: '🔗', category: 'identity', level: 'central', description: 'Link your PAN with Aadhaar online.', url: 'https://www.incometax.gov.in/iec/foportal/' },
+    { name: 'Passport Seva', hindi: 'पासपोर्ट', emoji: '🛂', category: 'identity', level: 'central', description: 'Apply for passport, renew, check status, book appointment.', url: 'https://www.passportindia.gov.in/' },
+    { name: 'Voter Portal', hindi: 'मतदाता', emoji: '🗳️', category: 'identity', level: 'central', description: 'Register as voter, check name in electoral roll, download e-EPIC.', url: 'https://voters.eci.gov.in/' },
+    { name: 'Voter Helpline', hindi: 'मतदाता हेल्पलाइन', emoji: '📞', category: 'identity', level: 'central', description: 'Find polling station, search electoral roll.', url: 'https://www.eci.gov.in/voter-helpline-app' },
+    { name: 'Parivahan (DL/RC)', hindi: 'परिवहन', emoji: '🚗', category: 'identity', level: 'central', description: 'Driving License, Vehicle RC, road tax - all transport services.', url: 'https://parivahan.gov.in/parivahan/' },
+    { name: 'FASTag', hindi: 'फास्टैग', emoji: '🏷️', category: 'identity', level: 'central', description: 'FASTag portal, balance, transactions.', url: 'https://www.npci.org.in/what-we-do/netc-fastag/product-overview' },
+
+    // ===== FINANCE =====
+    { name: 'Income Tax', hindi: 'आयकर', emoji: '💰', category: 'finance', level: 'central', description: 'File ITR, check refund, view Form 26AS, AIS/TIS.', url: 'https://www.incometax.gov.in/' },
+    { name: 'GST Portal', hindi: 'जीएसटी', emoji: '📊', category: 'finance', level: 'central', description: 'GST registration, returns, e-way bill.', url: 'https://www.gst.gov.in/' },
+    { name: 'EPFO (Main)', hindi: 'ईपीएफओ', emoji: '🏦', category: 'finance', level: 'central', description: 'PF main portal, employer services.', url: 'https://www.epfindia.gov.in/' },
+    { name: 'EPFO Unified (UAN)', hindi: 'ईपीएफओ यूनिफाइड', emoji: '👔', category: 'finance', level: 'central', description: 'UAN portal - check PF balance, claims, passbook.', url: 'https://unifiedportal-mem.epfindia.gov.in/memberinterface/' },
+    { name: 'Pensioners Portal', hindi: 'पेंशनर्स', emoji: '👴', category: 'finance', level: 'central', description: 'Central pensioners - Jeevan Pramaan, pension slip.', url: 'https://pensionersportal.gov.in/' },
+    { name: 'Jeevan Pramaan', hindi: 'जीवन प्रमाण', emoji: '✅', category: 'finance', level: 'central', description: 'Digital life certificate for pensioners.', url: 'https://jeevanpramaan.gov.in/' },
+    { name: 'NPS Trust', hindi: 'एनपीएस', emoji: '💼', category: 'finance', level: 'central', description: 'National Pension System portal.', url: 'https://www.npstrust.org.in/' },
+    { name: 'CRA-NSDL (NPS)', hindi: 'एनपीएस CRA', emoji: '📋', category: 'finance', level: 'central', description: 'Open/manage NPS account via NSDL CRA.', url: 'https://www.npscra.proteantech.in/' },
+    { name: 'DBT Bharat', hindi: 'डीबीटी', emoji: '💸', category: 'finance', level: 'central', description: 'Direct Benefit Transfer portal.', url: 'https://dbtbharat.gov.in/' },
+    { name: 'Jan Suraksha', hindi: 'जन सुरक्षा', emoji: '🛡️', category: 'finance', level: 'central', description: 'PMJJBY, PMSBY, APY insurance schemes.', url: 'https://jansuraksha.gov.in/' },
+    { name: 'RBI', hindi: 'आरबीआई', emoji: '🏛️', category: 'finance', level: 'central', description: 'Reserve Bank of India.', url: 'https://www.rbi.org.in/' },
+    { name: 'SEBI', hindi: 'सेबी', emoji: '📈', category: 'finance', level: 'central', description: 'Securities and Exchange Board - investor complaints.', url: 'https://www.sebi.gov.in/' },
+    { name: 'SCORES (SEBI)', hindi: 'स्कोर्स', emoji: '📝', category: 'finance', level: 'central', description: 'SEBI complaints portal for investors.', url: 'https://scores.sebi.gov.in/' },
+    { name: 'IRDAI', hindi: 'इरडाई', emoji: '🛡️', category: 'finance', level: 'central', description: 'Insurance regulator - IGMS, complaints.', url: 'https://irdai.gov.in/' },
+    { name: 'India Post', hindi: 'डाक', emoji: '📮', category: 'finance', level: 'central', description: 'Post office services, savings schemes.', url: 'https://www.indiapost.gov.in/' },
+    { name: 'BHIM UPI', hindi: 'भीम', emoji: '💳', category: 'finance', level: 'central', description: 'Official BHIM UPI app portal.', url: 'https://bhimupi.org.in/' },
+    { name: 'BBPS', hindi: 'बीबीपीएस', emoji: '📄', category: 'finance', level: 'central', description: 'Bharat Bill Payment System - all bill payments.', url: 'https://www.bharat-connect.com/' },
+    { name: 'GeM', hindi: 'जेम', emoji: '🛒', category: 'finance', level: 'central', description: 'Government e-Marketplace for public procurement.', url: 'https://gem.gov.in/' },
+
+    // ===== TRAVEL =====
+    { name: 'IRCTC', hindi: 'आईआरसीटीसी', emoji: '🚂', category: 'travel', level: 'central', description: 'Train booking, PNR, cancellation.', url: 'https://www.irctc.co.in/' },
+    { name: 'NTES', hindi: 'एनटीईएस', emoji: '🚆', category: 'travel', level: 'central', description: 'Live train status, running info.', url: 'https://enquiry.indianrail.gov.in/' },
+    { name: 'Indian Railways', hindi: 'भारतीय रेल', emoji: '🚊', category: 'travel', level: 'central', description: 'Official railways portal.', url: 'https://indianrailways.gov.in/' },
+    { name: 'DGCA Digital Sky', hindi: 'डीजीसीए', emoji: '✈️', category: 'travel', level: 'central', description: 'Drone registration, pilot license, aviation.', url: 'https://digitalsky.dgca.gov.in/' },
+    { name: 'DigiYatra', hindi: 'डिजी यात्रा', emoji: '🛫', category: 'travel', level: 'central', description: 'Paperless airport entry via facial recognition.', url: 'https://digiyatrafoundation.com/' },
+
+    // ===== EDUCATION =====
+    { name: 'DIKSHA', hindi: 'दिक्षा', emoji: '📚', category: 'education', level: 'central', description: 'E-learning platform, digital textbooks.', url: 'https://diksha.gov.in/' },
+    { name: 'SWAYAM', hindi: 'स्वयं', emoji: '🎓', category: 'education', level: 'central', description: 'Free online courses, MOOCs.', url: 'https://swayam.gov.in/' },
+    { name: 'National Scholarship', hindi: 'छात्रवृत्ति', emoji: '🎁', category: 'education', level: 'central', description: 'National Scholarship Portal - apply & track.', url: 'https://scholarships.gov.in/' },
+    { name: 'UGC', hindi: 'यूजीसी', emoji: '🏛️', category: 'education', level: 'central', description: 'University Grants Commission.', url: 'https://www.ugc.gov.in/' },
+    { name: 'NCERT', hindi: 'एनसीईआरटी', emoji: '📖', category: 'education', level: 'central', description: 'School textbooks, e-Pathshala.', url: 'https://ncert.nic.in/' },
+    { name: 'AICTE', hindi: 'एआईसीटीई', emoji: '🎓', category: 'education', level: 'central', description: 'Technical education regulator.', url: 'https://www.aicte-india.org/' },
+    { name: 'CBSE', hindi: 'सीबीएसई', emoji: '📝', category: 'education', level: 'central', description: 'Central Board - results, exams.', url: 'https://www.cbse.gov.in/' },
+    { name: 'National Digital Library', hindi: 'डिजिटल लाइब्रेरी', emoji: '📚', category: 'education', level: 'central', description: 'NDL India - millions of books.', url: 'https://ndl.iitkgp.ac.in/' },
+
+    // ===== HEALTH =====
+    { name: 'Ayushman Bharat PM-JAY', hindi: 'आयुष्मान भारत', emoji: '🏥', category: 'health', level: 'central', description: 'Health insurance - check eligibility, hospitals.', url: 'https://beneficiary.nha.gov.in/' },
+    { name: 'ABHA (Health ID)', hindi: 'आभा', emoji: '💚', category: 'health', level: 'central', description: 'Create ABHA ID, link health records.', url: 'https://abha.abdm.gov.in/abha/v3' },
+    { name: 'CoWIN', hindi: 'कोविन', emoji: '💉', category: 'health', level: 'central', description: 'Vaccination certificate download.', url: 'https://www.cowin.gov.in/' },
+    { name: 'NHM', hindi: 'एनएचएम', emoji: '⚕️', category: 'health', level: 'central', description: 'National Health Mission.', url: 'https://nhm.gov.in/' },
+    { name: 'ORS (Hospital Appt)', hindi: 'ओआरएस', emoji: '🏨', category: 'health', level: 'central', description: 'Online Registration System - book AIIMS/govt hospital appointments.', url: 'https://ors.gov.in/orsportal/' },
+    { name: 'ICMR', hindi: 'आईसीएमआर', emoji: '🔬', category: 'health', level: 'central', description: 'Medical research.', url: 'https://www.icmr.gov.in/' },
+    { name: 'e-Hospital', hindi: 'ई-हॉस्पिटल', emoji: '🏥', category: 'health', level: 'central', description: 'Digital health services portal.', url: 'https://ehospital.gov.in/' },
+
+    // ===== EMPLOYMENT =====
+    { name: 'National Career Service', hindi: 'कैरियर सेवा', emoji: '💼', category: 'employment', level: 'central', description: 'Job search, counseling.', url: 'https://www.ncs.gov.in/' },
+    { name: 'e-Shram Card', hindi: 'ई-श्रम', emoji: '👷', category: 'employment', level: 'central', description: 'Unorganized workers registration.', url: 'https://eshram.gov.in/' },
+    { name: 'MSME', hindi: 'एमएसएमई', emoji: '🏭', category: 'employment', level: 'central', description: 'MSME portal, schemes.', url: 'https://msme.gov.in/' },
+    { name: 'Udyam Registration', hindi: 'उद्यम', emoji: '🏢', category: 'employment', level: 'central', description: 'MSME registration, download certificate.', url: 'https://udyamregistration.gov.in/' },
+    { name: 'Mudra Loan', hindi: 'मुद्रा', emoji: '💵', category: 'employment', level: 'central', description: 'Mudra loans for small businesses.', url: 'https://www.mudra.org.in/' },
+    { name: 'Startup India', hindi: 'स्टार्टअप', emoji: '🚀', category: 'employment', level: 'central', description: 'Startup registration, schemes.', url: 'https://www.startupindia.gov.in/' },
+    { name: 'CSC', hindi: 'सीएससी', emoji: '🏪', category: 'employment', level: 'central', description: 'Common Service Centre - find nearest CSC.', url: 'https://csc.gov.in/' },
+
+    // ===== UTILITIES =====
+    { name: 'Ministry of Petroleum', hindi: 'पेट्रोलियम', emoji: '🔥', category: 'utilities', level: 'central', description: 'LPG/PNG ministry portal.', url: 'https://mopng.gov.in/' },
+    { name: 'DoT (Telecom)', hindi: 'दूरसंचार', emoji: '📱', category: 'utilities', level: 'central', description: 'Department of Telecommunications.', url: 'https://dot.gov.in/' },
+    { name: 'TAFCOP (Mobile SIM)', hindi: 'टाफकॉप', emoji: '📲', category: 'utilities', level: 'central', description: 'Check SIMs registered on your ID.', url: 'https://tafcop.sancharsaathi.gov.in/' },
+    { name: 'Sancharsaathi', hindi: 'संचारसाथी', emoji: '📡', category: 'utilities', level: 'central', description: 'CEIR - track lost/stolen mobile, verify KYC.', url: 'https://sancharsaathi.gov.in/' },
+    { name: 'Consumer Helpline', hindi: 'उपभोक्ता', emoji: '📞', category: 'utilities', level: 'central', description: 'Consumer complaints (INGOCC).', url: 'https://consumerhelpline.gov.in/' },
+    { name: 'TRAI', hindi: 'ट्राई', emoji: '📡', category: 'utilities', level: 'central', description: 'Telecom regulator.', url: 'https://trai.gov.in/' },
+    { name: 'FSSAI', hindi: 'एफएसएसएआई', emoji: '🍽️', category: 'utilities', level: 'central', description: 'Food safety licenses.', url: 'https://foscos.fssai.gov.in/' },
+    { name: 'CPGRAMS', hindi: 'सीपीग्राम्स', emoji: '📝', category: 'utilities', level: 'central', description: 'Central grievance redressal portal.', url: 'https://pgportal.gov.in/' },
+
+    // ===== AGRICULTURE =====
+    { name: 'PM Kisan', hindi: 'पीएम किसान', emoji: '🌾', category: 'agriculture', level: 'central', description: 'Check installment, KYC, beneficiary.', url: 'https://pmkisan.gov.in/' },
+    { name: 'Soil Health', hindi: 'मिट्टी स्वास्थ्य', emoji: '🌱', category: 'agriculture', level: 'central', description: 'Soil Health Card portal.', url: 'https://soilhealth.dac.gov.in/home' },
+    { name: 'e-NAM', hindi: 'ई-नाम', emoji: '🥬', category: 'agriculture', level: 'central', description: 'National Agriculture Market - mandi prices.', url: 'https://enam.gov.in/' },
+    { name: 'Kisan Suvidha', hindi: 'किसान सुविधा', emoji: '🌽', category: 'agriculture', level: 'central', description: 'Weather, market prices for farmers.', url: 'https://kisansuvidha.gov.in/' },
+    { name: 'NABARD', hindi: 'नाबार्ड', emoji: '🏦', category: 'agriculture', level: 'central', description: 'Rural development bank.', url: 'https://www.nabard.org/' },
+
+    // ===== WELFARE/DOCUMENTS =====
+    { name: 'DigiLocker', hindi: 'डिजीलॉकर', emoji: '📄', category: 'documents', level: 'central', description: 'Digital documents wallet.', url: 'https://www.digilocker.gov.in/' },
+    { name: 'UMANG', hindi: 'उमंग', emoji: '📱', category: 'documents', level: 'central', description: '1,200+ services unified platform.', url: 'https://web.umang.gov.in/' },
+    { name: 'PM Awas Yojana', hindi: 'पीएम आवास', emoji: '🏠', category: 'documents', level: 'central', description: 'Housing scheme portal.', url: 'https://pmaymis.gov.in/' },
+    { name: 'NFSA (Ration)', hindi: 'एनएफएसए', emoji: '🍚', category: 'documents', level: 'central', description: 'National Food Security Act - ration portal.', url: 'https://nfsa.gov.in/' },
+    { name: 'UDID (Disability)', hindi: 'यूडीआईडी', emoji: '♿', category: 'documents', level: 'central', description: 'Unique Disability ID card.', url: 'https://swavlambancard.gov.in/' },
+    { name: 'NSAP (Pension)', hindi: 'एनएसएपी', emoji: '🤝', category: 'documents', level: 'central', description: 'Social assistance pension.', url: 'https://nsap.dord.gov.in/' },
+    { name: 'e-Courts', hindi: 'ई-कोर्ट', emoji: '⚖️', category: 'documents', level: 'central', description: 'Case status, orders.', url: 'https://ecourts.gov.in/' },
+    { name: 'Supreme Court', hindi: 'सर्वोच्च', emoji: '🏛️', category: 'documents', level: 'central', description: 'Supreme Court of India.', url: 'https://www.sci.gov.in/' },
+    { name: 'NALSA (Legal Aid)', hindi: 'नालसा', emoji: '📜', category: 'documents', level: 'central', description: 'Free legal aid.', url: 'https://nalsa.gov.in/' },
+    { name: 'MyGov', hindi: 'माईगव', emoji: '🇮🇳', category: 'documents', level: 'central', description: 'Citizen engagement.', url: 'https://www.mygov.in/' },
+    { name: 'Digital India', hindi: 'डिजिटल भारत', emoji: '💻', category: 'documents', level: 'central', description: 'Digital India initiatives.', url: 'https://digitalindia.gov.in/' },
+    { name: 'PIB', hindi: 'पीआईबी', emoji: '📰', category: 'documents', level: 'central', description: 'Press Information Bureau.', url: 'https://pib.gov.in/' },
+    { name: 'NITI Aayog', hindi: 'नीति आयोग', emoji: '📈', category: 'documents', level: 'central', description: 'Policy think tank.', url: 'https://www.niti.gov.in/' },
+    { name: 'Census India', hindi: 'जनगणना', emoji: '📊', category: 'documents', level: 'central', description: 'Population statistics.', url: 'https://censusindia.gov.in/census.website/' },
+    { name: 'ICE Gate', hindi: 'आईस गेट', emoji: '🚢', category: 'documents', level: 'central', description: 'Customs e-gateway.', url: 'https://www.icegate.gov.in/' },
+
+    // ===== ALL STATES =====
+    { name: 'Andhra Pradesh', hindi: 'आंध्र प्रदेश', emoji: '🏛️', category: 'states', level: 'state', description: 'AP government portal.', url: 'https://www.ap.gov.in/' },
+    { name: 'Arunachal Pradesh', hindi: 'अरुणाचल', emoji: '🏛️', category: 'states', level: 'state', description: 'Arunachal Pradesh govt.', url: 'https://arunachalpradesh.gov.in/' },
+    { name: 'Assam', hindi: 'असम', emoji: '🏛️', category: 'states', level: 'state', description: 'Assam govt portal.', url: 'https://assam.gov.in/' },
+    { name: 'Bihar', hindi: 'बिहार', emoji: '🏛️', category: 'states', level: 'state', description: 'Bihar govt portal.', url: 'https://state.bihar.gov.in/' },
+    { name: 'Chhattisgarh', hindi: 'छत्तीसगढ़', emoji: '🏛️', category: 'states', level: 'state', description: 'CG govt portal.', url: 'https://cgstate.gov.in/' },
+    { name: 'Goa', hindi: 'गोवा', emoji: '🏛️', category: 'states', level: 'state', description: 'Goa govt portal.', url: 'https://goa.gov.in/' },
+    { name: 'Gujarat', hindi: 'गुजरात', emoji: '🏛️', category: 'states', level: 'state', description: 'Gujarat govt portal.', url: 'https://gujarat.gov.in/' },
+    { name: 'Haryana', hindi: 'हरियाणा', emoji: '🏛️', category: 'states', level: 'state', description: 'Haryana govt portal.', url: 'https://haryana.gov.in/' },
+    { name: 'Himachal Pradesh', hindi: 'हिमाचल', emoji: '🏛️', category: 'states', level: 'state', description: 'HP govt portal.', url: 'https://himachal.nic.in/' },
+    { name: 'Jharkhand', hindi: 'झारखंड', emoji: '🏛️', category: 'states', level: 'state', description: 'Jharkhand govt.', url: 'https://jharkhand.gov.in/' },
+    { name: 'Karnataka', hindi: 'कर्नाटक', emoji: '🏛️', category: 'states', level: 'state', description: 'Karnataka govt.', url: 'https://karnataka.gov.in/' },
+    { name: 'Kerala', hindi: 'केरल', emoji: '🏛️', category: 'states', level: 'state', description: 'Kerala govt.', url: 'https://www.kerala.gov.in/' },
+    { name: 'Madhya Pradesh', hindi: 'मध्य प्रदेश', emoji: '🏛️', category: 'states', level: 'state', description: 'MP govt portal.', url: 'https://mp.gov.in/' },
+    { name: 'Maharashtra', hindi: 'महाराष्ट्र', emoji: '🏛️', category: 'states', level: 'state', description: 'Maharashtra govt.', url: 'https://maharashtra.gov.in/' },
+    { name: 'Manipur', hindi: 'मणिपुर', emoji: '🏛️', category: 'states', level: 'state', description: 'Manipur govt.', url: 'https://manipur.gov.in/' },
+    { name: 'Meghalaya', hindi: 'मेघालय', emoji: '🏛️', category: 'states', level: 'state', description: 'Meghalaya govt.', url: 'https://meghalaya.gov.in/' },
+    { name: 'Mizoram', hindi: 'मिजोरम', emoji: '🏛️', category: 'states', level: 'state', description: 'Mizoram govt.', url: 'https://mizoram.gov.in/' },
+    { name: 'Nagaland', hindi: 'नागालैंड', emoji: '🏛️', category: 'states', level: 'state', description: 'Nagaland govt.', url: 'https://nagaland.gov.in/' },
+    { name: 'Odisha', hindi: 'ओडिशा', emoji: '🏛️', category: 'states', level: 'state', description: 'Odisha govt.', url: 'https://odisha.gov.in/' },
+    { name: 'Punjab', hindi: 'पंजाब', emoji: '🏛️', category: 'states', level: 'state', description: 'Punjab govt.', url: 'https://punjab.gov.in/' },
+    { name: 'Rajasthan', hindi: 'राजस्थान', emoji: '🏛️', category: 'states', level: 'state', description: 'Rajasthan govt.', url: 'https://rajasthan.gov.in/' },
+    { name: 'Sikkim', hindi: 'सिक्किम', emoji: '🏛️', category: 'states', level: 'state', description: 'Sikkim govt.', url: 'https://sikkim.gov.in/' },
+    { name: 'Tamil Nadu', hindi: 'तमिलनाडु', emoji: '🏛️', category: 'states', level: 'state', description: 'TN govt.', url: 'https://www.tn.gov.in/' },
+    { name: 'Telangana', hindi: 'तेलंगाना', emoji: '🏛️', category: 'states', level: 'state', description: 'Telangana govt.', url: 'https://telangana.gov.in/' },
+    { name: 'Tripura', hindi: 'त्रिपुरा', emoji: '🏛️', category: 'states', level: 'state', description: 'Tripura govt.', url: 'https://tripura.gov.in/' },
+    { name: 'Uttar Pradesh', hindi: 'उत्तर प्रदेश', emoji: '🏛️', category: 'states', level: 'state', description: 'UP govt.', url: 'https://up.gov.in/' },
+    { name: 'Uttarakhand', hindi: 'उत्तराखंड', emoji: '🏛️', category: 'states', level: 'state', description: 'UK govt.', url: 'https://uk.gov.in/' },
+    { name: 'West Bengal', hindi: 'पश्चिम बंगाल', emoji: '🏛️', category: 'states', level: 'state', description: 'WB govt.', url: 'https://wb.gov.in/' },
+
+    // ===== UNION TERRITORIES =====
+    { name: 'Delhi', hindi: 'दिल्ली', emoji: '🏛️', category: 'states', level: 'ut', description: 'Delhi govt.', url: 'https://delhi.gov.in/' },
+    { name: 'Jammu & Kashmir', hindi: 'जम्मू-कश्मीर', emoji: '🏛️', category: 'states', level: 'ut', description: 'J&K govt.', url: 'https://home.jk.gov.in/' },
+    { name: 'Ladakh', hindi: 'लदाख', emoji: '🏛️', category: 'states', level: 'ut', description: 'Ladakh UT.', url: 'https://ladakh.gov.in/' },
+    { name: 'Chandigarh', hindi: 'चंडीगढ़', emoji: '🏛️', category: 'states', level: 'ut', description: 'Chandigarh admin.', url: 'https://chandigarh.gov.in/' },
+    { name: 'Puducherry', hindi: 'पुडुचेरी', emoji: '🏛️', category: 'states', level: 'ut', description: 'Puducherry UT.', url: 'https://py.gov.in/' },
+    { name: 'Andaman & Nicobar', hindi: 'अंडमान', emoji: '🏛️', category: 'states', level: 'ut', description: 'A&N Islands.', url: 'https://andaman.gov.in/' },
+    { name: 'DNH & DD', hindi: 'डीएनएच-डीडी', emoji: '🏛️', category: 'states', level: 'ut', description: 'Dadra-Nagar Haveli & Daman-Diu (merged).', url: 'https://ddd.gov.in/' },
+    { name: 'Lakshadweep', hindi: 'लक्षद्वीप', emoji: '🏛️', category: 'states', level: 'ut', description: 'Lakshadweep UT.', url: 'https://lakshadweep.gov.in/' }
+];
+
+let currentFilter = 'all';
+
+function renderServices() {
+    const grid = document.getElementById('servicesGrid');
+    grid.innerHTML = '';
+    const filtered = currentFilter === 'all' ? services : services.filter(s => s.category === currentFilter);
+    
+    filtered.forEach(service => {
+        const card = document.createElement('a');
+        card.className = 'service-card';
+        card.href = service.url;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        
+        let tag = '';
+        if (service.level === 'master') tag = '<span class="tag master">⭐ Master</span>';
+        else if (service.level === 'central') tag = '<span class="tag central">Central</span>';
+        else if (service.level === 'state') tag = '<span class="tag state">State</span>';
+        else if (service.level === 'ut') tag = '<span class="tag ut">UT</span>';
+
+        card.innerHTML = `
+            <div class="service-header">
+                <div class="service-icon">${service.emoji}</div>
+                <div class="service-title">
+                    <h3>${service.name}</h3>
+                    <p>${service.hindi}</p>
+                </div>
+            </div>
+            <p class="service-desc">${service.description}</p>
+            <div class="service-url">🔗 ${service.url}</div>
+            <div class="tags">
+                <span class="tag verified">✓ Verified</span>
+                ${tag}
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function filterCategory(cat) {
+    currentFilter = cat;
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    event.target.classList.add('active');
+    renderServices();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function searchServices() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    if (!q) { renderServices(); return; }
+    const filtered = services.filter(s => 
+        s.name.toLowerCase().includes(q) || 
+        s.description.toLowerCase().includes(q) ||
+        s.hindi.toLowerCase().includes(q) ||
+        s.url.toLowerCase().includes(q)
+    );
+    const grid = document.getElementById('servicesGrid');
+    grid.innerHTML = '';
+    if (filtered.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:40px;color:#666;">No services found.</p>';
+        return;
+    }
+    filtered.forEach(service => {
+        const card = document.createElement('a');
+        card.className = 'service-card';
+        card.href = service.url;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        let tag = '';
+        if (service.level === 'master') tag = '<span class="tag master">⭐ Master</span>';
+        else if (service.level === 'central') tag = '<span class="tag central">Central</span>';
+        else if (service.level === 'state') tag = '<span class="tag state">State</span>';
+        else if (service.level === 'ut') tag = '<span class="tag ut">UT</span>';
+        card.innerHTML = `
+            <div class="service-header">
+                <div class="service-icon">${service.emoji}</div>
+                <div class="service-title"><h3>${service.name}</h3><p>${service.hindi}</p></div>
+            </div>
+            <p class="service-desc">${service.description}</p>
+            <div class="service-url">🔗 ${service.url}</div>
+            <div class="tags"><span class="tag verified">✓ Verified</span>${tag}</div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', renderServices);
+document.getElementById('searchInput').addEventListener('keypress', e => { if (e.key === 'Enter') searchServices(); });
+document.getElementById('searchInput').addEventListener('input', e => { if (e.target.value === '') renderServices(); });
+</script>
+</body>
+</html>
