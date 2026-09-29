@@ -43,7 +43,7 @@ EOF
 # A second stanza with a different path makes apt reject all sources.
 test -f /etc/apt/sources.list.d/debian.sources
 sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/debian.sources
-grep -q '^Types: deb deb-src
+grep -q 'Types: deb deb-src' /etc/apt/sources.list.d/debian.sources
 apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil fonts-dejavu-core dpkg-dev zstd ca-certificates
 python3 scripts/generate-files.py
