@@ -1,1 +1,3 @@
 JatayuOS review build requested 2026-09-29. This marker is the sole push path for the scoped workflow trigger.
+
+Consolidated installer UI and Kavach build 2026-09-29T16:42:03.113Z
