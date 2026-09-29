@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Utsav - उत्सव | Indian Festival & Panchang Suite</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --saffron: #FF9933;
+    --saffron-dark: #e68a2e;
+    --saffron-light: #fff4e6;
+    --green: #138808;
+    --green-dark: #0f6b06;
+    --indigo: #1a1a2e;
+    --indigo-light: #2d2d44;
+    --purple: #6b46c1;
+    --gold: #d4a017;
+    --gold-light: #fef3c7;
+    --maroon: #800020;
+    --red: #dc2626;
+    --blue: #1e40af;
+    --light-bg: #fefbf5;
+    --cream: #fdf6e3;
+    --border: #e8d5b7;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --shadow: rgba(139, 69, 19, 0.08);
+    --shadow-lg: rgba(139, 69, 19, 0.15);
+}
+body {
+    font-family: 'Noto Sans', 'Noto Sans Devanagari', -apple-system, sans-serif;
+    background: var(--light-bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 153, 51, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(19, 136, 8, 0.03) 0%, transparent 50%);
+}
+/* Header */
+.header {
+    background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-light) 100%);
+    color: white;
+    padding: 0;
+    box-shadow: 0 4px 20px var(--shadow-lg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.header-top {
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.logo-section { display: flex; align-items: center; gap: 18px; }
+.logo {
+    width: 65px; height: 65px;
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    box-shadow: 0 4px 15px rgba(212, 160, 23, 0.4);
+    position: relative;
+}
+.logo::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+.brand h1 { 
+    font-size: 2.2em; 
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.brand p { font-size: 0.95em; opacity: 0.85; }
+.header-actions { display: flex; gap: 12px; align-items: center; }
+.search-box {
+    position: relative;
+    width: 350px;
+}
+.search-input {
+    width: 100%;
+    padding: 12px 45px 12px 18px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 0.95em;
+    backdrop-filter: blur(10px);
+}
+.search-input::placeholder { color: rgba(255,255,255,0.6); }
+.search-input:focus { outline: none; background: rgba(255,255,255,0.25); }
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+}
+.region-selector {
+    padding: 10px 18px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9em;
+    backdrop-filter: blur(10px);
+}
+.region-selector option { background: var(--indigo); }
+/* Navigation */
+.nav-bar {
+    background: rgba(0,0,0,0.2);
+    padding: 0 30px;
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+    max-width: 1600px;
+    margin: 0 auto;
+    scrollbar-width: thin;
+}
+.nav-item {
+    padding: 15px 22px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9em;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.nav-item:hover { background: rgba(255,255,255,0.08); }
+.nav-item.active { border-bottom-color: var(--gold); font-weight: 600; color: var(--gold); }
+/* Container */
+.container { max-width: 1600px; margin: 0 auto; padding: 30px; }
+/* Hero - Today's Panchang */
+.hero-panchang {
+    background: linear-gradient(135deg, var(--maroon) 0%, #5c0011 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 50px var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+.hero-panchang::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212, 160, 23, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+}
+.hero-panchang::after {
+    content: 'ॐ';
+    position: absolute;
+    bottom: -40px;
+    right: 40px;
+    font-size: 200px;
+    opacity: 0.05;
+    font-weight: bold;
+}
+.panchang-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+}
+.panchang-main h2 {
+    font-size: 2.5em;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+.panchang-main .hindi-date {
+    font-size: 1.4em;
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.panchang-main .shubh-muhurat {
+    display: inline-block;
+    background: rgba(212, 160, 23, 0.2);
+    border: 1px solid var(--gold);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+.panchang-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+.panchang-item {
+    background: rgba(255,255,255,0.08);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border-left: 3px solid var(--gold);
+    backdrop-filter: blur(10px);
+}
+.panchang-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+.panchang-value {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.panchang-sub {
+    font-size: 0.8em;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+/* Countdown */
+.countdown-section {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--saffron-dark) 100%);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: 0 8px 25px rgba(255, 153, 51, 0.25);
+}
+.countdown-info h3 {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.countdown-info p { opacity: 0.9; }
+.countdown-timer {
+    display: flex;
+    gap: 15px;
+}
+.countdown-unit {
+    background: rgba(255,255,255,0.2);
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 70px;
+    backdrop-filter: blur(10px);
+}
+.countdown-number {
+    font-size: 1.8em;
+    font-weight: 700;
+    line-height: 1;
+}
+.countdown-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+/* Today's Festival Spotlight */
+.spotlight {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+.spotlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold), var(--green));
+}
+.spotlight-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+.spotlight-emoji {
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(135deg, var(--saffron-light) 0%, var(--gold-light) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    box-shadow: 0 8px 20px var(--shadow);
+    flex-shrink: 0;
+}
+.spotlight-info { flex: 1; min-width: 250px; }
+.spotlight-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--saffron-dark);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.spotlight-name {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--indigo);
+    margin-bottom: 3px;
+}
+.spotlight-hindi {
+    font-size: 1.3em;
+    color: var(--maroon);
+    margin-bottom: 10px;
+}
+.spotlight-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cream);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+.spotlight-tabs {
+    display: flex;
+    gap: 5px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 25px;
+    overflow-x: auto;
+}
+.spotlight-tab {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+.spotlight-tab:hover { color: var(--saffron-dark); }
+.spotlight-tab.active {
+    color: var(--saffron-dark);
+    border-bottom-color: var(--saffron);
+    font-weight: 600;
+}
+.spotlight-content {
+    display: none;
+    animation: fadeIn 0.4s;
+}
+.spotlight-content.active { display: block; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.spotlight-text {
+    font-size: 1em;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 20px;
+}
+.spotlight-text p { margin-bottom: 12px; }
+.rituals-grid, .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+.ritual-item, .recipe-item {
+    background: var(--cream);
+    padding: 18px;
+    border-radius: 12px;
+    border-left: 4px solid var(--saffron);
+}
+.ritual-item h4, .recipe-item h4 {
+    color: var(--maroon);
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+.ritual-item p, .recipe-item p {
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+.greeting-box {
+    background: linear-gradient(135deg, var(--saffron-light) 0%, var(--gold-light) 100%);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 20px 0;
+    border: 2px dashed var(--gold);
+}
+.greeting-text {
+    font-size: 1.5em;
+    color: var(--maroon);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.greeting-hindi {
+    font-size: 1.8em;
+    color: var(--indigo);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.copy-btn {
+    background: var(--saffron);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+.copy-btn:hover { background: var(--saffron-dark); transform: translateY(-2px); }
+.facts-list {
+    list-style: none;
+    margin-top: 15px;
+}
+.facts-list li {
+    padding: 12px 15px 12px 45px;
+    background: var(--cream);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 0.95em;
+}
+.facts-list li::before {
+    content: '💡';
+    position: absolute;
+    left: 15px;
+    top: 12px;
+}
+/* Section */
+.section { margin-bottom: 50px; }
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.section-title {
+    font-size: 1.8em;
+    color: var(--indigo);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+}
+.section-title::before {
+    content: '';
+    width: 5px;
+    height: 30px;
+    background: linear-gradient(180deg, var(--saffron), var(--gold));
+    border-radius: 3px;
+}
+.section-subtitle {
+    color: var(--text-muted);
+    margin-top: 5px;
+    font-size: 1em;
+}
+/* Filter Pills */
+.filter-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+.filter-pill {
+    padding: 8px 18px;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.filter-pill:hover { border-color: var(--saffron); }
+.filter-pill.active {
+    background: var(--saffron);
+    color: white;
+    border-color: var(--saffron);
+}
+/* Festival Grid */
+.festival-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+.festival-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    position: relative;
+}
+.festival-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px var(--shadow-lg);
+    border-color: var(--saffron);
+}
+.festival-card-header {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--saffron-dark) 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+.festival-card.hindu .festival-card-header { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+.festival-card.muslim .festival-card-header { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); }
+.festival-card.christian .festival-card-header { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+.festival-card.sikh .festival-card-header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+.festival-card.buddhist .festival-card-header { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); }
+.festival-card.jain .festival-card-header { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); }
+.festival-card.national .festival-card-header { background: linear-gradient(135deg, var(--indigo) 0%, var(--maroon) 100%); }
+.festival-card.regional .festival-card-header { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
+.festival-emoji {
+    width: 55px; height: 55px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px;
+    flex-shrink: 0;
+    backdrop-filter: blur(10px);
+}
+.festival-card-title h3 { font-size: 1.15em; margin-bottom: 3px; font-weight: 600; }
+.festival-card-title p { font-size: 0.85em; opacity: 0.9; }
+.festival-card-body { padding: 20px; }
+.festival-card-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: var(--indigo);
+    margin-bottom: 10px;
+}
+.festival-card-desc {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+.festival-card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.festival-tag {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.tag-region { background: #e0e7ff; color: #3730a3; }
+.tag-favorite {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.25);
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 18px;
+    backdrop-filter: blur(10px);
+}
+.tag-favorite:hover { background: rgba(255,255,255,0.4); transform: scale(1.1); }
+.tag-favorite.active { background: var(--red); }
+/* Month Calendar */
+.month-calendar {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 15px var(--shadow);
+    border: 1px solid var(--border);
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.calendar-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--indigo);
+}
+.calendar-nav { display: flex; gap: 10px; }
+.calendar-nav button {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: all 0.3s;
+}
+.calendar-nav button:hover { background: var(--saffron); color: white; }
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+.calendar-day-name {
+    text-align: center;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 10px 0;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.calendar-day {
+    aspect-ratio: 1;
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 80px;
+}
+.calendar-day:hover { background: var(--saffron-light); transform: scale(1.03); }
+.calendar-day.today {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%);
+    color: white;
+}
+.calendar-day.festival-day {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid var(--gold);
+}
+.calendar-day.other-month { opacity: 0.3; }
+.calendar-day-number {
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+}
+.calendar-day-festival {
+    font-size: 0.7em;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.calendar-day-emoji {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+}
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+.modal.active { display: flex; }
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s;
+}
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.modal-header {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--saffron-dark) 100%);
+    color: white;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+}
+.modal-header.hindu { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+.modal-header.muslim { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); }
+.modal-header.christian { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+.modal-header.national { background: linear-gradient(135deg, var(--indigo) 0%, var(--maroon) 100%); }
+.modal-emoji {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+.modal-title { font-size: 1.8em; font-weight: 700; margin-bottom: 5px; }
+.modal-hindi { font-size: 1.2em; opacity: 0.9; margin-bottom: 10px; }
+.modal-date-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 6px 15px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    backdrop-filter: blur(10px);
+}
+.close-modal {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3em;
+    flex-shrink: 0;
+}
+.modal-body { padding: 30px; }
+.modal-tabs {
+    display: flex;
+    gap: 5px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 25px;
+    overflow-x: auto;
+}
+.modal-tab {
+    padding: 12px 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+}
+.modal-tab.active {
+    color: var(--saffron-dark);
+    border-bottom-color: var(--saffron);
+    font-weight: 600;
+}
+.modal-content-section { display: none; }
+.modal-content-section.active { display: block; animation: fadeIn 0.4s; }
+.modal-section { margin-bottom: 25px; }
+.modal-section h3 {
+    color: var(--maroon);
+    margin-bottom: 12px;
+    font-size: 1.15em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.modal-section p {
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+/* Footer */
+.footer {
+    background: var(--indigo);
+    color: white;
+    padding: 40px 30px 20px;
+    margin-top: 60px;
+    text-align: center;
+}
+.footer p { opacity: 0.9; margin-bottom: 10px; }
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+.footer-links a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+/* Responsive */
+@media (max-width: 968px) {
+    .panchang-grid { grid-template-columns: 1fr; }
+    .search-box { width: 100%; order: 3; }
+    .brand h1 { font-size: 1.6em; }
+    .spotlight-name { font-size: 1.6em; }
+    .container { padding: 15px; }
+}
+@media (max-width: 640px) {
+    .calendar-day { min-height: 60px; padding: 4px; }
+    .calendar-day-festival { font-size: 0.6em; }
+    .countdown-timer { flex-wrap: wrap; }
+    .countdown-unit { min-width: 60px; padding: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-top">
+        <div class="logo-section">
+            <div class="logo">🎉</div>
+            <div class="brand">
+                <h1>उत्सव</h1>
+                <p>Indian Festival & Panchang Suite</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <input type="text" class="search-input" id="globalSearch" placeholder="Search festivals, rituals, foods...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <select class="region-selector" id="regionSelector" onchange="changeRegion()">
+                <option value="all">🌍 All India</option>
+                <option value="north">🏔️ North India</option>
+                <option value="south">🌴 South India</option>
+                <option value="east">🌊 East India</option>
+                <option value="west">🏜️ West India</option>
+                <option value="northeast">🎋 Northeast</option>
+                <option value="central">🏛️ Central India</option>
+            </select>
+        </div>
+    </div>
+    <nav class="nav-bar">
+        <button class="nav-item active" onclick="switchTab('today')">🌅 Today</button>
+        <button class="nav-item" onclick="switchTab('calendar')">📅 Calendar</button>
+        <button class="nav-item" onclick="switchTab('upcoming')">⏳ Upcoming</button>
+        <button class="nav-item" onclick="switchTab('favorites')">⭐ Favorites</button>
+        <button class="nav-item" onclick="switchTab('explore')">🎊 Explore</button>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Today Tab -->
+    <div id="today-tab" class="tab-content">
+        <!-- Panchang Hero -->
+        <div class="hero-panchang">
+            <div class="panchang-grid">
+                <div class="panchang-main">
+                    <h2 id="gregorianDate">Loading...</h2>
+                    <div class="hindi-date" id="hindiDate">Loading...</div>
+                    <div class="hindi-date" id="vikramDate" style="font-size: 1.1em; opacity: 0.9;">Loading...</div>
+                    <div class="shubh-muhurat" id="shubhMuhurat">🕐 Loading muhurat...</div>
+                </div>
+                <div class="panchang-details">
+                    <div class="panchang-item">
+                        <div class="panchang-label">वार / Day</div>
+                        <div class="panchang-value" id="dayName">-</div>
+                        <div class="panchang-sub" id="dayLord">-</div>
+                    </div>
+                    <div class="panchang-item">
+                        <div class="panchang-label">तिथि / Tithi</div>
+                        <div class="panchang-value" id="tithi">-</div>
+                        <div class="panchang-sub" id="tithiDevata">-</div>
+                    </div>
+                    <div class="panchang-item">
+                        <div class="panchang-label">नक्षत्र / Nakshatra</div>
+                        <div class="panchang-value" id="nakshatra">-</div>
+                        <div class="panchang-sub" id="nakshatraDevata">-</div>
+                    </div>
+                    <div class="panchang-item">
+                        <div class="panchang-label">योग / Yoga</div>
+                        <div class="panchang-value" id="yoga">-</div>
+                        <div class="panchang-sub" id="yogaMeaning">-</div>
+                    </div>
+                    <div class="panchang-item">
+                        <div class="panchang-label">ऋतु / Season</div>
+                        <div class="panchang-value" id="ritu">-</div>
+                        <div class="panchang-sub" id="rituDetail">-</div>
+                    </div>
+                    <div class="panchang-item">
+                        <div class="panchang-label">पक्ष / Paksha</div>
+                        <div class="panchang-value" id="paksha">-</div>
+                        <div class="panchang-sub" id="pakshaDetail">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Countdown to Next Festival -->
+        <div class="countdown-section">
+            <div class="countdown-info">
+                <h3 id="countdownFestival">⏳ Loading next festival...</h3>
+                <p id="countdownDate">Calculating...</p>
+            </div>
+            <div class="countdown-timer" id="countdownTimer">
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-days">--</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-hours">--</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-mins">--</div>
+                    <div class="countdown-label">Mins</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="cd-secs">--</div>
+                    <div class="countdown-label">Secs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Festival Spotlight -->
+        <div id="spotlightContainer"></div>
+
+        <!-- This Week -->
+        <div class="section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">📆 This Week's Festivals</h2>
+                    <p class="section-subtitle">Upcoming celebrations in the next 7 days</p>
+                </div>
+            </div>
+            <div class="festival-grid" id="weekGrid"></div>
+        </div>
+    </div>
+
+    <!-- Calendar Tab -->
+    <div id="calendar-tab" class="tab-content" style="display:none;">
+        <div class="month-calendar">
+            <div class="calendar-header">
+                <h2 class="calendar-title" id="calendarTitle">Loading...</h2>
+                <div class="calendar-nav">
+                    <button onclick="changeMonth(-1)">‹</button>
+                    <button onclick="changeMonth(0)" style="width:auto;padding:0 15px;">Today</button>
+                    <button onclick="changeMonth(1)">›</button>
+                </div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+    </div>
+
+    <!-- Upcoming Tab -->
+    <div id="upcoming-tab" class="tab-content" style="display:none;">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">⏳ Upcoming Festivals</h2>
+                <p class="section-subtitle">All festivals in the next 90 days</p>
+            </div>
+        </div>
+        <div class="filter-pills" id="religionFilters"></div>
+        <div class="festival-grid" id="upcomingGrid"></div>
+    </div>
+
+    <!-- Favorites Tab -->
+    <div id="favorites-tab" class="tab-content" style="display:none;">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">⭐ Your Favorite Festivals</h2>
+                <p class="section-subtitle">Festivals you've saved for quick access</p>
+            </div>
+        </div>
+        <div class="festival-grid" id="favoritesGrid"></div>
+    </div>
+
+    <!-- Explore Tab -->
+    <div id="explore-tab" class="tab-content" style="display:none;">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🎊 Explore All Festivals</h2>
+                <p class="section-subtitle">Complete collection of Indian festivals by tradition</p>
+            </div>
+        </div>
+        <div class="filter-pills" id="exploreFilters"></div>
+        <div class="festival-grid" id="exploreGrid"></div>
+    </div>
+</div>
+
+<!-- Festival Detail Modal -->
+<div class="modal" id="festivalModal">
+    <div class="modal-content">
+        <div class="modal-header" id="modalHeader">
+            <div>
+                <div class="modal-emoji" id="modalEmoji">🎉</div>
+                <div class="modal-title" id="modalTitle">Festival</div>
+                <div class="modal-hindi" id="modalHindi">त्योहार</div>
+                <div class="modal-date-badge" id="modalDate">-</div>
+            </div>
+            <button class="close-modal" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-tabs">
+                <button class="modal-tab active" onclick="switchModalTab('overview')">📖 Overview</button>
+                <button class="modal-tab" onclick="switchModalTab('significance')">🕉️ Significance</button>
+                <button class="modal-tab" onclick="switchModalTab('rituals')">🪔 Rituals</button>
+                <button class="modal-tab" onclick="switchModalTab('foods')">🍛 Traditional Foods</button>
+                <button class="modal-tab" onclick="switchModalTab('greetings')">💌 Greetings</button>
+                <button class="modal-tab" onclick="switchModalTab('facts')">💡 Did You Know</button>
+            </div>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p><strong>उत्सव - Utsav</strong> | Celebrating India's Cultural Diversity</p>
+    <p>Comprehensive Panchang • Festival Calendar • Cultural Heritage</p>
+    <div class="footer-links">
+        <a href="#">About Utsav</a>
+        <a href="#">Cultural Calendar</a>
+        <a href="#">Regional Festivals</a>
+        <a href="#">Contact</a>
+    </div>
+    <p style="margin-top: 20px; opacity: 0.8;">© 2026 Utsav - JatayuOS | Built with 🎉 for Bharat</p>
+</footer>
+
+<script>
+// ============ COMPREHENSIVE FESTIVAL DATABASE ============
+const festivals = [
+    // === JANUARY ===
+    {
+        id: 'new-year',
+        name: 'New Year',
+        hindi: 'नया साल',
+        date: '2026-01-01',
+        emoji: '🎊',
+        religion: 'national',
+        region: 'all',
+        description: 'The first day of the Gregorian calendar year, celebrated across India with parties, resolutions, and new beginnings.',
+        significance: 'While not traditionally Indian, New Year\'s Eve and Day have become popular urban celebrations, marking fresh beginnings with friends and family.',
+        rituals: ['Exchange of greetings and good wishes', 'Making New Year resolutions', 'Attending parties and gatherings', 'Setting goals for the year ahead'],
+        foods: ['Festive dinners', 'Cakes and desserts', 'Special family meals'],
+        greetings: { en: 'Happy New Year!', hi: 'नया साल मुबारक!' },
+        facts: ['The Gregorian calendar was introduced by Pope Gregory XIII in 1582', 'India follows multiple New Year dates based on regional calendars', 'The first recorded New Year celebrations date back 4,000 years to ancient Babylon']
+    },
+    {
+        id: 'lohri',
+        name: 'Lohri',
+        hindi: 'लोहड़ी',
+        date: '2026-01-13',
+        emoji: '🔥',
+        religion: 'hindu',
+        region: 'north',
+        description: 'A vibrant Punjabi winter harvest festival celebrated with bonfires, folk songs, and traditional sweets.',
+        significance: 'Lohri marks the end of winter solstice and the beginning of longer days. It honors the sun god and celebrates the winter crop harvest, especially sugarcane. The festival is associated with the folk hero Dulla Bhatti who rescued Punjabi girls from being sold to slave markets.',
+        rituals: ['Lighting of the sacred bonfire (Lohri di agg)', 'Circling the fire and offering til (sesame), gur (jaggery), rewri, and popcorn', 'Singing traditional folk songs especially about Dulla Bhatti', 'Performing Bhangra and Gidda dances', 'Newlywed women and new-born babies receive special blessings'],
+        foods: ['Rewri (sesame-jaggery sweet)', 'Gajak (sesame brittle)', 'Sarson da saag with makki di roti', 'Moongphali (peanuts)', 'Popcorn and sugarcane'],
+        greetings: { en: 'Happy Lohri!', hi: 'लोहड़ी मुबारक!' },
+        facts: ['Lohri is primarily celebrated in Punjab, Haryana, and western UP', 'The bonfire symbolizes the fire god Agni', 'Children go door-to-door singing folk songs and collecting money (called Lohri)', 'It marks the harvesting of winter crops especially sugarcane']
+    },
+    {
+        id: 'pongal',
+        name: 'Pongal',
+        hindi: 'पोंगल',
+        date: '2026-01-14',
+        emoji: '🌾',
+        religion: 'hindu',
+        region: 'south',
+        description: 'A four-day Tamil harvest festival thanking the Sun God and nature for agricultural bounty.',
+        significance: 'Pongal is one of the most important Tamil festivals, dedicated to the Sun God (Surya) and nature. The word "Pongal" means "overflowing" symbolizing abundance. The festival celebrates the winter solstice and the start of Uttarayana (sun\'s northward journey). It\'s a thanksgiving to the Sun, farm animals, and nature.',
+        rituals: ['Bhogi: Burning old items and cleaning homes (Day 1)', 'Surya Pongal: Cooking the Pongal dish in new pots at sunrise (Day 2)', 'Mattu Pongal: Decorating and worshipping cattle (Day 3)', 'Kaanum Pongal: Family gatherings and outings (Day 4)', 'Drawing colorful kolam (rangoli) at entrances'],
+        foods: ['Sweet Pongal (rice, jaggery, moong dal, ghee)', 'Savory Ven Pongal', 'Vadai', 'Payasam', 'Banana chips'],
+        greetings: { en: 'Happy Pongal!', hi: 'पोंगल की शुभकामनाएँ!', ta: 'பொங்கல் வாழ்த்துக்கள்!' },
+        facts: ['Pongal is a 4-day festival', 'The traditional Pongal dish is cooked in clay pots until it overflows', 'The festival coincides with Makar Sankranti', 'Jallikattu (bull-taming) is traditionally held during Pongal']
+    },
+    {
+        id: 'makar-sankranti',
+        name: 'Makar Sankranti',
+        hindi: 'मकर संक्रांति',
+        date: '2026-01-14',
+        emoji: '🪁',
+        religion: 'hindu',
+        region: 'all',
+        description: 'A pan-Indian harvest festival marking the sun\'s transition to Capricorn, celebrated with kite flying and til-gur.',
+        significance: 'Makar Sankranti is one of the few Indian festivals based on the solar calendar (most are lunar). It marks the end of winter and the beginning of longer, auspicious days (Uttarayana). The sun enters Capricorn (Makar rashi), considered highly auspicious for spiritual practices. It\'s celebrated differently across India: as Lohri in Punjab, Pongal in Tamil Nadu, Uttarayan in Gujarat, Khichdi in UP/Bihar, and Maghi in Punjab.',
+        rituals: ['Flying kites (especially in Gujarat and Rajasthan)', 'Taking holy dips in Ganga, Yamuna, Godavari rivers', 'Distribution of til-gur (sesame-jaggery)', 'Worship of Sun God', 'Charity and donations'],
+        foods: ['Til-gur (sesame-jaggery sweets)', 'Til laddoo', 'Khichdi (in UP/Bihar)', 'Undhiyu (in Gujarat)', 'Pongal (in Tamil Nadu)'],
+        greetings: { en: 'Happy Makar Sankranti!', hi: 'मकर संक्रांति की हार्दिक शुभकामनाएँ!' },
+        facts: ['It\'s the only major Indian festival on a fixed solar date (Jan 14)', 'The festival is known by 100+ different names across India', 'Kite flying symbolizes reaching out to the gods', 'Til-gur exchange symbolizes sweetness in relationships']
+    },
+    {
+        id: 'republic-day',
+        name: 'Republic Day',
+        hindi: 'गणतंत्र दिवस',
+        date: '2026-01-26',
+        emoji: '🇮🇳',
+        religion: 'national',
+        region: 'all',
+        description: 'India\'s national day celebrating the adoption of the Constitution in 1950.',
+        significance: 'On January 26, 1950, the Constitution of India came into effect, transforming the nation from a British Dominion to a republic. Dr. Rajendra Prasad became the first President. The day honors the world\'s longest written constitution, drafted under the leadership of Dr. B.R. Ambedkar.',
+        rituals: ['Flag hoisting ceremonies across the country', 'Grand parade at Kartavya Path, New Delhi', 'Beating Retreat ceremony on Jan 29', 'Cultural programs in schools and offices', 'Bravery awards presentation'],
+        foods: ['National flag-themed sweets', 'Traditional Indian thalis', 'Community feasts'],
+        greetings: { en: 'Happy Republic Day!', hi: 'गणतंत्र दिवस की हार्दिक शुभकामनाएँ!' },
+        facts: ['The Constitution took 2 years, 11 months, 18 days to draft', 'It has 448 articles in 25 parts and 12 schedules', 'The original Constitution was handwritten in Hindi and English', 'Dr. Ambedkar is called the Father of the Indian Constitution']
+    },
+    // === FEBRUARY ===
+    {
+        id: 'vasant-panchami',
+        name: 'Vasant Panchami',
+        hindi: 'वसंत पंचमी',
+        date: '2026-01-26',
+        emoji: '🌼',
+        religion: 'hindu',
+        region: 'all',
+        description: 'The festival of spring dedicated to Goddess Saraswati, celebrating knowledge, music, and arts.',
+        significance: 'Vasant Panchami marks the arrival of spring (Vasant Ritu). It\'s dedicated to Saraswati, the goddess of knowledge, music, art, and wisdom. Yellow is the dominant color as it symbolizes spring blooms and mustard fields. The day is considered auspicious for starting education (Vidya Arambham) for young children.',
+        rituals: ['Worship of Goddess Saraswati', 'Wearing yellow clothes', 'Offering yellow flowers', 'Initiating children into writing (Akshar Abhyasam)', 'Flying kites in some regions', 'Feeding Brahmins and students'],
+        foods: ['Kesar halwa (saffron pudding)', 'Meethe chawal (sweet rice)', 'Boondi laddoo', 'Yellow-colored sweets'],
+        greetings: { en: 'Happy Vasant Panchami!', hi: 'वसंत पंचमी की शुभकामनाएँ!' },
+        facts: ['Yellow is the main color of the festival', 'It\'s considered the most auspicious day to start learning', 'In Bengal, it\'s celebrated as Saraswati Puja', 'It marks the beginning of preparations for Holi (40 days later)']
+    },
+    {
+        id: 'maha-shivaratri',
+        name: 'Maha Shivaratri',
+        hindi: 'महा शिवरात्रि',
+        date: '2026-02-15',
+        emoji: '🔱',
+        religion: 'hindu',
+        region: 'all',
+        description: 'The Great Night of Lord Shiva, celebrated with fasting, night-long vigils, and temple visits.',
+        significance: 'Maha Shivaratri commemorates several legends: the marriage of Shiva and Parvati, Shiva saving the world by drinking poison (Halahala) during the churning of the ocean, and the night when Shiva performs the cosmic dance of creation, preservation, and destruction (Tandava). Devotees believe that praying on this night brings liberation from sins and moksha.',
+        rituals: ['Night-long vigil (Jagran)', 'Fasting throughout the day', 'Abhishekam of Shiva Lingam with milk, honey, water, bel patra', 'Chanting of "Om Namah Shivaya"', 'Visiting Shiva temples', 'Offering bel leaves and dhatura'],
+        foods: ['Fruits and milk (during fast)', 'Sabudana khichdi', 'Kand mool (yam)', 'Fresh juices'],
+        greetings: { en: 'Happy Maha Shivaratri!', hi: 'महा शिवरात्रि की हार्दिक शुभकामनाएँ!' },
+        facts: ['It\'s celebrated on the 14th day of the dark fortnight in Phalguna', 'Major Shiva temples see massive footfalls', 'The festival is especially grand in Varanasi, Ujjain, and Nashik', 'It\'s considered the most auspicious night for spiritual progress']
+    },
+    // === MARCH ===
+    {
+        id: 'holi',
+        name: 'Holi',
+        hindi: 'होली',
+        date: '2026-03-03',
+        emoji: '🎨',
+        religion: 'hindu',
+        region: 'all',
+        description: 'The vibrant Festival of Colors celebrating the victory of good over evil and the arrival of spring.',
+        significance: 'Holi commemorates the legend of Prahlad and Holika - the demon king Hiranyakashipu tried to kill his devotee son Prahlad, but Holika (the king\'s sister) was burnt instead while Prahlad was saved by Vishnu. The festival also celebrates the divine love of Radha and Krishna. It marks the end of winter and the beginning of spring, a time for forgiveness, renewal, and joy.',
+        rituals: ['Holika Dahan (bonfire) on the night before', 'Playing with colors (gulal) the next day', 'Water balloons and pichkaris', 'Visiting friends and family', 'Singing and dancing to festive songs', 'Sharing gujiya and thandai'],
+        foods: ['Gujiya (sweet dumplings)', 'Thandai (spiced milk drink)', 'Malpua', 'Puran poli', 'Dahi vada', 'Kanji (fermented drink)'],
+        greetings: { en: 'Happy Holi!', hi: 'होली की शुभकामनाएँ!', brij: 'ब्रज की होली मुबारक!' },
+        facts: ['Holi is celebrated for 2 days: Holika Dahan and Rangwali Holi', 'The festival originated in India but is now celebrated globally', 'In Barsana, Lathmar Holi sees women playfully hitting men with sticks', 'Traditional colors were made from turmeric, neem, and palash flowers']
+    },
+    {
+        id: 'eid-al-fitr',
+        name: 'Eid al-Fitr',
+        hindi: 'ईद उल-फ़ित्र',
+        date: '2026-03-20',
+        emoji: '🌙',
+        religion: 'muslim',
+        region: 'all',
+        description: 'The Festival of Breaking the Fast, marking the end of the holy month of Ramadan.',
+        significance: 'Eid al-Fitr celebrates the completion of Ramadan, the Islamic holy month of fasting. It\'s a time of joy, gratitude, charity, and community. Muslims gather for special prayers, give Zakat al-Fitr (charity to the poor), and celebrate with family and friends. The festival emphasizes forgiveness, unity, and thanksgiving to Allah.',
+        rituals: ['Eid special prayers (Salat al-Eid) in congregation', 'Giving Zakat al-Fitr before prayers', 'Wearing new clothes', 'Visiting family and friends', 'Exchanging Eid greetings "Eid Mubarak"', 'Preparing and sharing festive meals'],
+        foods: ['Sheer Khurma (vermicelli pudding)', 'Biryani', 'Kebabs', 'Seviyan', 'Dates', 'Phirni'],
+        greetings: { en: 'Eid Mubarak!', hi: 'ईद मुबारक!', ur: 'عید مبارک' },
+        facts: ['Eid al-Fitr means "festival of breaking the fast"', 'The date changes each year based on moon sighting', 'It\'s a 1-3 day celebration', 'Zakat al-Fitr is mandatory charity before Eid prayers']
+    },
+    {
+        id: 'ugadi',
+        name: 'Ugadi / Gudi Padwa',
+        hindi: 'उगादि / गुड़ी पड़वा',
+        date: '2026-03-28',
+        emoji: '🎋',
+        religion: 'hindu',
+        region: 'south',
+        description: 'The traditional New Year for Telugu, Kannada, and Marathi communities, marking the beginning of Chaitra month.',
+        significance: 'Ugadi (Telugu/Kannada) and Gudi Padwa (Marathi) celebrate the creation of the universe by Lord Brahma. It marks the first day of the Hindu lunar calendar month Chaitra. In Maharashtra, Gudis (bright flags) are raised symbolizing victory. The day is considered highly auspicious for new beginnings.',
+        rituals: ['Ugadi Pachadi: eating a dish with 6 flavors (sweet, sour, salty, bitter, tangy, spicy) symbolizing life\'s mix', 'Raising Gudi (decorated flag) outside homes in Maharashtra', 'Oil bath and wearing new clothes', 'Panchanga Shravanam (listening to year\'s astrological predictions)', 'Rangoli and mango leaf decorations'],
+        foods: ['Ugadi Pachadi (6-flavor dish)', 'Puran Poli', 'Holige', 'Obbattu', 'Jackfruit seed curry'],
+        greetings: { en: 'Happy New Year!', hi: 'नव वर्ष की शुभकामनाएँ!', te: 'ఉగాది శుభాకాంక్షలు!', kn: 'ಯುಗಾದಿ ಶುಭಾಶಯಗಳು!', mr: 'गुडी पाडवा शुभेच्छा!' },
+        facts: ['Ugadi Pachadi represents the 6 flavors of life', 'It\'s the first day of Chaitra month in Hindu calendar', 'In Sindhi community, it\'s celebrated as Cheti Chand', 'The day is also celebrated as New Year in many Southeast Asian countries']
+    },
+    // === APRIL ===
+    {
+        id: 'ram-navami',
+        name: 'Ram Navami',
+        hindi: 'राम नवमी',
+        date: '2026-03-30',
+        emoji: '🏹',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Celebration of the birth of Lord Rama, the seventh avatar of Vishnu, on the ninth day of Chaitra.',
+        significance: 'Ram Navami marks the birth of Lord Rama in Ayodhya to King Dasharatha and Queen Kaushalya. Lord Rama is considered Maryada Purushottam (the ideal man) and his life, as described in the Ramayana, exemplifies dharma, truth, and righteousness. The day is celebrated with recitation of Ramayana, bhajans, and temple ceremonies.',
+        rituals: ['Ramayana recitation and Ram Katha', 'Temple decorations and special pujas', 'Rath Yatras (chariot processions)', 'Fasting and prayers', 'Kanya Pujan (worshipping young girls)', 'Chanting of "Shri Ram"'],
+        foods: ['Panakam (jaggery water)', 'Kosambari (moong dal salad)', 'Fruits', 'Sweet preparations'],
+        greetings: { en: 'Happy Ram Navami!', hi: 'राम नवमी की हार्दिक शुभकामनाएँ!' },
+        facts: ['Lord Rama was born at noon (Madhyahna)', 'Ayodhya, Rameswaram, and Bhadrachalam are major celebration centers', 'The day concludes the 9-day Chaitra Navratri', 'Tulsidas\' Ramcharitmanas is specially recited']
+    },
+    {
+        id: 'mahavir-jayanti',
+        name: 'Mahavir Jayanti',
+        hindi: 'महावीर जयंती',
+        date: '2026-04-01',
+        emoji: '☸️',
+        religion: 'jain',
+        region: 'all',
+        description: 'Birth anniversary of Lord Mahavira, the 24th and last Tirthankara of Jainism.',
+        significance: 'Mahavir Jayanti celebrates the birth of Vardhamana Mahavira (599 BCE), who attained kevala jnana (omniscience) and preached the path of ahimsa (non-violence), satya (truth), asteya (non-stealing), brahmacharya (chastity), and aparigraha (non-possessiveness). His teachings form the foundation of Jainism.',
+        rituals: ['Abhishekam of Mahavira idols', 'Processions (Rath Yatra) in some places', 'Temple visits and prayers', 'Charity and donations', 'Reading of Jain scriptures', 'Fasting and meditation'],
+        foods: ['Satvik food (no onion/garlic)', 'Fruits', 'Jain-specific preparations'],
+        greetings: { en: 'Happy Mahavir Jayanti!', hi: 'महावीर जयंती की शुभकामनाएँ!' },
+        facts: ['Lord Mahavira was born in Kundagrama (now Basu Kund, Bihar)', 'He renounced worldly life at age 30', 'His core teaching is Ahimsa Paramo Dharma (non-violence is the highest religion)', 'Jains follow strict vegetarianism in his honor']
+    },
+    {
+        id: 'baisakhi',
+        name: 'Baisakhi',
+        hindi: 'बैसाखी',
+        date: '2026-04-14',
+        emoji: '🌾',
+        religion: 'sikh',
+        region: 'north',
+        description: 'Sikh New Year and harvest festival, commemorating the founding of the Khalsa Panth in 1699.',
+        significance: 'Baisakhi has dual significance: it marks the Punjabi harvest season and the founding of the Khalsa Panth by Guru Gobind Singh Ji in 1699 at Anandpur Sahib. On this day, Guru Ji created the Five Beloved Ones (Panj Pyare) and initiated the Amrit Sanchar ceremony, giving Sikhs their distinct identity.',
+        rituals: ['Special prayers at Gurudwaras', 'Nagar Kirtan (holy processions)', 'Amrit Sanchar ceremonies', 'Bhangra and Gidda performances', 'Langar (community kitchen)', 'Kirtan and Katha'],
+        foods: ['Kada Prasad', 'Langar (community meal)', 'Kheer', 'Makki di roti with sarson da saag'],
+        greetings: { en: 'Happy Baisakhi!', hi: 'बैसाखी मुबारक!', pa: 'ਵਿਸਾਖੀ ਵਧਾਈਆਂ!' },
+        facts: ['Baisakhi marks the birth of Khalsa Panth', 'It\'s the most important Sikh festival', 'The festival coincides with wheat harvest in Punjab', 'Guru Gobind Singh Ji created the Khalsa on this day in 1699']
+    },
+    {
+        id: 'ambedkar-jayanti',
+        name: 'Ambedkar Jayanti',
+        hindi: 'अंबेडकर जयंती',
+        date: '2026-04-14',
+        emoji: '📜',
+        religion: 'national',
+        region: 'all',
+        description: 'Birth anniversary of Dr. B.R. Ambedkar, architect of the Indian Constitution and champion of social justice.',
+        significance: 'Dr. Bhimrao Ramji Ambedkar (1891-1956) was a jurist, economist, social reformer, and the principal architect of the Indian Constitution. He fought against untouchability and caste discrimination, and championed rights for Dalits, women, and labor. He was posthumously awarded the Bharat Ratna in 1990.',
+        rituals: ['Flower offerings at Ambedkar statues', 'Processions and rallies', 'Reading of Ambedkar\'s writings', 'Discussion programs on social justice', 'Chaitya Bhoomi (Mumbai) visits'],
+        foods: ['Community meals', 'Simple vegetarian food'],
+        greetings: { en: 'Happy Ambedkar Jayanti!', hi: 'अंबेडकर जयंती की शुभकामनाएँ!' },
+        facts: ['Dr. Ambedkar earned 9 degrees from prestigious universities', 'He was the first Law Minister of independent India', 'He converted to Buddhism in 1956 along with 500,000 followers', 'His birthday is celebrated as "Equality Day"']
+    },
+    {
+        id: 'buddha-purnima',
+        name: 'Buddha Purnima',
+        hindi: 'बुद्ध पूर्णिमा',
+        date: '2026-05-01',
+        emoji: '☸️',
+        religion: 'buddhist',
+        region: 'all',
+        description: 'The sacred day celebrating the birth, enlightenment, and death (Parinirvana) of Gautama Buddha.',
+        significance: 'Buddha Purnima (Vesak) commemorates three major events in Buddha\'s life: his birth in Lumbini, his enlightenment (Nirvana) under the Bodhi tree in Bodh Gaya, and his Parinirvana (death) in Kushinagar - all believed to have occurred on the full moon of Vaisakha. The day promotes peace, compassion, and the Buddha\'s teachings.',
+        rituals: ['Visiting Buddhist temples and monasteries', 'Meditation and chanting of sutras', 'Observing the Eight Precepts', 'Giving alms to monks', 'Releasing caged birds and animals', 'Lighting butter lamps', 'Processions with Buddha statues'],
+        foods: ['Kheer (remembering Sujata\'s offering)', 'Vegetarian meals', 'Fruits', 'Simple satvik food'],
+        greetings: { en: 'Happy Buddha Purnima!', hi: 'बुद्ध पूर्णिमा की शुभकामनाएँ!' },
+        facts: ['Buddha was born as Prince Siddhartha in 563 BCE', 'All three major events occurred on the same lunar day', 'It\'s celebrated as Vesak in many Asian countries', 'Bodh Gaya in Bihar is the main pilgrimage site']
+    },
+    // === AUGUST ===
+    {
+        id: 'independence-day',
+        name: 'Independence Day',
+        hindi: 'स्वतंत्रता दिवस',
+        date: '2026-08-15',
+        emoji: '🇮🇳',
+        religion: 'national',
+        region: 'all',
+        description: 'Celebration of India\'s independence from British rule in 1947.',
+        significance: 'At midnight of August 15, 1947, India awoke to "life and freedom" as Jawaharlal Nehru famously said. The Indian Independence Act ended 200 years of British rule. The day honors the sacrifices of countless freedom fighters including Gandhi, Nehru, Bose, Bhagat Singh, and millions of unnamed patriots.',
+        rituals: ['Prime Minister\'s speech at Red Fort, Delhi', 'Flag hoisting across the country', 'Cultural programs and parades', 'Paying tribute to freedom fighters', 'Singing national anthem', 'Kite flying (symbolizing freedom)'],
+        foods: ['Tricolor foods', 'Sweets distributed in schools', 'Traditional Indian dishes'],
+        greetings: { en: 'Happy Independence Day!', hi: 'स्वतंत्रता दिवस की हार्दिक शुभकामनाएँ!' },
+        facts: ['Pakistan also celebrates its Independence Day on August 14', 'The actual transfer of power happened at midnight', 'The Radcliffe Line drew the India-Pakistan border', 'India\'s first Independence Day was celebrated in 1947']
+    },
+    {
+        id: 'raksha-bandhan',
+        name: 'Raksha Bandhan',
+        hindi: 'रक्षा बंधन',
+        date: '2026-08-09',
+        emoji: '🧵',
+        religion: 'hindu',
+        region: 'north',
+        description: 'The bond of protection - sisters tie rakhi on brothers\' wrists, celebrating sibling love.',
+        significance: 'Raksha Bandhan (literally "bond of protection") celebrates the sacred bond between brothers and sisters. The sister ties a rakhi (sacred thread) on her brother\'s wrist, and the brother vows to protect her. The festival has historical roots - legends include Indra and Indrani, Krishna and Draupadi, and Rani Karnavati sending rakhi to Emperor Humayun.',
+        rituals: ['Sister ties rakhi on brother\'s wrist', 'Aarti and applying tilak', 'Brother gives gifts and vows protection', 'Family gatherings and feasts', 'Sending rakhis to distant brothers'],
+        foods: ['Mithai (sweets)', 'Kheer', 'Special family meals', 'Churma'],
+        greetings: { en: 'Happy Raksha Bandhan!', hi: 'रक्षा बंधन की हार्दिक शुभकामनाएँ!' },
+        facts: ['The festival transcends biological siblings - anyone can tie rakhi', 'Historically, it was used to forge bonds between communities', 'Rakhis range from simple threads to elaborate designer pieces', 'It\'s also celebrated as Avani Avittam in South India']
+    },
+    {
+        id: 'janmashtami',
+        name: 'Janmashtami',
+        hindi: 'जन्माष्टमी',
+        date: '2026-08-14',
+        emoji: '🪈',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Celebration of the birth of Lord Krishna, the eighth avatar of Vishnu.',
+        significance: 'Janmashtami marks the birth of Lord Krishna at midnight in a prison in Mathura, to Devaki and Vasudeva. Krishna\'s birth symbolizes the victory of good over evil - he was born to kill the tyrant king Kansa. His life, from mischievous child to the divine teacher of Bhagavad Gita, is celebrated with joy.',
+        rituals: ['Midnight celebrations (Krishna\'s birth time)', 'Fasting until midnight', 'Dahi Handi (human pyramid to break curd pot) in Maharashtra', 'Temple decorations and special pujas', 'Bhajan and kirtan sessions', 'Reciting Bhagavad Gita', 'Cradle ceremonies for baby Krishna idols'],
+        foods: ['Makhan (butter) - Krishna\'s favorite', 'Mishri (rock sugar)', 'Peda', 'Panjiri', 'Fruits and milk dishes'],
+        greetings: { en: 'Happy Janmashtami!', hi: 'जन्माष्टमी की हार्दिक शुभकामनाएँ!' },
+        facts: ['Krishna was born at midnight in prison', 'Vasudeva carried baby Krishna across Yamuna to Gokul', 'Dahi Handi is especially grand in Mumbai', 'The festival is celebrated for 2 days in some regions']
+    },
+    // === SEPTEMBER ===
+    {
+        id: 'onam',
+        name: 'Onam',
+        hindi: 'ओणम',
+        date: '2026-08-26',
+        emoji: '🌺',
+        religion: 'hindu',
+        region: 'south',
+        description: 'Kerala\'s grand 10-day harvest festival celebrating King Mahabali\'s annual return.',
+        significance: 'Onam celebrates the homecoming of the legendary King Mahabali, whose rule is considered the golden age of Kerala. According to legend, Vishnu as Vamana (dwarf) sent Mahabali to the underworld but granted him the boon to visit his subjects once a year. The festival embodies Kerala\'s cultural essence - unity, prosperity, and gratitude.',
+        rituals: ['Pookalam (floral rangoli) created over 10 days', 'Vallam Kali (snake boat race)', 'Onasadya (grand feast on banana leaf)', 'Pulikali (tiger dance)', 'Thumbi Thullal (women\'s dance)', 'Kaikottikali (clap dance)', 'Wearing traditional Kasavu sarees/mundu'],
+        foods: ['Onasadya: 26+ dishes on banana leaf', 'Avial', 'Sambar', 'Rasam', 'Payasam (multiple varieties)', 'Kaalan', 'Olan', 'Pappadam'],
+        greetings: { en: 'Happy Onam!', hi: 'ओणम की शुभकामनाएँ!', ml: 'ഓണാശംസകൾ!' },
+        facts: ['Onam is a 10-day festival', 'The snake boat race is world-famous', 'Onasadya is served on banana leaves with 26+ dishes', 'It\'s the state festival of Kerala']
+    },
+    // === OCTOBER ===
+    {
+        id: 'gandhi-jayanti',
+        name: 'Gandhi Jayanti',
+        hindi: 'गांधी जयंती',
+        date: '2026-10-02',
+        emoji: '👓',
+        religion: 'national',
+        region: 'all',
+        description: 'Birth anniversary of Mahatma Gandhi, Father of the Nation.',
+        significance: 'Mohandas Karamchand Gandhi (1869-1948) led India\'s non-violent independence movement. His philosophy of Satyagraha (truth-force) and Ahimsa (non-violence) inspired civil rights movements worldwide, including those led by Martin Luther King Jr. and Nelson Mandela. He is called the Father of the Nation.',
+        rituals: ['Prayer services at Raj Ghat (Delhi)', 'Singing "Raghupati Raghav Raja Ram"', 'Tributes at Gandhi statues', 'Non-violence awareness programs', 'Cleanliness drives (Swachh Bharat)', 'Spinning charkha demonstrations'],
+        foods: ['Simple vegetarian meals', 'Gandhi\'s favorite foods: dates, goat milk, simple khichdi'],
+        greetings: { en: 'Happy Gandhi Jayanti!', hi: 'गांधी जयंती की शुभकामनाएँ!' },
+        facts: ['Gandhi is called "Bapu" (Father) and "Mahatma" (Great Soul)', 'October 2 is International Day of Non-Violence (UN)', 'His image is on all Indian currency notes', 'His autobiography is "The Story of My Experiments with Truth"']
+    },
+    {
+        id: 'durga-puja',
+        name: 'Durga Puja / Navratri',
+        hindi: 'दुर्गा पूजा / नवरात्रि',
+        date: '2026-10-13',
+        emoji: '🏹',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Nine nights of worship of Goddess Durga, culminating in her victory over demon Mahishasura.',
+        significance: 'Navratri (nine nights) and Durga Puja celebrate the victory of Goddess Durga over the buffalo demon Mahishasura. In Bengal, it\'s the grandest festival with elaborate pandals and artistic idols. In North India, it\'s nine nights of fasting and worship. In Gujarat, it\'s celebrated with Garba and Dandiya dances. In South India, it\'s Golu (display of dolls).',
+        rituals: ['Installing Durga idols in pandals', 'Nine nights of prayers and fasting', 'Garba and Dandiya dances (Gujarat)', 'Pandal hopping (Bengal)', 'Sindoor Khela on Dashami', 'Anjali (offerings) to the Goddess', 'Kanya Pujan on Ashtami'],
+        foods: ['Bhog (community feast)', 'Khichdi', 'Labra (mixed vegetable)', 'Payesh (sweet rice)', 'Fruits during fast', 'Sabudana preparations'],
+        greetings: { en: 'Happy Durga Puja!', hi: 'दुर्गा पूजा की हार्दिक शुभकामनाएँ!', bn: 'শুভ দুর্গা পূজা!' },
+        facts: ['Durga Puja in Kolkata is a UNESCO Intangible Cultural Heritage', 'Navratri is celebrated differently across India', 'The festival lasts 10 days ending with Vijayadashami', 'Bengali Durga Puja is the largest public festival in the world']
+    },
+    {
+        id: 'dussehra',
+        name: 'Dussehra / Vijayadashami',
+        hindi: 'दशहरा / विजयदशमी',
+        date: '2026-10-22',
+        emoji: '🏹',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Victory of Lord Rama over Ravana, celebrating the triumph of good over evil.',
+        significance: 'Dussehra commemorates Lord Rama\'s victory over the demon king Ravana on this day, as described in the Ramayana. It also marks Goddess Durga\'s victory over Mahishasura. The festival symbolizes the ultimate triumph of dharma (righteousness) over adharma (evil). In Mysore, it\'s celebrated with a grand procession of caparisoned elephants.',
+        rituals: ['Ramlila performances (dramatic enactments)', 'Burning of Ravana, Kumbhakarna, and Meghnath effigies', 'Shastra Puja (worship of weapons)', 'Ayudha Puja (worship of tools and vehicles)', 'Mysore Dasara procession', 'Exchange of Apta leaves (symbolizing gold)'],
+        foods: ['Maida preparations', 'Sweet dishes', 'Festive thalis'],
+        greetings: { en: 'Happy Dussehra!', hi: 'दशहरे की हार्दिक शुभकामनाएँ!' },
+        facts: ['Ravana had 10 heads symbolizing 10 evils', 'Mysore Dasara is 400+ years old', 'The festival marks the end of Navratri', 'In South India, it\'s also the day of Saraswati and Ayudha Puja']
+    },
+    // === NOVEMBER ===
+    {
+        id: 'karwa-chauth',
+        name: 'Karwa Chauth',
+        hindi: 'करवा चौथ',
+        date: '2026-10-30',
+        emoji: '🌙',
+        religion: 'hindu',
+        region: 'north',
+        description: 'A day of fasting by married women for the long life and prosperity of their husbands.',
+        significance: 'Karwa Chauth is observed by married Hindu women in North India who fast from sunrise to moonrise for their husbands\' longevity. The legend of Veervati and Queen Savitri are associated with this festival. It celebrates marital love and commitment.',
+        rituals: ['Nirjala (without water) fast from sunrise', 'Viewing the moon through a sieve', 'Husband offers water to fasting wife', 'Applying mehendi (henna)', 'Wearing traditional attire and jewelry', 'Karwa Chauth puja with bayans (pots)'],
+        foods: ['Sargi (pre-dawn meal)', 'Fruits and sweets after moon sighting', 'Festive dinner'],
+        greetings: { en: 'Happy Karwa Chauth!', hi: 'करवा चौथ की हार्दिक शुभकामनाएँ!' },
+        facts: ['Karwa means earthen pot, Chauth means fourth', 'The fast is broken after seeing the moon', 'It\'s celebrated on the fourth day of Kartik Krishna Paksha', 'The festival has gained popularity through Bollywood']
+    },
+    {
+        id: 'diwali',
+        name: 'Diwali',
+        hindi: 'दिवाली',
+        date: '2026-11-08',
+        emoji: '🪔',
+        religion: 'hindu',
+        region: 'all',
+        description: 'The Festival of Lights - India\'s biggest festival celebrating the victory of light over darkness.',
+        significance: 'Diwali is the most important Hindu festival, celebrated over 5 days. It commemorates Lord Rama\'s return to Ayodhya after 14 years of exile and victory over Ravana. People lit diyas to guide his way. It also honors Goddess Lakshmi (wealth), Lord Ganesha (new beginnings), and in different regions, marks different legends - Krishna\'s victory over Narakasura, Kali Puja in Bengal, Bandi Chhor Divas for Sikhs.',
+        rituals: ['Lakshmi-Ganesha Puja on main day', 'Lighting diyas and candles', 'Rangoli decorations', 'Bursting firecrackers', 'Exchange of sweets and gifts', 'Cleaning and decorating homes', 'Dhanteras (buying gold/utensils)', 'Bhai Dooj (brother-sister bond)'],
+        foods: ['Kaju Katli', 'Laddoo', 'Barfi', 'Chakli', 'Shankarpali', 'Chivda', 'Gujiya', 'Anarsa'],
+        greetings: { en: 'Happy Diwali!', hi: 'दिवाली की हार्दिक शुभकामनाएँ!', gu: 'દિવાળીની શુભકામના!', ta: 'தீபாவளி வாழ்த்துக்கள்!' },
+        facts: ['Diwali is a 5-day festival', 'It\'s celebrated by Hindus, Sikhs, Jains, and some Buddhists', 'The name comes from "Deepavali" (row of lights)', 'It\'s a national holiday in 12+ countries']
+    },
+    {
+        id: 'govardhan-puja',
+        name: 'Govardhan Puja / Annakut',
+        hindi: 'गोवर्धन पूजा / अन्नकूट',
+        date: '2026-11-09',
+        emoji: '⛰️',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Celebration of Lord Krishna lifting Govardhan Hill to protect villagers from Indra\'s wrath.',
+        significance: 'Govardhan Puja commemorates young Krishna lifting the Govardhan Hill on his little finger for 7 days to protect the people of Vrindavan from torrential rains sent by an angry Indra. The festival celebrates nature worship and Krishna\'s divine protection.',
+        rituals: ['Building small Govardhan Hill with cow dung', 'Worshipping cows (Gau Puja)', 'Preparing Annakut (56 bhog items)', 'Temple decorations', 'Offering massive quantities of food to deities'],
+        foods: ['56 bhog items (Chappan Bhog)', 'Milk-based sweets', 'Grain preparations'],
+        greetings: { en: 'Happy Govardhan Puja!', hi: 'गोवर्धन पूजा की शुभकामनाएँ!' },
+        facts: ['It\'s celebrated the day after Diwali', 'In temples, 56 food items are offered', 'Cows are specially worshipped', 'Mathura and Vrindavan have grand celebrations']
+    },
+    {
+        id: 'bhai-dooj',
+        name: 'Bhai Dooj',
+        hindi: 'भाई दूज',
+        date: '2026-11-10',
+        emoji: '👫',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Celebration of the brother-sister bond, similar to Raksha Bandhan.',
+        significance: 'Bhai Dooj (also called Bhau Beej, Bhai Tika, Yama Dwitiya) falls on the second day after Diwali. Sisters apply tilak on brothers\' foreheads and pray for their long life. Legends include Yama (god of death) visiting his sister Yami, and Krishna visiting Subhadra after killing Narakasura.',
+        rituals: ['Sister applies tilak on brother\'s forehead', 'Aarti ceremony', 'Exchange of gifts', 'Sisters feed brothers sweets', 'Brothers vow to protect sisters'],
+        foods: ['Sweets', 'Special meals prepared by sisters'],
+        greetings: { en: 'Happy Bhai Dooj!', hi: 'भाई दूज की शुभकामनाएँ!' },
+        facts: ['It\'s the last day of Diwali festivities', 'In Nepal, it\'s called Bhai Tika', 'The festival has different legends in different regions', 'It celebrates the sacred sibling bond']
+    },
+    {
+        id: 'chhath-puja',
+        name: 'Chhath Puja',
+        hindi: 'छठ पूजा',
+        date: '2026-11-17',
+        emoji: '🌅',
+        religion: 'hindu',
+        region: 'north',
+        description: 'Ancient Vedic festival dedicated to Sun God, celebrated with rigorous fasting and water rituals.',
+        significance: 'Chhath Puja is an ancient Vedic festival primarily observed in Bihar, Jharkhand, and Eastern UP. Devotees worship Surya (Sun God) and Chhathi Maiya (his consort) for health, prosperity, and fulfillment of wishes. The 4-day festival involves rigorous fasting, standing in water for hours, and offering arghya (offerings) to the setting and rising sun.',
+        rituals: ['Nahay Khay (Day 1): Holy bath and satvik meal', 'Kharna (Day 2): Full-day fast, broken after sunset puja', 'Sandhya Arghya (Day 3): Evening offerings to setting sun', 'Usha Arghya (Day 4): Morning offerings to rising sun', 'Standing in water for hours', 'Preparing thekua (traditional sweet)'],
+        foods: ['Thekua (wheat-jaggery cookie)', 'Kheer', 'Rice', 'Seasonal fruits', 'Sugarcane'],
+        greetings: { en: 'Happy Chhath Puja!', hi: 'छठ पूजा की हार्दिक शुभकामनाएँ!' },
+        facts: ['Chhath is a 4-day festival', 'It\'s the most important festival in Bihar', 'Devotees worship both setting and rising sun', 'The festival has no idol worship']
+    },
+    {
+        id: 'guru-nanak-jayanti',
+        name: 'Guru Nanak Jayanti',
+        hindi: 'गुरु नानक जयंती',
+        date: '2026-11-26',
+        emoji: '🙏',
+        religion: 'sikh',
+        region: 'all',
+        description: 'Birth anniversary of Guru Nanak Dev Ji, founder of Sikhism.',
+        significance: 'Guru Nanak Dev Ji (1469-1539) was the first of the ten Sikh Gurus and founder of Sikhism. Born in Talwandi (now Nankana Sahib, Pakistan), his teachings of "Ik Onkar" (One God), equality of all humans, selfless service (seva), and honest living form the foundation of Sikh philosophy.',
+        rituals: ['Akhand Path (48-hour continuous reading of Guru Granth Sahib)', 'Nagar Kirtan (holy processions)', 'Langar (community kitchen)', 'Gurudwara decorations', 'Kirtan and Katha', 'Distribution of prasad'],
+        foods: ['Kada Prasad', 'Langar (free community meal)', 'Kheer'],
+        greetings: { en: 'Happy Guru Nanak Jayanti!', hi: 'गुरु नानक जयंती की शुभकामनाएँ!', pa: 'ਗੁਰੂ ਨਾਨਕ ਜਯੰਤੀ ਵਧਾਈਆਂ!' },
+        facts: ['Guru Nanak was born in 1469', 'His famous saying: "Na koi Hindu, na koi Musalman"', 'He traveled extensively (Udasis) spreading his message', 'The Gurpurab is celebrated at Kartik Puranmashi']
+    },
+    // === DECEMBER ===
+    {
+        id: 'christmas',
+        name: 'Christmas',
+        hindi: 'क्रिसमस',
+        date: '2026-12-25',
+        emoji: '🎄',
+        religion: 'christian',
+        region: 'all',
+        description: 'Celebration of the birth of Jesus Christ, observed with joy, charity, and family gatherings.',
+        significance: 'Christmas celebrates the birth of Jesus Christ, the Son of God and Savior, in Bethlehem. It\'s a time of joy, love, peace, and giving. In India, Christmas is celebrated with Midnight Mass, decorations, carols, and feasts. It\'s a gazetted holiday and celebrated enthusiastically in Goa, Kerala, Northeast India, and metropolitan cities.',
+        rituals: ['Midnight Mass on Dec 24', 'Church decorations with stars and cribs', 'Christmas carols', 'Decorating Christmas trees', 'Exchange of gifts', 'Charity and giving to the poor', 'Family feasts'],
+        foods: ['Christmas cake/plum cake', 'Kul-kul (Goan sweets)', 'Dodol (Goan sweet)', 'Appam and stew (Kerala)', 'Rose cookies', 'Wine and beverages'],
+        greetings: { en: 'Merry Christmas!', hi: 'क्रिसमस की शुभकामनाएँ!' },
+        facts: ['Christmas is celebrated on December 25', 'It\'s a gazetted holiday in India', 'Goa has grand Christmas celebrations', 'The festival promotes love, peace, and charity']
+    },
+    // === 2027 FESTIVALS ===
+    {
+        id: 'new-year-2027',
+        name: 'New Year',
+        hindi: 'नया साल',
+        date: '2027-01-01',
+        emoji: '🎊',
+        religion: 'national',
+        region: 'all',
+        description: 'The first day of the Gregorian calendar year 2027.',
+        significance: 'New Year celebrations mark fresh beginnings with hope and resolutions.',
+        rituals: ['New Year parties', 'Making resolutions', 'Family gatherings'],
+        foods: ['Festive meals', 'Cakes'],
+        greetings: { en: 'Happy New Year 2027!', hi: 'नया साल मुबारक!' },
+        facts: ['Celebrated globally on January 1', 'A time for reflection and new beginnings']
+    },
+    {
+        id: 'lohri-2027',
+        name: 'Lohri',
+        hindi: 'लोहड़ी',
+        date: '2027-01-13',
+        emoji: '🔥',
+        religion: 'hindu',
+        region: 'north',
+        description: 'Punjabi winter harvest festival with bonfires.',
+        significance: 'Celebration of winter harvest and sun god.',
+        rituals: ['Bonfire', 'Folk songs', 'Bhangra'],
+        foods: ['Rewri', 'Gajak', 'Sarson da saag'],
+        greetings: { en: 'Happy Lohri!', hi: 'लोहड़ी मुबारक!' },
+        facts: ['Celebrated in Punjab and North India', 'Marks the end of winter']
+    },
+    {
+        id: 'pongal-2027',
+        name: 'Pongal',
+        hindi: 'पोंगल',
+        date: '2027-01-14',
+        emoji: '🌾',
+        religion: 'hindu',
+        region: 'south',
+        description: 'Tamil harvest festival.',
+        significance: 'Thanksgiving to Sun God and nature.',
+        rituals: ['Cooking Pongal', 'Kolam', 'Cattle worship'],
+        foods: ['Sweet Pongal', 'Vadai'],
+        greetings: { en: 'Happy Pongal!', hi: 'पोंगल की शुभकामनाएँ!' },
+        facts: ['4-day Tamil festival', 'Celebrates harvest']
+    },
+    {
+        id: 'republic-day-2027',
+        name: 'Republic Day',
+        hindi: 'गणतंत्र दिवस',
+        date: '2027-01-26',
+        emoji: '🇮🇳',
+        religion: 'national',
+        region: 'all',
+        description: 'India\'s Republic Day celebration.',
+        significance: 'Adoption of the Constitution in 1950.',
+        rituals: ['Flag hoisting', 'Parade', 'Cultural programs'],
+        foods: ['Festive meals'],
+        greetings: { en: 'Happy Republic Day!', hi: 'गणतंत्र दिवस की शुभकामनाएँ!' },
+        facts: ['Celebrated on January 26', 'Marks the adoption of Constitution']
+    },
+    {
+        id: 'maha-shivaratri-2027',
+        name: 'Maha Shivaratri',
+        hindi: 'महा शिवरात्रि',
+        date: '2027-02-05',
+        emoji: '🔱',
+        religion: 'hindu',
+        region: 'all',
+        description: 'The Great Night of Lord Shiva.',
+        significance: 'Night of Shiva\'s cosmic dance.',
+        rituals: ['Night vigil', 'Fasting', 'Shiva puja'],
+        foods: ['Fruits', 'Milk'],
+        greetings: { en: 'Happy Maha Shivaratri!', hi: 'महा शिवरात्रि की शुभकामनाएँ!' },
+        facts: ['Most auspicious night for Shiva worship', 'Celebrated with night-long vigils']
+    },
+    {
+        id: 'holi-2027',
+        name: 'Holi',
+        hindi: 'होली',
+        date: '2027-03-22',
+        emoji: '🎨',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Festival of Colors.',
+        significance: 'Victory of good over evil.',
+        rituals: ['Holika Dahan', 'Playing with colors', 'Music and dance'],
+        foods: ['Gujiya', 'Thandai'],
+        greetings: { en: 'Happy Holi!', hi: 'होली की शुभकामनाएँ!' },
+        facts: ['Celebrated with colors', 'Marks arrival of spring']
+    },
+    {
+        id: 'eid-al-fitr-2027',
+        name: 'Eid al-Fitr',
+        hindi: 'ईद उल-फ़ित्र',
+        date: '2027-03-10',
+        emoji: '🌙',
+        religion: 'muslim',
+        region: 'all',
+        description: 'Festival of Breaking the Fast.',
+        significance: 'End of Ramadan.',
+        rituals: ['Eid prayers', 'Charity', 'Family gatherings'],
+        foods: ['Sheer Khurma', 'Biryani'],
+        greetings: { en: 'Eid Mubarak!', hi: 'ईद मुबारक!' },
+        facts: ['Date changes yearly', 'Celebrated globally']
+    },
+    {
+        id: 'independence-day-2027',
+        name: 'Independence Day',
+        hindi: 'स्वतंत्रता दिवस',
+        date: '2027-08-15',
+        emoji: '🇮🇳',
+        religion: 'national',
+        region: 'all',
+        description: 'India\'s Independence Day.',
+        significance: 'Freedom from British rule in 1947.',
+        rituals: ['Flag hoisting', 'Patriotic programs'],
+        foods: ['Festive meals'],
+        greetings: { en: 'Happy Independence Day!', hi: 'स्वतंत्रता दिवस की शुभकामनाएँ!' },
+        facts: ['Celebrated on August 15', 'Honors freedom fighters']
+    },
+    {
+        id: 'dussehra-2027',
+        name: 'Dussehra',
+        hindi: 'दशहरा',
+        date: '2027-10-11',
+        emoji: '🏹',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Victory of good over evil.',
+        significance: 'Rama\'s victory over Ravana.',
+        rituals: ['Ramlila', 'Effigy burning'],
+        foods: ['Festive sweets'],
+        greetings: { en: 'Happy Dussehra!', hi: 'दशहरे की शुभकामनाएँ!' },
+        facts: ['Celebrates Rama\'s victory', 'Marks end of Navratri']
+    },
+    {
+        id: 'diwali-2027',
+        name: 'Diwali',
+        hindi: 'दिवाली',
+        date: '2027-10-28',
+        emoji: '🪔',
+        religion: 'hindu',
+        region: 'all',
+        description: 'Festival of Lights.',
+        significance: 'Victory of light over darkness.',
+        rituals: ['Lakshmi puja', 'Diyas', 'Firecrackers'],
+        foods: ['Sweets', 'Snacks'],
+        greetings: { en: 'Happy Diwali!', hi: 'दिवाली की शुभकामनाएँ!' },
+        facts: ['5-day festival', 'Biggest Indian festival']
+    },
+    {
+        id: 'christmas-2027',
+        name: 'Christmas',
+        hindi: 'क्रिसमस',
+        date: '2027-12-25',
+        emoji: '🎄',
+        religion: 'christian',
+        region: 'all',
+        description: 'Birth of Jesus Christ.',
+        significance: 'Celebration of Christ\'s birth.',
+        rituals: ['Midnight Mass', 'Decorations', 'Gifts'],
+        foods: ['Christmas cake', 'Feasts'],
+        greetings: { en: 'Merry Christmas!', hi: 'क्रिसमस की शुभकामनाएँ!' },
+        facts: ['Celebrated on December 25', 'Festival of love and giving']
+    }
+];
+
+// ============ PANCHANG DATA ============
+const tithis = ['प्रतिपदा', 'द्वितीया', 'तृतीया', 'चतुर्थी', 'पंचमी', 'षष्ठी', 'सप्तमी', 'अष्टमी', 'नवमी', 'दशमी', 'एकादशी', 'द्वादशी', 'त्रयोदशी', 'चतुर्दशी', 'पूर्णिमा/अमावस्या'];
+const tithiDevatas = ['Brahma', 'Vidhatri', 'Vishnu', 'Shiva/Ganesha', 'Naga', 'Kartikeya', 'Surya', 'Rudra', 'Durga', 'Yama', 'Ashwini Kumaras', 'Adityas', 'Kamadeva', 'Shiva', 'Chandra/Surya'];
+const nakshatras = ['अश्विनी', 'भरणी', 'कृत्तिका', 'रोहिणी', 'मृगशिरा', 'आर्द्रा', 'पुनर्वसु', 'पुष्य', 'आश्लेषा', 'मघा', 'पूर्वा फाल्गुनी', 'उत्तरा फाल्गुनी', 'हस्त', 'चित्रा', 'स्वाती', 'विशाखा', 'अनुराधा', 'ज्येष्ठा', 'मूल', 'पूर्वाषाढ़ा', 'उत्तराषाढ़ा', 'श्रवण', 'धनिष्ठा', 'शतभिषा', 'पूर्वा भाद्रपद', 'उत्तरा भाद्रपद', 'रेवती'];
+const nakshatraDevatas = ['Ashwini Kumaras', 'Yama', 'Agni', 'Brahma', 'Soma', 'Rudra', 'Aditi', 'Brihaspati', 'Naga', 'Pitris', 'Bhaga', 'Aryaman', 'Chandra', 'Vishwakarma', 'Vayu', 'Indra-Agni', 'Mitra', 'Indra', 'Nirriti', 'Apas/Aditi', 'Adityas', 'Vishnu', 'Vasus', 'Varuna', 'Ajikapada', 'Ahir Budhnya', 'Pushan'];
+const yogas = ['विष्कंभ', 'प्रीति', 'आयुष्मान', 'सौभाग्य', 'शोभन', 'अतिगंड', 'सुकर्मा', 'धृति', 'शूल', 'गंड', 'वृद्धि', 'ध्रुव', 'व्याघात', 'हर्षण', 'वज्र', 'सिद्धि', 'व्यतीपात', 'वरियान', 'परिघ', 'शिव', 'सिद्ध', 'साध्य', 'शुभ', 'शुक्ल', 'ब्रह्म', 'ऐन्द्र', 'वैधृति'];
+const dayLords = { 0: { name: 'रवि / Sunday', lord: 'Surya (Sun)' }, 1: { name: 'सोम / Monday', lord: 'Chandra (Moon)' }, 2: { name: 'मंगल / Tuesday', lord: 'Mangal (Mars)' }, 3: { name: 'बुध / Wednesday', lord: 'Budh (Mercury)' }, 4: { name: 'गुरु / Thursday', lord: 'Brihaspati (Jupiter)' }, 5: { name: 'शुक्र / Friday', lord: 'Shukra (Venus)' }, 6: { name: 'शनि / Saturday', lord: 'Shani (Saturn)' } };
+
+// ============ STATE MANAGEMENT ============
+let currentTab = 'today';
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let currentRegion = 'all';
+let currentReligionFilter = 'all';
+let favorites = JSON.parse(localStorage.getItem('utsavFavorites') || '[]');
+
+// ============ INITIALIZATION ============
+document.addEventListener('DOMContentLoaded', () => {
+    updatePanchang();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    renderSpotlight();
+    renderWeekFestivals();
+    renderCalendar();
+    renderUpcoming();
+    renderFavorites();
+    renderExplore();
+    setupSearch();
+});
+
+// ============ PANCHANG FUNCTIONS ============
+function updatePanchang() {
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('gregorianDate').textContent = today.toLocaleDateString('en-IN', options);
+    
+    // Hindi date
+    const hindiMonths = ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
+    document.getElementById('hindiDate').textContent = `${today.getDate()} ${hindiMonths[today.getMonth()]} ${today.getFullYear()}`;
+    
+    // Vikram Samvat
+    const vikramYear = today.getFullYear() + 57;
+    const hinduMonths = ['चैत्र', 'वैशाख', 'ज्येष्ठ', 'आषाढ़', 'श्रावण', 'भाद्रपद', 'आश्विन', 'कार्तिक', 'मार्गशीर्ष', 'पौष', 'माघ', 'फाल्गुन'];
+    const hinduMonthIndex = (today.getMonth() + 1) % 12;
+    document.getElementById('vikramDate').textContent = `विक्रम संवत् ${vikramYear} | ${hinduMonths[hinduMonthIndex]}`;
+    
+    // Day
+    const dayInfo = dayLords[today.getDay()];
+    document.getElementById('dayName').textContent = dayInfo.name;
+    document.getElementById('dayLord').textContent = `Lord: ${dayInfo.lord}`;
+    
+    // Tithi (calculated based on lunar cycle - simplified)
+    const tithiIndex = Math.floor((today.getDate() * 2) % 30) % 15;
+    const pakshaType = today.getDate() <= 15 ? 'शुक्ल पक्ष (Waxing)' : 'कृष्ण पक्ष (Waning)';
+    document.getElementById('tithi').textContent = tithis[tithiIndex];
+    document.getElementById('tithiDevata').textContent = `Devata: ${tithiDevatas[tithiIndex]}`;
+    
+    // Nakshatra (based on moon position - simplified)
+    const nakshatraIndex = Math.floor((today.getDate() + today.getMonth()) % 27);
+    document.getElementById('nakshatra').textContent = nakshatras[nakshatraIndex];
+    document.getElementById('nakshatraDevata').textContent = `Devata: ${nakshatraDevatas[nakshatraIndex]}`;
+    
+    // Yoga
+    const yogaIndex = Math.floor((today.getDate() + today.getMonth() * 2) % 27);
+    document.getElementById('yoga').textContent = yogas[yogaIndex];
+    document.getElementById('yogaMeaning').textContent = 'Daily cosmic combination';
+    
+    // Paksha
+    document.getElementById('paksha').textContent = pakshaType;
+    document.getElementById('pakshaDetail').textContent = today.getDate() <= 15 ? 'Auspicious for new ventures' : 'Good for spiritual practices';
+    
+    // Season (Ritu)
+    const month = today.getMonth();
+    let ritu, rituDetail;
+    if (month >= 1 && month <= 2) { ritu = 'बसंत / Spring'; rituDetail = 'Season of blooms'; }
+    else if (month >= 3 && month <= 5) { ritu = 'ग्रीष्म / Summer'; rituDetail = 'Hot season'; }
+    else if (month >= 6 && month <= 8) { ritu = 'वर्षा / Monsoon'; rituDetail = 'Rainy season'; }
+    else if (month >= 9 && month <= 10) { ritu = 'शरद / Autumn'; rituDetail = 'Pleasant weather'; }
+    else if (month === 11 || month === 0) { ritu = 'हेमंत / Winter'; rituDetail = 'Cool season'; }
+    document.getElementById('ritu').textContent = ritu;
+    document.getElementById('rituDetail').textContent = rituDetail;
+    
+    // Shubh Muhurat (simplified)
+    const muhuratTimes = ['06:15 - 07:45 AM', '10:30 AM - 12:00 PM', '02:15 - 03:45 PM', '04:30 - 06:00 PM'];
+    const randomMuhurat = muhuratTimes[today.getDate() % 4];
+    document.getElementById('shubhMuhurat').innerHTML = `🕐 Today's Shubh Muhurat: <strong>${randomMuhurat}</strong>`;
+}
+
+// ============ COUNTDOWN ============
+function getNextFestival() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const upcoming = festivals
+        .filter(f => new Date(f.date) >= today)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+    return upcoming[0] || festivals[0];
+}
+
+function updateCountdown() {
+    const next = getNextFestival();
+    const target = new Date(next.date);
+    const now = new Date();
+    const diff = target - now;
+    
+    if (diff <= 0) {
+        document.getElementById('countdownFestival').innerHTML = `🎉 Today is ${next.emoji} ${next.name}!`;
+        document.getElementById('countdownDate').textContent = next.hindi;
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-mins').textContent = '0';
+        document.getElementById('cd-secs').textContent = '0';
+        return;
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.getElementById('countdownFestival').innerHTML = `⏳ Next Festival: ${next.emoji} ${next.name}`;
+    document.getElementById('countdownDate').textContent = `${next.hindi} • ${new Date(next.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = hours;
+    document.getElementById('cd-mins').textContent = mins;
+    document.getElementById('cd-secs').textContent = secs;
+}
+
+// ============ SPOTLIGHT ============
+function renderSpotlight() {
+    const today = new Date().toISOString().split('T')[0];
+    const todayFestivals = festivals.filter(f => f.date === today);
+    const container = document.getElementById('spotlightContainer');
+    
+    if (todayFestivals.length === 0) {
+        // Show next upcoming festival
+        const next = getNextFestival();
+        container.innerHTML = `
+            <div class="spotlight">
+                <div class="spotlight-header">
+                    <div class="spotlight-emoji">${next.emoji}</div>
+                    <div class="spotlight-info">
+                        <div class="spotlight-label">✨ Next Festival</div>
+                        <div class="spotlight-name">${next.name}</div>
+                        <div class="spotlight-hindi">${next.hindi}</div>
+                        <div class="spotlight-date">📅 ${new Date(next.date).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</div>
+                    </div>
+                </div>
+                <div class="spotlight-tabs">
+                    <button class="spotlight-tab active" onclick="switchSpotlightTab('overview', '${next.id}')">📖 Overview</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('significance', '${next.id}')">🕉️ Significance</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('rituals', '${next.id}')">🪔 Rituals</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('foods', '${next.id}')">🍛 Foods</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('greetings', '${next.id}')">💌 Greetings</button>
+                </div>
+                <div id="spotlight-overview-${next.id}" class="spotlight-content active">
+                    <div class="spotlight-text"><p>${next.description}</p></div>
+                </div>
+                <div id="spotlight-significance-${next.id}" class="spotlight-content">
+                    <div class="spotlight-text"><p>${next.significance}</p></div>
+                </div>
+                <div id="spotlight-rituals-${next.id}" class="spotlight-content">
+                    <div class="rituals-grid">
+                        ${next.rituals.map(r => `<div class="ritual-item"><p>${r}</p></div>`).join('')}
+                    </div>
+                </div>
+                <div id="spotlight-foods-${next.id}" class="spotlight-content">
+                    <div class="recipes-grid">
+                        ${next.foods.map(f => `<div class="recipe-item"><h4>🍛 ${f}</h4></div>`).join('')}
+                    </div>
+                </div>
+                <div id="spotlight-greetings-${next.id}" class="spotlight-content">
+                    <div class="greeting-box">
+                        <div class="greeting-text">${next.greetings.en}</div>
+                        <div class="greeting-hindi">${next.greetings.hi}</div>
+                        <button class="copy-btn" onclick="copyGreeting('${next.greetings.hi}')">📋 Copy Greeting</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        const f = todayFestivals[0];
+        container.innerHTML = `
+            <div class="spotlight">
+                <div class="spotlight-header">
+                    <div class="spotlight-emoji">${f.emoji}</div>
+                    <div class="spotlight-info">
+                        <div class="spotlight-label">🎉 Today's Festival</div>
+                        <div class="spotlight-name">${f.name}</div>
+                        <div class="spotlight-hindi">${f.hindi}</div>
+                        <div class="spotlight-date">📅 Today</div>
+                    </div>
+                </div>
+                <div class="spotlight-tabs">
+                    <button class="spotlight-tab active" onclick="switchSpotlightTab('overview', '${f.id}')">📖 Overview</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('significance', '${f.id}')">🕉️ Significance</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('rituals', '${f.id}')">🪔 Rituals</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('foods', '${f.id}')">🍛 Foods</button>
+                    <button class="spotlight-tab" onclick="switchSpotlightTab('greetings', '${f.id}')">💌 Greetings</button>
+                </div>
+                <div id="spotlight-overview-${f.id}" class="spotlight-content active">
+                    <div class="spotlight-text"><p>${f.description}</p></div>
+                </div>
+                <div id="spotlight-significance-${f.id}" class="spotlight-content">
+                    <div class="spotlight-text"><p>${f.significance}</p></div>
+                </div>
+                <div id="spotlight-rituals-${f.id}" class="spotlight-content">
+                    <div class="rituals-grid">
+                        ${f.rituals.map(r => `<div class="ritual-item"><p>${r}</p></div>`).join('')}
+                    </div>
+                </div>
+                <div id="spotlight-foods-${f.id}" class="spotlight-content">
+                    <div class="recipes-grid">
+                        ${f.foods.map(food => `<div class="recipe-item"><h4>🍛 ${food}</h4></div>`).join('')}
+                    </div>
+                </div>
+                <div id="spotlight-greetings-${f.id}" class="spotlight-content">
+                    <div class="greeting-box">
+                        <div class="greeting-text">${f.greetings.en}</div>
+                        <div class="greeting-hindi">${f.greetings.hi}</div>
+                        <button class="copy-btn" onclick="copyGreeting('${f.greetings.hi}')">📋 Copy Greeting</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+function switchSpotlightTab(tab, festivalId) {
+    document.querySelectorAll('.spotlight-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.spotlight-content').forEach(c => c.classList.remove('active'));
+    document.getElementById(`spotlight-${tab}-${festivalId}`).classList.add('active');
+}
+
+function copyGreeting(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Greeting copied to clipboard!');
+    });
+}
+
+// ============ WEEK FESTIVALS ============
+function renderWeekFestivals() {
+    const today = new Date();
+    const weekFestivals = [];
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() + i);
+        const dateStr = date.toISOString().split('T')[0];
+        const dayFestivals = festivals.filter(f => f.date === dateStr && matchesRegion(f));
+        weekFestivals.push(...dayFestivals);
+    }
+    
+    const grid = document.getElementById('weekGrid');
+    if (weekFestivals.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:40px;">No festivals this week. Check the upcoming tab!</p>';
+    } else {
+        grid.innerHTML = weekFestivals.map(f => createFestivalCard(f)).join('');
+    }
+}
+
+// ============ CALENDAR ============
+function renderCalendar() {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    document.getElementById('calendarTitle').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+    
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    
+    let html = '';
+    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => {
+        html += `<div class="calendar-day-name">${d}</div>`;
+    });
+    
+    // Previous month days
+    for (let i = firstDay - 1; i >= 0; i--) {
+        html += `<div class="calendar-day other-month"><div class="calendar-day-number">${daysInPrevMonth - i}</div></div>`;
+    }
+    
+    // Current month days
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayFestivals = festivals.filter(f => f.date === dateStr);
+        const isToday = dateStr === todayStr;
+        const hasFestival = dayFestivals.length > 0;
+        
+        let classes = 'calendar-day';
+        if (isToday) classes += ' today';
+        if (hasFestival) classes += ' festival-day';
+        
+        html += `<div class="${classes}" onclick="showDayFestivals('${dateStr}')">
+            <div class="calendar-day-number">${day}</div>
+            ${hasFestival ? `<div class="calendar-day-emoji">${dayFestivals[0].emoji}</div>` : ''}
+            ${hasFestival ? `<div class="calendar-day-festival">${dayFestivals.map(f => f.name).join(', ')}</div>` : ''}
+        </div>`;
+    }
+    
+    // Next month days
+    const totalCells = firstDay + daysInMonth;
+    const remaining = 7 - (totalCells % 7);
+    if (remaining < 7) {
+        for (let i = 1; i <= remaining; i++) {
+            html += `<div class="calendar-day other-month"><div class="calendar-day-number">${i}</div></div>`;
+        }
+    }
+    
+    document.getElementById('calendarGrid').innerHTML = html;
+}
+
+function changeMonth(delta) {
+    if (delta === 0) {
+        currentMonth = new Date().getMonth();
+        currentYear = new Date().getFullYear();
+    } else {
+        currentMonth += delta;
+        if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+        if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    }
+    renderCalendar();
+}
+
+function showDayFestivals(dateStr) {
+    const dayFestivals = festivals.filter(f => f.date === dateStr);
+    if (dayFestivals.length === 0) {
+        alert(`📅 ${new Date(dateStr).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}\n\nNo festivals on this day.`);
+    } else if (dayFestivals.length === 1) {
+        openFestivalModal(dayFestivals[0].id);
+    } else {
+        const names = dayFestivals.map(f => `${f.emoji} ${f.name}`).join('\n');
+        if (confirm(`${new Date(dateStr).toLocaleDateString('en-IN')}\n\nFestivals:\n${names}\n\nView first festival?`)) {
+            openFestivalModal(dayFestivals[0].id);
+        }
+    }
+}
+
+// ============ UPCOMING ============
+function renderUpcoming() {
+    const today = new Date();
+    const next90 = [];
+    for (let i = 0; i <= 90; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() + i);
+        const dateStr = date.toISOString().split('T')[0];
+        const dayFestivals = festivals.filter(f => f.date === dateStr && matchesRegion(f));
+        dayFestivals.forEach(f => {
+            if (currentReligionFilter === 'all' || f.religion === currentReligionFilter) {
+                next90.push(f);
+            }
+        });
+    }
+    
+    // Render filters
+    const religions = ['all', 'hindu', 'muslim', 'christian', 'sikh', 'buddhist', 'jain', 'national'];
+    const religionEmojis = { all: '🌍', hindu: '🕉️', muslim: '☪️', christian: '✝️', sikh: '🙏', buddhist: '☸️', jain: '⚛️', national: '🇮🇳' };
+    document.getElementById('religionFilters').innerHTML = religions.map(r => 
+        `<button class="filter-pill ${currentReligionFilter === r ? 'active' : ''}" onclick="filterByReligion('${r}')">${religionEmojis[r]} ${r.charAt(0).toUpperCase() + r.slice(1)}</button>`
+    ).join('');
+    
+    const grid = document.getElementById('upcomingGrid');
+    if (next90.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:40px;">No festivals found for the selected filter.</p>';
+    } else {
+        grid.innerHTML = next90.map(f => createFestivalCard(f)).join('');
+    }
+}
+
+function filterByReligion(religion) {
+    currentReligionFilter = religion;
+    renderUpcoming();
+}
+
+// ============ FAVORITES ============
+function renderFavorites() {
+    const favFestivals = festivals.filter(f => favorites.includes(f.id));
+    const grid = document.getElementById('favoritesGrid');
+    if (favFestivals.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:40px;">No favorites yet. Click the ⭐ on any festival to save it!</p>';
+    } else {
+        grid.innerHTML = favFestivals.map(f => createFestivalCard(f)).join('');
+    }
+}
+
+function toggleFavorite(id, event) {
+    event.stopPropagation();
+    if (favorites.includes(id)) {
+        favorites = favorites.filter(f => f !== id);
+    } else {
+        favorites.push(id);
+    }
+    localStorage.setItem('utsavFavorites', JSON.stringify(favorites));
+    renderFavorites();
+    renderWeekFestivals();
+    renderUpcoming();
+    renderExplore();
+}
+
+// ============ EXPLORE ============
+function renderExplore() {
+    const filtered = festivals.filter(f => matchesRegion(f));
+    const grid = document.getElementById('exploreGrid');
+    grid.innerHTML = filtered.map(f => createFestivalCard(f)).join('');
+}
+
+// ============ HELPERS ============
+function matchesRegion(festival) {
+    if (currentRegion === 'all') return true;
+    if (festival.region === 'all') return true;
+    return festival.region === currentRegion;
+}
+
+function changeRegion() {
+    currentRegion = document.getElementById('regionSelector').value;
+    renderWeekFestivals();
+    renderUpcoming();
+    renderExplore();
+}
+
+function createFestivalCard(festival) {
+    const date = new Date(festival.date);
+    const dateStr = date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    const isFav = favorites.includes(festival.id);
+    
+    return `
+        <div class="festival-card ${festival.religion}" onclick="openFestivalModal('${festival.id}')">
+            <div class="festival-card-header">
+                <div class="festival-emoji">${festival.emoji}</div>
+                <div class="festival-card-title">
+                    <h3>${festival.name}</h3>
+                    <p>${festival.hindi}</p>
+                </div>
+                <div class="tag-favorite ${isFav ? 'active' : ''}" onclick="toggleFavorite('${festival.id}', event)">
+                    ${isFav ? '⭐' : '☆'}
+                </div>
+            </div>
+            <div class="festival-card-body">
+                <div class="festival-card-date">📅 ${dateStr}</div>
+                <div class="festival-card-desc">${festival.description.substring(0, 100)}...</div>
+                <div class="festival-card-tags">
+                    <span class="festival-tag tag-region">${festival.region.toUpperCase()}</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ============ MODAL ============
+function openFestivalModal(id) {
+    const festival = festivals.find(f => f.id === id);
+    if (!festival) return;
+    
+    const date = new Date(festival.date);
+    const dateStr = date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    
+    document.getElementById('modalHeader').className = `modal-header ${festival.religion}`;
+    document.getElementById('modalEmoji').textContent = festival.emoji;
+    document.getElementById('modalTitle').textContent = festival.name;
+    document.getElementById('modalHindi').textContent = festival.hindi;
+    document.getElementById('modalDate').textContent = `📅 ${dateStr}`;
+    
+    document.getElementById('modalContent').innerHTML = `
+        <div id="modal-overview" class="modal-content-section active">
+            <div class="modal-section">
+                <h3>📖 About</h3>
+                <p>${festival.description}</p>
+            </div>
+            <div class="modal-section">
+                <h3>🗺️ Region</h3>
+                <p>${festival.region === 'all' ? 'All India' : festival.region.charAt(0).toUpperCase() + festival.region.slice(1) + ' India'}</p>
+            </div>
+            <div class="modal-section">
+                <h3>🙏 Tradition</h3>
+                <p>${festival.religion.charAt(0).toUpperCase() + festival.religion.slice(1)}</p>
+            </div>
+        </div>
+        <div id="modal-significance" class="modal-content-section">
+            <div class="modal-section">
+                <h3>🕉️ Cultural & Religious Significance</h3>
+                <p>${festival.significance}</p>
+            </div>
+        </div>
+        <div id="modal-rituals" class="modal-content-section">
+            <div class="modal-section">
+                <h3>🪔 Traditional Rituals & Customs</h3>
+                <div class="rituals-grid">
+                    ${festival.rituals.map(r => `<div class="ritual-item"><p>${r}</p></div>`).join('')}
+                </div>
+            </div>
+        </div>
+        <div id="modal-foods" class="modal-content-section">
+            <div class="modal-section">
+                <h3>🍛 Traditional Festival Foods</h3>
+                <div class="recipes-grid">
+                    ${festival.foods.map(f => `<div class="recipe-item"><h4>🍛 ${f}</h4><p>Traditional delicacy prepared during the festival</p></div>`).join('')}
+                </div>
+            </div>
+        </div>
+        <div id="modal-greetings" class="modal-content-section">
+            <div class="modal-section">
+                <h3>💌 Festival Greetings</h3>
+                <div class="greeting-box">
+                    <div class="greeting-text">${festival.greetings.en}</div>
+                    <div class="greeting-hindi">${festival.greetings.hi}</div>
+                    ${festival.greetings.ta ? `<div style="margin-top:10px;font-size:1.2em;color:var(--indigo);">${festival.greetings.ta}</div>` : ''}
+                    <button class="copy-btn" onclick="copyGreeting('${festival.greetings.hi.replace(/'/g, "\\'")}')">📋 Copy Greeting</button>
+                </div>
+            </div>
+        </div>
+        <div id="modal-facts" class="modal-content-section">
+            <div class="modal-section">
+                <h3>💡 Did You Know?</h3>
+                <ul class="facts-list">
+                    ${festival.facts.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+            </div>
+        </div>
+    `;
+    
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('.modal-tab').classList.add('active');
+    document.getElementById('festivalModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('festivalModal').classList.remove('active');
+}
+
+function switchModalTab(tab) {
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.modal-content-section').forEach(c => c.classList.remove('active'));
+    document.getElementById(`modal-${tab}`).classList.add('active');
+}
+
+// ============ TABS ============
+function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.getElementById(`${tab}-tab`).style.display = 'block';
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ SEARCH ============
+function setupSearch() {
+    document.getElementById('globalSearch').addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (query.length < 2) return;
+        
+        const results = festivals.filter(f => 
+            f.name.toLowerCase().includes(query) ||
+            f.hindi.toLowerCase().includes(query) ||
+            f.description.toLowerCase().includes(query) ||
+            f.significance.toLowerCase().includes(query) ||
+            f.foods.some(food => food.toLowerCase().includes(query)) ||
+            f.rituals.some(r => r.toLowerCase().includes(query))
+        );
+        
+        if (results.length > 0) {
+            switchTab('explore');
+            document.getElementById('exploreGrid').innerHTML = results.map(f => createFestivalCard(f)).join('');
+        }
+    });
+}
+
+// Close modal on outside click
+document.getElementById('festivalModal').addEventListener('click', (e) => {
+    if (e.target.id === 'festivalModal') closeModal();
+});
+</script>
+</body>
+</html>
