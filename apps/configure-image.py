@@ -15,6 +15,14 @@ def welcome(d):
     d['requirements']['required']=[x for x in d['requirements']['required'] if x!='internet']
     d['showSupportUrl']=False;d['showKnownIssuesUrl']=False;d['showReleaseNotesUrl']=False
 edit_yaml('/etc/calamares/modules/welcome.conf',welcome)
+# Password quality remains visible as guidance; users may proceed with a
+# matching non-empty password even when libpwquality considers it weak.
+def users(d):
+    d['allowWeakPasswords']=True
+    d['allowWeakPasswordsDefault']=True
+    requirements=d.setdefault('passwordRequirements',{})
+    requirements['minLength']=1
+edit_yaml('/etc/calamares/modules/users.conf',users)
 edit_yaml('/etc/calamares/modules/bootloader.conf',lambda d:d.update({'efiBootloaderId':'JatayuOS','installEFIFallback':False}))
 # Debian's helper apt-installs mutually exclusive grub metapackages during install.
 # Our ISO already includes grub2-common and BOTH platform binary sets, so this
