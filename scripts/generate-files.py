@@ -163,7 +163,7 @@ Icon=/usr/share/jatayu/logo.png
 ''')
 
 for slug,title in [('kavach','Kavach'),('sarkar-setu','Sarkar Setu'),('utsav','Utsav')]:
-    put(f'overlay/usr/share/applications/org.jatayu.{slug}.desktop',f'[Desktop Entry]\\nType=Application\\nName={title}\\nExec=xdg-open /usr/share/jatayu/{slug}.html\\nIcon=applications-internet\\nTerminal=false\\nCategories=X-Jatayu-Tools;Network;\\n')
+    put(f'overlay/usr/share/applications/org.jatayu.{slug}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nExec=xdg-open /usr/share/jatayu/{slug}.html\nIcon=applications-internet\nTerminal=false\nCategories=X-Jatayu-Tools;Network;\n')
 put('assets/README.txt','''JatayuOS 0.1 development preview
 Created for Anup Yadav. Based on Debian and KDE; Firefox retains Mozilla identity.
 This integrated source kit is not a tested ISO or production release.
