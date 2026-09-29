@@ -70,6 +70,7 @@ kde-config-fcitx5
 im-config
 python3
 python3-pyside6.qtwidgets
+python3-pyside6.qtwebenginewidgets
 python3-pyside6.qtsvg
 python3-pil
 python3-pyqt6
