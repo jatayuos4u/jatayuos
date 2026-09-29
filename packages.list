@@ -47,6 +47,9 @@ fastfetch
 partitionmanager
 calamares
 calamares-settings-debian
+cracklib-runtime
+wamerican
+libpwquality-tools
 grub-efi-amd64-bin
 grub-pc-bin
 grub2-common
