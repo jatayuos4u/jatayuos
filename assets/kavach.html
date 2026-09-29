@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kavach - कवच | Security & Scam Awareness</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --saffron: #FF9933;
+    --shield-blue: #1e3a8a;
+    --shield-dark: #172554;
+    --shield-light: #3b82f6;
+    --gold: #fbbf24;
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+    --success: #16a34a;
+    --success-light: #dcfce7;
+    --warning: #f59e0b;
+    --warning-light: #fef3c7;
+    --indigo: #1a1a2e;
+    --light-bg: #f8fafc;
+    --border: #e2e8f0;
+    --shadow: rgba(0,0,0,0.1);
+    --shadow-lg: rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Noto Sans', 'Noto Sans Devanagari', -apple-system, sans-serif;
+    background: var(--light-bg);
+    color: #1e293b;
+    line-height: 1.6;
+}
+/* Header */
+.header {
+    background: linear-gradient(135deg, var(--shield-dark) 0%, var(--shield-blue) 100%);
+    color: white;
+    padding: 25px 30px;
+    box-shadow: 0 4px 20px var(--shadow-lg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.logo-section { display: flex; align-items: center; gap: 15px; }
+.logo {
+    width: 65px; height: 65px;
+    background: linear-gradient(135deg, var(--gold) 0%, #f59e0b 100%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    box-shadow: 0 4px 15px rgba(251,191,36,0.4);
+    animation: shieldPulse 3s infinite;
+}
+@keyframes shieldPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(251,191,36,0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 4px 25px rgba(251,191,36,0.6); }
+}
+.brand h1 { font-size: 2.2em; font-weight: 700; }
+.brand p { font-size: 0.95em; opacity: 0.95; }
+.emergency-badge {
+    background: var(--danger);
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: emergencyPulse 2s infinite;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+@keyframes emergencyPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.7); }
+    50% { box-shadow: 0 0 0 15px rgba(220,38,38,0); }
+}
+/* Navigation */
+.nav-bar {
+    background: rgba(0,0,0,0.2);
+    padding: 0 30px;
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.nav-item {
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9em;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+.nav-item:hover { background: rgba(255,255,255,0.1); }
+.nav-item.active { border-bottom-color: var(--gold); font-weight: 600; }
+/* Container */
+.container { max-width: 1600px; margin: 0 auto; padding: 30px; }
+/* Emergency Banner */
+.emergency-banner {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: 0 8px 25px rgba(220,38,38,0.3);
+}
+.emergency-banner h2 { font-size: 1.5em; margin-bottom: 8px; }
+.emergency-banner p { opacity: 0.95; }
+.emergency-numbers {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.emergency-num {
+    background: white;
+    color: var(--danger);
+    padding: 12px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+.emergency-num:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+.emergency-num small { display: block; font-size: 0.7em; font-weight: 500; opacity: 0.8; }
+/* Security Dashboard */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+.dash-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--shadow);
+    border-left: 5px solid var(--success);
+    transition: all 0.3s;
+}
+.dash-card.warning { border-left-color: var(--warning); }
+.dash-card.danger { border-left-color: var(--danger); }
+.dash-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px var(--shadow-lg); }
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.dash-icon {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    background: var(--success-light);
+}
+.dash-card.warning .dash-icon { background: var(--warning-light); }
+.dash-card.danger .dash-icon { background: var(--danger-light); }
+.dash-status {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+.status-ok { background: var(--success-light); color: var(--success); }
+.status-warn { background: var(--warning-light); color: var(--warning); }
+.status-bad { background: var(--danger-light); color: var(--danger); }
+.dash-title { font-size: 1.1em; font-weight: 600; color: var(--indigo); margin-bottom: 5px; }
+.dash-desc { font-size: 0.9em; color: #64748b; margin-bottom: 15px; }
+.dash-action {
+    background: var(--shield-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9em;
+    width: 100%;
+    transition: all 0.3s;
+}
+.dash-action:hover { background: var(--shield-dark); }
+/* Section */
+.section { margin-bottom: 50px; }
+.section-title {
+    font-size: 1.8em;
+    color: var(--indigo);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-subtitle {
+    color: #64748b;
+    margin-bottom: 25px;
+    font-size: 1.05em;
+}
+/* Scam Cards */
+.scam-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+.scam-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.scam-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px var(--shadow-lg);
+    border-color: var(--danger);
+}
+.scam-header {
+    background: linear-gradient(135deg, var(--danger) 0%, #991b1b 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.scam-icon {
+    width: 55px; height: 55px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+.scam-title h3 { font-size: 1.2em; margin-bottom: 3px; }
+.scam-title p { font-size: 0.85em; opacity: 0.9; }
+.scam-body { padding: 20px; }
+.scam-section { margin-bottom: 15px; }
+.scam-section-title {
+    font-size: 0.85em;
+    font-weight: 700;
+    color: var(--danger);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.scam-section p, .scam-section li {
+    font-size: 0.9em;
+    color: #475569;
+    margin-bottom: 5px;
+}
+.scam-section ul { padding-left: 20px; }
+.scam-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+.scam-tag {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75em;
+    font-weight: 600;
+    background: var(--danger-light);
+    color: var(--danger);
+}
+.scam-tag.high { background: #fee2e2; color: #991b1b; }
+.scam-tag.medium { background: var(--warning-light); color: #92400e; }
+/* Tips Section */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.tip-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--shadow);
+    border-top: 4px solid var(--success);
+    transition: all 0.3s;
+}
+.tip-card:hover { transform: translateY(-5px); }
+.tip-icon {
+    width: 50px; height: 50px;
+    background: var(--success-light);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.tip-title {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--indigo);
+    margin-bottom: 10px;
+}
+.tip-list { list-style: none; }
+.tip-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9em;
+    color: #475569;
+    display: flex;
+    align-items: start;
+    gap: 8px;
+}
+.tip-list li:last-child { border-bottom: none; }
+.tip-list li::before {
+    content: '✓';
+    color: var(--success);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+/* Checklist */
+.checklist {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--shadow);
+}
+.checklist-item {
+    display: flex;
+    align-items: start;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.checklist-item:hover { background: var(--light-bg); }
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item input[type="checkbox"] {
+    width: 22px; height: 22px;
+    cursor: pointer;
+    margin-top: 2px;
+    accent-color: var(--success);
+}
+.checklist-item.done label { text-decoration: line-through; opacity: 0.6; }
+.checklist-content { flex: 1; }
+.checklist-title { font-weight: 600; color: var(--indigo); margin-bottom: 3px; }
+.checklist-desc { font-size: 0.9em; color: #64748b; }
+.progress-bar {
+    background: var(--border);
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.progress-fill {
+    background: linear-gradient(90deg, var(--success) 0%, #16a34a 100%);
+    height: 100%;
+    transition: width 0.5s;
+    border-radius: 10px;
+}
+.progress-text {
+    text-align: center;
+    font-weight: 600;
+    color: var(--indigo);
+    margin-bottom: 15px;
+}
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal.active { display: flex; }
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s;
+}
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.modal-header {
+    background: linear-gradient(135deg, var(--danger) 0%, #991b1b 100%);
+    color: white;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+}
+.modal-header h2 { font-size: 1.5em; }
+.close-modal {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+.modal-body { padding: 30px; }
+.modal-section { margin-bottom: 25px; }
+.modal-section h3 {
+    color: var(--danger);
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.modal-section p, .modal-section li {
+    color: #475569;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+.modal-section ul { padding-left: 20px; }
+.modal-action {
+    background: var(--danger);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.modal-action a { color: var(--gold); text-decoration: underline; }
+/* Footer */
+.footer {
+    background: var(--shield-dark);
+    color: white;
+    padding: 40px 30px 20px;
+    margin-top: 60px;
+    text-align: center;
+}
+.footer p { opacity: 0.9; margin-bottom: 10px; }
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+.footer-links a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+}
+.footer-links a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+    .brand h1 { font-size: 1.5em; }
+    .scam-grid { grid-template-columns: 1fr; }
+    .container { padding: 15px; }
+    .emergency-banner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+    <div class="header-main">
+        <div class="logo-section">
+            <div class="logo">🛡️</div>
+            <div class="brand">
+                <h1>कवच</h1>
+                <p>Kavach - Your Digital Shield</p>
+            </div>
+        </div>
+        <a href="tel:1930" class="emergency-badge">
+            🚨 Emergency: 1930
+        </a>
+    </div>
+    <nav class="nav-bar">
+        <button class="nav-item active" onclick="switchTab('dashboard')">🛡️ Dashboard</button>
+        <button class="nav-item" onclick="switchTab('scams')">⚠️ Scam Alerts</button>
+        <button class="nav-item" onclick="switchTab('tips')">✅ Safe Practices</button>
+        <button class="nav-item" onclick="switchTab('checklist')">📋 Security Checklist</button>
+        <button class="nav-item" onclick="switchTab('report')">📞 Report Crime</button>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        <div>
+            <h2>🚨 Cyber Crime? Call NOW</h2>
+            <p>Golden Hour: Report within 1 hour for maximum recovery chance</p>
+        </div>
+        <div class="emergency-numbers">
+            <a href="tel:1930" class="emergency-num">
+                📞 1930
+                <small>Cyber Crime</small>
+            </a>
+            <a href="tel:112" class="emergency-num">
+                🚔 112
+                <small>Emergency</small>
+            </a>
+            <a href="tel:14400" class="emergency-num">
+                🏦 14400
+                <small>Banking Fraud</small>
+            </a>
+        </div>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div id="dashboard-tab" class="tab-content">
+        <h2 class="section-title">🛡️ Your Security Status</h2>
+        <p class="section-subtitle">Monitor and protect your system with one click</p>
+
+        <div class="dashboard">
+            <div class="dash-card">
+                <div class="dash-header">
+                    <div class="dash-icon">🔥</div>
+                    <span class="dash-status status-ok">✓ Active</span>
+                </div>
+                <div class="dash-title">Firewall Protection</div>
+                <div class="dash-desc">UFW firewall is protecting your system from unauthorized network access.</div>
+                <button class="dash-action" onclick="showFirewallHelp()">Manage Firewall</button>
+            </div>
+
+            <div class="dash-card warning">
+                <div class="dash-header">
+                    <div class="dash-icon">🔄</div>
+                    <span class="dash-status status-warn">⏳ Check</span>
+                </div>
+                <div class="dash-title">System Updates</div>
+                <div class="dash-desc">Keep your OS and apps updated to patch security vulnerabilities.</div>
+                <button class="dash-action" onclick="showUpdateHelp()">Check Updates</button>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-header">
+                    <div class="dash-icon">🔐</div>
+                    <span class="dash-status status-ok">✓ Strong</span>
+                </div>
+                <div class="dash-title">Password Security</div>
+                <div class="dash-desc">Use unique passwords for every account. Never share OTP with anyone.</div>
+                <button class="dash-action" onclick="showPasswordHelp()">Password Tips</button>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-header">
+                    <div class="dash-icon">💾</div>
+                    <span class="dash-status status-ok">✓ Ready</span>
+                </div>
+                <div class="dash-title">Backup Status</div>
+                <div class="dash-desc">Regular backups protect against ransomware and data loss.</div>
+                <button class="dash-action" onclick="showBackupHelp()">Setup Backup</button>
+            </div>
+
+            <div class="dash-card danger">
+                <div class="dash-header">
+                    <div class="dash-icon">🎣</div>
+                    <span class="dash-status status-bad">⚠ Alert</span>
+                </div>
+                <div class="dash-title">Phishing Protection</div>
+                <div class="dash-desc">Stay alert to fake emails, SMS, and calls impersonating banks/govt.</div>
+                <button class="dash-action" onclick="switchTab('scams')">View Scam Alerts</button>
+            </div>
+
+            <div class="dash-card">
+                <div class="dash-header">
+                    <div class="dash-icon">🔒</div>
+                    <span class="dash-status status-ok">✓ Enabled</span>
+                </div>
+                <div class="dash-title">Privacy Mode</div>
+                <div class="dash-desc">Zero telemetry, zero tracking. Your data stays on your device.</div>
+                <button class="dash-action" onclick="showPrivacyHelp()">Privacy Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scams Tab -->
+    <div id="scams-tab" class="tab-content" style="display:none;">
+        <h2 class="section-title">⚠️ Common Indian Scams</h2>
+        <p class="section-subtitle">Learn how scammers operate and how to protect yourself. Click any scam for detailed information.</p>
+
+        <div class="scam-grid" id="scamGrid"></div>
+    </div>
+
+    <!-- Tips Tab -->
+    <div id="tips-tab" class="tab-content" style="display:none;">
+        <h2 class="section-title">✅ Safe Digital Practices</h2>
+        <p class="section-subtitle">Follow these golden rules to stay safe online</p>
+
+        <div class="tips-grid">
+            <div class="tip-card">
+                <div class="tip-icon">🔐</div>
+                <div class="tip-title">Password Safety</div>
+                <ul class="tip-list">
+                    <li>Use 12+ character passwords with mixed case, numbers, symbols</li>
+                    <li>Never reuse passwords across accounts</li>
+                    <li>Enable 2-Factor Authentication (2FA) everywhere</li>
+                    <li>Use a password manager like KeePassXC</li>
+                    <li>Never write passwords in notebooks or phone notes</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">📱</div>
+                <div class="tip-title">UPI & Payment Safety</div>
+                <ul class="tip-list">
+                    <li>NEVER enter UPI PIN to RECEIVE money</li>
+                    <li>Verify recipient name before sending</li>
+                    <li>Use only official apps (BHIM, GPay, PhonePe, Paytm)</li>
+                    <li>Don't scan QR codes from strangers</li>
+                    <li>Enable transaction alerts on your bank</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">📞</div>
+                <div class="tip-title">Call & SMS Safety</div>
+                <ul class="tip-list">
+                    <li>Bank will NEVER call asking for OTP/PIN/CVV</li>
+                    <li>Police/CBI will NEVER call for "digital arrest"</li>
+                    <li>Verify caller ID independently (search official number)</li>
+                    <li>Don't install AnyDesk/TeamViewer on caller's advice</li>
+                    <li>Hang up on suspicious calls immediately</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">🌐</div>
+                <div class="tip-title">Internet Safety</div>
+                <ul class="tip-list">
+                    <li>Check for HTTPS (🔒) before entering data</li>
+                    <li>Don't click suspicious links in SMS/email</li>
+                    <li>Avoid public Wi-Fi for banking</li>
+                    <li>Keep browser and OS updated</li>
+                    <li>Use ad-blockers to avoid malvertising</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">📧</div>
+                <div class="tip-title">Email Safety</div>
+                <ul class="tip-list">
+                    <li>Check sender email carefully (look for misspellings)</li>
+                    <li>Don't open attachments from unknown senders</li>
+                    <li>Beware of "urgent" or "threatening" language</li>
+                    <li>Never click "unsubscribe" in spam emails</li>
+                    <li>Verify lottery/prize emails - they're ALWAYS fake</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">📲</div>
+                <div class="tip-title">App Safety</div>
+                <ul class="tip-list">
+                    <li>Download apps only from official stores</li>
+                    <li>Check app permissions before installing</li>
+                    <li>Read reviews and download count</li>
+                    <li>Avoid "instant loan" apps with high interest</li>
+                    <li>Uninstall apps you don't use regularly</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">🆔</div>
+                <div class="tip-title">Identity Protection</div>
+                <ul class="tip-list">
+                    <li>Don't share Aadhaar/PAN photos on social media</li>
+                    <li>Lock your Aadhaar biometrics on UIDAI portal</li>
+                    <li>Shred documents with personal info before discarding</li>
+                    <li>Monitor your credit report annually (CIBIL)</li>
+                    <li>Report lost ID documents immediately</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-icon">👨‍👩‍👧</div>
+                <div class="tip-title">Family Safety</div>
+                <ul class="tip-list">
+                    <li>Educate elderly family about phone scams</li>
+                    <li>Set up parental controls for children</li>
+                    <li>Teach kids not to share personal info online</li>
+                    <li>Monitor children's social media activity</li>
+                    <li>Create family emergency plan for cyber incidents</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checklist Tab -->
+    <div id="checklist-tab" class="tab-content" style="display:none;">
+        <h2 class="section-title">📋 Your Security Checklist</h2>
+        <p class="section-subtitle">Complete these steps to secure your digital life</p>
+
+        <div class="progress-text" id="progressText">0 of 12 completed (0%)</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+
+        <div class="checklist" id="checklist"></div>
+    </div>
+
+    <!-- Report Tab -->
+    <div id="report-tab" class="tab-content" style="display:none;">
+        <h2 class="section-title">📞 Report Cyber Crime</h2>
+        <p class="section-subtitle">If you've been scammed, act FAST. The first hour is critical.</p>
+
+        <div class="emergency-banner" style="margin-bottom: 30px;">
+            <div>
+                <h2>⏰ Golden Hour Rule</h2>
+                <p>Report within 1 hour of fraud for best chance of fund recovery</p>
+            </div>
+        </div>
+
+        <div class="tips-grid">
+            <div class="tip-card" style="border-top-color: var(--danger);">
+                <div class="tip-icon" style="background: var(--danger-light);">📞</div>
+                <div class="tip-title">Step 1: Call Immediately</div>
+                <ul class="tip-list">
+                    <li><strong>1930</strong> - National Cyber Crime Helpline</li>
+                    <li><strong>112</strong> - National Emergency</li>
+                    <li><strong>14400</strong> - Banking Fraud Helpline</li>
+                    <li>Have transaction details ready</li>
+                    <li>Note the complaint reference number</li>
+                </ul>
+            </div>
+
+            <div class="tip-card" style="border-top-color: var(--warning);">
+                <div class="tip-icon" style="background: var(--warning-light);">🏦</div>
+                <div class="tip-title">Step 2: Contact Your Bank</div>
+                <ul class="tip-list">
+                    <li>Call bank's fraud department immediately</li>
+                    <li>Freeze compromised cards/accounts</li>
+                    <li>Request transaction reversal</li>
+                    <li>Get written acknowledgment</li>
+                    <li>Change net banking password</li>
+                </ul>
+            </div>
+
+            <div class="tip-card" style="border-top-color: var(--shield-blue);">
+                <div class="tip-icon" style="background: #dbeafe;">🌐</div>
+                <div class="tip-title">Step 3: File Online Complaint</div>
+                <ul class="tip-list">
+                    <li>Visit <strong>cybercrime.gov.in</strong></li>
+                    <li>Register with mobile number</li>
+                    <li>File detailed complaint with evidence</li>
+                    <li>Upload screenshots, SMS, call logs</li>
+                    <li>Track status using ACK number</li>
+                </ul>
+            </div>
+
+            <div class="tip-card" style="border-top-color: var(--success);">
+                <div class="tip-icon" style="background: var(--success-light);">👮</div>
+                <div class="tip-title">Step 4: Visit Police Station</div>
+                <ul class="tip-list">
+                    <li>Visit local police/Cyber Cell</li>
+                    <li>Carry printed complaint + evidence</li>
+                    <li>Get FIR registered (mandatory for >₹10,000)</li>
+                    <li>Collect FIR copy for bank/insurance</li>
+                    <li>Follow up regularly</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 30px; border-radius: 15px; margin-top: 30px; box-shadow: 0 4px 15px var(--shadow);">
+            <h3 style="color: var(--indigo); margin-bottom: 15px;">📄 Documents to Keep Ready</h3>
+            <ul class="tip-list">
+                <li>Bank account statement showing fraudulent transaction</li>
+                <li>Screenshots of suspicious SMS/emails/WhatsApp</li>
+                <li>Call logs with scammer's number</li>
+                <li>Transaction reference numbers (UTR/RR Number)</li>
+                <li>Aadhaar/PAN card (for identity verification)</li>
+                <li>Any communication with the scammer</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Scam Detail Modal -->
+<div class="modal" id="scamModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Scam Details</h2>
+            <button class="close-modal" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p><strong>Kavach - कवच</strong> | Your Digital Shield</p>
+    <p>Stay informed. Stay safe. Stay secure.</p>
+    <div class="footer-links">
+        <a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a>
+        <a href="https://rbi.org.in" target="_blank">RBI Awareness</a>
+        <a href="https://chakrashield.gov.in" target="_blank">Chakra Shield</a>
+    </div>
+    <p style="margin-top: 20px; opacity: 0.8;">© 2026 Kavach - JatayuOS | Built with 🛡️ for Bharat</p>
+</footer>
+
+<script>
+// Real Indian Scams Database
+const scams = [
+    {
+        id: 'kyc',
+        name: 'KYC Update Scam',
+        hindi: 'केवाईसी अपडेट धोखाधड़ी',
+        emoji: '📋',
+        severity: 'high',
+        targets: ['Bank customers', 'Aadhaar holders', 'PAN card holders'],
+        howItWorks: 'Scammers call/SMS claiming your KYC is expired. They send fake links that look like bank/government websites. When you enter details, they steal your credentials and empty your account.',
+        redFlags: [
+            'Unsolicited call/SMS about KYC expiry',
+            'Links sent via SMS (banks never do this)',
+            'Urgency language - "Account will be blocked"',
+            'Asking for OTP, PIN, or CVV',
+            'URLs like "sbi-kyc-update.com" (fake)'
+        ],
+        prevention: [
+            'NEVER click links in SMS for KYC',
+            'Visit bank branch or official website directly',
+            'KYC updates are FREE - never pay for it',
+            'Bank will never ask for OTP to update KYC',
+            'Verify by calling bank on official number'
+        ],
+        action: 'If scammed: Call 1930 immediately, then contact bank to freeze account. File complaint at cybercrime.gov.in within 1 hour.'
+    },
+    {
+        id: 'anydesk',
+        name: 'Remote Access Scam',
+        hindi: 'रिमोट एक्सेस धोखाधड़ी',
+        emoji: '💻',
+        severity: 'high',
+        targets: ['Elderly people', 'Bank customers', 'Small business owners'],
+        howItWorks: 'Scammer poses as bank/tech support. Claims your account is compromised. Asks you to install AnyDesk, TeamViewer, or QuickSupport. Once they access your screen, they see your banking details and transfer money.',
+        redFlags: [
+            'Call asking to install remote software',
+            'Claiming to be from bank/SBI/HDFC/tech support',
+            'Saying your account is hacked/compromised',
+            'Asking you to open banking websites',
+            'Speaking in panic/urgent tone'
+        ],
+        prevention: [
+            'NEVER install AnyDesk/TeamViewer on anyone\'s advice',
+            'Bank employees NEVER call to ask this',
+            'Never share screen with strangers',
+            'Hang up immediately if asked to install software',
+            'If installed, uninstall immediately and change all passwords'
+        ],
+        action: 'If scammed: Uninstall remote app immediately. Disconnect internet. Call 1930 and bank. Change all passwords from a different device.'
+    },
+    {
+        id: 'digital-arrest',
+        name: 'Digital Arrest Scam',
+        hindi: 'डिजिटल अरेस्ट धोखाधड़ी',
+        emoji: '👮',
+        severity: 'high',
+        targets: ['All citizens', 'NRIs', 'Elderly people'],
+        howItWorks: 'Scammer poses as CBI/Police/Customs officer. Claims you\'re involved in money laundering/drug racket. Asks you to join video call, "verify" by showing ID, and transfer money to "verification account". Can last for days/weeks.',
+        redFlags: [
+            'Police/CBI NEVER do "digital arrest"',
+            'No government agency asks for money via video call',
+            'Fake IDs/uniforms shown on video',
+            'Asking to keep it "secret" from family',
+            'Threatening immediate arrest if you don\'t comply'
+        ],
+        prevention: [
+            'Police/CBI/ED NEVER call for digital arrest',
+            'No govt agency asks for money transfer',
+            'Never share video call with "officers"',
+            'Real police will visit your home with warrant',
+            'Tell family immediately - scammers isolate victims'
+        ],
+        action: 'If scammed: Call 1930 immediately. This is a MAJOR crime. File FIR at local police station. Contact bank to reverse transactions.'
+    },
+    {
+        id: 'upi-pin',
+        name: 'UPI PIN Scam',
+        hindi: 'यूपीआई पिन धोखाधड़ी',
+        emoji: '💳',
+        severity: 'high',
+        targets: ['UPI users', 'Mobile payment users'],
+        howItWorks: 'Scammer says they\'ll SEND you money. Asks you to scan QR code or enter UPI PIN to "receive" payment. In reality, entering PIN authorizes money going OUT of your account.',
+        redFlags: [
+            'Asking for UPI PIN to RECEIVE money',
+            'QR code scanning to get payment',
+            '"Enter PIN to verify your account"',
+            'Claims money will be doubled/refunded',
+            'Any request for PIN when receiving money'
+        ],
+        prevention: [
+            'UPI PIN is ONLY for SENDING money',
+            'NEVER enter PIN to receive payment',
+            'To receive: only share UPI ID/phone number',
+            'Verify recipient name before entering PIN',
+            'No bank/officer ever asks for UPI PIN'
+        ],
+        action: 'If scammed: Call 1930 within 1 hour. Contact bank. File complaint on cybercrime.gov.in. Check if money can be reversed via NPCI.'
+    },
+    {
+        id: 'lottery',
+        name: 'Lottery/Prize Scam',
+        hindi: 'लॉटरी/इनाम धोखाधड़ी',
+        emoji: '🎁',
+        severity: 'medium',
+        targets: ['All citizens', 'Elderly people'],
+        howItWorks: 'You receive email/call claiming you won a lottery (KBC, international lottery, etc.). To claim prize, you must pay "processing fee", "tax", or "customs duty". After payment, more demands come. You never receive any prize.',
+        redFlags: [
+            'You won a lottery you never entered',
+            'Asking for upfront fee to claim prize',
+            'Emails from Gmail/Yahoo (not official)',
+            'Urgency to claim "within 24 hours"',
+            'Requests for personal/bank details'
+        ],
+        prevention: [
+            'Real lotteries NEVER ask for fees',
+            'If you didn\'t buy a ticket, you can\'t win',
+            'KBC and similar shows have official processes',
+            'International lotteries are ILLEGAL in India',
+            'Delete such emails immediately'
+        ],
+        action: 'If paid: File complaint at cybercrime.gov.in. Report to local police. Contact bank to try reversal. This is fraud under IPC 420.'
+    },
+    {
+        id: 'sim-swap',
+        name: 'SIM Swap Scam',
+        hindi: 'सिम स्वैप धोखाधड़ी',
+        emoji: '📱',
+        severity: 'high',
+        targets: ['Banking users', 'Crypto investors', 'High-net-worth individuals'],
+        howItWorks: 'Scammer tricks telecom operator into transferring your number to their SIM. They receive all your OTPs and take over bank accounts, crypto wallets, and other 2FA-protected accounts.',
+        redFlags: [
+            'Sudden loss of mobile network',
+            'Unable to receive calls/SMS',
+            'Notifications of SIM change you didn\'t request',
+            'Unusual activity on bank accounts',
+            'Locked out of online accounts'
+        ],
+        prevention: [
+            'Set SIM lock PIN with telecom operator',
+            'Never share OTP with anyone',
+            'Use authenticator apps instead of SMS 2FA',
+            'Monitor account activity regularly',
+            'Contact telecom immediately if network drops'
+        ],
+        action: 'If scammed: Call telecom operator IMMEDIATELY. Contact bank to freeze accounts. File police complaint. Change all passwords.'
+    },
+    {
+        id: 'fake-customer',
+        name: 'Fake Customer Care',
+        hindi: 'नकली कस्टमर केयर',
+        emoji: '📞',
+        severity: 'high',
+        targets: ['Online shoppers', 'Banking customers', 'All service users'],
+        howItWorks: 'Google search shows fake customer care numbers for banks, Amazon, Flipkart, etc. When you call, scammer poses as executive, asks for details/OTP, and empties your account.',
+        redFlags: [
+            'Numbers found via Google (not official website)',
+            'Numbers starting with mobile prefixes',
+            'Executive asking for card details/OTP',
+            'Promising instant refund after sharing details',
+            'Pressure tactics and urgency'
+        ],
+        prevention: [
+            'ONLY use numbers from official websites/apps',
+            'Bank numbers are on the back of your card',
+            'Customer care NEVER asks for OTP/PIN/CVV',
+            'Bookmark official customer care pages',
+            'Verify number before calling'
+        ],
+        action: 'If scammed: Call 1930. Contact official bank customer care. File cybercrime complaint. Report fake number to Google.'
+    },
+    {
+        id: 'investment',
+        name: 'Fake Investment Scam',
+        hindi: 'नकली निवेश धोखाधड़ी',
+        emoji: '📈',
+        severity: 'high',
+        targets: ['Investors', 'Young professionals', 'Middle-class families'],
+        howItWorks: 'Fake trading apps/platforms promise guaranteed high returns (10-30% monthly). Show fake profits on app. When you try to withdraw, they ask for "tax" or "fees". Eventually, the app disappears with your money.',
+        redFlags: [
+            'Guaranteed high returns (impossible)',
+            'Apps not on Play Store/App Store',
+            'Pressure to invest more to "unlock" profits',
+            'No SEBI registration number',
+            'Telegram/WhatsApp groups pushing investments'
+        ],
+        prevention: [
+            'Check SEBI registration before investing',
+            'No investment guarantees 10%+ monthly',
+            'Only use registered brokers (Zerodha, Groww, etc.)',
+            'Research company thoroughly before investing',
+            'If it sounds too good, it IS a scam'
+        ],
+        action: 'If scammed: Report to SEBI (scores.gov.in). File FIR with Economic Offences Wing. Report at cybercrime.gov.in. Contact bank.'
+    },
+    {
+        id: 'job',
+        name: 'Job/Work-from-Home Scam',
+        hindi: 'नौकरी/कार्य धोखाधड़ी',
+        emoji: '💼',
+        severity: 'medium',
+        targets: ['Job seekers', 'Students', 'Housewives'],
+        howItWorks: 'Fake job offers for data entry, typing work, or "like YouTube videos". Ask for "registration fee" or "security deposit". After payment, either no work comes or impossible tasks are given. Money is never refunded.',
+        redFlags: [
+            'Asking for money to get a job',
+            'Too-good salaries for simple work',
+            'No company website or physical address',
+            'Communication only via WhatsApp/Telegram',
+            'Promises of earning ₹50,000+ monthly easily'
+        ],
+        prevention: [
+            'Real jobs NEVER ask for money',
+            'Verify company on LinkedIn/official website',
+            'Check reviews on Glassdoor/Indeed',
+            'Never pay "registration" or "training" fees',
+            'Be wary of unsolicited job offers'
+        ],
+        action: 'If scammed: File complaint at cybercrime.gov.in. Report on LinkedIn. Contact bank for chargeback if paid by card.'
+    },
+    {
+        id: 'loan-app',
+        name: 'Illegal Loan App',
+        hindi: 'अवैध लोन ऐप',
+        emoji: '💰',
+        severity: 'high',
+        targets: ['People in financial need', 'Young adults'],
+        howItWorks: 'Fake loan apps offer instant loans without documentation. They access your contacts/photos. When you default, they harass you and your contacts with morphed photos, threats, and humiliation. Interest rates are 300%+ annually.',
+        redFlags: [
+            'Apps not on official Play Store',
+            'Asking for excessive permissions (contacts, gallery)',
+            'No RBI registration',
+            'Hidden charges and extremely high interest',
+            'Instant approval without credit check'
+        ],
+        prevention: [
+            'Only use RBI-registered lending apps',
+            'Check app permissions before installing',
+            'Read terms carefully - look for hidden fees',
+            'Verify lender on RBI website',
+            'Avoid apps with <10,000 downloads'
+        ],
+        action: 'If harassed: File FIR immediately. Report to RBI. Cyber crime complaint. These apps are ILLEGAL. Police will help.'
+    },
+    {
+        id: 'qr-code',
+        name: 'QR Code Payment Scam',
+        hindi: 'क्यूआर कोड धोखाधड़ी',
+        emoji: '📷',
+        severity: 'high',
+        targets: ['UPI users', 'Small shop owners', 'Online sellers'],
+        howItWorks: 'Scammer poses as buyer. Sends QR code saying "scan to receive payment". Actually, scanning QR code authorizes PAYMENT from your account. Or they replace shop QR codes with their own.',
+        redFlags: [
+            'QR code to RECEIVE money (never needed)',
+            'Buyer sending QR instead of scanning yours',
+            'Tampered QR codes at shops',
+            'Requests to scan multiple times',
+            'QR codes on unstuck stickers'
+        ],
+        prevention: [
+            'To receive money: only share UPI ID/number',
+            'NEVER scan QR to receive payment',
+            'Verify QR code at shops before scanning',
+            'Check merchant name before entering PIN',
+            'Use official payment apps only'
+        ],
+        action: 'If scammed: Call 1930 immediately. Contact bank. File cybercrime complaint. Report to UPI app provider.'
+    },
+    {
+        id: 'matrimonial',
+        name: 'Matrimonial Scam',
+        hindi: 'मैट्रिमोनियल धोखाधड़ी',
+        emoji: '💑',
+        severity: 'medium',
+        targets: ['Singles looking for marriage', 'NRIs', 'Divorced/widowed'],
+        howItWorks: 'Fake profiles on matrimonial sites. Build emotional connection over weeks. Then create emergency (medical, visa, business) and ask for money. Once money is sent, profile disappears.',
+        redFlags: [
+            'Too perfect profile/photos',
+            'Quick declarations of love',
+            'Requests for money for emergencies',
+            'Refusing video calls/meetings',
+            'Stories of being stuck abroad'
+        ],
+        prevention: [
+            'Never send money to online matches',
+            'Verify identity through video calls',
+            'Meet in public places before sharing details',
+            'Check profile on multiple platforms',
+            'Inform family about online relationships'
+        ],
+        action: 'If scammed: Report on matrimonial site. File FIR. Cybercrime complaint. Preserve all chat records as evidence.'
+    },
+    {
+        id: 'delivery',
+        name: 'Fake Delivery/Customs Scam',
+        hindi: 'नकली डिलीवरी/कस्टम्स',
+        emoji: '📦',
+        severity: 'medium',
+        targets: ['Online shoppers', 'International package recipients'],
+        howItWorks: 'SMS/email about package stuck at customs. Fake link asks for "customs duty" or "delivery fee". Payment goes to scammer. Or fake delivery person asks for OTP to "verify" delivery.',
+        redFlags: [
+            'Unexpected package notifications',
+            'Links in SMS for customs payment',
+            'Delivery asking for OTP',
+            'Payment requests to personal UPI IDs',
+            'Poor grammar in official-looking messages'
+        ],
+        prevention: [
+            'Track packages only on official courier sites',
+            'Customs duty is paid at official counters only',
+            'Delivery boys NEVER need your OTP',
+            'Verify sender before paying anything',
+            'Check tracking on official websites'
+        ],
+        action: 'If scammed: Contact courier company. File cybercrime complaint. Report to payment platform. File police complaint.'
+    },
+    {
+        id: 'crypto',
+        name: 'Crypto/Forex Scam',
+        hindi: 'क्रिप्टो/फॉरेक्स धोखाधड़ी',
+        emoji: '₿',
+        severity: 'high',
+        targets: ['Young investors', 'Tech-savvy people'],
+        howItWorks: 'Fake crypto exchanges or "mentors" on Telegram/YouTube promise huge returns. Show fake profits. When you try to withdraw, they demand "tax" or "fees". Crypto is hard to trace and recover.',
+        redFlags: [
+            'Guaranteed returns in crypto',
+            '"Mentors" on Telegram/YouTube',
+            'Unknown exchanges not on CoinMarketCap',
+            'Pressure to invest more quickly',
+            'Requests to send crypto to "verify" wallet'
+        ],
+        prevention: [
+            'Use only registered exchanges (WazirX, CoinDCX)',
+            'No one can guarantee crypto profits',
+            'Crypto trading is risky - do your research',
+            'Beware of "pump and dump" schemes',
+            'Never share private keys with anyone'
+        ],
+        action: 'If scammed: Report to exchange. File cybercrime complaint. Note: Crypto recovery is difficult - prevention is key.'
+    },
+    {
+        id: 'otp-phishing',
+        name: 'OTP Phishing',
+        hindi: 'ओटीपी फिशिंग',
+        emoji: '🔑',
+        severity: 'high',
+        targets: ['All mobile users', 'Banking customers'],
+        howItWorks: 'Scammer calls claiming to be from bank/OTP verification. Asks you to share OTP received on phone. Uses OTP to authorize transactions, change passwords, or take over accounts.',
+        redFlags: [
+            'Anyone asking for OTP',
+            'Calls claiming to verify your identity',
+            'Messages with urgent OTP requests',
+            'Bank "executives" asking for OTP',
+            'Requests to read OTP aloud'
+        ],
+        prevention: [
+            'NEVER share OTP with ANYONE',
+            'OTP is like your password - keep it secret',
+            'Bank will never ask for OTP',
+            'If in doubt, hang up and call official number',
+            'Enable OTP via app instead of SMS where possible'
+        ],
+        action: 'If shared OTP: Call bank IMMEDIATELY. Freeze account. Call 1930. Change all passwords. File cybercrime complaint.'
+    }
+];
+
+// Security Checklist
+const checklistItems = [
+    { id: 1, title: 'Enable Firewall', desc: 'Turn on UFW firewall to block unauthorized access' },
+    { id: 2, title: 'Update System', desc: 'Install all pending OS and app updates' },
+    { id: 3, title: 'Strong Passwords', desc: 'Use 12+ character unique passwords for all accounts' },
+    { id: 4, title: 'Enable 2FA', desc: 'Turn on two-factor authentication for email, banking, social media' },
+    { id: 5, title: 'Backup Data', desc: 'Setup automatic backup of important files' },
+    { id: 6, title: 'Lock Aadhaar Biometrics', desc: 'Visit uidai.gov.in to lock/unlock Aadhaar biometrics' },
+    { id: 7, title: 'Check Bank Alerts', desc: 'Enable SMS/email alerts for all transactions' },
+    { id: 8, title: 'Review App Permissions', desc: 'Check and revoke unnecessary app permissions' },
+    { id: 9, title: 'Scan for Malware', desc: 'Run antivirus scan on your system' },
+    { id: 10, title: 'Secure Wi-Fi', desc: 'Use WPA3/WPA2 encryption, change default router password' },
+    { id: 11, title: 'Check Credit Report', desc: 'Review CIBIL report annually for suspicious activity' },
+    { id: 12, title: 'Educate Family', desc: 'Teach family members about common scams' }
+];
+
+// Render Scam Cards
+function renderScams() {
+    const grid = document.getElementById('scamGrid');
+    grid.innerHTML = '';
+    scams.forEach(scam => {
+        const card = document.createElement('div');
+        card.className = 'scam-card';
+        card.onclick = () => showScamDetail(scam.id);
+        card.innerHTML = `
+            <div class="scam-header">
+                <div class="scam-icon">${scam.emoji}</div>
+                <div class="scam-title">
+                    <h3>${scam.name}</h3>
+                    <p>${scam.hindi}</p>
+                </div>
+            </div>
+            <div class="scam-body">
+                <div class="scam-section">
+                    <div class="scam-section-title">⚠️ How It Works</div>
+                    <p>${scam.howItWorks.substring(0, 150)}...</p>
+                </div>
+                <div class="scam-section">
+                    <div class="scam-section-title">🎯 Common Targets</div>
+                    <p>${scam.targets.join(', ')}</p>
+                </div>
+                <div class="scam-tags">
+                    <span class="scam-tag ${scam.severity}">${scam.severity.toUpperCase()} RISK</span>
+                    <span class="scam-tag">Click for details →</span>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Show Scam Detail
+function showScamDetail(id) {
+    const scam = scams.find(s => s.id === id);
+    if (!scam) return;
+    
+    document.getElementById('modalTitle').innerHTML = `${scam.emoji} ${scam.name} <small style="opacity:0.8;font-size:0.7em;">${scam.hindi}</small>`;
+    document.getElementById('modalBody').innerHTML = `
+        <div class="modal-section">
+            <h3>⚠️ How This Scam Works</h3>
+            <p>${scam.howItWorks}</p>
+        </div>
+        <div class="modal-section">
+            <h3>🎯 Common Targets</h3>
+            <p>${scam.targets.join(', ')}</p>
+        </div>
+        <div class="modal-section">
+            <h3>🚩 Red Flags - Warning Signs</h3>
+            <ul>${scam.redFlags.map(f => `<li>${f}</li>`).join('')}</ul>
+        </div>
+        <div class="modal-section">
+            <h3>🛡️ Prevention Tips</h3>
+            <ul>${scam.prevention.map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>
+        <div class="modal-action">
+            <strong>🚨 If You've Been Scammed:</strong><br>
+            ${scam.action}<br><br>
+            <strong>Emergency Numbers:</strong> 
+            <a href="tel:1930">1930</a> | 
+            <a href="tel:112">112</a> | 
+            <a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a>
+        </div>
+    `;
+    document.getElementById('scamModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('scamModal').classList.remove('active');
+}
+
+// Render Checklist
+function renderChecklist() {
+    const container = document.getElementById('checklist');
+    container.innerHTML = '';
+    const completed = JSON.parse(localStorage.getItem('kavachChecklist') || '[]');
+    
+    checklistItems.forEach(item => {
+        const isDone = completed.includes(item.id);
+        const div = document.createElement('div');
+        div.className = `checklist-item ${isDone ? 'done' : ''}`;
+        div.innerHTML = `
+            <input type="checkbox" id="check-${item.id}" ${isDone ? 'checked' : ''} onchange="toggleCheck(${item.id})">
+            <div class="checklist-content">
+                <label for="check-${item.id}" class="checklist-title">${item.title}</label>
+                <div class="checklist-desc">${item.desc}</div>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+    updateProgress();
+}
+
+function toggleCheck(id) {
+    let completed = JSON.parse(localStorage.getItem('kavachChecklist') || '[]');
+    if (completed.includes(id)) {
+        completed = completed.filter(i => i !== id);
+    } else {
+        completed.push(id);
+    }
+    localStorage.setItem('kavachChecklist', JSON.stringify(completed));
+    renderChecklist();
+}
+
+function updateProgress() {
+    const completed = JSON.parse(localStorage.getItem('kavachChecklist') || '[]');
+    const total = checklistItems.length;
+    const done = completed.length;
+    const percent = Math.round((done / total) * 100);
+    document.getElementById('progressText').textContent = `${done} of ${total} completed (${percent}%)`;
+    document.getElementById('progressFill').style.width = `${percent}%`;
+}
+
+// Tab Switching
+function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.getElementById(`${tab}-tab`).style.display = 'block';
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Helper Functions for Dashboard
+function showFirewallHelp() {
+    alert('🔥 Firewall Management\n\nTo manage firewall in JatayuOS:\n\n1. Open Terminal (Mantra)\n2. Run: sudo ufw status\n3. To enable: sudo ufw enable\n4. To disable: sudo ufw disable\n\nFor GUI: Open "Sutra" settings → Security → Firewall');
+}
+
+function showUpdateHelp() {
+    alert('🔄 System Updates\n\nTo update JatayuOS:\n\n1. Open "Sangrah" (Software Center)\n2. Click "Updates" tab\n3. Click "Install All Updates"\n\nOr via Terminal:\nsudo apt update\nsudo apt upgrade');
+}
+
+function showPasswordHelp() {
+    alert('🔐 Password Security Tips\n\n• Use 12+ characters with mixed case, numbers, symbols\n• Never reuse passwords across accounts\n• Use KeePassXC (pre-installed) as password manager\n• Enable 2FA on all important accounts\n• Change passwords every 6 months\n• Never write passwords in plain text');
+}
+
+function showBackupHelp() {
+    alert('💾 Backup Setup\n\nUse "Smriti" (Backup app) in JatayuOS:\n\n1. Open Smriti app\n2. Select folders to backup\n3. Choose external drive or cloud\n4. Schedule automatic backups\n\nRecommendation: Backup weekly to external drive');
+}
+
+function showPrivacyHelp() {
+    alert('🔒 Privacy Settings\n\nJatayuOS is privacy-first:\n\n✓ Zero telemetry\n✓ Zero tracking\n✓ Zero ads\n✓ Firewall enabled by default\n✓ No data collection\n\nYour data stays on YOUR device.');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    renderScams();
+    renderChecklist();
+});
+
+// Close modal on outside click
+document.getElementById('scamModal').addEventListener('click', (e) => {
+    if (e.target.id === 'scamModal') closeModal();
+});
+</script>
+</body>
+</html>
