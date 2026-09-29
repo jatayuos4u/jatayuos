@@ -41,13 +41,13 @@ apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil fonts-dejavu-core dpkg-dev zstd ca-certificates
 python3 scripts/generate-files.py
 python3 scripts/preflight.py --apt
-printf '%s  %s\n' '7bfc7288091765442b5af923563ba966749289cf476253f9bc7be35c353e3f7a' jatayu-tools_2.0.1_all.deb | sha256sum -c -
+printf '%s  %s\n' '1482544a10ec927187566396067d94009eff00b7c4866cf805d809b46f515235' jatayu-tools_2.0.2_all.deb | sha256sum -c -
 bash scripts/package.sh
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
-cp out/jatayu-integration_*.deb jatayu-tools_2.0.1_all.deb build/config/packages.chroot/
+cp out/jatayu-integration_*.deb jatayu-tools_2.0.2_all.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
 # The live-build bootloader templates carry Debian's default splash.
