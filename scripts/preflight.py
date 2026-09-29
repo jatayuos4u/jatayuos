@@ -10,10 +10,10 @@ for f in ROOT.rglob('*.py'):
         except SyntaxError as e: errors.append(str(e))
 for f in [*ROOT.glob('*.sh'),*ROOT.glob('scripts/*.sh'),*ROOT.glob('hooks/*')]:
     if subprocess.run(['bash','-n',str(f)],capture_output=True).returncode: errors.append(f'Shell syntax: {f}')
-for f in ['apps/app.py','apps/engine.py','scripts/jatayu-admin','assets/wallpaper.jpg','assets/logo.png','assets/boot-splash.png','assets/plymouth-logo.png','assets/india-tricolor.png','scripts/prepare-boot-art.py','scripts/jatayu-live-installer','jatayu-tools_2.0.1_all.deb']:
+for f in ['apps/app.py','apps/engine.py','scripts/jatayu-admin','assets/wallpaper.jpg','assets/logo.png','assets/boot-splash.png','assets/plymouth-logo.png','assets/india-tricolor.png','scripts/prepare-boot-art.py','scripts/jatayu-live-installer','jatayu-tools_2.0.2_all.deb']:
     if not (ROOT/f).is_file(): errors.append(f'Missing {f}')
-deb=ROOT/'jatayu-tools_2.0.1_all.deb'
-if deb.is_file() and hashlib.sha256(deb.read_bytes()).hexdigest() != '7bfc7288091765442b5af923563ba966749289cf476253f9bc7be35c353e3f7a':
+deb=ROOT/'jatayu-tools_2.0.2_all.deb'
+if deb.is_file() and hashlib.sha256(deb.read_bytes()).hexdigest() != '1482544a10ec927187566396067d94009eff00b7c4866cf805d809b46f515235':
     errors.append('Jatayu Tools package checksum mismatch')
 branding=ROOT/'overlay/etc/calamares/branding/jatayu/branding.desc'
 if a.apt and branding.is_file():
