@@ -27,7 +27,7 @@ class Worker(QThread):
 class Window(QMainWindow):
     def __init__(self,mode):
         super().__init__(); self.mode=mode;self.worker=None;self.proc=None; self.buttons=[]
-        titles={'live':'Welcome to JatayuOS','welcome':'Jatayu Welcome','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
+        titles={'live':'Welcome to JatayuOS','welcome':'Aarambh','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
         self.setWindowTitle(titles.get(mode,'JatayuOS')); self.resize(760,540 if mode=='live' else 500)
         self.setWindowIcon(QIcon(str(ASSETS/'logo.png')))
         central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(28,26,28,24);self.layout.setSpacing(12)
@@ -87,6 +87,7 @@ class Window(QMainWindow):
 
     def page_welcome(self):
         self.text('Aarambh helps you get productive quickly. Open essential help, software and settings from one clean starting point.')
+        self.text('Shortcuts: Meta opens the app menu; Meta+E opens Files; Ctrl+Alt+T opens Terminal; Print captures the screen. Customize these in System Settings.')
         self.button('User Manual',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'USER-MANUAL.txt'))))
         self.button('Frequently Asked Questions',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'FAQ.txt'))))
         self.button('Software Center',lambda:self.launch(['plasma-discover']))
@@ -180,12 +181,12 @@ class Window(QMainWindow):
             self.button(title+' — '+url,lambda checked=False,u=url:QDesktopServices.openUrl(QUrl(u)))
 
     def page_android(self):
-        self.text('Experimental Waydroid integration. Android is optional and not part of the 2 GB RAM promise. The Android image needs a separate download. No Play Store, Google apps or ARM translation libraries are bundled.')
+        self.text('Waydroid is included from Debian Trixie backports. A Wayland session, compatible kernel binder support, and a separate Android image download are required. No Google apps or ARM translation libraries are bundled.')
         self.button('Check Android readiness',lambda:self.work(self.android_check))
         self.button('Start installed Waydroid UI',lambda:self.launch(['waydroid','show-full-ui']))
         self.button('Stop Waydroid session',lambda:self.launch(['waydroid','session','stop']))
         self.button('Open official setup documentation',lambda:QDesktopServices.openUrl(QUrl('https://docs.waydro.id/usage/install-on-desktops')))
-        self.text('Waydroid host installation is not automated until a maintained Trixie package/repository and signing key have been verified. This screen alone does not provide Android compatibility.')
+        self.text('Initialize Waydroid after installation using its official setup documentation. Hardware and app compatibility still require testing.')
     def android_check(self):
         mem=next((int(x.split()[1])//1024 for x in Path('/proc/meminfo').read_text().splitlines() if x.startswith('MemTotal:')),0)
         return f'RAM: {mem} MiB\nWayland session: {os.environ.get("XDG_SESSION_TYPE")=="wayland"}\nWaydroid installed: {bool(shutil.which("waydroid"))}\nBinder device present: {any(Path(x).exists() for x in ["/dev/binder","/dev/binderfs/binder-control"])}\nThis is a basic check; GPU and app compatibility still require testing.'
