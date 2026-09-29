@@ -20,7 +20,7 @@ for mode,title,icon,categories in apps:
 for mode in ('update','backup','check','language','portals','android'):
     (R/f'overlay/usr/share/applications/org.jatayu.{mode}.desktop').unlink(missing_ok=True)
 for name,title,command,icon in (
-    ('installer','Install JatayuOS','calamares-install-debian','drive-harddisk'),
+    ('installer','Install JatayuOS','jatayu live-install','drive-harddisk'),
     ('faq','JatayuOS FAQ','xdg-open /usr/share/jatayu/FAQ.txt','help-faq'),
     ('manual','JatayuOS User Manual','xdg-open /usr/share/jatayu/USER-MANUAL.txt','help-contents')):
     put(f'overlay/usr/share/applications/org.jatayu.{name}.desktop',
