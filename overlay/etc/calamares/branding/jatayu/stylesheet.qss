@@ -1,2 +1,2 @@
 QComboBox#languageWidget { qproperty-maxVisibleItems: 9; min-height: 28px; }
-QComboBox#languageWidget QAbstractItemView { background: #ffffff; color: #10212d; selection-background-color: #dcefe3; selection-color: #10212d; }
+QComboBox#languageWidget QAbstractItemView { qproperty-maximumHeight: 280; background: #ffffff; color: #10212d; selection-background-color: #dcefe3; selection-color: #10212d; }
