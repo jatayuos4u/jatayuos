@@ -41,13 +41,13 @@ apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil fonts-dejavu-core dpkg-dev zstd ca-certificates
 python3 scripts/generate-files.py
 python3 scripts/preflight.py --apt
-printf '%s  %s\n' '4634514e641b851369b9cd276f573f68fa75128a38394a6e1722a32b87bd489b' jatayu-tools_2.0.0_all.deb | sha256sum -c -
+printf '%s  %s\n' '7bfc7288091765442b5af923563ba966749289cf476253f9bc7be35c353e3f7a' jatayu-tools_2.0.1_all.deb | sha256sum -c -
 bash scripts/package.sh
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
-cp out/jatayu-integration_*.deb jatayu-tools_2.0.0_all.deb build/config/packages.chroot/
+cp out/jatayu-integration_*.deb jatayu-tools_2.0.1_all.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
 # The live-build bootloader templates carry Debian's default splash.
@@ -62,6 +62,9 @@ cd ..
 iso=build/live-image-amd64.hybrid.iso
 test -s "$iso"
 test -x build/chroot/usr/bin/jatayu-tools
+chroot build/chroot /usr/bin/env QT_QPA_PLATFORM=offscreen /usr/bin/jatayu-tools --smoke
+test -s build/chroot/tmp/jatayu-tools-smoke.png
+cp build/chroot/tmp/jatayu-tools-smoke.png out/jatayu-tools-smoke.png
 test -x build/chroot/usr/libexec/jatayu-live-installer
 cp "$iso" out/JatayuOS-0.1-dev-amd64.iso
 find build -maxdepth 1 -name '*.packages' -exec cp '{}' out/ \;

@@ -67,7 +67,7 @@ ColorScheme=BreezeDark
 BrowserApplication=firefox-esr.desktop
 [KDE]
 LookAndFeelPackage=org.jatayu.desktop
-SingleClick=false
+SingleClick=true
 [Icons]
 Theme=Papirus-Dark
 ''')
@@ -78,7 +78,7 @@ put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-h
 base='overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/'
 put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS development layout','Version':'0.1','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
 put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[kdeglobals][Icons]\nTheme=Papirus-Dark\n[plasmarc][Theme]\nname=default\n')
-put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 54;\npanel.floating = false;\nvar launcher = panel.addWidget(\"org.kde.plasma.kickoff\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.png\");\nvar tasks = panel.addWidget(\"org.kde.plasma.icontasks\");\ntasks.currentConfigGroup = [\"General\"];\ntasks.writeConfig(\"launchers\", \"applications:org.kde.dolphin.desktop,applications:firefox-esr.desktop,applications:org.kde.discover.desktop,applications:systemsettings.desktop\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.jpg\");\nds[i].writeConfig(\"FillMode\",\"1\");\n}\n")
+put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 54;\npanel.floating = false;\nvar launcher = panel.addWidget(\"org.kde.plasma.kickoff\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.png\");\nvar tasks = panel.addWidget(\"org.kde.plasma.icontasks\");\ntasks.currentConfigGroup = [\"General\"];\ntasks.writeConfig(\"launchers\", \"applications:org.kde.dolphin.desktop,applications:firefox-esr.desktop,applications:org.kde.discover.desktop,applications:systemsettings.desktop\");\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.jpg\");\nds[i].writeConfig(\"FillMode\",\"2\");\n}\n")
 brand='overlay/etc/calamares/branding/jatayu/'
 put(brand+'branding.desc','''componentName: jatayu
 welcomeStyleCalamares: true
@@ -98,6 +98,7 @@ images:
   productLogo: logo.png
   productIcon: logo.png
   productWelcome: logo.png
+slideshow: [ "/etc/calamares/branding/jatayu/logo.png" ]
 style:
   SidebarBackground: "#10212d"
   SidebarText: "#ffffff"
@@ -121,7 +122,19 @@ fun animate() {
   if (phase < 40) opacity = 0.72 + phase * 0.007;
   else opacity = 1 - (phase - 40) * 0.007;
   logo.sprite.SetOpacity(opacity);
+  saffron.sprite.SetOpacity(0.45 + (tick % 45) / 82);
+  white.sprite.SetOpacity(0.45 + ((tick + 15) % 45) / 82);
+  green.sprite.SetOpacity(0.45 + ((tick + 30) % 45) / 82);
 }
+saffron.image = Image.Text("●", 1, 0.55, 0.12);
+white.image = Image.Text("●", 1, 1, 1);
+green.image = Image.Text("●", 0.12, 0.66, 0.34);
+saffron.sprite = Sprite(saffron.image);
+white.sprite = Sprite(white.image);
+green.sprite = Sprite(green.image);
+saffron.sprite.SetPosition(Window.GetWidth()/2-42, Window.GetHeight()/2+75, 10);
+white.sprite.SetPosition(Window.GetWidth()/2-8, Window.GetHeight()/2+75, 10);
+green.sprite.SetPosition(Window.GetWidth()/2+26, Window.GetHeight()/2+75, 10);
 Plymouth.SetRefreshFunction(animate);
 fun show_message(text) {
   message.image = Image.Text(text, 1, 1, 1);

@@ -47,6 +47,7 @@ menu color hotsel 1;7;37;40 #ffffffff #b02d814d none
 menu color tabmsg * #ffffffff #00000000 none
 menu color help * #ffffffff #00000000 none
 menu width 60
+menu hshift 12
 menu margin 2
 menu vshift 10
 menu rows 5
@@ -58,7 +59,7 @@ menu tabmsg Press ENTER to boot or TAB to edit an entry
 ''')
 (OUT/'grub-pc'/'live-theme').mkdir(exist_ok=True)
 (OUT/'grub-pc'/'live-theme'/'theme.txt').write_text('''desktop-image: "../splash.png"
-title-text: "JatayuOS Live"
+title-text: ""
 title-color: "#ffffff"
 title-font: "Unifont Regular 16"
 message-font: "Unifont Regular 16"
