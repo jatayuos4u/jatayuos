@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Standalone windows for the owner's unchanged local HTML tools."""
 import sys
+import subprocess
 from pathlib import Path
 from PySide6.QtCore import QUrl, Qt
 from PySide6.QtGui import QDesktopServices, QIcon
@@ -14,6 +15,11 @@ APPS = {
     'utsav': 'Utsav',
 }
 ROOT = Path('/usr/share/jatayu').resolve()
+KAVACH_ACTIONS = {
+    '/firewall': ['/usr/bin/systemsettings', 'kcm_firewall'],
+    '/updates': ['/usr/bin/plasma-discover', '--mode', 'Update'],
+    '/backup': ['/usr/bin/jatayu', 'backup'],
+}
 
 class AppPage(QWebEnginePage):
     def __init__(self, owner, external_only=False):
@@ -22,6 +28,12 @@ class AppPage(QWebEnginePage):
         self.popup_pages = []
 
     def acceptNavigationRequest(self, url, nav_type, is_main_frame):
+        if (sys.argv[1] == 'kavach' and is_main_frame and
+                url.scheme() == 'https' and url.host() == 'action.jatayuos.invalid'):
+            command = KAVACH_ACTIONS.get(url.path())
+            if command and not url.hasQuery() and not url.hasFragment():
+                subprocess.Popen(command, close_fds=True, start_new_session=True)
+            return False
         if url.scheme() in ('http', 'https', 'mailto', 'tel'):
             QDesktopServices.openUrl(url)
             return False
