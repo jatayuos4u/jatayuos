@@ -213,7 +213,7 @@ def main():
     if mode=='autostart':
         if live():
             desktop=Path.home()/'Desktop';desktop.mkdir(exist_ok=True)
-            for name in ('org.jatayu.installer.desktop','org.jatayu.faq.desktop','org.jatayu.manual.desktop'):
+            for name in ('org.jatayu.installer.desktop',):
                 source=Path('/usr/share/applications')/name
                 if source.is_file():
                     target=desktop/name
