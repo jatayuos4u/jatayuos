@@ -36,12 +36,33 @@ replace("src/modules/users/UsersPage.cpp",
 ''')
 replace("src/modules/welcome/WelcomePage.cpp",
     '#include <QApplication>\n',
-    '#include <QAbstractItemView>\n#include <QApplication>\n')
+    '''#include <QAbstractItemView>
+#include <QProxyStyle>
+#include <QApplication>
+
+// QComboBox's menu-style popup ignores maxVisibleItems and grows to screen height.
+// Use a scrolling list popup for the locale selector.
+class JatayuLanguageStyle : public QProxyStyle
+{
+public:
+    JatayuLanguageStyle() : QProxyStyle( QStringLiteral( "Fusion" ) ) {}
+    int styleHint( StyleHint hint, const QStyleOption* option = nullptr,
+                   const QWidget* widget = nullptr, QStyleHintReturn* data = nullptr ) const override
+    {
+        if ( hint == QStyle::SH_ComboBox_Popup ) return 0;
+        return QProxyStyle::styleHint( hint, option, widget, data );
+    }
+};
+''')
 replace("src/modules/welcome/WelcomePage.cpp",
     '    ui->languageWidget->setModel( m_conf->languagesModel() );\n',
     '''    // Bound the locale popup on small VM and physical displays.
+    auto* localeStyle = new JatayuLanguageStyle;
+    localeStyle->setParent( ui->languageWidget );
+    ui->languageWidget->setStyle( localeStyle );
+    ui->languageWidget->setStyleSheet( QStringLiteral( "combobox-popup: 0;" ) );
     ui->languageWidget->setMaxVisibleItems( 8 );
-    ui->languageWidget->view()->setMaximumHeight( 280 );
     ui->languageWidget->setModel( m_conf->languagesModel() );
+    ui->languageWidget->view()->setMaximumHeight( 280 );
 ''')
 print("Calamares UI patch applied")
