@@ -33,7 +33,7 @@ class Window(QMainWindow):
         central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(28,26,28,24);self.layout.setSpacing(12)
         if mode in ('live','welcome'):
             header=QHBoxLayout()
-            mark=QLabel();mark.setPixmap(QPixmap(str(ASSETS/'logo.png')).scaled(72,72,Qt.KeepAspectRatio,Qt.SmoothTransformation));header.addWidget(mark)
+            mark=QLabel();mark.setFixedSize(72,72);mark.setPixmap(QPixmap(str(ASSETS/'logo.png')).scaled(72,72,Qt.KeepAspectRatio,Qt.SmoothTransformation));header.addWidget(mark)
             heading=QVBoxLayout()
             title=QLabel(titles[mode]);title.setObjectName('title');heading.addWidget(title)
             heading.addWidget(QLabel('Udaan Aapki. Shakti Bharat Ki.'))
@@ -221,7 +221,7 @@ def main():
             mode='live'
         elif (STATE/'welcome-complete').exists():return 0
         else:mode='welcome'
-    app=QApplication(sys.argv);app.setStyle('Fusion');app.setStyleSheet(STYLE)
+    app=QApplication(sys.argv);app.setDesktopFileName('org.jatayu.welcome' if mode in ('live','welcome') else 'org.jatayu.'+mode);app.setStyle('Fusion');app.setStyleSheet(STYLE)
     w=Window(mode);w.show()
     if direct_install:QTimer.singleShot(0,w.install_os)
     if a.smoke:
