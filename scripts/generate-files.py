@@ -188,3 +188,6 @@ and notices under /usr/share/doc. The image build preserves those notices.
 Do not publicly redistribute before completing docs/COMPLIANCE.md.
 ''')
 print('Generated original assets, desktop integration, policies and installer branding.')
+
+# Offer Hindi alongside the default US physical keyboard without switching input.
+put('overlay/etc/skel/.config/fcitx5/profile','[Groups/0]\nName=Default\nDefault Layout=us\nDefaultIM=keyboard-us\n[Groups/0/Items/0]\nName=keyboard-us\nLayout=\n[Groups/0/Items/1]\nName=m17n_hi_itrans\nLayout=\n[GroupOrder]\n0=Default\n')
