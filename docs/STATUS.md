@@ -14,12 +14,19 @@
 - Non-expanding Calamares welcome logo and readable selected sidebar text.
 - Fixed Aarambh header-logo dimensions and a Wayland desktop-file identity.
 
-Validation: Python syntax checks, desktop-file generation, and applying the full source patch to upstream Calamares 3.3.14 passed. These latest changes have not been compiled or boot-tested in a new ISO. Default panel changes apply to new user profiles; existing profiles are not forcibly reset.
+Validation: Python syntax checks, desktop-file generation, and applying the full source patch to upstream Calamares 3.3.14 passed. The patched Calamares and Fcitx packages compiled successfully in build #23; the image did not complete and runtime changes remain untested. Default panel changes apply to new user profiles; existing profiles are not forcibly reset.
 
-## Blocking diagnosis
-Fcitx still displays the Wayland Diagnose message in both live and installed sessions.
-The existing direct KWin launcher and X11-only fallback did not resolve the owner's test.
-Collect the effective kwinrc InputMethod and VirtualKeyboardEnabled settings plus fcitx5-diagnose from the affected installed session before another speculative change. Debian im-config also provides an im-launch autostart path; its involvement has not been established in this running session.
+## Build #23 and current blocker
+- Both patched packages compiled and installed into the image chroot.
+- Image configuration failed because Debian did not supply /etc/calamares/modules/locale.conf. Commit 0454b0e creates it when absent; syntax and isolated missing/existing configuration checks passed.
+- GitHub also rejected artifact upload because Actions artifact storage quota is full. No new ISO was delivered. Do not spend another full build until upload capacity is available.
+- Only runs #22 and #23 remain visible in the repository; #22 retains the last successful ISO (artifact 11076812929, 2,096,318,502 bytes). Preserve or download it before any cleanup.
+- GitHub's upload error states quota usage is recalculated every 6–12 hours.
+
+## Fcitx and India defaults prepared
+The supplied diagnostic report shows one working Fcitx process, the KWin launcher and active Wayland input contexts. The early warning is consistent with a startup timing issue, but its root cause is not conclusively established.
+The custom Fcitx package delays its diagnostic from 7 to 30 seconds while retaining the warning conditions. User boot/input validation is still required.
+The next image also sets the initial timezone to Asia/Kolkata and adds optional Hindi ITRANS input alongside the default US keyboard. These defaults are not yet runtime-tested.
 
 ## Remaining release work
 1. Confirm the installed theme, locale layout, standard folders, dock and Fcitx/input behavior on the next test image.
