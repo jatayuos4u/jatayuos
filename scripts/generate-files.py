@@ -73,7 +73,7 @@ Theme=Papirus-Dark
 ''')
 put('overlay/etc/skel/.config/plasmarc','[Theme]\nname=default\n')
 put('overlay/etc/skel/.config/baloofilerc','[Basic Settings]\nIndexing-Enabled=false\n')
-put('overlay/etc/skel/.config/kwinrc','[Plugins]\nblurEnabled=false\ncontrastEnabled=false\n[Wayland]\nInputMethod=/usr/share/applications/fcitx5-wayland-launcher.desktop\n')
+put('overlay/etc/skel/.config/kwinrc','[Plugins]\nblurEnabled=false\ncontrastEnabled=false\n[Wayland]\nInputMethod=/usr/share/applications/org.fcitx.Fcitx5.desktop\n')
 put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-handler/http=firefox-esr.desktop\nx-scheme-handler/https=firefox-esr.desktop\ntext/html=firefox-esr.desktop\n')
 base='overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/'
 put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS development layout','Version':'0.1','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
@@ -165,6 +165,11 @@ Icon=/usr/share/jatayu/logo.png
 for slug,title in [('kavach','Kavach'),('sarkar-setu','Sarkar Setu'),('utsav','Utsav')]:
     put(f'overlay/usr/share/applications/org.jatayu.{slug}.desktop',f'[Desktop Entry]\nType=Application\nName={title}\nExec=jatayu-webapp {slug}\nIcon=applications-internet\nTerminal=false\nCategories=X-Jatayu-Tools;Network;\n')
 put('overlay/etc/skel/.xinputrc','# Let KDE Wayland start Fcitx 5 from Virtual Keyboard.\nrun_im none\n')
+# KWin launches Fcitx directly with its input-method socket on Wayland.
+# Prevent the independent XDG autostart from racing it; keep an X11 fallback.
+put('assets/fcitx-x11.sh','#!/bin/sh\n[ "${XDG_SESSION_TYPE:-}" = x11 ] || exit 0\nexec /usr/bin/fcitx5 -d\n')
+put('overlay/etc/skel/.config/autostart/org.fcitx.Fcitx5.desktop','[Desktop Entry]\nType=Application\nName=Fcitx 5 (X11 fallback)\nExec=/bin/sh /usr/share/jatayu/fcitx-x11.sh\nOnlyShowIn=KDE;\n')
+
 put('assets/README.txt','''JatayuOS 0.1 development preview
 Created for Anup Yadav. Based on Debian and KDE; Firefox retains Mozilla identity.
 This integrated source kit is not a tested ISO or production release.
