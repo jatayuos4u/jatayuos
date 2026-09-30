@@ -6,3 +6,4 @@ Preflight syntax corrected 2026-09-29T16:46:31.645Z
 Final ISO upload retry 2026-09-29T17:12:25.744Z
 2026-09-30: build installer unpacker, scrolling locale popup and KWin Fcitx fixes.
 2026-09-30: retry with actual SquashFS read check.
+2026-09-30: approved finishing build with installed GRUB, desktop, locale and delayed Fcitx diagnosis.
