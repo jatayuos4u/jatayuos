@@ -104,3 +104,12 @@ if not grub_cfg.is_file():
 with grub_cfg.open('a') as config:
     config.write('\nset timeout_style=menu\nset timeout=8\n')
 print('Rendered 640x480 BIOS and 800x600 UEFI tricolor menus.')
+
+# Ship the same artwork and theme inside the installed root filesystem.
+# ISO bootloader templates alone are not copied into the installed GRUB theme.
+installed = ROOT/'build'/'config'/'includes.chroot'/'usr'/'share'/'grub'/'themes'/'jatayu'
+installed.mkdir(parents=True, exist_ok=True)
+render((800, 600), installed/'background.png')
+theme = (OUT/'grub-pc'/'live-theme'/'theme.txt').read_text()
+(installed/'theme.txt').write_text(theme.replace('../splash.png', 'background.png'))
+print('Prepared persistent installed-system GRUB theme.')
