@@ -66,3 +66,22 @@ replace("src/modules/welcome/WelcomePage.cpp",
     ui->languageWidget->view()->setMaximumHeight( 280 );
 ''')
 print("Calamares UI patch applied")
+
+# Render each locale as one elided label rather than two distant text columns.
+replace("src/modules/welcome/WelcomePage.cpp",
+    '''    QStyledItemDelegate::paint( painter, option, index );
+    option.widget->style()->drawItemText(
+        painter,
+        option.rect,
+        Qt::AlignRight | Qt::AlignVCenter,
+        option.palette,
+        false,
+        index.data( Calamares::Locale::TranslationsModel::EnglishLabelRole ).toString() );''',
+    '''    QStyleOptionViewItem item( option );
+    initStyleOption( &item, index );
+    const QString english = index.data( Calamares::Locale::TranslationsModel::EnglishLabelRole ).toString();
+    if ( !english.isEmpty() && english != item.text )
+        item.text += QStringLiteral( " (%1)" ).arg( english );
+    item.textElideMode = Qt::ElideRight;
+    const QStyle* style = item.widget ? item.widget->style() : QApplication::style();
+    style->drawControl( QStyle::CE_ItemViewItem, &item, painter, item.widget );''')
