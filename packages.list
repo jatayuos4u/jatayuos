@@ -48,6 +48,7 @@ fastfetch
 partitionmanager
 calamares
 calamares-settings-debian
+squashfs-tools
 cracklib-runtime
 wamerican
 libpwquality-tools
