@@ -72,6 +72,7 @@ chmod +x build/config/hooks/live/*
 mkdir -p build/config/bootloaders
 cp -a /usr/share/live/build/bootloaders/. build/config/bootloaders/
 python3 scripts/prepare-boot-art.py
+bash scripts/build-fcitx.sh
 cd build
 lb config
 lb build
