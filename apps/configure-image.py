@@ -19,6 +19,8 @@ edit_yaml('/etc/calamares/modules/welcome.conf',welcome)
 def locale_defaults(d):
     d.update({'region':'Asia','zone':'Kolkata','useSystemTimezone':False})
     d['geoip']={'style':'none'}
+if not Path('/etc/calamares/modules/locale.conf').exists():
+    write('/etc/calamares/modules/locale.conf','{}\n')
 edit_yaml('/etc/calamares/modules/locale.conf',locale_defaults)
 Path('/etc/localtime').unlink(missing_ok=True)
 Path('/etc/localtime').symlink_to('/usr/share/zoneinfo/Asia/Kolkata')
