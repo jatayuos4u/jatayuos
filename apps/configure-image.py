@@ -50,7 +50,7 @@ for p in ['/etc/os-release','/usr/lib/os-release']:
     if not existing.strip():
         subprocess.run(['dpkg-divert','--local','--add','--rename',p],check=True)
     write(p,identity)
-write('/etc/default/grub.d/jatayu.cfg','GRUB_DISTRIBUTOR="JatayuOS"\nGRUB_DISABLE_OS_PROBER=false\nGRUB_CMDLINE_LINUX_DEFAULT="quiet splash"\n')
+write('/etc/default/grub.d/jatayu.cfg','GRUB_DISTRIBUTOR="JatayuOS"\nGRUB_DISABLE_OS_PROBER=false\nGRUB_CMDLINE_LINUX_DEFAULT="quiet splash"\nGRUB_THEME="/usr/share/grub/themes/jatayu/theme.txt"\nGRUB_TERMINAL_OUTPUT="gfxterm"\nGRUB_GFXMODE="auto"\nGRUB_TIMEOUT_STYLE="menu"\nGRUB_TIMEOUT=8\n')
 # Live-only installer shortcut creation is delegated to our autostart.
 write('/etc/xdg/autostart/calamares-desktop-icon.desktop','[Desktop Entry]\nType=Application\nName=Installer shortcut\nHidden=true\n')
 for name in ['org.kde.plasma-welcome.desktop','plasma-welcome.desktop']:
