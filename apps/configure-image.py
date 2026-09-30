@@ -15,6 +15,14 @@ def welcome(d):
     d['requirements']['required']=[x for x in d['requirements']['required'] if x!='internet']
     d['showSupportUrl']=False;d['showKnownIssuesUrl']=False;d['showReleaseNotesUrl']=False
 edit_yaml('/etc/calamares/modules/welcome.conf',welcome)
+# India is the initial location; the installer remains free to change it.
+def locale_defaults(d):
+    d.update({'region':'Asia','zone':'Kolkata','useSystemTimezone':False})
+    d['geoip']={'style':'none'}
+edit_yaml('/etc/calamares/modules/locale.conf',locale_defaults)
+Path('/etc/localtime').unlink(missing_ok=True)
+Path('/etc/localtime').symlink_to('/usr/share/zoneinfo/Asia/Kolkata')
+write('/etc/timezone','Asia/Kolkata\n')
 # Password quality remains visible as guidance; users may proceed with a
 # matching non-empty password even when libpwquality considers it weak.
 def users(d):
