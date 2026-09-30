@@ -93,6 +93,7 @@ apparmor-utils
 ufw
 zram-tools
 xdg-utils
+xdg-user-dirs
 libglib2.0-bin
 firmware-linux
 firmware-iwlwifi
