@@ -7,7 +7,7 @@ launcher.currentConfigGroup = ["General"];
 launcher.writeConfig("icon", "/usr/share/jatayu/logo.png");
 var tasks = panel.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
-tasks.writeConfig("launchers", ["applications:org.kde.dolphin.desktop", "applications:systemsettings.desktop"]);
+tasks.writeConfig("launchers", ["applications:org.kde.dolphin.desktop", "applications:firefox-esr.desktop", "applications:systemsettings.desktop"]);
 panel.addWidget("org.kde.plasma.systemtray");
 panel.addWidget("org.kde.plasma.digitalclock");
 panel.addWidget("org.kde.plasma.showdesktop");

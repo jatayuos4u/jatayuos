@@ -28,6 +28,8 @@ if a.apt and branding.is_file():
         if slide != '/etc/calamares/branding/jatayu/logo.png': errors.append(f'Unexpected slideshow path: {slide}')
     if not settings.get('slideshow'): errors.append('Missing Calamares slideshow')
 # Wallpaper pieces and metadata are mandatory even for the fast source check.
+layout=ROOT/'overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/contents/layouts/org.kde.plasma.desktop-layout.js'
+if layout.is_file() and 'applications:firefox-esr.desktop' not in layout.read_text():errors.append('Firefox ESR dock launcher is missing')
 manifest=json.loads((ROOT/'vendor/wallpaper-package.json').read_text())
 digest=hashlib.sha256();total=0
 for part in manifest['parts']:

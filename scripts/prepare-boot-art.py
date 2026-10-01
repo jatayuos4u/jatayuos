@@ -43,7 +43,7 @@ def render(size, target):
     image.save(target, optimize=True)
 
 render((640, 480), OUT/'syslinux_common'/'splash.png')
-render((800, 600), OUT/'grub-pc'/'splash.png')
+render((1920, 1080), OUT/'grub-pc'/'splash.png')
 (OUT/'syslinux_common'/'stdmenu.cfg').write_text('''menu background splash.png
 menu color title * #ffffffff #00000000 none
 menu color border * #00000000 #00000000 none
@@ -103,13 +103,13 @@ if not grub_cfg.is_file():
     raise SystemExit('Missing upstream GRUB template')
 with grub_cfg.open('a') as config:
     config.write('\nset timeout_style=menu\nset timeout=8\n')
-print('Rendered 640x480 BIOS and 800x600 UEFI tricolor menus.')
+print('Rendered 640x480 BIOS and 1920x1080 UEFI tricolor menus.')
 
 # Ship the same artwork and theme inside the installed root filesystem.
 # ISO bootloader templates alone are not copied into the installed GRUB theme.
 installed = ROOT/'build'/'config'/'includes.chroot'/'usr'/'share'/'grub'/'themes'/'jatayu'
 installed.mkdir(parents=True, exist_ok=True)
-render((800, 600), installed/'background.png')
+render((1920, 1080), installed/'background.png')
 theme = (OUT/'grub-pc'/'live-theme'/'theme.txt').read_text()
 (installed/'theme.txt').write_text(theme.replace('../splash.png', 'background.png'))
 print('Prepared persistent installed-system GRUB theme.')
