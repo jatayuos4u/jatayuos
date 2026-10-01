@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 python3 /usr/share/jatayu/configure-image.py
 # Fail before creating an ISO if offline installer or input-method prerequisites are absent.
 test -x /usr/bin/unsquashfs
-mksquashfs /usr/share/jatayu/FAQ.txt /tmp/jatayu-unpacker-test.squashfs -noappend -processors 1 >/dev/null
+mksquashfs /usr/share/jatayu/FAQ.pdf /tmp/jatayu-unpacker-test.squashfs -noappend -processors 1 >/dev/null
 unsquashfs -s /tmp/jatayu-unpacker-test.squashfs >/dev/null
 rm /tmp/jatayu-unpacker-test.squashfs
 test -s /usr/share/applications/org.fcitx.Fcitx5.desktop
@@ -31,4 +31,3 @@ for f in Path('/usr/share/doc').glob('*/copyright'):
     except FileNotFoundError: pass
 PY
 apt-get clean
-

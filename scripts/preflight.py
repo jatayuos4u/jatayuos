@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fail before a long build for invalid syntax, missing files or unavailable packages."""
-import argparse, ast, hashlib, pathlib, subprocess, sys, json, tempfile, tarfile, importlib.util, xml.etree.ElementTree as ET
+import argparse, ast, hashlib, pathlib, subprocess, sys, json, tempfile, tarfile, importlib.util, shlex, xml.etree.ElementTree as ET
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(); p.add_argument('--apt',action='store_true'); a=p.parse_args()
 errors=[]
@@ -44,6 +44,17 @@ for name in ('USER-MANUAL.pdf','FAQ.pdf'):
     path=ROOT/'assets'/name
     if not path.is_file() or not path.read_bytes().startswith(b'%PDF-'):
         errors.append('Missing or invalid offline PDF: '+name)
+# package.sh installs assets/* into /usr/share/jatayu. Validate the smoke-test
+# input before source compilation or live-build can spend runner minutes.
+for hook in (ROOT/'hooks').glob('*.hook.chroot'):
+    for line in hook.read_text().splitlines():
+        words=shlex.split(line, comments=True)
+        if words and words[0]=='mksquashfs':
+            sources=words[1:words.index(next(w for w in words[1:] if w.endswith('.squashfs')))]
+            for source in sources:
+                if source.startswith('/usr/share/jatayu/'):
+                    asset=ROOT/'assets'/source.removeprefix('/usr/share/jatayu/')
+                    if not asset.is_file():errors.append(f'Missing hook input: {source} ({hook.name})')
 for name in ('ABOUT.html','kavach.svg','sarkar-setu.svg','utsav.svg'):
     if not (ROOT/'assets'/name).is_file():errors.append('Missing '+name)
 for path in (ROOT/'overlay').rglob('*.desktop'):
@@ -83,4 +94,3 @@ if a.apt and not errors:
 print(f'Checked Python/shell syntax, required assets and {len(packages)} package declarations.')
 if errors: print('\n'.join(errors),file=sys.stderr); sys.exit(1)
 print(('APT dependency and source precheck PASS' if a.apt else 'Static precheck PASS') + '; boot/install testing remains required.')
-
