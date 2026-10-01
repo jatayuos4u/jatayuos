@@ -1,0 +1,33 @@
+{
+  "package": "jatayu-wallpaper",
+  "version": "1.2.1",
+  "size": 84111888,
+  "sha256": "b278fd3f4a032baf9c8b547423c793c73c70ae1c8b37a82c7c4b9d220b5277a9",
+  "parts": [
+    {
+      "file": "jatayu-wallpaper_1.2.1_all.deb.part00",
+      "size": 20971520,
+      "sha256": "25faa45117cec6fc5f220e64002b4ad98aa2d8f6232b284ac18989f52678b6ce"
+    },
+    {
+      "file": "jatayu-wallpaper_1.2.1_all.deb.part01",
+      "size": 20971520,
+      "sha256": "fb6d3be8c17b3f9e4b2d57859bfa4f5d83b4f4377fddae92d17100104aadf253"
+    },
+    {
+      "file": "jatayu-wallpaper_1.2.1_all.deb.part02",
+      "size": 20971520,
+      "sha256": "f0d11bd6f980141c0439e72272fd9dadfcae811c31a53cee03f24c56b377e043"
+    },
+    {
+      "file": "jatayu-wallpaper_1.2.1_all.deb.part03",
+      "size": 20971520,
+      "sha256": "fd6a003396a143607d0dd6aa08a706455aecd21c68e6baf31c2f089ba532936f"
+    },
+    {
+      "file": "jatayu-wallpaper_1.2.1_all.deb.part04",
+      "size": 225808,
+      "sha256": "29a0221b56b252ae84feb2e4ed0aee667e475aec93045149a4d2c43aec621d61"
+    }
+  ]
+}

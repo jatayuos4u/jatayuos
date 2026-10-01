@@ -2,5 +2,7 @@
 ColorScheme=BreezeDark
 [kdeglobals][KDE]
 widgetStyle=Breeze
+[kdeglobals][Icons]
+Theme=Papirus-Dark
 [plasmarc][Theme]
 name=default

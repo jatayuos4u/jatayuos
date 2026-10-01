@@ -4,7 +4,7 @@ import argparse, json, os, shutil, subprocess, sys
 from pathlib import Path
 from PySide6.QtCore import Qt, QThread, Signal, QProcess, QUrl, QTimer
 from PySide6.QtGui import QDesktopServices, QIcon, QPixmap
-from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,QComboBox,QLineEdit,QFileDialog,QMessageBox,QPlainTextEdit,QCheckBox,QSpinBox,QFormLayout,QListWidget,QListWidgetItem)
+from PySide6.QtWidgets import (QScrollArea,QTextBrowser,QGridLayout,QApplication,QMainWindow,QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,QComboBox,QLineEdit,QFileDialog,QMessageBox,QPlainTextEdit,QCheckBox,QSpinBox,QFormLayout,QListWidget,QListWidgetItem)
 import engine
 
 ROOT=Path(__file__).resolve().parent
@@ -28,14 +28,14 @@ class Window(QMainWindow):
     def __init__(self,mode):
         super().__init__(); self.mode=mode;self.worker=None;self.proc=None; self.buttons=[]
         titles={'live':'Welcome to JatayuOS','welcome':'Aarambh','tools':'Jatayu Tools','update':'Jatayu Update','backup':'Jatayu Sanjeevani','check':'Jaanch','language':'Bhasa Setu','portals':'Sarkar Setu','android':'Android Setup','about':'About JatayuOS'}
-        self.setWindowTitle(titles.get(mode,'JatayuOS')); self.resize(760,540 if mode=='live' else 500)
+        self.setWindowTitle(titles.get(mode,'JatayuOS')); self.resize(820,650 if mode in ('live','welcome','about') else 540)
         self.setWindowIcon(QIcon(str(ASSETS/'logo.png')))
-        central=QWidget();self.setCentralWidget(central);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(28,26,28,24);self.layout.setSpacing(12)
+        central=QWidget();scroll=QScrollArea();scroll.setWidgetResizable(True);scroll.setWidget(central);scroll.setFrameShape(QScrollArea.NoFrame);self.setCentralWidget(scroll);self.layout=QVBoxLayout(central);self.layout.setContentsMargins(28,26,28,24);self.layout.setSpacing(12)
         if mode in ('live','welcome'):
             header=QHBoxLayout()
             mark=QLabel();mark.setFixedSize(72,72);mark.setPixmap(QPixmap(str(ASSETS/'logo.png')).scaled(72,72,Qt.KeepAspectRatio,Qt.SmoothTransformation));header.addWidget(mark)
             heading=QVBoxLayout()
-            title=QLabel(titles[mode]);title.setObjectName('title');heading.addWidget(title)
+            title=QLabel('Welcome to JatayuOS' if mode=='live' else 'Aarambh');title.setWordWrap(True);title.setObjectName('title');heading.addWidget(title)
             heading.addWidget(QLabel('Udaan Aapki. Shakti Bharat Ki.'))
             header.addLayout(heading);header.addStretch();self.layout.addLayout(header)
         else:
@@ -43,7 +43,7 @@ class Window(QMainWindow):
             self.text('Udaan Aapki. Shakti Bharat Ki.')
         getattr(self,'page_'+mode)()
         self.log=QPlainTextEdit();self.log.setReadOnly(True);self.log.setMaximumHeight(90);self.log.setVisible(False);self.layout.addWidget(self.log)
-        self.text('Development preview • Independent project by Anup Yadav • No government affiliation')
+        self.text('Release Candidate • Independent project by Anup Yadav • No government affiliation')
 
     def text(self,s):
         w=QLabel(s);w.setWordWrap(True);self.layout.addWidget(w);return w
@@ -71,12 +71,23 @@ class Window(QMainWindow):
             QMessageBox.information(self,'Operation in progress','Wait for the active operation to finish before closing.');e.ignore()
         else:e.accept()
 
+    def document(self,name):
+        QDesktopServices.openUrl(QUrl.fromLocalFile(str(ASSETS/name)))
+
+    def quick_links(self):
+        grid=QGridLayout()
+        actions=[('Files',['dolphin']),('Firefox',['firefox-esr']),('Software Center',['plasma-discover']),('System Settings',['systemsettings']),('Jatayu Tools',['jatayu-tools']),('Wallpaper Changer',['jatayu-wallpaper'])]
+        for i,(label,args) in enumerate(actions):
+            button=QPushButton(label);button.clicked.connect(lambda checked=False,a=args:self.launch(a));grid.addWidget(button,i//3,i%3);self.buttons.append(button)
+        self.layout.addLayout(grid)
+
     def page_live(self):
         self.text('Aarambh is your starting point for JatayuOS. Explore the live desktop, review essential help, or begin installation. Internet is optional.')
         self.text('Made in India • Independent project • Debian 13 + KDE Plasma')
-        self.button('User Manual',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'USER-MANUAL.txt'))))
-        self.button('Frequently Asked Questions',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'FAQ.txt'))))
+        self.button('User Manual',lambda:self.document('USER-MANUAL.pdf'))
+        self.button('Frequently Asked Questions',lambda:self.document('FAQ.pdf'))
         self.button('About JatayuOS',lambda:self.launch(['jatayu','about']))
+        self.quick_links()
         self.button('Try JatayuOS',self.close)
         self.button('Install JatayuOS',self.install_os)
         if not live():self.text('Live-session preview. Installation is available only from the ISO.')
@@ -91,18 +102,26 @@ class Window(QMainWindow):
             self.proc.start('pkexec',['/usr/libexec/jatayu-live-installer'])
 
     def page_welcome(self):
+        self.text('Made in India • Debian 13 + KDE Plasma')
         self.text('Aarambh helps you get productive quickly. Open essential help, software and settings from one clean starting point.')
         self.text('Shortcuts: Meta opens the app menu; Meta+E opens Files; Ctrl+Alt+T opens Terminal; Print captures the screen. Customize these in System Settings.')
-        self.button('User Manual',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'USER-MANUAL.txt'))))
-        self.button('Frequently Asked Questions',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'FAQ.txt'))))
-        self.button('Software Center',lambda:self.launch(['plasma-discover']))
-        self.button('System Settings',lambda:self.launch(['systemsettings']))
+        self.button('User Manual',lambda:self.document('USER-MANUAL.pdf'))
+        self.button('Frequently Asked Questions',lambda:self.document('FAQ.pdf'))
+        self.quick_links()
+        self.text('Useful shortcuts: Meta opens the menu; Meta+E opens Files; Alt+Space opens KRunner; Ctrl+Alt+T opens Terminal.')
         self.button('About JatayuOS',lambda:self.launch(['jatayu','about']))
-        self.button('Do not show on next sign-in',self.finish_welcome)
+        startup=QCheckBox('Show Aarambh when I sign in');startup.setChecked(not (STATE/'welcome-complete').exists());startup.toggled.connect(self.set_startup);self.layout.addWidget(startup)
+        self.button('Start using JatayuOS',self.close)
     def install_selected(self):
         selected=[k for k,c in self.choices if c.isChecked()]
         if not selected:return self.error('Select at least one software group.')
         if QMessageBox.question(self,'Install software','Install the selected groups and dependencies? This uses internet, disk space and administrator approval.')==QMessageBox.Yes:self.admin(['install',*selected])
+    def set_startup(self,enabled):
+        STATE.mkdir(parents=True,exist_ok=True)
+        marker=STATE/'welcome-complete'
+        if enabled:marker.unlink(missing_ok=True)
+        else:marker.touch()
+
     def finish_welcome(self):
         STATE.mkdir(parents=True,exist_ok=True);(STATE/'welcome-complete').touch();self.close()
 
@@ -148,7 +167,7 @@ class Window(QMainWindow):
         self.text('Create a dated personal-file backup, preferably on an external drive. Restore into a NEW folder. This is not full-system recovery or an encrypted backup.')
         self.button('Back up a folder',self.backup_folder)
         self.button('Restore a Jatayu backup',self.restore_folder)
-        self.text('Automatic scheduling and bootable recovery are not implemented in this development preview.')
+        self.text('Automatic scheduling and bootable recovery are not implemented in this release candidate.')
     def backup_folder(self):
         src=QFileDialog.getExistingDirectory(self,'Folder to back up',str(Path.home()))
         if not src:return
@@ -197,10 +216,22 @@ class Window(QMainWindow):
         return f'RAM: {mem} MiB\nWayland session: {os.environ.get("XDG_SESSION_TYPE")=="wayland"}\nWaydroid installed: {bool(shutil.which("waydroid"))}\nBinder device present: {any(Path(x).exists() for x in ["/dev/binder","/dev/binderfs/binder-control"])}\nThis is a basic check; GPU and app compatibility still require testing.'
 
     def page_about(self):
-        self.text('JatayuOS 0.1 Development Preview\nMade in India • Created by Anup Yadav\nBuilt on Debian 13 with KDE Plasma and Mozilla Firefox ESR.\nDesigned as a clean, privacy-respecting desktop with familiar Linux foundations and India-first identity.\nContact: jatayuos4u@gmail.com')
-        self.text('JatayuOS is independent and is not affiliated with or endorsed by the Government of India or the Debian Project. Debian is a registered trademark owned by Software in the Public Interest, Inc. Other marks belong to their owners.')
-        self.button('Open third-party licence files',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile('/usr/share/doc')))
-        self.button('Open development notes',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile(str(ROOT/'README.txt'))))
+        page=QTextBrowser();page.setOpenExternalLinks(True);page.setMinimumHeight(350)
+        page.setHtml((ASSETS/'ABOUT.html').read_text())
+        self.layout.addWidget(page)
+        grid=QGridLayout()
+        actions=[('Offline User Manual',lambda:self.document('USER-MANUAL.pdf')),('Offline FAQ',lambda:self.document('FAQ.pdf')),('Installed licences and credits',lambda:QDesktopServices.openUrl(QUrl.fromLocalFile('/usr/share/doc'))),('Installed package manifest',lambda:self.document('build-package-manifest.tsv'))]
+        for i,(label,action) in enumerate(actions):
+            button=QPushButton(label);button.clicked.connect(action);grid.addWidget(button,i//2,i%2);self.buttons.append(button)
+        self.layout.addLayout(grid)
+
+def initialise_user_folders():
+    if shutil.which('xdg-user-dirs-update'):
+        subprocess.run(['xdg-user-dirs-update'],check=False)
+    for name in ('Desktop','Documents','Downloads','Music','Pictures','Videos','Templates','Public'):
+        (Path.home()/name).mkdir(exist_ok=True)
+    # Leave user bookmarks and Dolphin's native Places model untouched.
+
 
 def main():
     direct_install=len(sys.argv)>1 and sys.argv[1]=='live-install'
@@ -221,6 +252,7 @@ def main():
             mode='live'
         elif (STATE/'welcome-complete').exists():return 0
         else:mode='welcome'
+    initialise_user_folders()
     app=QApplication(sys.argv);app.setDesktopFileName('org.jatayu.welcome' if mode in ('live','welcome') else 'org.jatayu.'+mode);app.setStyle('Fusion');app.setStyleSheet(STYLE)
     w=Window(mode);w.show()
     if direct_install:QTimer.singleShot(0,w.install_os)
@@ -228,3 +260,4 @@ def main():
         app.processEvents();w.grab().save(os.environ.get('JATAYU_SMOKE_IMAGE','/tmp/jatayu-smoke.png'));w.close();return 0
     return app.exec()
 if __name__=='__main__':sys.exit(main())
+

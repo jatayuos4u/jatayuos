@@ -1,3 +1,11 @@
+# JatayuOS Release Candidate build
+
+Current work continues on `codex/aarambh-waydroid-finalize`. See `docs/RC-VALIDATION.md` for the 2026-10-01 integration and local checks. ISO output is `out/JatayuOS-0.1-rc-amd64.iso`.
+
+Run `python3 scripts/preflight.py` for the static gate. In a dedicated privileged Debian 13 builder, run `sudo bash scripts/build.sh --precheck-only` for the APT/source gate, or `sudo bash scripts/build.sh` to continue into compilation and ISO assembly only after that gate passes.
+
+The previous project guide below describes the original kit and budget policy; current implementation details are in `docs/RC-VALIDATION.md`.
+
 # JatayuOS integrated development build kit
 
 JatayuOS — Made In India Operating System.
@@ -62,3 +70,4 @@ The approved eagle desktop remains the target. This kit uses original temporary 
 This is an integrated **development** build, not production-ready or security-certified software. Do not publicly redistribute the image until artwork, Firefox/package distribution requirements, corresponding-source access and the project's own licence choice are resolved. Source and notice obligations are not met solely by including this kit.
 
 Next action: run the kit once in a suitable local Debian VM if possible. If GitHub is your only builder, use the manual workflow once, save its log, and test the resulting ISO in a disposable VM before any real disk installation.
+

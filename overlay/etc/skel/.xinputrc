@@ -1,0 +1,2 @@
+# Let KDE Wayland start Fcitx 5 from Virtual Keyboard.
+run_im none

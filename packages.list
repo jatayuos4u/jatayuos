@@ -74,11 +74,14 @@ fcitx5-m17n
 kde-config-fcitx5
 im-config
 python3
+python3-pyqt6
+libreoffice
+libreoffice-kf6
+xdg-user-dirs
 python3-pyside6.qtwidgets
 python3-pyside6.qtwebenginewidgets
 python3-pyside6.qtsvg
 python3-pil
-python3-pyqt6
 python3-pypdf
 python3-yaml
 desktop-file-utils
@@ -93,7 +96,6 @@ apparmor-utils
 ufw
 zram-tools
 xdg-utils
-xdg-user-dirs
 libglib2.0-bin
 firmware-linux
 firmware-iwlwifi
@@ -104,3 +106,4 @@ firmware-amd-graphics
 firmware-intel-graphics
 intel-microcode
 amd64-microcode
+

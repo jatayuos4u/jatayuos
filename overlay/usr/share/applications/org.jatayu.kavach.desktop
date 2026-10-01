@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Kavach
+Exec=jatayu-webapp kavach
+Icon=/usr/share/jatayu/kavach.svg
+Terminal=false
+Categories=X-Jatayu-Tools;Network;

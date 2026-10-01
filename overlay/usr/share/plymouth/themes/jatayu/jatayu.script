@@ -2,10 +2,16 @@ Window.SetBackgroundTopColor(0.025,0.055,0.09);
 Window.SetBackgroundBottomColor(0.025,0.055,0.09);
 logo.image = Image("logo.png");
 logo.sprite = Sprite(logo.image);
-logo.sprite.SetPosition(Window.GetWidth()/2-logo.image.GetWidth()/2,Window.GetHeight()/2-logo.image.GetHeight()/2-35,10);
-title.image = Image.Text("JatayuOS", 1, 0.83, 0.43);
-title.sprite = Sprite(title.image);
-title.sprite.SetPosition(Window.GetWidth()/2-title.image.GetWidth()/2,Window.GetHeight()/2+100,10);
+logo.sprite.SetPosition(Window.GetWidth()/2-logo.image.GetWidth()/2, Window.GetHeight()/2-logo.image.GetHeight()/2-47, 10);
+saffron.image = Image("plymouth-dot-saffron.png");
+white.image = Image("plymouth-dot-white.png");
+green.image = Image("plymouth-dot-green.png");
+saffron.sprite = Sprite(saffron.image);
+white.sprite = Sprite(white.image);
+green.sprite = Sprite(green.image);
+saffron.sprite.SetPosition(Window.GetWidth()/2-54, Window.GetHeight()/2+105, 10);
+white.sprite.SetPosition(Window.GetWidth()/2-18, Window.GetHeight()/2+105, 10);
+green.sprite.SetPosition(Window.GetWidth()/2+18, Window.GetHeight()/2+105, 10);
 message.sprite = Sprite();
 tick = 0;
 fun animate() {
@@ -14,22 +20,22 @@ fun animate() {
   if (phase < 40) opacity = 0.72 + phase * 0.007;
   else opacity = 1 - (phase - 40) * 0.007;
   logo.sprite.SetOpacity(opacity);
+  saffron.sprite.SetOpacity(0.45 + (tick % 45) / 82);
+  white.sprite.SetOpacity(0.45 + ((tick + 15) % 45) / 82);
+  green.sprite.SetOpacity(0.45 + ((tick + 30) % 45) / 82);
 }
-Plymouth.SetRefreshFunction(animate);
 fun show_message(text) {
   message.image = Image.Text(text, 1, 1, 1);
   message.sprite.SetImage(message.image);
-  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2,Window.GetHeight()/2+145,10);
+  message.sprite.SetPosition(Window.GetWidth()/2-message.image.GetWidth()/2, Window.GetHeight()/2+165, 10);
 }
-fun normal() { show_message("Udaan Aapki. Shakti Bharat Ki."); }
 fun password(prompt, bullets) {
   text = prompt + " ";
   for (i=0; i<bullets; i++) text += "*";
   show_message(text);
 }
 fun question(prompt, entry) { show_message(prompt + " " + entry); }
-Plymouth.SetDisplayNormalFunction(normal);
+Plymouth.SetRefreshFunction(animate);
 Plymouth.SetDisplayPasswordFunction(password);
 Plymouth.SetDisplayQuestionFunction(question);
 Plymouth.SetMessageFunction(show_message);
-normal();

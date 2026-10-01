@@ -1,0 +1,31 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Jatayu Wallpaper Changer
+Source: Created for JatayuOS; full application source supplied in the release bundle.
+
+Files: app.py core.py plasma.py service.py build.py assets/*
+Copyright: 2026 JatayuOS Project contributors
+License: GPL-3.0-or-later
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU General Public License for more details.
+ .
+ On Debian systems the full licence is in /usr/share/common-licenses/GPL-3.
+
+Files: usr/share/wallpapers/Jatayu-Collection/*.png
+Copyright: No exclusive copyright asserted in purely AI-generated imagery
+License: generated-artwork
+ Generated for the JatayuOS collection using the built-in image generator.
+ No third-party reference photos were used. Included for use with JatayuOS.
+ Full HD exports are resized from generated masters. Application GPL
+ licensing does not assert human authorship of the generated scenes.
+
+Files: usr/share/metainfo/*.xml
+Copyright: 2026 JatayuOS Project contributors
+License: CC0-1.0
+ Metadata dedicated to the public domain under CC0 1.0.

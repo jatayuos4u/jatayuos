@@ -7,7 +7,7 @@ launcher.currentConfigGroup = ["General"];
 launcher.writeConfig("icon", "/usr/share/jatayu/logo.png");
 var tasks = panel.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
-tasks.writeConfig("launchers", "applications:org.kde.dolphin.desktop,applications:firefox-esr.desktop,applications:org.kde.discover.desktop,applications:systemsettings.desktop");
+tasks.writeConfig("launchers", ["applications:org.kde.dolphin.desktop", "applications:systemsettings.desktop"]);
 panel.addWidget("org.kde.plasma.systemtray");
 panel.addWidget("org.kde.plasma.digitalclock");
 panel.addWidget("org.kde.plasma.showdesktop");
@@ -16,4 +16,5 @@ for (var i=0; i<ds.length; i++) {
   ds[i].wallpaperPlugin="org.kde.image";
   ds[i].currentConfigGroup=["Wallpaper","org.kde.image","General"];
   ds[i].writeConfig("Image","file:///usr/share/jatayu/wallpaper.jpg");
+ds[i].writeConfig("FillMode","2");
 }

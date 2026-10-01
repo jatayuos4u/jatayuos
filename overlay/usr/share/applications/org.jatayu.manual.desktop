@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=JatayuOS User Manual
-Exec=xdg-open /usr/share/jatayu/USER-MANUAL.txt
+Exec=xdg-open /usr/share/jatayu/USER-MANUAL.pdf
 Icon=help-contents
 Terminal=false
 Categories=System;

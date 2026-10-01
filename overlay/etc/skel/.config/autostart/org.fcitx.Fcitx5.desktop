@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Fcitx 5 (X11 fallback)
+Exec=/bin/sh /usr/share/jatayu/fcitx-x11.sh
+OnlyShowIn=KDE;

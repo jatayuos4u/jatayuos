@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Jatayu Tools
-Comment=JatayuOS Jatayu Tools
-Exec=jatayu tools
-Icon=/usr/share/jatayu/logo.png
+Name=Jatayu Editing Tools
+Comment=JatayuOS Jatayu Editing Tools
+Exec=jatayu-tools
+Icon=jatayu-tools
 Terminal=false
 Categories=X-Jatayu-Tools;System;
 StartupNotify=true

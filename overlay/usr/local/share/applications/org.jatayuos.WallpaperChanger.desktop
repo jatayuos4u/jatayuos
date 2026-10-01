@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Jatayu Wallpaper Changer
+Exec=jatayu-wallpaper
+Icon=org.jatayuos.WallpaperChanger
+Terminal=false
+Categories=X-Jatayu-Tools;Utility;Graphics;Qt;
+StartupWMClass=org.jatayuos.WallpaperChanger

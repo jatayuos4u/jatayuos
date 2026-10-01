@@ -17,16 +17,17 @@ cp scripts/postinst "$stage/DEBIAN/postinst"
 chmod 755 "$stage/usr/bin/jatayu" "$stage/usr/bin/jatayu-webapp" "$stage/usr/libexec/jatayu-admin" "$stage/usr/libexec/jatayu-live-installer" "$stage/DEBIAN/postinst"
 cat > "$stage/DEBIAN/control" <<'EOF'
 Package: jatayu-integration
-Version: 0.1.0
+Version: 0.1.1~rc1
 Architecture: all
 Maintainer: Anup Yadav <jatayuos4u@gmail.com>
 Depends: python3, python3-pyside6.qtwidgets, python3-pyside6.qtwebenginewidgets, python3-pil, python3-yaml, rsync, poppler-utils, qpdf, ghostscript, librsvg2-bin, pkexec, plasma-workspace, xdg-utils
 Section: misc
 Priority: optional
-Description: JatayuOS development desktop integration and offline utility suite
+Description: JatayuOS release candidate desktop integration and offline utility suite
  Original Jatayu interfaces using established Debian utilities.
- Development preview; see bundled limitations and compliance notes.
+ Release Candidate; see bundled limitations and compliance notes.
 EOF
 mkdir -p out
-dpkg-deb --root-owner-group --build "$stage" out/jatayu-integration_0.1.0_all.deb
+dpkg-deb --root-owner-group --build "$stage" out/jatayu-integration_0.1.1~rc1_all.deb
+
 

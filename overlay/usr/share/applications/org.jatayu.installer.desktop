@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Install JatayuOS
-Exec=calamares-install-debian
-Icon=drive-harddisk
+Exec=pkexec /usr/libexec/jatayu-live-installer
+Icon=/usr/share/jatayu/logo.png
 Terminal=false
 Categories=System;

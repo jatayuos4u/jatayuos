@@ -51,7 +51,7 @@ for entry in Path('/usr/share/applications').glob('*.desktop'):
         override=Path('/usr/local/share/applications')/entry.name
         write(override,'[Desktop Entry]\nType=Application\nName=Install Debian\nHidden=true\n')
 # Identity: explicitly divert base-files entries rather than unmanaged overwrites.
-identity='NAME="JatayuOS"\nPRETTY_NAME="JatayuOS 0.1 Development (Debian 13)"\nID=jatayuos\nID_LIKE=debian\nVERSION_ID="0.1"\nVERSION="0.1 Development"\nVERSION_CODENAME=trixie\nDEBIAN_CODENAME=trixie\n'
+identity='NAME="JatayuOS"\nPRETTY_NAME="JatayuOS 0.1 Release Candidate (Debian 13)"\nID=jatayuos\nID_LIKE=debian\nVERSION_ID="0.1"\nVERSION="0.1 Release Candidate"\nVERSION_CODENAME=trixie\nDEBIAN_CODENAME=trixie\n'
 for p in ['/etc/os-release','/usr/lib/os-release']:
     # live-build/debootstrap already diverts /etc/os-release to its own
     # .debootstrap path. Preserve that registered diversion; dpkg rejects a
@@ -81,3 +81,4 @@ subprocess.run(['ufw','default','allow','outgoing'],check=True)
 p=Path('/etc/ufw/ufw.conf');p.write_text(p.read_text().replace('ENABLED=no','ENABLED=yes'))
 subprocess.run(['systemctl','enable','ufw','zramswap'],check=True)
 print('Jatayu image integration configured. VM installation tests remain required.')
+

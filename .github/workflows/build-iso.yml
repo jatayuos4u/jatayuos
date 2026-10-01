@@ -1,4 +1,4 @@
-name: Manual JatayuOS development ISO
+name: JatayuOS Release Candidate - gated build
 on:
   push:
     branches: [codex/aarambh-waydroid-finalize]
@@ -6,9 +6,13 @@ on:
   workflow_dispatch:
     inputs:
       confirm:
-        description: 'Type BUILD to spend runner minutes on one development ISO'
+        description: 'Type BUILD to spend runner minutes on one Release Candidate ISO'
         required: true
         type: string
+      precheck_only:
+        description: Run precheck only without compiling or assembling the ISO
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -44,17 +48,19 @@ jobs:
           mkdir -p out
           docker run --rm --privileged --name jatayu-builder \
             -v "$GITHUB_WORKSPACE:/work" -w /work debian:trixie \
-            bash scripts/build.sh
+            bash scripts/build.sh ${{ inputs.precheck_only && '--precheck-only' || '' }}
       - name: Upload ISO and reports
-        if: success()
+        if: success() && inputs.precheck_only != true
         uses: actions/upload-artifact@v4
         with:
-          name: JatayuOS-development-ISO
+          name: JatayuOS-Release-Candidate-ISO
           path: |
             out/*.iso
             out/SHA256SUMS
             out/*manifest*
             out/third-party-notices/
+            out/precheck*.txt
+            out/*smoke*.png
           compression-level: 0
           retention-days: 3
       - name: Upload build log even on failure
@@ -65,3 +71,4 @@ jobs:
           path: out/build.log
           if-no-files-found: ignore
           retention-days: 3
+

@@ -1,3 +1,5 @@
 [Plugins]
 blurEnabled=false
 contrastEnabled=false
+[Wayland]
+InputMethod=/usr/share/applications/org.fcitx.Fcitx5.desktop

@@ -55,9 +55,10 @@ def main():
         return 2
     app = QApplication(sys.argv)
     app.setApplicationName(APPS[sys.argv[1]])
+    app.setDesktopFileName('org.jatayu.' + sys.argv[1])
     window = QMainWindow()
     window.setWindowTitle(APPS[sys.argv[1]] + ' · JatayuOS')
-    window.setWindowIcon(QIcon(str(ROOT / 'logo.png')))
+    window.setWindowIcon(QIcon(str(ROOT / (sys.argv[1] + '.svg'))))
     view = QWebEngineView(window)
     page = AppPage(view)
     view.setPage(page)
@@ -71,3 +72,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+

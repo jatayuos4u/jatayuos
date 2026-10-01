@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Utsav
+Exec=jatayu-webapp utsav
+Icon=/usr/share/jatayu/utsav.svg
+Terminal=false
+Categories=X-Jatayu-Tools;Network;

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=JatayuOS FAQ
-Exec=xdg-open /usr/share/jatayu/FAQ.txt
+Exec=xdg-open /usr/share/jatayu/FAQ.pdf
 Icon=help-faq
 Terminal=false
 Categories=System;

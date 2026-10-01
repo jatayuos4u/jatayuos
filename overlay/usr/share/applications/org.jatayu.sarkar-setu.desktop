@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Sarkar Setu
+Exec=jatayu-webapp sarkar-setu
+Icon=/usr/share/jatayu/sarkar-setu.svg
+Terminal=false
+Categories=X-Jatayu-Tools;Network;

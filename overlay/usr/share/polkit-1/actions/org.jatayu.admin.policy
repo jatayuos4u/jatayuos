@@ -22,4 +22,11 @@
     <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate>
     <annotate key="org.freedesktop.policykit.exec.argv1">refresh</annotate>
   </action>
+  <action id="org.jatayu.live-installer">
+    <description>Start Calamares in the JatayuOS live session</description>
+    <message>Start the JatayuOS installer</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>yes</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-live-installer</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
 </policyconfig>

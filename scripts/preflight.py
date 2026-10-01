@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fail before a long build for invalid syntax, missing files or unavailable packages."""
-import argparse, ast, hashlib, pathlib, subprocess, sys
+import argparse, ast, hashlib, pathlib, subprocess, sys, json, tempfile, tarfile, importlib.util, xml.etree.ElementTree as ET
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(); p.add_argument('--apt',action='store_true'); a=p.parse_args()
 errors=[]
@@ -27,13 +27,58 @@ if a.apt and branding.is_file():
     for slide in settings.get('slideshow', []):
         if slide != '/etc/calamares/branding/jatayu/logo.png': errors.append(f'Unexpected slideshow path: {slide}')
     if not settings.get('slideshow'): errors.append('Missing Calamares slideshow')
+# Wallpaper pieces and metadata are mandatory even for the fast source check.
+manifest=json.loads((ROOT/'vendor/wallpaper-package.json').read_text())
+digest=hashlib.sha256();total=0
+for part in manifest['parts']:
+    path=ROOT/part['file']
+    if not path.is_file():errors.append('Missing wallpaper part: '+part['file']);continue
+    data=path.read_bytes();digest.update(data);total+=len(data)
+    if len(data)!=part['size'] or hashlib.sha256(data).hexdigest()!=part['sha256']:
+        errors.append('Invalid wallpaper part: '+part['file'])
+if total!=manifest['size'] or digest.hexdigest()!=manifest['sha256']:
+    errors.append('Wallpaper complete-package checksum mismatch')
+for name in ('USER-MANUAL.pdf','FAQ.pdf'):
+    path=ROOT/'assets'/name
+    if not path.is_file() or not path.read_bytes().startswith(b'%PDF-'):
+        errors.append('Missing or invalid offline PDF: '+name)
+for name in ('ABOUT.html','kavach.svg','sarkar-setu.svg','utsav.svg'):
+    if not (ROOT/'assets'/name).is_file():errors.append('Missing '+name)
+for path in (ROOT/'overlay').rglob('*.desktop'):
+    if not path.is_file():continue
+    text=path.read_text()
+    if '[Desktop Entry]' not in text or 'Type=' not in text or 'Name=' not in text:
+        errors.append('Invalid desktop entry: '+str(path))
+for path in (ROOT/'overlay/etc/xdg/menus').rglob('*.menu'):
+    try:ET.parse(path)
+    except ET.ParseError:errors.append('Invalid menu XML: '+str(path))
+for path in ('apps/app.py','apps/configure-image.py','auto-config.sh','scripts/generate-files.py'):
+    if 'Development Preview' in (ROOT/path).read_text() or 'development preview' in (ROOT/path).read_text():
+        errors.append('Outdated user-facing branding: '+path)
 packages=[s.strip() for s in (ROOT/'packages.list').read_text().splitlines() if s.strip() and not s.startswith('#')]
-for name in ('user-setup','sddm-theme-breeze','papirus-icon-theme'):
+for name in ('user-setup','sddm-theme-breeze','papirus-icon-theme','libreoffice','python3-pyqt6','waydroid','xdg-user-dirs'):
     if name not in packages: errors.append(f'Missing live-login package: {name}')
 if a.apt:
     for name in packages:
         r=subprocess.run(['apt-cache','policy',name],text=True,capture_output=True)
         if 'Candidate:' not in r.stdout or 'Candidate: (none)' in r.stdout: errors.append(f'Unavailable package: {name}')
+if a.apt and not errors:
+    spec=importlib.util.spec_from_file_location('prepare_wallpaper',ROOT/'scripts/prepare-wallpaper.py')
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    deb=module.prepare()
+    for field,expected in [('Package','jatayu-wallpaper'),('Version','1.2.1'),('Architecture','all')]:
+        value=subprocess.check_output(['dpkg-deb','-f',str(deb),field],text=True).strip()
+        if value!=expected:errors.append('Wallpaper metadata mismatch: '+field)
+    result=subprocess.run(['apt-get','--simulate','--no-install-recommends','install',*packages,str(deb),str(ROOT/'jatayu-tools_2.0.2_all.deb')],text=True,capture_output=True)
+    report=ROOT/'out/precheck-dependencies.txt';report.parent.mkdir(exist_ok=True);report.write_text(result.stdout+result.stderr)
+    if result.returncode:errors.append('APT dependency simulation failed; see out/precheck-dependencies.txt')
+    for package,version in [('calamares','3.3.14-1'),('fcitx5','5.1.12-2')]:
+        result=subprocess.run(['apt-cache','showsrc',package],text=True,capture_output=True)
+        if 'Version: '+version+'\n' not in result.stdout:errors.append('Missing pinned source version: '+package+'='+version)
+    for name in ('USER-MANUAL.pdf','FAQ.pdf'):
+        if subprocess.run(['pdfinfo',str(ROOT/'assets'/name)],capture_output=True).returncode:
+            errors.append('Unreadable PDF: '+name)
 print(f'Checked Python/shell syntax, required assets and {len(packages)} package declarations.')
 if errors: print('\n'.join(errors),file=sys.stderr); sys.exit(1)
-print('Static preflight PASS; this does not boot-test an ISO.')
+print(('APT dependency and source precheck PASS' if a.apt else 'Static precheck PASS') + '; boot/install testing remains required.')
+

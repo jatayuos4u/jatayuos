@@ -9,7 +9,9 @@ cap_hex=$(awk '/^CapEff:/{print $2}' /proc/self/status)
 (( (16#$cap_hex & (1<<21)) && (16#$cap_hex & (1<<18)) )) || { echo 'Builder needs mount and chroot capabilities; stop before downloads.' >&2; exit 2; }
 mkdir -p out
 exec > >(tee -a out/build.log) 2>&1
-echo "JatayuOS development build started: $(date -u +%FT%TZ)"
+echo "JatayuOS release candidate build started: $(date -u +%FT%TZ)"
+precheck_only=false
+case "${1:-}" in --precheck-only) precheck_only=true ;; "") ;; *) echo "Unknown build option" >&2; exit 2 ;; esac
 export DEBIAN_FRONTEND=noninteractive
 # Dedicated Debian builder: firmware candidates must be visible to preflight too.
 # The official Trixie container already has a debian.sources file with its own
@@ -45,9 +47,11 @@ test -f /etc/apt/sources.list.d/debian.sources
 sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/debian.sources
 grep -q 'Types: deb deb-src' /etc/apt/sources.list.d/debian.sources
 apt-get update
-apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil fonts-dejavu-core dpkg-dev zstd ca-certificates
+apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil poppler-utils fonts-dejavu-core dpkg-dev zstd ca-certificates
+python3 scripts/prepare-wallpaper.py
 python3 scripts/generate-files.py
-python3 scripts/preflight.py --apt
+python3 scripts/preflight.py --apt | tee out/precheck.txt
+if $precheck_only; then echo "Precheck passed. ISO build was not requested."; exit 0; fi
 printf '%s  %s\n' '1482544a10ec927187566396067d94009eff00b7c4866cf805d809b46f515235' jatayu-tools_2.0.2_all.deb | sha256sum -c -
 bash scripts/package.sh
 apt-get build-dep -y calamares
@@ -63,7 +67,7 @@ mkdir -p build/auto build/config/package-lists build/config/packages.chroot buil
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
-cp out/jatayu-integration_*.deb jatayu-tools_2.0.2_all.deb build/config/packages.chroot/
+cp out/jatayu-integration_*.deb jatayu-tools_2.0.2_all.deb out/jatayu-wallpaper_1.2.1_all.deb build/config/packages.chroot/
 cp out/calamares-src/calamares_3.3.14-1+jatayu1_amd64.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
@@ -79,6 +83,11 @@ lb build
 cd ..
 iso=build/live-image-amd64.hybrid.iso
 test -s "$iso"
+test -x build/chroot/usr/bin/jatayu-wallpaper
+test -s build/chroot/usr/share/jatayu/USER-MANUAL.pdf
+test -s build/chroot/usr/share/jatayu/FAQ.pdf
+chroot build/chroot /usr/bin/python3 -c "from PyQt6.QtWidgets import QApplication"
+test -x build/chroot/usr/bin/libreoffice
 test -x build/chroot/usr/bin/jatayu-tools
 chroot build/chroot /usr/bin/python3 -c 'from PySide6.QtWebEngineWidgets import QWebEngineView'
 for slug in kavach sarkar-setu utsav; do test -s "build/chroot/usr/share/jatayu/${slug}.html"; done
@@ -87,11 +96,12 @@ chroot build/chroot /usr/bin/env QT_QPA_PLATFORM=offscreen /usr/bin/jatayu-tools
 test -s build/chroot/tmp/jatayu-tools-smoke.png
 cp build/chroot/tmp/jatayu-tools-smoke.png out/jatayu-tools-smoke.png
 test -x build/chroot/usr/libexec/jatayu-live-installer
-cp "$iso" out/JatayuOS-0.1-dev-amd64.iso
+cp "$iso" out/JatayuOS-0.1-rc-amd64.iso
 find build -maxdepth 1 -name '*.packages' -exec cp '{}' out/ \;
 cp build/chroot/usr/share/jatayu/build-package-manifest.tsv out/package-manifest.tsv
 cp -a build/chroot/usr/share/jatayu/notices out/third-party-notices
-python3 scripts/iso-check.py out/JatayuOS-0.1-dev-amd64.iso
-(cd out && sha256sum JatayuOS-0.1-dev-amd64.iso > SHA256SUMS)
-echo 'Development ISO assembled. It is NOT boot-tested or cleared for public redistribution.'
+python3 scripts/iso-check.py out/JatayuOS-0.1-rc-amd64.iso
+(cd out && sha256sum JatayuOS-0.1-rc-amd64.iso > SHA256SUMS)
+echo 'Release Candidate ISO assembled. It is NOT boot-tested or cleared for public redistribution.'
 echo 'Run the VM/hardware checklist in docs/TESTING.md. See source obligations in docs/COMPLIANCE.md.'
+
