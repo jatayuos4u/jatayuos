@@ -9,3 +9,5 @@ Final ISO upload retry 2026-09-29T17:12:25.744Z
 2026-09-30: approved finishing build with installed GRUB, desktop, locale and delayed Fcitx diagnosis.
 
 2026-09-30: owner-approved build with all prepared finishing improvements and corrected missing locale configuration.
+
+2026-10-01: owner confirms storage restored; rebuild the validated finishing image for ISO delivery.
