@@ -30,4 +30,18 @@ for f in Path('/usr/share/doc').glob('*/copyright'):
     try: shutil.copyfile(f,Path('/usr/share/jatayu/notices')/(f.parent.name+'.copyright'))
     except FileNotFoundError: pass
 PY
+# Preserve the installed version's normal modules; replace only the logo.
+fastfetch --config none --gen-config /tmp/jatayu-fastfetch-default.json
+python3 - <<'FFPY'
+import json
+from pathlib import Path
+p=Path('/tmp/jatayu-fastfetch-default.json')
+data=json.loads(p.read_text())
+assert data.get('modules'), 'Fastfetch default modules missing'
+data['logo']={'type':'file','source':'/usr/share/jatayu/fastfetch-jatayu.txt','color':{'1':'yellow'}}
+Path('/etc/skel/.config/fastfetch/config.jsonc').write_text(json.dumps(data,indent=2)+'\n')
+p.unlink()
+FFPY
+fastfetch --config /etc/skel/.config/fastfetch/config.jsonc --pipe > /usr/share/jatayu/fastfetch-smoke.txt
+grep -q 'OS:' /usr/share/jatayu/fastfetch-smoke.txt
 apt-get clean

@@ -164,7 +164,7 @@ put('overlay/etc/skel/.config/plasma-workspace/env/00-jatayu-places.sh','#!/bin/
 put('overlay/usr/share/firefox-esr/browser/defaults/preferences/jatayu.js','pref("browser.tabs.inTitlebar", 0);\n')
 put('overlay/etc/skel/.config/gtk-3.0/settings.ini','[Settings]\ngtk-decoration-layout=:minimize,maximize,close\n')
 put('overlay/etc/skel/.config/gtk-4.0/settings.ini','[Settings]\ngtk-decoration-layout=:minimize,maximize,close\n')
-put('assets/fastfetch-jatayu.txt', '$1   J A T A Y U\n      O S\n\n  MADE IN INDIA\n')
+# The approved text-logo asset is maintained in assets/fastfetch-jatayu.txt.
 put('overlay/etc/skel/.config/fastfetch/config.jsonc',json.dumps({'logo':{'type':'file','source':'/usr/share/jatayu/fastfetch-jatayu.txt','color':{'1':'yellow'}}},indent=2)+'\n')
 put('overlay/etc/default/grub.d/jatayu.cfg','GRUB_DISTRIBUTOR="JatayuOS"\nGRUB_DISABLE_OS_PROBER=false\nGRUB_CMDLINE_LINUX_DEFAULT="quiet splash"\nGRUB_THEME="/usr/share/grub/themes/jatayu/theme.txt"\nGRUB_TERMINAL_OUTPUT="gfxterm"\nGRUB_GFXMODE="auto"\nGRUB_TIMEOUT_STYLE="menu"\nGRUB_TIMEOUT=8\n')
 put('overlay/etc/sddm.conf.d/20-jatayu.conf','[Theme]\nCurrent=breeze\n[General]\nInputMethod=\n')
