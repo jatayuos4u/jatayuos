@@ -1,5 +1,7 @@
 # Approved final Fastfetch design
 
+Official website: https://jatayuos.in
+
 Approved by the owner on 2 October 2026 after viewing the generated terminal
 sample: gold text-character eagle with spread wings and shield on the left,
 JATAYU OS and MADE IN INDIA below; standard Fastfetch system information on the

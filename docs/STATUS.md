@@ -1,5 +1,7 @@
 # JatayuOS finishing status — 30 September 2026
 
+Official website: https://jatayuos.in
+
 ## Confirmed
 - Development ISO build #22 completed and passed automated image-structure checks.
 - The owner reports successful installation and supplied installed-system desktop screenshots.

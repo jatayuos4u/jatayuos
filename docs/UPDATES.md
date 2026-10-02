@@ -1,5 +1,7 @@
 # Updates and last testing candidate
 
+Official website: https://jatayuos.in
+
 This candidate keeps Debian 13 (trixie) as its supported base. Do not change
 APT suites to a future Debian release without a tested migration.
 

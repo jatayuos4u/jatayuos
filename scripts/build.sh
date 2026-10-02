@@ -96,12 +96,12 @@ chroot build/chroot /usr/bin/env QT_QPA_PLATFORM=offscreen /usr/bin/jatayu-tools
 test -s build/chroot/tmp/jatayu-tools-smoke.png
 cp build/chroot/tmp/jatayu-tools-smoke.png out/jatayu-tools-smoke.png
 test -x build/chroot/usr/libexec/jatayu-live-installer
-cp "$iso" out/JatayuOS-0.1-rc-amd64.iso
+cp "$iso" out/JatayuOS-1.0-Udaan-amd64.iso
 find build -maxdepth 1 -name '*.packages' -exec cp '{}' out/ \;
 cp build/chroot/usr/share/jatayu/build-package-manifest.tsv out/package-manifest.tsv
 cp -a build/chroot/usr/share/jatayu/notices out/third-party-notices
-python3 scripts/iso-check.py out/JatayuOS-0.1-rc-amd64.iso
-(cd out && sha256sum JatayuOS-0.1-rc-amd64.iso > SHA256SUMS)
+python3 scripts/iso-check.py out/JatayuOS-1.0-Udaan-amd64.iso
+(cd out && sha256sum JatayuOS-1.0-Udaan-amd64.iso > SHA256SUMS)
 echo 'Release Candidate ISO assembled. It is NOT boot-tested or cleared for public redistribution.'
 echo 'Run the VM/hardware checklist in docs/TESTING.md. See source obligations in docs/COMPLIANCE.md.'
 

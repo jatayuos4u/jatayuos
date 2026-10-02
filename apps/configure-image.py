@@ -51,7 +51,7 @@ for entry in Path('/usr/share/applications').glob('*.desktop'):
         override=Path('/usr/local/share/applications')/entry.name
         write(override,'[Desktop Entry]\nType=Application\nName=Install Debian\nHidden=true\n')
 # Identity: explicitly divert base-files entries rather than unmanaged overwrites.
-identity='NAME="JatayuOS"\nPRETTY_NAME="JatayuOS 0.1 Release Candidate (Debian 13)"\nID=jatayuos\nID_LIKE=debian\nVERSION_ID="0.1"\nVERSION="0.1 Release Candidate"\nVERSION_CODENAME=trixie\nDEBIAN_CODENAME=trixie\n'
+identity='NAME="JatayuOS"\nPRETTY_NAME="JatayuOS 1.0 (Udaan)"\nID=jatayuos\nID_LIKE=debian\nVERSION_ID="1.0"\nVERSION="1.0 (Udaan)"\nVERSION_CODENAME=udaan\nDEBIAN_CODENAME=trixie\nHOME_URL="https://jatayuos.in"\n'
 for p in ['/etc/os-release','/usr/lib/os-release']:
     # live-build/debootstrap already diverts /etc/os-release to its own
     # .debootstrap path. Preserve that registered diversion; dpkg rejects a

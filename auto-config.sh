@@ -12,8 +12,8 @@ lb config noauto \
   --debian-installer none --apt-recommends false \
   --firmware-chroot true --firmware-binary true \
   --security true --updates true --backports true \
-  --memtest none --iso-volume JATAYUOS_RC \
-  --iso-application 'JatayuOS Release Candidate Live' \
+  --memtest none --iso-volume JATAYUOS_1_0 \
+  --iso-application 'JatayuOS 1.0 (Udaan) Live' \
   --iso-publisher 'JatayuOS - Anup Yadav - Independent project' \
   --bootappend-live 'boot=live components quiet splash username=jatayu user-fullname=JatayuOS hostname=jatayuos locales=en_IN.UTF-8 keyboard-layouts=us timezone=Asia/Kolkata' \
   --chroot-squashfs-compression-type zstd \

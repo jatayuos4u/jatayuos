@@ -7,11 +7,12 @@ windowPlacement: center
 strings:
   productName: JatayuOS
   shortProductName: JatayuOS
-  version: "0.1 Release Candidate"
-  shortVersion: "0.1"
-  versionedName: JatayuOS 0.1 Release Candidate
-  shortVersionedName: JatayuOS 0.1
+  version: "1.0 (Udaan)"
+  shortVersion: "1.0"
+  versionedName: JatayuOS 1.0 (Udaan)
+  shortVersionedName: JatayuOS 1.0
   bootloaderEntryName: JatayuOS
+  productUrl: https://jatayuos.in
 images:
   productLogo: logo.png
   productIcon: logo.png

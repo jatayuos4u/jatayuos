@@ -2,8 +2,8 @@
   "KPlugin": {
     "Id": "org.jatayu.desktop",
     "Name": "JatayuOS",
-    "Description": "JatayuOS development layout",
-    "Version": "0.1",
+    "Description": "JatayuOS Udaan desktop layout",
+    "Version": "1.0",
     "Authors": [
       {
         "Name": "Anup Yadav"

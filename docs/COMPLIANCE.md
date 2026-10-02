@@ -1,5 +1,7 @@
 # Private development release gate
 
+Official website: https://jatayuos.in
+
 This handoff is not legal clearance or permission to publicly redistribute every resulting binary.
 
 - Preserve all upstream notices and licence files. The build collects installed copyright files and source package/version references, but does not itself download all corresponding source.

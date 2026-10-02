@@ -1,5 +1,7 @@
 # JatayuOS 0.1 Release Candidate integration
 
+Official website: https://jatayuos.in
+
 Prepared on 2026-10-01 on the existing `codex/aarambh-waydroid-finalize` test branch.
 
 ## Changes

@@ -1,4 +1,4 @@
-name: JatayuOS Release Candidate - gated build
+name: JatayuOS 1.0 Udaan - gated build
 on:
   push:
     branches: [codex/aarambh-waydroid-finalize]
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm:
-        description: 'Type BUILD to spend runner minutes on one Release Candidate ISO'
+        description: 'Type BUILD to spend runner minutes on one JatayuOS 1.0 Udaan candidate ISO'
         required: true
         type: string
       precheck_only:
@@ -53,7 +53,7 @@ jobs:
         if: success() && inputs.precheck_only != true
         uses: actions/upload-artifact@v4
         with:
-          name: JatayuOS-Release-Candidate-ISO
+          name: JatayuOS-1.0-Udaan-ISO
           path: |
             out/*.iso
             out/SHA256SUMS

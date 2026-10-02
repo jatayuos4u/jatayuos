@@ -42,7 +42,7 @@ put('overlay/etc/skel/.config/baloofilerc','[Basic Settings]\nIndexing-Enabled=f
 put('overlay/etc/skel/.config/kwinrc','[Plugins]\nblurEnabled=false\ncontrastEnabled=false\n[Wayland]\nInputMethod=/usr/share/applications/org.fcitx.Fcitx5.desktop\n')
 put('overlay/etc/skel/.config/mimeapps.list','[Default Applications]\nx-scheme-handler/http=firefox-esr.desktop\nx-scheme-handler/https=firefox-esr.desktop\ntext/html=firefox-esr.desktop\n')
 base='overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/'
-put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS development layout','Version':'0.1','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
+put(base+'metadata.json',json.dumps({'KPlugin':{'Id':'org.jatayu.desktop','Name':'JatayuOS','Description':'JatayuOS Udaan desktop layout','Version':'1.0','Authors':[{'Name':'Anup Yadav'}]},'KPackageStructure':'Plasma/LookAndFeel'},indent=2))
 put(base+'contents/defaults','[kdeglobals][General]\nColorScheme=BreezeDark\n[kdeglobals][KDE]\nwidgetStyle=Breeze\n[kdeglobals][Icons]\nTheme=Papirus-Dark\n[plasmarc][Theme]\nname=default\n')
 put(base+'contents/layouts/org.kde.plasma.desktop-layout.js',"var panel = new Panel;\npanel.location = \"bottom\";\npanel.height = 54;\npanel.floating = false;\nvar launcher = panel.addWidget(\"org.kde.plasma.kickoff\");\nlauncher.currentConfigGroup = [\"General\"];\nlauncher.writeConfig(\"icon\", \"/usr/share/jatayu/logo.png\");\nvar tasks = panel.addWidget(\"org.kde.plasma.icontasks\");\ntasks.currentConfigGroup = [\"General\"];\ntasks.writeConfig(\"launchers\", [\"applications:org.kde.dolphin.desktop\", \"applications:firefox-esr.desktop\", \"applications:systemsettings.desktop\"]);\npanel.addWidget(\"org.kde.plasma.systemtray\");\npanel.addWidget(\"org.kde.plasma.digitalclock\");\npanel.addWidget(\"org.kde.plasma.showdesktop\");\nvar ds = desktops();\nfor (var i=0; i<ds.length; i++) {\n  ds[i].wallpaperPlugin=\"org.kde.image\";\n  ds[i].currentConfigGroup=[\"Wallpaper\",\"org.kde.image\",\"General\"];\n  ds[i].writeConfig(\"Image\",\"file:///usr/share/jatayu/wallpaper.jpg\");\nds[i].writeConfig(\"FillMode\",\"2\");\n}\n")
 brand='overlay/etc/calamares/branding/jatayu/'
@@ -55,11 +55,12 @@ windowPlacement: center
 strings:
   productName: JatayuOS
   shortProductName: JatayuOS
-  version: "0.1 Release Candidate"
-  shortVersion: "0.1"
-  versionedName: JatayuOS 0.1 Release Candidate
-  shortVersionedName: JatayuOS 0.1
+  version: "1.0 (Udaan)"
+  shortVersion: "1.0"
+  versionedName: JatayuOS 1.0 (Udaan)
+  shortVersionedName: JatayuOS 1.0
   bootloaderEntryName: JatayuOS
+  productUrl: https://jatayuos.in
 images:
   productLogo: logo.png
   productIcon: logo.png

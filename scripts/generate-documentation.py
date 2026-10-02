@@ -24,6 +24,7 @@ styles.add(ParagraphStyle(name='Small',fontName='Jatayu',fontSize=8.5,leading=12
 styles.add(ParagraphStyle(name='Cover',fontName='Jatayu-Bold',fontSize=32,leading=39,spaceAfter=18,textColor=colors.HexColor('#10212d')))
 
 REFERENCES=[
+ ('JatayuOS - official website','https://jatayuos.in'),
  ('Debian - source and distribution obligations','https://www.debian.org/CD/vendors/legal'),
  ('Debian - trademark policy','https://www.debian.org/trademark'),
  ('KDE - project and contributors','https://kde.org/community/'),
@@ -50,7 +51,9 @@ def footer(canvas,doc):
  canvas.setFillColor(colors.HexColor('#138808'));canvas.rect(2*w/3,hh-7,w/3,7,fill=1,stroke=0)
  canvas.setStrokeColor(colors.HexColor('#d9e1e6'));canvas.line(50,48,w-50,48)
  canvas.setFont('Jatayu',8);canvas.setFillColor(colors.HexColor('#526572'))
- canvas.drawString(50,33,'JatayuOS 0.1 Release Candidate  |  Made in India')
+ canvas.drawString(50,33,'JatayuOS 1.0 (Udaan)  |  Made in India')
+ canvas.drawString(50,20,'https://jatayuos.in')
+ canvas.linkURL('https://jatayuos.in',(50,18,160,29),relative=0)
  canvas.drawRightString(w-50,33,str(doc.page));canvas.restoreState()
 def build(name,title,pages):
  story=[]
@@ -64,7 +67,7 @@ manual=[
  ('User Manual',[
   Image(str(ASSETS/'logo.png'),width=86,height=86,hAlign='LEFT'),Spacer(1,16),p('Welcome to<br/>JatayuOS','Cover'),
   p('Udaan Aapki. Shakti Bharat Ki.','Sub'),p('<b>Made in India</b> - an independent desktop project created by Anup Yadav, built with Debian 13 and KDE Plasma.'),
-  p('Version 0.1 Release Candidate | AMD64 | Guide edition: 1 October 2026'),
+  p('Version 1.0 (Udaan) | AMD64 | Guide edition: 2 October 2026'),
   p('This candidate is prepared for testing before the final release. A successful ISO build does not replace live-session, installation and hardware tests.'),
   h('Start here'),p('Boot the ISO and open Aarambh. Choose <b>Try JatayuOS</b> to explore the desktop or <b>Install JatayuOS</b> to open the installer. The manual and FAQ are available offline from Aarambh, the application menu and the live desktop.'),
   rows([('Before installing','Back up your data and verify the ISO checksum. First test the candidate in a disposable virtual machine.'),('Guide map','2 Installation | 3 Desktop and applications | 4 Jatayu apps | 5 Language and Android | 6 Help | 7 Credits and legal notices')])]),
@@ -83,7 +86,7 @@ manual=[
  ('Jatayu applications',[
   p('Open the Jatayu Tools menu for the bundled utility suite. Each application has a specific purpose; online services retain their own terms and privacy policies.'),
   rows([('Aarambh','Welcome and first-start hub: offline help, Files, Firefox, Discover, Settings, Editing Tools, Wallpaper Changer and About. Clear the startup checkbox to stop automatic opening.'),('Jatayu Editing Tools','The supplied 2.0.2 desktop utility for image/PDF processing. Choose input files, operation and a new output path. Keep originals and check exported results.'),('Jatayu Wallpaper Changer','Version 1.2.1: 24 offline India, nature and space scenes, search, favourites and automatic rotation. Choose a screen or all screens; the app applies wallpapers through Plasma.'),('Kavach','Local dashboard with links to firewall settings, system updates and personal-file backup. Its dashboard does not certify system security.'),('Sarkar Setu','A local directory of public-service links. External sites open in Firefox; their operators handle accounts and transactions.'),('Utsav','The owner-supplied local HTML application, opened in its own desktop window. Its content is bundled unchanged.'),('Sanjeevani / Jaanch','The shared Jatayu app contains personal-folder backup and basic local diagnostics. These are not full-system snapshots or boot recovery.'),('Bhasa Setu / Android Setup','Shared-app entry points for language/input settings and Waydroid readiness. Standard KDE settings and official Android setup remain authoritative.')]),
-  h('Wallpaper collection'),p('The bundled PNG exports are 1920 x 1080, resized from generated masters. The scenes are AI-generated artwork, not verified photographs of the depicted locations. Application licensing and artwork notices are separate. Your wallpaper settings are stored in your own account.'),
+  h('Wallpaper collection'),p('The bundled PNG exports are 1920 x 1080, resized from generated masters. The scenes are generated illustrations, not verified photographs of the depicted locations. Application licensing and artwork notices are separate. Your wallpaper settings are stored in your own account.'),
   h('Personal-file backup'),p('Use Kavach\'s backup action or <b>jatayu backup</b>. Choose a source folder and a separate destination, preferably on an external disk. Restore to a new directory; verify important files before deleting any originals.')]),
  ('Language, input and Android',[
   h('Indian languages and keyboard input'),p('Open System Settings for display language, regional formats and keyboard layouts. These are separate choices. Open Fcitx5 Configuration to add an input method such as a Hindi method supplied by m17n. Sign out and back in when required.'),
@@ -108,7 +111,7 @@ manual=[
   *[p(f'<link href="{url}" color="#176879">{escape(label)}</link>','Small') for label,url in REFERENCES]])]
 
 faq=[('Frequently Asked Questions',[
- p('JatayuOS 0.1 Release Candidate | Offline help | 1 October 2026'),
+ p('JatayuOS 1.0 (Udaan) | Offline help | 2 October 2026'),
  h('What is JatayuOS?'),p('An independent Debian 13 desktop with KDE Plasma, Firefox ESR, LibreOffice and Jatayu applications. Created by Anup Yadav, with an India-first project identity and global open-source foundations.'),
  h('Is this the final version?'),p('No. This is a Release Candidate for testing. Development Preview wording has been retired from the desktop, but final-release validation is still required.'),
  h('Why the name JatayuOS?'),p('The name draws on Jatayu\'s courage, service and protection in the Ramayana. It expresses the project\'s intended identity without claiming institutional endorsement.'),
@@ -121,7 +124,7 @@ faq=[('Frequently Asked Questions',[
  h('Why does Dolphin show only Home?'),p('Check that Places is visible and standard folders exist. This candidate creates the standard directories before Aarambh opens and leaves the KDE Places model native. You may add folders to Places yourself; existing bookmarks are not reset.'),
  h('How do I stop Aarambh opening at sign-in?'),p('Clear Show Aarambh when I sign in, then close the app. Reopen Aarambh from the menu to enable it again.'),
  h('Where is Wallpaper Changer?'),p('Open Jatayu Tools or Aarambh. Version 1.2.1 includes 24 offline scenes, favourites and rotation. Choose a screen and apply a wallpaper. Rotation still needs testing through logout/login on the target Plasma desktop.'),
- h('Are the wallpapers real photographs?'),p('No. They are AI-generated artistic scenes. Full HD describes their exported 1920 x 1080 dimensions. Location labels do not guarantee geographic accuracy.'),
+ h('Are the wallpapers real photographs?'),p('No. They are generated artistic illustrations. Full HD describes their exported 1920 x 1080 dimensions. Location labels do not guarantee geographic accuracy.'),
  h('Do Sarkar Setu and Kavach store my passwords?'),p('Their wrappers open external links in Firefox and do not implement government account login. The linked sites and browser have their own handling of credentials and personal data. Review each service\'s address and privacy policy.'),
  h('Is Kavach a security certificate?'),p('No. It is a local dashboard with system actions. Effective firewall, update and backup behaviour must be checked on the installed system.'),
  h('How do I get Hindi typing?'),p('Use KDE regional/keyboard settings and Fcitx5 Configuration. Add the desired input method. On Wayland, review KDE\'s Virtual Keyboard selection. Sign out and back in if needed.')]),
@@ -131,13 +134,25 @@ faq=[('Frequently Asked Questions',[
  h('How do I update JatayuOS?'),p('Use Discover for Debian package updates. The candidate has no published signed Jatayu repository. Downloading a new ISO does not update an installed system.'),
  h('Is Secure Boot supported?'),p('This candidate does not claim certified Secure Boot compatibility. Record firmware settings when testing BIOS and UEFI boot.'),
  h('Does a precheck PASS mean everything works?'),p('It confirms required source files, package integrity, declared package availability and dependency checks for the build. It does not replace boot, installer, desktop or hardware testing.'),
- h('Where are credits and licences?'),p('Open About JatayuOS or page 7 of the User Manual. Installed notices are under /usr/share/doc; the build manifest identifies exact shipped packages and source versions.'),
+ h('Where are credits and licences?'),p('Open About JatayuOS or the credits chapter of the User Manual. Installed notices are under /usr/share/doc; the build manifest identifies exact shipped packages and source versions.'),
  h('Can I redistribute this ISO publicly?'),p('The candidate is for project testing. Public distribution needs a completed licence, trademark/artwork and corresponding-source review. Including credits alone does not satisfy every redistribution requirement.'),
  h('How do I report a problem?'),p('Contact jatayuos4u@gmail.com with the ISO checksum, device/VM details, exact steps and reviewed logs. Do not include passwords or private account data.')])]
-build('USER-MANUAL.pdf','JatayuOS User Manual',manual)
-build('FAQ.pdf','JatayuOS FAQ',faq)
+# Genuine owner-provided captures; keep their testing-build provenance visible.
+manual.insert(3,('Desktop screenshot',[
+ p('This real-PC capture was supplied during release testing on 2 October 2026. It shows the existing desktop design; the window footer belongs to the earlier candidate.'),
+ Image(str(ROOT/'docs/screenshots/desktop-dolphin-testing.png'),width=495,height=290,hAlign='LEFT'),
+ h('Dolphin Places'),p('The left sidebar provides Home, Desktop, Documents, Downloads, Music, Pictures, Videos, Trash and Network. Devices depend on the hardware and mounted disks.'),
+ p('JatayuOS 1.0 (Udaan) keeps this desktop style. Updated version labels and the approved Fastfetch design must be captured from the final tested ISO before publication.')]))
+manual[0][1][-1]=rows([('Before installing','Back up your data and verify the ISO checksum. First test the candidate in a disposable virtual machine.'),('Guide map','2 Installation | 3 Desktop | 4 Screenshot | 5 Jatayu apps | 6 Language and Android | 7 Help | 8 Credits')])
+faq.append(('Dolphin troubleshooting screenshot',[
+ p('Earlier VM testing capture, supplied 2 October 2026. Standard folders existed, but their Places shortcuts were missing. This is a troubleshooting example, not the intended 1.0 sidebar.'),
+ Image(str(ROOT/'docs/screenshots/dolphin-vm-before-fix.png'),width=495,height=309,hAlign='LEFT'),
+ h('What to check'),p('Confirm the Places panel is visible. The 1.0 image initializes missing standard shortcuts for new accounts. For an existing account, add the desired folders to Places; do not reset customized bookmarks.'),
+ h('Firefox window buttons'),p('Open about:config and set the Number preference browser.tabs.inTitlebar to 0, then close and reopen Firefox. The owner confirmed this restores native window controls in the test ISO. New profiles receive this default.')]))
+build('USER-MANUAL.pdf','JatayuOS 1.0 (Udaan) User Manual',manual)
+build('FAQ.pdf','JatayuOS 1.0 (Udaan) FAQ',faq)
 
-about='''<h1>JatayuOS 0.1</h1><h3>Release Candidate · Made in India</h3>
+about='''<h1>JatayuOS 1.0 (Udaan)</h1><h3>Made in India</h3>
 <p><b>Udaan Aapki. Shakti Bharat Ki.</b></p>
 <p>Created and maintained by <b>Anup Yadav</b>. An independent desktop project built on Debian 13, the Linux kernel and KDE Plasma, with Mozilla Firefox ESR and LibreOffice.</p>
 <h2>Why JatayuOS?</h2><p>The name draws on the courage, service and protection associated with Jatayu in the Ramayana. It connects the project's identity with Indian culture. Made in India describes the project's origin; the operating system also depends on global open-source contributions.</p>
@@ -149,5 +164,5 @@ about='''<h1>JatayuOS 0.1</h1><h3>Release Candidate · Made in India</h3>
 about+=''.join(f'<p><a href="{url}">{escape(label)}</a></p>' for label,url in REFERENCES)
 about+='''<p><a href="https://github.com/jatayuos4u/jatayuos">Project repository</a> · <a href="mailto:jatayuos4u@gmail.com">Contact the maintainer</a></p><p>Release Candidate: prepared for validation before the final release.</p>'''
 (ASSETS/'ABOUT.html').write_text('<!doctype html><html><head><meta charset="utf-8"><title>About JatayuOS</title></head><body>'+about+'</body></html>')
-(ASSETS/'README.txt').write_text('JatayuOS 0.1 Release Candidate\nMade in India - Created by Anup Yadav\nOffline help: USER-MANUAL.pdf and FAQ.pdf.\nOpen About JatayuOS for credits, policies and project information.\nThis candidate requires boot, installation and hardware testing before final release.\n')
+(ASSETS/'README.txt').write_text('JatayuOS 1.0 (Udaan)\nMade in India - Created by Anup Yadav\nOffline help: USER-MANUAL.pdf and FAQ.pdf.\nOfficial website: https://jatayuos.in\nOpen About JatayuOS for credits, policies and project information.\nThis candidate requires boot, installation and hardware testing before final release.\n')
 print('Generated offline manual, FAQ and About page.')

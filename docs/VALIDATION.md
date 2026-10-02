@@ -1,5 +1,7 @@
 # Local validation report
 
+Official website: https://jatayuos.in
+
 Validated 27 September 2026. This is source/package validation, NOT an ISO build report.
 
 - 93 package names matched downloaded Debian Trixie package indexes (main and non-free-firmware).

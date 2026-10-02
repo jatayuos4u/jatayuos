@@ -42,8 +42,9 @@ class Window(QMainWindow):
             title=QLabel(titles.get(mode,'JatayuOS'));title.setObjectName('title');self.layout.addWidget(title)
             self.text('Udaan Aapki. Shakti Bharat Ki.')
         getattr(self,'page_'+mode)()
+        self.button('Official website: jatayuos.in',lambda:QDesktopServices.openUrl(QUrl('https://jatayuos.in')))
         self.log=QPlainTextEdit();self.log.setReadOnly(True);self.log.setMaximumHeight(90);self.log.setVisible(False);self.layout.addWidget(self.log)
-        self.text('Release Candidate • Independent project by Anup Yadav • No government affiliation')
+        self.text('JatayuOS 1.0 (Udaan) • Made in India • Independent project by Anup Yadav')
 
     def text(self,s):
         w=QLabel(s);w.setWordWrap(True);self.layout.addWidget(w);return w
