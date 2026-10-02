@@ -158,7 +158,9 @@ put('overlay/etc/skel/.config/dolphinrc','[General]\nShowFullPath=false\n[MainWi
 # Initialize standard folders/Places before Plasma or Dolphin creates its model.
 put('overlay/etc/skel/.config/plasma-workspace/env/00-jatayu-places.sh','#!/bin/sh\nmkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}"\npython3 /usr/share/jatayu/user-defaults.py >>"${XDG_STATE_HOME:-$HOME/.local/state}/jatayu-places.log" 2>&1\n')
 # Native KDE title bar defaults; preferences remain editable by the user.
-put('overlay/usr/share/firefox-esr/browser/defaults/preferences/jatayu.js','pref("browser.tabs.drawInTitlebar", false);\n')
+# Firefox uses an integer preference: 0 shows the native window title bar.
+# drawInTitlebar is obsolete and has no effect in current Firefox ESR.
+put('overlay/usr/share/firefox-esr/browser/defaults/preferences/jatayu.js','pref("browser.tabs.inTitlebar", 0);\n')
 put('overlay/etc/skel/.config/gtk-3.0/settings.ini','[Settings]\ngtk-decoration-layout=:minimize,maximize,close\n')
 put('overlay/etc/skel/.config/gtk-4.0/settings.ini','[Settings]\ngtk-decoration-layout=:minimize,maximize,close\n')
 put('assets/fastfetch-jatayu.txt', '$1   J A T A Y U\n      O S\n\n  MADE IN INDIA\n')

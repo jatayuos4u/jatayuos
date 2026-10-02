@@ -1,1 +1,1 @@
-pref("browser.tabs.drawInTitlebar", false);
+pref("browser.tabs.inTitlebar", 0);
