@@ -18,6 +18,8 @@ sddm-theme-breeze
 kde-config-sddm
 breeze
 breeze-gtk-theme
+libpam-kwallet5
+kwalletmanager
 papirus-icon-theme
 plasma-nm
 plasma-pa
@@ -106,4 +108,3 @@ firmware-amd-graphics
 firmware-intel-graphics
 intel-microcode
 amd64-microcode
-

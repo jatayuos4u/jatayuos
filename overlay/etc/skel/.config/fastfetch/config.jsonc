@@ -1,0 +1,9 @@
+{
+  "logo": {
+    "type": "file",
+    "source": "/usr/share/jatayu/fastfetch-jatayu.txt",
+    "color": {
+      "1": "yellow"
+    }
+  }
+}

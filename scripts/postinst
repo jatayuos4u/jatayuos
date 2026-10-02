@@ -2,5 +2,9 @@
 set -e
 # No per-user configuration rewrites; new-user defaults live under /etc/skel.
 if command -v update-desktop-database >/dev/null 2>&1; then update-desktop-database -q || true; fi
+# Refresh generated boot files on upgrades, without resetting user preferences.
+if [ "$1" = configure ] && [ -n "${2:-}" ]; then
+    if command -v update-grub >/dev/null 2>&1; then update-grub; fi
+    if command -v update-initramfs >/dev/null 2>&1; then update-initramfs -u -k all; fi
+fi
 exit 0
-

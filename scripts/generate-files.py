@@ -154,3 +154,14 @@ put('overlay/etc/skel/.config/fcitx5/profile','[Groups/0]\nName=Default\nDefault
 # A local override adds the owner's unchanged package to the custom menu.
 put('overlay/usr/local/share/applications/org.jatayuos.WallpaperChanger.desktop','[Desktop Entry]\nType=Application\nName=Jatayu Wallpaper Changer\nExec=jatayu-wallpaper\nIcon=org.jatayuos.WallpaperChanger\nTerminal=false\nCategories=X-Jatayu-Tools;Utility;Graphics;Qt;\nStartupWMClass=org.jatayuos.WallpaperChanger\n')
 put('overlay/etc/skel/.config/dolphinrc','[General]\nShowFullPath=false\n[MainWindow]\nMenuBar=Enabled\n')
+
+# Initialize standard folders/Places before Plasma or Dolphin creates its model.
+put('overlay/etc/skel/.config/plasma-workspace/env/00-jatayu-places.sh','#!/bin/sh\nmkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}"\npython3 /usr/share/jatayu/user-defaults.py >>"${XDG_STATE_HOME:-$HOME/.local/state}/jatayu-places.log" 2>&1\n')
+# Native KDE title bar defaults; preferences remain editable by the user.
+put('overlay/usr/share/firefox-esr/browser/defaults/preferences/jatayu.js','pref("browser.tabs.drawInTitlebar", false);\n')
+put('overlay/etc/skel/.config/gtk-3.0/settings.ini','[Settings]\ngtk-decoration-layout=:minimize,maximize,close\n')
+put('overlay/etc/skel/.config/gtk-4.0/settings.ini','[Settings]\ngtk-decoration-layout=:minimize,maximize,close\n')
+put('assets/fastfetch-jatayu.txt', '$1   J A T A Y U\n      O S\n\n  MADE IN INDIA\n')
+put('overlay/etc/skel/.config/fastfetch/config.jsonc',json.dumps({'logo':{'type':'file','source':'/usr/share/jatayu/fastfetch-jatayu.txt','color':{'1':'yellow'}}},indent=2)+'\n')
+put('overlay/etc/default/grub.d/jatayu.cfg','GRUB_DISTRIBUTOR="JatayuOS"\nGRUB_DISABLE_OS_PROBER=false\nGRUB_CMDLINE_LINUX_DEFAULT="quiet splash"\nGRUB_THEME="/usr/share/grub/themes/jatayu/theme.txt"\nGRUB_TERMINAL_OUTPUT="gfxterm"\nGRUB_GFXMODE="auto"\nGRUB_TIMEOUT_STYLE="menu"\nGRUB_TIMEOUT=8\n')
+put('overlay/etc/sddm.conf.d/20-jatayu.conf','[Theme]\nCurrent=breeze\n[General]\nInputMethod=\n')

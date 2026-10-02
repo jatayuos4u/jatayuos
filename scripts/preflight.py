@@ -4,6 +4,8 @@ import argparse, ast, hashlib, pathlib, subprocess, sys, json, tempfile, tarfile
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(); p.add_argument('--apt',action='store_true'); a=p.parse_args()
 errors=[]
+for name in ('apps/user-defaults.py','overlay/etc/skel/.config/plasma-workspace/env/00-jatayu-places.sh','overlay/usr/share/firefox-esr/browser/defaults/preferences/jatayu.js','assets/fastfetch-jatayu.txt'):
+    if not (ROOT/name).is_file():errors.append('Missing desktop fix: '+name)
 for f in ROOT.rglob('*.py'):
     if 'build' not in f.relative_to(ROOT).parts:
         try: ast.parse(f.read_text(), filename=str(f))
