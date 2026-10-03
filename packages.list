@@ -25,6 +25,7 @@ plasma-nm
 plasma-pa
 powerdevil
 upower
+systemd-timesyncd
 xdg-desktop-portal
 xdg-desktop-portal-kde
 kscreen

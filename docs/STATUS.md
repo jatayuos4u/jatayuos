@@ -2,6 +2,24 @@
 
 Official website: https://jatayuos.in
 
+## Post-install update defect: source correction pending next ISO
+
+The owner confirmed installation and installed-system startup succeed. Windows
+boot success has not yet been confirmed. Installed updates initially failed:
+APT reported repository signatures not yet valid because the clock was behind.
+`timedatectl` reported NTP unavailable; manually correcting time and installing
+systemd-timesyncd restored updates, as confirmed by the owner.
+
+The build disables recommended packages, so it omitted the default time daemon.
+Current source explicitly includes systemd-timesyncd and enables its service
+for live and installed boot. Source preflight now requires it and assembled-image
+validation checks the unit and enablement link. The existing build #33 ISO does
+not contain this correction. No replacement build has been started.
+
+Before release, verify fresh live/installed boot synchronizes with working internet,
+APT/Discover refresh succeeds, and the clock remains correct after Windows/Linux
+reboots. Without internet/NTP access, automatic synchronization cannot occur.
+
 ## Delivered candidate
 
 [Build #33](https://github.com/jatayuos4u/jatayuos/actions/runs/37128272039)

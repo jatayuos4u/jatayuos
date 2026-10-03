@@ -13,7 +13,10 @@ test -s /etc/skel/.config/autostart/org.fcitx.Fcitx5.desktop
 sed -i 's/^# *en_IN UTF-8/en_IN UTF-8/;s/^# *hi_IN UTF-8/hi_IN UTF-8/' /etc/locale.gen
 locale-gen
 update-locale LANG=en_IN.UTF-8
-systemctl enable NetworkManager sddm unattended-upgrades
+# Recommendations are disabled: install and explicitly enable the NTP provider.
+# Activation occurs on live/installed boot, not inside this build chroot.
+test -f /usr/lib/systemd/system/systemd-timesyncd.service
+systemctl enable NetworkManager sddm unattended-upgrades systemd-timesyncd
 systemctl disable ssh.service 2>/dev/null || true
 plymouth-set-default-theme jatayu
 # Calamares' libpwquality check needs a built CrackLib database in the live image.

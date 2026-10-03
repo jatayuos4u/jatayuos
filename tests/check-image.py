@@ -26,4 +26,9 @@ ff=json.loads(read('/etc/skel/.config/fastfetch/config.jsonc'))
 assert ff['logo']['source']=='/usr/share/jatayu/fastfetch-jatayu.txt' and ff['modules']
 assert config('branding/jatayu/branding.desc')['slideshow']=='show.qml'
 assert read('/etc/calamares/branding/jatayu/show.qml').count('    Slide {')==6
+# The actual enabled unit must survive into the installed filesystem.
+assert (root/'usr/lib/systemd/system/systemd-timesyncd.service').is_file()
+link=root/'etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service'
+assert link.is_symlink(), 'Automatic time synchronization is not enabled'
+assert str(link.readlink()).endswith('/systemd-timesyncd.service')
 print('Assembled image installer, bootloader, desktop service, branding and help checks PASS.')
