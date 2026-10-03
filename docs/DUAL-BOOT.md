@@ -11,7 +11,7 @@ are accepted, subject to sufficient free space for the bootloader.
 
 The patched Calamares checks its complete partition job plan against the
 original disk model before executing partition operations. Formatting or
-deleting an existing NTFS or EFI partition, or replacing the partition table
+deleting an existing NTFS, BitLocker or EFI partition, or replacing the partition table
 of a disk containing one, stops installation. This intentionally also blocks
 erase-disk installation on such disks and formatting NTFS data volumes.
 Shrinking NTFS through the supported alongside workflow remains possible.
@@ -43,7 +43,7 @@ services or animations caused all repeated-click symptoms.
   file hashes remain unchanged, retain Windows Boot Manager, and boot both OSes.
 - Verify GRUB shows Windows when a valid Microsoft loader exists, including
   a loader on a different EFI partition.
-- Confirm unsafe NTFS/EFI format, delete, and erase plans stop before disk writes.
+- Confirm unsafe NTFS/BitLocker/EFI format, delete, and erase plans stop before disk writes.
 - Confirm a blank-disk installation and NTFS alongside shrink still work.
 - Test multiple disks and NVMe naming; repeat the protection tests.
 - Test Secure Boot separately; support is not established by these changes.
@@ -52,7 +52,7 @@ services or animations caused all repeated-click symptoms.
 - Check UPower and desktop portal D-Bus activation in live and installed sessions.
 
 Source patch application against upstream 3.3.14 and static preflight passed.
-Eleven isolated C++ plan fixtures passed, including protected partition format
+Thirteen isolated C++ plan fixtures passed, including protected partition format
 and deletion, changed preview filesystem type, alongside root creation, blank
 disk, and multiple disks. Reproduce after applying the patch with
 `python3 tests/partition-plan-check.py /path/to/calamares-3.3.14`.

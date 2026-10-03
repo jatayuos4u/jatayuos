@@ -13,7 +13,7 @@ cpp=r'''
 #include <iostream>
 using QString=std::string;
 struct QStringList:std::vector<QString>{bool isEmpty()const{return empty();} bool contains(const QString&s)const{return std::find(begin(),end(),s)!=end();} QStringList&operator<<(const QString&s){push_back(s);return *this;}};
-enum class FileSystem{Ntfs,Ext4,Fat32};
+enum class FileSystem{Ntfs,BitLocker,Ext4,Fat32};
 struct FS{FileSystem value;FileSystem type()const{return value;}};
 struct Partition{QString path;FS fs;bool efi;const FS&fileSystem()const{return fs;}QString partitionPath()const{return path;}};
 struct Table{std::vector<Partition*>parts;};
@@ -35,10 +35,12 @@ return {};
 }
 int main(){
 Partition win{"/dev/nvme0n1p3",{FileSystem::Ntfs},false},esp{"/dev/nvme0n1p1",{FileSystem::Fat32},true},root{"/dev/nvme0n1p4",{FileSystem::Ext4},false};
-Table table{{&win,&esp,&root}};Device disk{&table};Info info{{&disk},{}};
+Partition encrypted{"/dev/nvme0n1p6",{FileSystem::BitLocker},false};
+Table table{{&win,&esp,&root,&encrypted}};Device disk{&table};Info info{{&disk},{}};
 auto blocked=[&](Job*j){info.plan={Calamares::job_ptr(j)};return !check({&info}).empty();};
 assert(blocked(new FormatPartitionJob(&win)));assert(blocked(new DeletePartitionJob(&win)));
 assert(blocked(new FormatPartitionJob(&esp)));assert(blocked(new DeletePartitionJob(&esp)));
+assert(blocked(new FormatPartitionJob(&encrypted)));assert(blocked(new DeletePartitionJob(&encrypted)));
 assert(blocked(new CreatePartitionTableJob));assert(!blocked(new FormatPartitionJob(&root)));
 assert(!blocked(new ResizePartitionJob));
 // The preview type may already be ext4; original NTFS must still be protected.
@@ -49,7 +51,7 @@ Table blank{};Device empty{&blank};Info emptyInfo{{&empty},{Calamares::job_ptr(n
 assert(check({&emptyInfo}).empty());
 // A harmless second disk does not bypass protection on the Windows disk.
 info.plan={Calamares::job_ptr(new DeletePartitionJob(&win))};assert(!check({&emptyInfo,&info}).empty());
-std::cout<<"11 partition-plan fixtures PASS (isolated logic harness; full Calamares compilation pending)\n";
+std::cout<<"13 partition-plan fixtures PASS (isolated logic harness; full Calamares compilation pending)\n";
 }
 '''
 with tempfile.TemporaryDirectory(prefix='jatayu-guard-') as directory:

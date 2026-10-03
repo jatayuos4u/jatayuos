@@ -26,9 +26,14 @@ branding=ROOT/'overlay/etc/calamares/branding/jatayu/branding.desc'
 if a.apt and branding.is_file():
     import yaml
     settings=yaml.safe_load(branding.read_text())
-    for slide in settings.get('slideshow', []):
-        if slide != '/etc/calamares/branding/jatayu/logo.png': errors.append(f'Unexpected slideshow path: {slide}')
-    if not settings.get('slideshow'): errors.append('Missing Calamares slideshow')
+    if settings.get('slideshow') != 'show.qml' or settings.get('slideshowAPI') != 2:
+        errors.append('Invalid Jatayu installation slideshow configuration')
+# Keep the six-slide presentation and its reusable card in every package.
+show=ROOT/'overlay/etc/calamares/branding/jatayu/show.qml'
+card=show.with_name('JatayuCard.qml')
+if not show.is_file() or show.read_text().count('    Slide {') != 6:
+    errors.append('Missing six-slide installer presentation')
+if not card.is_file(): errors.append('Missing installer slide card')
 # Wallpaper pieces and metadata are mandatory even for the fast source check.
 layout=ROOT/'overlay/usr/share/plasma/look-and-feel/org.jatayu.desktop/contents/layouts/org.kde.plasma.desktop-layout.js'
 if layout.is_file() and 'applications:firefox-esr.desktop' not in layout.read_text():errors.append('Firefox ESR dock launcher is missing')

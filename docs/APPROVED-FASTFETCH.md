@@ -16,3 +16,9 @@ in Konsole at the normal desktop resolution before final ISO assembly.
 
 Reference: conversation image generated 2 October 2026, showing a gold eagle
 and shield alongside a full default Fastfetch information column.
+
+The testing candidate now includes a new fixed-width eagle/shield text asset
+in place of the earlier chevron design. It follows the approved composition;
+it is not a pixel-exact transcription of the illustrative generated image.
+The installed Fastfetch version still supplies its default information modules.
+Confirm spacing and appearance in Konsole during candidate testing.

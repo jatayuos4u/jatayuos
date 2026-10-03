@@ -10,6 +10,8 @@ def edit_yaml(p,fn):
 if not Path('/etc/calamares/settings.conf').exists():raise SystemExit('Missing Debian Calamares configuration')
 edit_yaml('/etc/calamares/settings.conf',lambda d:d.update({'branding':'jatayu','prompt-install':True}))
 # Require an explicit partitioning choice and support small existing Windows ESPs.
+if not Path('/etc/calamares/modules/partition.conf').exists():
+    write('/etc/calamares/modules/partition.conf','{}\n')
 edit_yaml('/etc/calamares/modules/partition.conf',lambda d:d.update({
     'initialPartitioningChoice':'none', 'allowManualPartitioning':True,
     'efi':{'mountPoint':'/boot/efi','recommendedSize':'300MiB','minimumSize':'32MiB'},

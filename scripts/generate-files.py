@@ -66,7 +66,8 @@ images:
   productLogo: logo.png
   productIcon: logo.png
   productWelcome: logo.png
-slideshow: [ "/etc/calamares/branding/jatayu/logo.png" ]
+slideshow: "show.qml"
+slideshowAPI: 2
 style:
   SidebarBackground: "#10212d"
   SidebarText: "#ffffff"

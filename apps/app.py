@@ -94,7 +94,7 @@ class Window(QMainWindow):
         if not live():self.text('Live-session preview. Installation is available only from the ISO.')
     def install_os(self):
         if not live():return self.error('Installation is only available from the live ISO.')
-        if QMessageBox.question(self,'Open installer','Open Calamares? Review its partition summary carefully before approving installation.')==QMessageBox.Yes:
+        if QMessageBox.question(self,'Open installer','Open Calamares? For Windows dual boot, use free space and reuse the EFI partition without formatting. Back up your files and BitLocker recovery key. Review the final partition summary before installation.')==QMessageBox.Yes:
             self.log.setVisible(True);self.log.clear()
             self.proc=QProcess(self);self.proc.setProcessChannelMode(QProcess.MergedChannels)
             self.proc.readyReadStandardOutput.connect(lambda:self.log.appendPlainText(bytes(self.proc.readAllStandardOutput()).decode(errors='replace')))
@@ -261,4 +261,3 @@ def main():
         app.processEvents();w.grab().save(os.environ.get('JATAYU_SMOKE_IMAGE','/tmp/jatayu-smoke.png'));w.close();return 0
     return app.exec()
 if __name__=='__main__':sys.exit(main())
-

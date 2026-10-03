@@ -101,7 +101,7 @@ public:
     {
         return Calamares::JobResult::error(
             QStringLiteral( "Windows / EFI partition protection" ),
-            QStringLiteral( "This plan would erase an existing NTFS or EFI system partition. "
+            QStringLiteral( "This plan would erase an existing NTFS, BitLocker or EFI system partition. "
                             "Go back, install in free space, and reuse the EFI partition at "
                             "/boot/efi without formatting it. Erasing a disk containing these "
                             "partitions is disabled in this release." ) );
@@ -122,6 +122,7 @@ replace("src/modules/partition/core/PartitionCoreModule.cpp",
         {
             const auto* partition = *it;
             if ( partition && ( partition->fileSystem().type() == FileSystem::Ntfs
+                                || partition->fileSystem().type() == FileSystem::BitLocker
                                 || PartUtils::isEfiBootable( partition ) ) )
                 protectedPaths << partition->partitionPath();
         }
