@@ -16,6 +16,7 @@ JatayuOS is an independent AMD64 desktop distribution based on Debian 13 (Trixie
 - [Frequently Asked Questions](assets/FAQ.pdf)
 - [Screenshots and capture provenance](docs/SCREENSHOTS.md)
 - [Testing checklist](docs/TESTING.md)
+- [Windows dual boot, protection policy and responsiveness validation](docs/DUAL-BOOT.md)
 - [Update policy](docs/UPDATES.md)
 - [Credits and distribution checklist](docs/COMPLIANCE.md)
 

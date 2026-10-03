@@ -32,6 +32,7 @@ put('overlay/etc/skel/.config/kdeglobals','''[General]
 ColorScheme=BreezeDark
 BrowserApplication=firefox-esr.desktop
 [KDE]
+AnimationDurationFactor=0.5
 LookAndFeelPackage=org.jatayu.desktop
 SingleClick=true
 [Icons]

@@ -60,15 +60,16 @@ mkdir -p out/calamares-src
 calamares_src=out/calamares-src/calamares-3.3.14
 test -f "$calamares_src/debian/changelog"
 python3 scripts/patch-calamares.py "$calamares_src"
-sed -i '1s/(3.3.14-1)/(3.3.14-1+jatayu1)/' "$calamares_src/debian/changelog"
+python3 tests/partition-plan-check.py "$calamares_src"
+sed -i '1s/(3.3.14-1)/(3.3.14-1+jatayu2)/' "$calamares_src/debian/changelog"
 (cd "$calamares_src" && DEB_BUILD_OPTIONS="nocheck parallel=2" dpkg-buildpackage -b -us -uc -j2)
-test -s out/calamares-src/calamares_3.3.14-1+jatayu1_amd64.deb
+test -s out/calamares-src/calamares_3.3.14-1+jatayu2_amd64.deb
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
 cp out/jatayu-integration_*.deb jatayu-tools_2.0.2_all.deb out/jatayu-wallpaper_1.2.1_all.deb build/config/packages.chroot/
-cp out/calamares-src/calamares_3.3.14-1+jatayu1_amd64.deb build/config/packages.chroot/
+cp out/calamares-src/calamares_3.3.14-1+jatayu2_amd64.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
 # The live-build bootloader templates carry Debian's default splash.
@@ -104,4 +105,3 @@ python3 scripts/iso-check.py out/JatayuOS-1.0-Udaan-amd64.iso
 (cd out && sha256sum JatayuOS-1.0-Udaan-amd64.iso > SHA256SUMS)
 echo 'Release Candidate ISO assembled. It is NOT boot-tested or cleared for public redistribution.'
 echo 'Run the VM/hardware checklist in docs/TESTING.md. See source obligations in docs/COMPLIANCE.md.'
-

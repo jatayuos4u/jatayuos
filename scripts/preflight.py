@@ -71,7 +71,7 @@ for path in ('apps/app.py','apps/configure-image.py','auto-config.sh','scripts/g
     if 'Development Preview' in (ROOT/path).read_text() or 'development preview' in (ROOT/path).read_text():
         errors.append('Outdated user-facing branding: '+path)
 packages=[s.strip() for s in (ROOT/'packages.list').read_text().splitlines() if s.strip() and not s.startswith('#')]
-for name in ('user-setup','sddm-theme-breeze','papirus-icon-theme','libreoffice','python3-pyqt6','waydroid','xdg-user-dirs'):
+for name in ('user-setup','sddm-theme-breeze','papirus-icon-theme','libreoffice','python3-pyqt6','waydroid','xdg-user-dirs','upower','xdg-desktop-portal','xdg-desktop-portal-kde','os-prober','ntfs-3g'):
     if name not in packages: errors.append(f'Missing live-login package: {name}')
 if a.apt:
     for name in packages:

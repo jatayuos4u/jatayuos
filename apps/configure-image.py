@@ -9,6 +9,11 @@ def edit_yaml(p,fn):
 
 if not Path('/etc/calamares/settings.conf').exists():raise SystemExit('Missing Debian Calamares configuration')
 edit_yaml('/etc/calamares/settings.conf',lambda d:d.update({'branding':'jatayu','prompt-install':True}))
+# Require an explicit partitioning choice and support small existing Windows ESPs.
+edit_yaml('/etc/calamares/modules/partition.conf',lambda d:d.update({
+    'initialPartitioningChoice':'none', 'allowManualPartitioning':True,
+    'efi':{'mountPoint':'/boot/efi','recommendedSize':'300MiB','minimumSize':'32MiB'},
+}))
 def welcome(d):
     d['requirements']['requiredStorage']=25
     d['requirements']['requiredRam']=1.5
@@ -81,4 +86,3 @@ subprocess.run(['ufw','default','allow','outgoing'],check=True)
 p=Path('/etc/ufw/ufw.conf');p.write_text(p.read_text().replace('ENABLED=no','ENABLED=yes'))
 subprocess.run(['systemctl','enable','ufw','zramswap'],check=True)
 print('Jatayu image integration configured. VM installation tests remain required.')
-
