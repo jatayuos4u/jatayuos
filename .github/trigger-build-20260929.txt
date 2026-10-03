@@ -1,5 +1,1 @@
-Retry the authorized Udaan testing build after fixing the partition iterator const-pointer compilation error.
-Previous attempt #31 stopped before ISO construction after approximately 8 runner minutes.
-Use a 50-minute retry cap to remain under 60 total runner minutes.
-Run all prechecks, preserve six local installation slides and dual-boot safeguards.
-Retain artifacts for one day to limit storage usage. Do not publish a final release.
+2026-10-03: one rc3 candidate; restore upstream partitioning, add live installation guide and assembled-image checks. User authorized one build within 60 runner minutes.

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=JatayuOS Installation Guide
+Exec=xdg-open /usr/share/jatayu/INSTALLATION-GUIDE.pdf
+Icon=help-contents
+Terminal=false
+Categories=System;

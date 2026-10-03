@@ -2,7 +2,16 @@
 
 Official website: https://jatayuos.in
 
-## Delivered candidate
+## Current source: installer correction
+
+The build #32 partition protection rule was too broad and is withdrawn.
+Current source restores upstream partition/bootloader logic, retaining Debian
+Live Calamares sequencing, manual partitioning and Windows detection.
+A five-page installation PDF is added to the live desktop and Aarambh.
+Integration version: 1.0~rc3. A fresh build is being prepared; Windows boot and
+first-click hardware testing remain required before public release.
+
+## Previous candidate (superseded by the installer correction)
 
 [Build #32](https://github.com/jatayuos4u/jatayuos/actions/runs/37115177183)
 completed successfully on 3 October 2026. Source revision:

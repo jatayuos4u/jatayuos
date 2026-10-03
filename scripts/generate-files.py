@@ -22,6 +22,7 @@ for mode in ('update','backup','check','language','portals','android'):
     (R/f'overlay/usr/share/applications/org.jatayu.{mode}.desktop').unlink(missing_ok=True)
 for name,title,command,icon in (
     ('installer','Install JatayuOS','pkexec /usr/libexec/jatayu-live-installer','/usr/share/jatayu/logo.png'),
+    ('installation-guide','JatayuOS Installation Guide','xdg-open /usr/share/jatayu/INSTALLATION-GUIDE.pdf','help-contents'),
     ('faq','JatayuOS FAQ','xdg-open /usr/share/jatayu/FAQ.pdf','help-faq'),
     ('manual','JatayuOS User Manual','xdg-open /usr/share/jatayu/USER-MANUAL.pdf','help-contents')):
     put(f'overlay/usr/share/applications/org.jatayu.{name}.desktop',

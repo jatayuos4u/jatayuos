@@ -85,6 +85,7 @@ class Window(QMainWindow):
     def page_live(self):
         self.text('Aarambh is your starting point for JatayuOS. Explore the live desktop, review essential help, or begin installation. Internet is optional.')
         self.text('Made in India • Independent project • Debian 13 + KDE Plasma')
+        self.button('Installation Guide',lambda:self.document('INSTALLATION-GUIDE.pdf'))
         self.button('User Manual',lambda:self.document('USER-MANUAL.pdf'))
         self.button('Frequently Asked Questions',lambda:self.document('FAQ.pdf'))
         self.button('About JatayuOS',lambda:self.launch(['jatayu','about']))
@@ -106,6 +107,7 @@ class Window(QMainWindow):
         self.text('Made in India • Debian 13 + KDE Plasma')
         self.text('Aarambh helps you get productive quickly. Open essential help, software and settings from one clean starting point.')
         self.text('Shortcuts: Meta opens the app menu; Meta+E opens Files; Ctrl+Alt+T opens Terminal; Print captures the screen. Customize these in System Settings.')
+        self.button('Installation Guide',lambda:self.document('INSTALLATION-GUIDE.pdf'))
         self.button('User Manual',lambda:self.document('USER-MANUAL.pdf'))
         self.button('Frequently Asked Questions',lambda:self.document('FAQ.pdf'))
         self.quick_links()
@@ -244,7 +246,11 @@ def main():
     mode=a.mode
     if mode=='autostart':
         if live():
-            desktop=Path.home()/'Desktop';desktop.mkdir(exist_ok=True)
+            desktop=Path(subprocess.check_output(['xdg-user-dir','DESKTOP'],text=True).strip())
+            desktop.mkdir(parents=True,exist_ok=True)
+            guide=ASSETS/'INSTALLATION-GUIDE.pdf'
+            if guide.is_file():
+                shutil.copyfile(guide,desktop/'JatayuOS Installation Guide.pdf')
             for name in ('org.jatayu.installer.desktop',):
                 source=Path('/usr/share/applications')/name
                 if source.is_file():

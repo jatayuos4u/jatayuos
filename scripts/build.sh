@@ -59,17 +59,20 @@ mkdir -p out/calamares-src
 (cd out/calamares-src && apt-get source calamares=3.3.14-1)
 calamares_src=out/calamares-src/calamares-3.3.14
 test -f "$calamares_src/debian/changelog"
+# Prove the UI patch leaves the complete partition and bootloader modules unchanged.
+find "$calamares_src/src/modules/partition" "$calamares_src/src/modules/bootloader" -type f -print0 | sort -z | xargs -0 sha256sum > out/installer-core-before.sha256
 python3 scripts/patch-calamares.py "$calamares_src"
+sha256sum --quiet -c out/installer-core-before.sha256
 python3 tests/partition-plan-check.py "$calamares_src"
-sed -i '1s/(3.3.14-1)/(3.3.14-1+jatayu2)/' "$calamares_src/debian/changelog"
+sed -i '1s/(3.3.14-1)/(3.3.14-1+jatayu3)/' "$calamares_src/debian/changelog"
 (cd "$calamares_src" && DEB_BUILD_OPTIONS="nocheck parallel=2" dpkg-buildpackage -b -us -uc -j2)
-test -s out/calamares-src/calamares_3.3.14-1+jatayu2_amd64.deb
+test -s out/calamares-src/calamares_3.3.14-1+jatayu3_amd64.deb
 mkdir -p build/auto build/config/package-lists build/config/packages.chroot build/config/hooks/live
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
-cp out/jatayu-integration_*.deb jatayu-tools_2.0.2_all.deb out/jatayu-wallpaper_1.2.1_all.deb build/config/packages.chroot/
-cp out/calamares-src/calamares_3.3.14-1+jatayu2_amd64.deb build/config/packages.chroot/
+cp out/jatayu-integration_1.0~rc3_all.deb jatayu-tools_2.0.2_all.deb out/jatayu-wallpaper_1.2.1_all.deb build/config/packages.chroot/
+cp out/calamares-src/calamares_3.3.14-1+jatayu3_amd64.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
 # The live-build bootloader templates carry Debian's default splash.
@@ -87,6 +90,8 @@ test -s "$iso"
 test -x build/chroot/usr/bin/jatayu-wallpaper
 test -s build/chroot/usr/share/jatayu/USER-MANUAL.pdf
 test -s build/chroot/usr/share/jatayu/FAQ.pdf
+test -s build/chroot/usr/share/jatayu/INSTALLATION-GUIDE.pdf
+python3 tests/check-image.py build/chroot
 chroot build/chroot /usr/bin/python3 -c "from PyQt6.QtWidgets import QApplication"
 test -x build/chroot/usr/bin/libreoffice
 test -x build/chroot/usr/bin/jatayu-tools

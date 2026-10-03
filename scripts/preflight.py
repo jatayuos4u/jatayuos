@@ -47,7 +47,7 @@ for part in manifest['parts']:
         errors.append('Invalid wallpaper part: '+part['file'])
 if total!=manifest['size'] or digest.hexdigest()!=manifest['sha256']:
     errors.append('Wallpaper complete-package checksum mismatch')
-for name in ('USER-MANUAL.pdf','FAQ.pdf'):
+for name in ('USER-MANUAL.pdf','FAQ.pdf','INSTALLATION-GUIDE.pdf'):
     path=ROOT/'assets'/name
     if not path.is_file() or not path.read_bytes().startswith(b'%PDF-'):
         errors.append('Missing or invalid offline PDF: '+name)
@@ -95,7 +95,7 @@ if a.apt and not errors:
     for package,version in [('calamares','3.3.14-1'),('fcitx5','5.1.12-2')]:
         result=subprocess.run(['apt-cache','showsrc',package],text=True,capture_output=True)
         if 'Version: '+version+'\n' not in result.stdout:errors.append('Missing pinned source version: '+package+'='+version)
-    for name in ('USER-MANUAL.pdf','FAQ.pdf'):
+    for name in ('USER-MANUAL.pdf','FAQ.pdf','INSTALLATION-GUIDE.pdf'):
         if subprocess.run(['pdfinfo',str(ROOT/'assets'/name)],capture_output=True).returncode:
             errors.append('Unreadable PDF: '+name)
 print(f'Checked Python/shell syntax, required assets and {len(packages)} package declarations.')
