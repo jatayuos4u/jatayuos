@@ -114,7 +114,7 @@ replace("src/modules/partition/core/PartitionCoreModule.cpp",
     '''    // Check the entire plan before unmounting or making disk changes.
     for ( const auto* info : m_deviceInfos )
     {
-        const auto* original = info->immutableDevice.data();
+        auto* original = info->immutableDevice.data();
         if ( !original->partitionTable() ) continue;
         QStringList protectedPaths;
         for ( auto it = PartitionIterator::begin( original->partitionTable() );

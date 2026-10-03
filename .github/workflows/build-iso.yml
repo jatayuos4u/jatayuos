@@ -22,7 +22,7 @@ jobs:
   build:
     if: github.event_name == 'push' || inputs.confirm == 'BUILD'
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - name: Fast source preflight
@@ -62,7 +62,7 @@ jobs:
             out/precheck*.txt
             out/*smoke*.png
           compression-level: 0
-          retention-days: 3
+          retention-days: 1
       - name: Upload build log even on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -70,5 +70,5 @@ jobs:
           name: JatayuOS-build-log
           path: out/build.log
           if-no-files-found: ignore
-          retention-days: 3
+          retention-days: 1
 

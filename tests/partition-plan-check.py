@@ -17,7 +17,7 @@ enum class FileSystem{Ntfs,BitLocker,Ext4,Fat32};
 struct FS{FileSystem value;FileSystem type()const{return value;}};
 struct Partition{QString path;FS fs;bool efi;const FS&fileSystem()const{return fs;}QString partitionPath()const{return path;}};
 struct Table{std::vector<Partition*>parts;};
-struct Device{Table*t;Table*partitionTable()const{return t;}};
+struct Device{Table*t;Table*partitionTable(){return t;}const Table*partitionTable()const{return t;}};
 namespace PartitionIterator{auto begin(Table*t){return t->parts.begin();}auto end(Table*t){return t->parts.end();}}
 namespace PartUtils{bool isEfiBootable(const Partition*p){return p->efi;}}
 struct Job{virtual~Job()=default;};

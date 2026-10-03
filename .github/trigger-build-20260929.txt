@@ -1,6 +1,5 @@
-Authorized single JatayuOS 1.0 (Udaan) testing candidate build.
-Include six installer slides, protected Windows/BitLocker/EFI partition plans,
-KDE desktop service completion, shorter animations, and corrected Fastfetch text asset.
-Run the dependency precheck before compilation and ISO assembly.
-Keep the 60-minute runner cap. Do not publish a final release.
-Source revision: b4e7e4a9d8ac3521035dd2d363512ef25b77521f
+Retry the authorized Udaan testing build after fixing the partition iterator const-pointer compilation error.
+Previous attempt #31 stopped before ISO construction after approximately 8 runner minutes.
+Use a 50-minute retry cap to remain under 60 total runner minutes.
+Run all prechecks, preserve six local installation slides and dual-boot safeguards.
+Retain artifacts for one day to limit storage usage. Do not publish a final release.
