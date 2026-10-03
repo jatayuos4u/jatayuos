@@ -1,13 +1,6 @@
-JatayuOS review build requested 2026-09-29. This marker is the sole push path for the scoped workflow trigger.
-
-Consolidated installer UI and Kavach build 2026-09-29T16:42:03.113Z
-Retry with matching Debian source keyring 2026-09-29T16:44:51.897Z
-Preflight syntax corrected 2026-09-29T16:46:31.645Z
-Final ISO upload retry 2026-09-29T17:12:25.744Z
-2026-09-30: build installer unpacker, scrolling locale popup and KWin Fcitx fixes.
-2026-09-30: retry with actual SquashFS read check.
-2026-09-30: approved finishing build with installed GRUB, desktop, locale and delayed Fcitx diagnosis.
-
-2026-09-30: owner-approved build with all prepared finishing improvements and corrected missing locale configuration.
-
-2026-10-01: owner confirms storage restored; rebuild the validated finishing image for ISO delivery.
+Authorized single JatayuOS 1.0 (Udaan) testing candidate build.
+Include six installer slides, protected Windows/BitLocker/EFI partition plans,
+KDE desktop service completion, shorter animations, and corrected Fastfetch text asset.
+Run the dependency precheck before compilation and ISO assembly.
+Keep the 60-minute runner cap. Do not publish a final release.
+Source revision: b4e7e4a9d8ac3521035dd2d363512ef25b77521f
