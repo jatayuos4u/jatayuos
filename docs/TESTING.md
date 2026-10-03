@@ -1,8 +1,18 @@
-# First ISO test checklist
+# JatayuOS candidate test checklist
 
 Official website: https://jatayuos.in
 
 Use disposable virtual disks and snapshots. Never test partitioning against your only copy of Windows or personal files.
+
+## Build #32 priorities
+
+- Check all six installation slides rotate and stop when installation finishes.
+- Follow [Windows dual-boot validation](DUAL-BOOT.md), including preserved EFI
+  file hashes, Windows Boot Manager, and booting both systems.
+- Test menu response on the first click with both mouse and touchpad; capture
+  fresh KWin/Plasma logs if repeated clicks are still needed.
+- Check Firefox minimize/maximize, Dolphin Places and the revised Fastfetch logo.
+- Verify UPower and KDE desktop portal D-Bus activation after login.
 
 ## Before build
 

@@ -58,5 +58,7 @@ disk, and multiple disks. Reproduce after applying the patch with
 `python3 tests/partition-plan-check.py /path/to/calamares-3.3.14`.
 This harness uses lightweight API substitutes and does not compile Calamares
 or write disks. The integration package also assembled locally as `1.0~rc2`.
-Full compilation, boot tests, and hardware responsiveness are pending. Do not label
+Build #32 compiled the patched Calamares package successfully and assembled
+the ISO with its automated structure checks passing. Windows boot preservation
+and hardware responsiveness tests are still pending. Do not label
 this a tested public release until these checks pass.

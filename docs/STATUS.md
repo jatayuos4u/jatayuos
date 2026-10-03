@@ -1,43 +1,56 @@
-# JatayuOS finishing status — 30 September 2026
+# JatayuOS 1.0 (Udaan) testing status — 3 October 2026
 
 Official website: https://jatayuos.in
 
-## Confirmed
-- Development ISO build #22 completed and passed automated image-structure checks.
-- The owner reports successful installation and supplied installed-system desktop screenshots.
-- The missing unsquashfs dependency was added; the build reads a small SquashFS image before image creation.
-- Simple matching passwords are permitted with quality guidance; the patched installer includes a show-password option.
+## Delivered candidate
 
-## Prepared after build #22, not yet delivered in a new ISO
-- Persistent installed-system GRUB theme using the approved tricolor artwork, logo and countdown.
-- Explicit xdg-user-dirs package to initialize Documents, Downloads, Pictures, Music and other standard folders.
-- Dolphin and System Settings launchers in the default Plasma panel.
-- Locale names rendered together with their English labels instead of distant columns.
-- Non-expanding Calamares welcome logo and readable selected sidebar text.
-- Fixed Aarambh header-logo dimensions and a Wayland desktop-file identity.
+[Build #32](https://github.com/jatayuos4u/jatayuos/actions/runs/37115177183)
+completed successfully on 3 October 2026. Source revision:
+`ac51f8d37989a049e72e010aa79721472006978f`.
+The ISO is 2,322,923,520 bytes (2.16 GiB). Its bundle includes SHA256SUMS,
+package reports and third-party notices. Actions artifacts have one-day
+retention; this is a testing delivery, not a permanent public release.
 
-Validation: Python syntax checks, desktop-file generation, and applying the full source patch to upstream Calamares 3.3.14 passed. The patched Calamares and Fcitx packages compiled successfully in build #23; the image did not complete and runtime changes remain untested. Default panel changes apply to new user profiles; existing profiles are not forcibly reset.
+Included changes:
+- Six local JatayuOS installation slides, advancing every 14 seconds.
+- Windows/BitLocker/EFI destructive-plan protection before partition writes,
+  explicit partition selection, and reuse of existing EFI partitions.
+- UPower and KDE desktop portal services, plus shorter animations for new accounts.
+- A revised gold eagle/shield text asset with Fastfetch's default modules.
+- Existing Firefox native title-bar fix, Dolphin folder initialization,
+  Jatayu applications, offline manuals, LibreOffice and Waydroid packages.
 
-## Build #23 and current blocker
-- Both patched packages compiled and installed into the image chroot.
-- Image configuration failed because Debian did not supply /etc/calamares/modules/locale.conf. Commit 0454b0e creates it when absent; syntax and isolated missing/existing configuration checks passed.
-- GitHub also rejected artifact upload because Actions artifact storage quota is full. No new ISO was delivered. Do not spend another full build until upload capacity is available.
-- Only runs #22 and #23 remain visible in the repository; #22 retains the last successful ISO (artifact 11076812929, 2,096,318,502 bytes). Preserve or download it before any cleanup.
-- GitHub's upload error states quota usage is recalculated every 6–12 hours.
+## Verified
 
-## Fcitx and India defaults prepared
-The supplied diagnostic report shows one working Fcitx process, the KWin launcher and active Wayland input contexts. The early warning is consistent with a startup timing issue, but its root cause is not conclusively established.
-The custom Fcitx package delays its diagnostic from 7 to 30 seconds while retaining the warning conditions. User boot/input validation is still required.
-The next image also sets the initial timezone to Asia/Kolkata and adds optional Hindi ITRANS input alongside the default US keyboard. These defaults are not yet runtime-tested.
+- Static syntax/assets checks and Debian dependency/source precheck passed.
+- Patched Calamares 3.3.14-1+jatayu2 compiled and was installed into the image.
+- Thirteen isolated partition-plan fixtures passed. These use API substitutes,
+  not real disks; the harness also rejects the earlier const-pointer regression.
+- Six slides rendered locally with Qt Quick and upstream Calamares components;
+  slide count, wraparound and exit lifecycle passed.
+- Ten existing app/defaults unit tests passed locally.
+- Integration-package assembly, build smoke checks and ISO structure checks passed.
+- ISO and log artifacts uploaded successfully.
 
-## Remaining release work
-1. Confirm the installed theme, locale layout, standard folders, dock and Fcitx/input behavior on the next test image.
-2. Validate both BIOS and UEFI installation/reboot paths and at least one real PC. Successful installation in the reported VM does not establish all hardware paths.
-3. Measure startup time, idle CPU/RAM and Jatayu Tools launch time on known hardware; performance is not yet benchmarked.
-4. Build the signed Jatayu APT repository and versioned packages for Tools/branding/configuration updates to installed systems. Debian package updates alone do not deliver project updates.
-5. Exercise Jatayu Tools document/image operations, Kavach system links and all three web apps.
-6. Initialize and test Waydroid on supported hardware; bundled packages do not imply Android is ready without its separate image.
-7. Verify effective firewall, unattended security updates, backup/restore and installer cleanup on an installed system.
-8. Complete corresponding-source delivery and project artwork/licence records before a public release.
+Build #31 stopped at a const-pointer compilation error before ISO construction.
+It was corrected in #32. The two attempts used about 43 minutes of runner time,
+within the 60-minute budget; #32 had a 50-minute cap.
 
-Full-system backup/recovery, automated snapshots and complete Hindi UI localization remain unfinished. Secure Boot and Windows dual-boot have not been validated.
+## Required before final release
+
+1. Follow [dual-boot validation](DUAL-BOOT.md) on disposable disks, then a backed-up
+   Windows PC. Verify Microsoft EFI files and Windows Boot Manager are preserved,
+   and boot Windows and JatayuOS. The affected PC's missing Microsoft EFI files
+   require separate recovery first.
+2. Test menus and app launch on the first click with both a mouse and touchpad.
+   Missing-service and animation changes do not prove the input issue is solved.
+3. Confirm all six slides in the real installer, Firefox window buttons,
+   Dolphin Places, and Fastfetch appearance in Konsole.
+4. Test live/installed networking, audio, sleep, graphics and Indian typing.
+5. Validate BIOS, Secure Boot, encryption and Waydroid separately; support is
+   not established by successful ISO assembly.
+6. Finish signed Jatayu update repository setup, corresponding-source delivery,
+   artwork/licence records and the [distribution checklist](COMPLIANCE.md).
+
+No final public release has been published. See [testing](TESTING.md),
+[update policy](UPDATES.md), and [approved Fastfetch target](APPROVED-FASTFETCH.md).
