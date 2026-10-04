@@ -1,24 +1,23 @@
-# Approved final Fastfetch design
+# Locked Fastfetch design: Option 1
 
-Official website: https://jatayuos.in
+Website: https://jatayuos.in
 
-Approved by the owner on 2 October 2026 after viewing the generated terminal
-sample: gold text-character eagle with spread wings and shield on the left,
-JATAYU OS and MADE IN INDIA below; standard Fastfetch system information on the
-right, normal module order, spacing, labels and terminal colour blocks.
+Owner selected and locked Option 1 on 4 October 2026 (UTC): the simple gold
+JATAYU wordmark, OS beneath it, and MADE IN INDIA below. This replaces the
+previous eagle/shield target and review-only eagle draft.
 
-The image is the visual target, not proof of an implemented terminal asset.
-Do not substitute the four-line wordmark or a logo-only display. Preserve the
-default modules from the installed Fastfetch version and replace only its logo.
-Use real machine values, never the sample's illustrative values. Match the
-approved composition with fixed-width terminal characters; validate rendering
-in Konsole at the normal desktop resolution before final ISO assembly.
+The active text asset is assets/fastfetch-jatayu.txt: plain printable ASCII,
+35 columns maximum, with Fastfetch's $1 colour marker. No image protocol or
+external font dependency is needed.
 
-Reference: conversation image generated 2 October 2026, showing a gold eagle
-and shield alongside a full default Fastfetch information column.
+The logo appears on the left. The installed Fastfetch version generates its
+normal modules; only its logo configuration is replaced by the image hook.
+Keep the full default information, module order, labels, spacing and terminal
+colour blocks. OS identifies JatayuOS 1.0 (Udaan); all other values come from the
+running machine. Never replace modules with the five-line concept sample or
+copy illustrative hardware values from generated previews.
 
-The testing candidate now includes a new fixed-width eagle/shield text asset
-in place of the earlier chevron design. It follows the approved composition;
-it is not a pixel-exact transcription of the illustrative generated image.
-The installed Fastfetch version still supplies its default information modules.
-Confirm spacing and appearance in Konsole during candidate testing.
+This source is locked for the next ISO build. It is not included in build #33.
+Before release, verify the complete layout in Konsole at 1366x768 and a narrower
+window, confirming no logo fragments appear inside the information column.
+No new ISO build was requested by this design-lock instruction.
