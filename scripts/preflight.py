@@ -113,6 +113,15 @@ if not locale_defaults.is_file() or any(value not in locale_defaults.read_text()
     errors.append('Missing explicit UTF-8 KDE session defaults')
 if 'update-locale LANG=en_IN.UTF-8 LC_CTYPE=en_IN.UTF-8' not in (ROOT/'hooks/0900-jatayu.hook.chroot').read_text():
     errors.append('Missing explicit UTF-8 system locale defaults')
+# Lock the automatic time provider and approved Fastfetch configuration.
+image_hook=(ROOT/'hooks/0900-jatayu.hook.chroot').read_text()
+if not any(line.startswith('systemctl enable ') and 'systemd-timesyncd' in shlex.split(line)[2:] for line in image_hook.splitlines()):
+    errors.append('Automatic time synchronization must be enabled in the image hook')
+if not any(line.startswith('test -f ') and line.endswith('/systemd-timesyncd.service') for line in image_hook.splitlines()):
+    errors.append('Image hook must verify the time synchronization service exists')
+for value in ("assert data.get('modules')", "'source':'/usr/share/jatayu/fastfetch-jatayu.txt'"):
+    if value not in image_hook:
+        errors.append('Missing locked Fastfetch default modules or logo: '+value)
 print(f'Checked Python/shell syntax, required assets and {len(packages)} package declarations.')
 if errors: print('\n'.join(errors),file=sys.stderr); sys.exit(1)
 print(('APT dependency and source precheck PASS' if a.apt else 'Static precheck PASS') + '; boot/install testing remains required.')

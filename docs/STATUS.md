@@ -1,6 +1,20 @@
-# JatayuOS 1.0 (Udaan) testing status - 3 October 2026
+# JatayuOS 1.0 (Udaan) testing status - 4 October 2026
 
 Official website: https://jatayuos.in
+
+## Final-candidate source preparation
+
+The build workflow now targets `main` and refuses manual dispatches from other
+branches. Checkout is pinned to the triggering commit SHA, which is verified and
+saved as `SOURCE-COMMIT.txt` with the build reports. The existing trigger-file
+path filter remains: this preparation commit does not request an ISO build.
+The 50-minute timeout and one-day artifact retention remain unchanged.
+
+Current source also includes Dolphin thumbnail backends, default previews and
+cache initialization; the approved simple Fastfetch logo with system modules;
+and explicit `en_IN.UTF-8` system/KDE locale defaults. These changes, including
+time synchronization, require verification in the next ISO. Build #33 is not a
+public final release. Keep integration version `1.0~rc3` until acceptance passes.
 
 ## Post-install update defect: source correction pending next ISO
 

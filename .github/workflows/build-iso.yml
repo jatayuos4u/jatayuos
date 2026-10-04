@@ -1,12 +1,12 @@
-name: JatayuOS 1.0 Udaan - gated build
+name: JatayuOS 1.0 Udaan - final candidate (gated)
 on:
   push:
-    branches: [codex/aarambh-waydroid-finalize]
+    branches: [main]
     paths: [.github/trigger-build-20260929.txt]
   workflow_dispatch:
     inputs:
       confirm:
-        description: 'Type BUILD to spend runner minutes on one JatayuOS 1.0 Udaan candidate ISO'
+        description: 'Type BUILD to spend runner minutes on one JatayuOS 1.0 Udaan final-candidate ISO'
         required: true
         type: string
       precheck_only:
@@ -20,11 +20,19 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: github.event_name == 'push' || inputs.confirm == 'BUILD'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.confirm == 'BUILD')
     runs-on: ubuntu-24.04
     timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Verify and record exact source
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir -p out
+          printf '%s\n' "$GITHUB_SHA" > out/SOURCE-COMMIT.txt
+          printf 'Source commit: %s\n' "$GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
       - name: Fast source preflight
         run: python3 scripts/preflight.py
       - name: Reclaim disk space and check capacity
@@ -57,6 +65,7 @@ jobs:
           path: |
             out/*.iso
             out/SHA256SUMS
+            out/SOURCE-COMMIT.txt
             out/*manifest*
             out/third-party-notices/
             out/precheck*.txt
@@ -68,7 +77,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: JatayuOS-build-log
-          path: out/build.log
+          path: |
+            out/build.log
+            out/SOURCE-COMMIT.txt
+            out/precheck*.txt
           if-no-files-found: ignore
           retention-days: 1
 
