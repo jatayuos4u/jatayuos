@@ -7,7 +7,8 @@ rm -rf -- "$stage"
 mkdir -p "$stage/DEBIAN" "$stage/usr/share/jatayu" "$stage/usr/bin" "$stage/usr/libexec"
 cp -a overlay/. "$stage/"
 cp apps/*.py "$stage/usr/share/jatayu/"
-cp assets/* "$stage/usr/share/jatayu/"
+# Install runtime assets only; design/reference subdirectories are not shipped.
+find assets -maxdepth 1 -type f -exec cp -- {} "$stage/usr/share/jatayu/" \;
 cp assets/logo.png "$stage/etc/calamares/branding/jatayu/logo.png"
 cp assets/plymouth-logo.png "$stage/usr/share/plymouth/themes/jatayu/logo.png"
 cp assets/plymouth-dot-*.png "$stage/usr/share/plymouth/themes/jatayu/"
