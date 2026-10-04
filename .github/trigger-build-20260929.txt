@@ -1,1 +1,1 @@
-2026-10-03: one rc3 candidate; restore upstream partitioning, add live installation guide and assembled-image checks. User authorized one build within 60 runner minutes.
+2026-10-04: start one JatayuOS 1.0 Udaan Final Candidate from main after preparation 5cc07445. Include NTP, Dolphin thumbnail, UTF-8 locale and locked Fastfetch fixes. User explicitly authorized this build; prechecks required, 50-minute cap, one-day artifacts, no automatic retry.
