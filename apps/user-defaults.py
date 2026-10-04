@@ -8,6 +8,10 @@ import xml.etree.ElementTree as ET
 
 def initialize():
     home=Path.home()
+    # Run on every login, before the one-time Places marker: caches may be cleared.
+    cache=Path(os.environ.get('XDG_CACHE_HOME') or home/'.cache')
+    for name in ('', 'normal', 'large', 'x-large', 'xx-large'):
+        (cache/'thumbnails'/name).mkdir(mode=0o700, parents=True, exist_ok=True)
     config=Path(os.environ.get('XDG_CONFIG_HOME',home/'.config'))
     data=Path(os.environ.get('XDG_DATA_HOME',home/'.local/share'))
     state=Path(os.environ.get('XDG_STATE_HOME',home/'.local/state'))/'jatayu'
