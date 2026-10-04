@@ -107,6 +107,12 @@ if a.apt and not errors:
     for name in ('USER-MANUAL.pdf','FAQ.pdf','INSTALLATION-GUIDE.pdf'):
         if subprocess.run(['pdfinfo',str(ROOT/'assets'/name)],capture_output=True).returncode:
             errors.append('Unreadable PDF: '+name)
+# Keep the validated UTF-8 session defaults in both KDE and the image hook.
+locale_defaults=ROOT/'overlay/etc/skel/.config/plasma-localerc'
+if not locale_defaults.is_file() or any(value not in locale_defaults.read_text().splitlines() for value in ('LANG=en_IN.UTF-8','LC_CTYPE=en_IN.UTF-8')):
+    errors.append('Missing explicit UTF-8 KDE session defaults')
+if 'update-locale LANG=en_IN.UTF-8 LC_CTYPE=en_IN.UTF-8' not in (ROOT/'hooks/0900-jatayu.hook.chroot').read_text():
+    errors.append('Missing explicit UTF-8 system locale defaults')
 print(f'Checked Python/shell syntax, required assets and {len(packages)} package declarations.')
 if errors: print('\n'.join(errors),file=sys.stderr); sys.exit(1)
 print(('APT dependency and source precheck PASS' if a.apt else 'Static precheck PASS') + '; boot/install testing remains required.')
