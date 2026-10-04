@@ -112,3 +112,10 @@ firmware-amd-graphics
 firmware-intel-graphics
 intel-microcode
 amd64-microcode
+
+# Dolphin thumbnail backends (APT recommendations are disabled).
+kio-extras
+kimageformat6-plugins
+kdegraphics-thumbnailers
+ffmpegthumbs
+qt6-image-formats-plugins
