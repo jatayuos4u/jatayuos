@@ -31,4 +31,14 @@ assert (root/'usr/lib/systemd/system/systemd-timesyncd.service').is_file()
 link=root/'etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service'
 assert link.is_symlink(), 'Automatic time synchronization is not enabled'
 assert str(link.readlink()).endswith('/systemd-timesyncd.service')
+# Verify shipped KDE defaults and the generated system locale, not just source.
+import configparser
+regional=configparser.ConfigParser(interpolation=None)
+regional.read(root/'etc/skel/.config/plasma-localerc')
+assert regional['Formats']['LANG']=='en_IN.UTF-8'
+assert regional['Formats']['LC_CTYPE']=='en_IN.UTF-8'
+system_locale=read('/etc/default/locale')
+for key in ('LANG','LC_CTYPE'):
+    values=[line.split('=',1)[1].strip().strip('"') for line in system_locale.splitlines() if line.startswith(key+'=')]
+    assert values==['en_IN.UTF-8'], 'Incorrect system locale: '+key
 print('Assembled image installer, bootloader, desktop service, branding and help checks PASS.')
