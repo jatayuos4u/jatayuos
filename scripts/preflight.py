@@ -76,8 +76,17 @@ for path in ('apps/app.py','apps/configure-image.py','auto-config.sh','scripts/g
     if 'Development Preview' in (ROOT/path).read_text() or 'development preview' in (ROOT/path).read_text():
         errors.append('Outdated user-facing branding: '+path)
 packages=[s.strip() for s in (ROOT/'packages.list').read_text().splitlines() if s.strip() and not s.startswith('#')]
-for name in ('user-setup','sddm-theme-breeze','papirus-icon-theme','libreoffice','python3-pyqt6','waydroid','xdg-user-dirs','upower','systemd-timesyncd','xdg-desktop-portal','xdg-desktop-portal-kde','os-prober','ntfs-3g'):
+for name in ('user-setup','sddm-theme-breeze','papirus-icon-theme','libreoffice','python3-pyqt6','waydroid','xdg-user-dirs','upower','systemd-timesyncd','xdg-desktop-portal','xdg-desktop-portal-kde','os-prober','ntfs-3g','kio-extras','kimageformat6-plugins','kdegraphics-thumbnailers','ffmpegthumbs','qt6-image-formats-plugins'):
     if name not in packages: errors.append(f'Missing live-login package: {name}')
+# Default previews and cache initialization must survive future build edits.
+preview=ROOT/'overlay/etc/skel/.local/share/dolphin/view_properties/global/.directory'
+if not preview.is_file() or 'PreviewsShown=true' not in preview.read_text():
+    errors.append('Dolphin default image previews are missing')
+defaults=(ROOT/'apps/user-defaults.py').read_text()
+if "cache/'thumbnails'/name" not in defaults or defaults.index("cache/'thumbnails'/name") > defaults.index('if marker.exists():return'):
+    errors.append('Thumbnail cache must initialize before the Places marker check')
+if (ROOT/'overlay/etc/skel/.cache').exists():
+    errors.append('Do not ship runtime caches in the default user skeleton')
 if a.apt:
     for name in packages:
         r=subprocess.run(['apt-cache','policy',name],text=True,capture_output=True)
