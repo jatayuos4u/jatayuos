@@ -1,1 +1,1 @@
-2026-10-04: start one JatayuOS 1.0 Udaan Final Candidate from main after preparation 5cc07445. Include NTP, Dolphin thumbnail, UTF-8 locale and locked Fastfetch fixes. User explicitly authorized this build; prechecks required, 50-minute cap, one-day artifacts, no automatic retry.
+2026-10-04 19:46 IST: user authorized one corrected final-candidate build after packaging fix 93694cb7. Build from main, retain precheck gates and 50-minute cap. Upload one ISO bundle and diagnostic logs with one-day retention. No duplicate dispatch or automatic retry.
