@@ -130,5 +130,13 @@
   ],
   "release_published": false,
   "tag_created": false,
-  "rebuild_requested": false
+  "rebuild_requested": false,
+  "delivery": {
+    "iso_host": "SourceForge",
+    "source_host": "SourceForge",
+    "website": "https://jatayuos.in",
+    "sourceforge_project_url": null,
+    "website_repository": null,
+    "status": "preparation_in_progress_access_and_artifact_verification_pending"
+  }
 }

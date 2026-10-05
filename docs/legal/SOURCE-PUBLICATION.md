@@ -91,3 +91,11 @@ actual terms; this preparation does not create such a commitment.
 
 Complete the per-component review, record license/rights decisions, then update
 COMPLIANCE.md and the release checklist with verified URLs and evidence.
+
+## Selected hosting
+
+The maintainer selected SourceForge for the ISO and corresponding-source delivery,
+with https://jatayuos.in as the website. See
+[the upload procedure](../releases/SOURCEFORGE-PUBLICATION.md). Project access,
+exact ISO checksum verification, source collection and public URL checks remain
+pending. No public upload has occurred.

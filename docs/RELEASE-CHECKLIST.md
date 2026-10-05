@@ -43,7 +43,9 @@ items do not mark public distribution cleared.
 
 ## Delivery and website
 
-- [ ] Set permanent ISO hosting; do not use one-day Actions artifacts as the public download.
+- [x] Select SourceForge for ISO and corresponding-source hosting; jatayuos.in for the website.
+- [ ] Obtain SourceForge project access and upload/verify permanent downloads.
+- [ ] Connect the website's source repository and add verified release URLs.
 - [ ] Publish verified SHA256SUMS for that exact ISO.
 - [ ] Publish the newer guides as separate downloads with versions and hashes.
 - [ ] Link all artifacts and source/notices from jatayuos.in and test those links.
