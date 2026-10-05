@@ -1,4 +1,4 @@
-# Private development release gate
+# Source and license publication gate
 
 Official website: https://jatayuos.in
 
@@ -23,3 +23,20 @@ Primary references:
 - https://www.debian.org/doc/manuals/debian-faq/ftparchives.en.html
 
 The broader JatayuOS Blueprint v1.1 remains the product plan. This kit is a development implementation subset, with gaps explicitly recorded in STATUS.md.
+
+## Audit preparation completed on 5 October 2026 UTC
+
+- Existing Jatayu Tools and Wallpaper Changer licenses inspected and preserved.
+- Missing shipped Creative Studio core.py recovered; complete source/payload
+  archive and package assembly helper added. Rebuilt installed payload matched
+  all 14 original files. The original ISO and packages remain unchanged.
+- Full GPL text and component-scope/credit notices added without a blanket
+  relicense of integration code or artwork.
+- Exact-manifest source collector added and locally tested; it has not collected
+  the full ISO source set because the Build 35 package manifest is still needed.
+
+Publication remains pending the exact manifest/notices, source collection and
+hosting, original licensing/rights decisions and the applicable Firefox branded
+redistribution route. See [audit](legal/PUBLICATION-AUDIT.md),
+[source procedure](legal/SOURCE-PUBLICATION.md), [copyright scope](../COPYRIGHT.md)
+and [credits index](../THIRD-PARTY-NOTICES.md).

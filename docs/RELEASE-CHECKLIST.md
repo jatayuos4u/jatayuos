@@ -15,6 +15,19 @@ that the work failed, only that evidence or a decision is still needed.
 - [ ] Verify and record ISO SHA256, byte size and SOURCE-COMMIT.txt from the preserved bundle.
 - [ ] Record hardware/VM configurations and individually tested scenarios where compatibility will be advertised.
 
+## Source audit preparation
+
+- [x] Inspect existing Creative Studio and Wallpaper Changer license notices.
+- [x] Recover missing Creative Studio core source and preserve the complete source/payload archive.
+- [x] Rebuild Creative Studio package and compare its installed payload with the shipped package.
+- [x] Add component credit/license-scope notices and exact-source collection tooling.
+- [ ] Obtain exact Build 35 package-manifest.tsv and third-party-notices output.
+- [ ] Run exact-source collection and review covered package/source completeness.
+- [ ] Verify the Firefox downstream redistribution route, including the titlebar preference override.
+
+See [source/license audit](legal/PUBLICATION-AUDIT.md). The completed preparation
+items do not mark public distribution cleared.
+
 ## Public distribution
 
 - [ ] Select and record licenses for original Jatayu code and artwork.

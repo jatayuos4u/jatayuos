@@ -49,3 +49,9 @@ Report issues with the ISO checksum, boot mode, hardware/VM details, reproductio
 ## Credits
 
 JatayuOS builds on Debian, Linux, KDE, Mozilla, Qt, LibreOffice, Calamares, Fcitx, Waydroid and other upstream contributors. Third-party components retain their licences and marks. Installed licence files and package/source manifests remain part of the image. See the compliance checklist for outstanding publication obligations.
+
+## Source and license publication
+
+See [component copyright scope](COPYRIGHT.md), [third-party credit index](THIRD-PARTY-NOTICES.md), [verified audit and remaining work](docs/legal/PUBLICATION-AUDIT.md) and [exact source collection procedure](docs/legal/SOURCE-PUBLICATION.md).
+
+The [Creative Studio 2.0.2 source bundle](vendor/jatayu-tools-2.0.2-source.tar.gz) preserves the shipped source/assets/notices and includes package assembly material. Its rebuilt installed payload matches the original package. Full-ISO source publication, original integration/artwork licensing and permanent source hosting remain pending; no blanket license is applied by these additions.
