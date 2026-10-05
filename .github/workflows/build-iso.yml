@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.confirm == 'BUILD')
+    if: (github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.confirm == 'BUILD')) || (github.ref == 'refs/heads/prepare/final-1.0-udaan' && github.event_name == 'workflow_dispatch' && inputs.confirm == 'BUILD' && inputs.precheck_only == true)
     runs-on: ubuntu-24.04
     timeout-minutes: 50
     steps:
