@@ -140,14 +140,34 @@ put('overlay/etc/skel/.xinputrc','# Let KDE Wayland start Fcitx 5 from Virtual K
 put('assets/fcitx-x11.sh','#!/bin/sh\n[ "${XDG_SESSION_TYPE:-}" = x11 ] || exit 0\nexec /usr/bin/fcitx5 -d\n')
 put('overlay/etc/skel/.config/autostart/org.fcitx.Fcitx5.desktop','[Desktop Entry]\nType=Application\nName=Fcitx 5 (X11 fallback)\nExec=/bin/sh /usr/share/jatayu/fcitx-x11.sh\nOnlyShowIn=KDE;\n')
 
-put('overlay/usr/share/doc/jatayu-integration/copyright','''JatayuOS integration development source
+put('overlay/usr/share/doc/jatayu-integration/copyright','''JatayuOS original integration software
+Copyright (C) 2026 Anup Yadav
 Project maintainer: Anup Yadav <jatayuos4u@gmail.com>
-Original integration code and owner-provided Jatayu visual references were prepared for this project.
-The owner's final publication licence has not yet been selected. This is a private
-development handoff, not a blanket licence for upstream components.
-Debian, KDE, Qt, Calamares, Firefox and all dependencies retain their own licences
-and notices under /usr/share/doc. The image build preserves those notices.
-Do not publicly redistribute before completing docs/COMPLIANCE.md.
+SPDX-License-Identifier: GPL-3.0-or-later
+
+The original JatayuOS integration software is free software: you can
+redistribute it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+This software is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+
+The full GNU GPL version 3 text accompanies this software in GPL-3.
+On Debian systems it is also available at /usr/share/common-licenses/GPL-3.
+If needed, see https://www.gnu.org/licenses/.
+
+Scope: original Jatayu application code, HTML application code, integration
+configuration and build/packaging scripts. Existing third-party notices and
+licenses take precedence for their components. Logo, wallpaper, other artwork,
+documentation and trademarks are outside this new software grant.
+See https://github.com/jatayuos4u/jatayuos/blob/main/COPYRIGHT.md for scope.
+
+Debian, KDE, Qt, Calamares, Firefox and all dependencies retain their own
+licenses and notices under /usr/share/doc. Source delivery and the remaining
+publication requirements are recorded in docs/COMPLIANCE.md.
 ''')
 print('Generated original assets, desktop integration, policies and installer branding.')
 

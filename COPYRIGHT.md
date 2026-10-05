@@ -1,33 +1,59 @@
 # Copyright and license scope
 
 JatayuOS is an independent project maintained by Anup Yadav.
-This repository contains multiple works with different licenses and authors.
-The presence of GPL text in LICENSES/ does not place every file under GPL.
+This repository contains works with different licenses and authors.
+
+## Original software: GPL-3.0-or-later
+
+On 5 October 2026 UTC, the maintainer authorized GPL-3.0-or-later for the
+original JatayuOS software. Copyright (C) 2026 Anup Yadav.
+
+You may redistribute and/or modify that software under the GNU General Public
+License as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version. It is supplied WITHOUT ANY
+WARRANTY, including implied MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+The complete version 3 text is in [LICENSE](LICENSE).
+
+This grant covers the project-authored software portions of:
+
+- `apps/`: Python application and integration code.
+- `scripts/`, `hooks/`, `auto-config.sh`, `tests/` and `.github/workflows/`:
+  build, packaging, administration, generation, validation and automation code.
+- `overlay/`: original configuration, launchers, policies, QML, JavaScript and
+  shell integration code.
+- `assets/kavach.html`, `assets/sarkar-setu.html`, `assets/utsav.html` and
+  `assets/fcitx-x11.sh`: original application/interface and startup code.
+
+It also covers the same original software preserved at Build 35 source commit
+`95afcb80e3517d8930557d4fb1ba9a20a92b7f7f`. This records the maintainer's
+current grant for those sources; the existing ISO/package bytes and their
+historical notices have not been changed.
+
+Existing per-file, upstream and vendor terms take precedence for their material.
+This grant covers Jatayu-authored modifications only where a file contains
+third-party code; it does not relicense the upstream work.
 
 ## Existing licensed works
 
-- Jatayu Tools 2.0.2: the shipped application notice specifies GPL-3.0-or-later;
-  its AppStream metadata notice specifies CC0-1.0. Recovered source and original
-  notices are preserved in vendor/jatayu-tools-2.0.2-source.tar.gz.
-- Wallpaper Changer application: GPL-3.0-or-later, as specified by its supplied
-  copyright file. Its metadata and generated artwork have separate notices.
-- Debian and other third-party software: retain their individual licenses,
-  copyright notices and marks. The ISO includes installed notices, but the
-  corresponding-source publication set still needs completion.
+- Jatayu Tools 2.0.2: GPL-3.0-or-later under its shipped application notice;
+  AppStream metadata has its existing CC0-1.0 notice. Preserved source and
+  notices are in `vendor/jatayu-tools-2.0.2-source.tar.gz`.
+- Wallpaper Changer application: GPL-3.0-or-later under its supplied copyright
+  file. Its metadata and artwork have separate existing notices.
+- Debian and other third-party software: retain individual licenses, notices
+  and marks. The corresponding-source publication set still needs completion.
 
-## Original material awaiting a publication decision
+## Material outside this new software grant
 
-The original integration code, custom HTML interfaces, documentation and
-OS artwork must not be treated as newly licensed by this audit.
-The existing integration notice states that the publication license has not
-been selected. A root blanket license is intentionally not added.
+Documentation (including guides, PDFs, screenshots and About prose), logos,
+wallpapers, icons, other artwork, bundled binary packages and third-party
+source archives are not newly licensed by this approval. Existing notices
+continue to apply where present. Outstanding original artwork/documentation
+permissions and publication terms must be recorded separately.
 
-Recommended license for project-owned original software: GPL-3.0-or-later.
-Record approval and ownership first, then apply it only to the approved file
-scope. Treat artwork, documentation and trademarks separately, and preserve
-existing third-party terms.
+The software license does not grant rights to project or third-party trademarks.
+JatayuOS branding does not imply government affiliation or endorsement by
+Debian, KDE, Mozilla or other upstream projects.
 
-JatayuOS naming/branding does not imply government affiliation or endorsement
-by Debian, KDE, Mozilla or other upstream projects.
-
-See docs/legal/PUBLICATION-AUDIT.md for verified findings and outstanding work.
+See [the publication audit](docs/legal/PUBLICATION-AUDIT.md) for remaining
+source delivery, rights and publication work.

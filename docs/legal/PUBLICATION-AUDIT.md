@@ -12,7 +12,7 @@ for assets the maintainer does not own or declare an ISO legally cleared.
 
 | Component | Verified evidence | Remaining requirement |
 | --- | --- | --- |
-| Jatayu integration 1.0~rc3 | Source/config/build scripts at the Build 35 commit | Maintainer license and provenance confirmation; accessible source snapshot |
+| Jatayu integration 1.0~rc3 | Source/config/build scripts at the Build 35 commit; maintainer authorized GPL-3.0-or-later on 5 October 2026 UTC | Accessible licensed source snapshot; retain third-party notices and confirm any external inputs |
 | Jatayu Tools 2.0.2 | Shipped copyright says GPL-3.0-or-later; Python sources in package | Publish recovered complete payload/source bundle alongside binary |
 | Wallpaper Changer 1.2.1 | Preserved source, GPL-3.0-or-later text, separate artwork/CC0 metadata notices | Publish complete source/build inputs; resolve artwork permission scope |
 | Calamares 3.3.14-1+jatayu3 | Pinned Debian 3.3.14-1 plus scripts/patch-calamares.py and build.sh | Publish exact Debian source archives and applicable notices plus modifications |
@@ -70,10 +70,10 @@ Package license, firmware and required build-input review remains necessary.
 
 ## Publication decisions still needed
 
-1. Confirm the maintainer's authority to license the original integration code,
-   HTML apps, custom shapes, docs and other project-authored material.
-   Recommended software license: GPL-3.0-or-later, consistent with the two
-   existing Jatayu application packages. This is a recommendation, not a grant.
+1. The maintainer has authorized GPL-3.0-or-later for original software; the
+   scope and Build 35 source applicability are recorded in COPYRIGHT.md.
+   Preserve applicable external notices and resolve any third-party inputs.
+   Documentation and artwork publication terms remain separate decisions.
 2. Record origin and permission for the logo, main wallpaper, tricolor art and
    any third-party inputs. AI generation descriptions alone do not establish
    rights for every input or a trademark clearance.
@@ -87,8 +87,11 @@ Package license, firmware and required build-input review remains necessary.
    distribution policy restricts default-setting changes; do not assume its route
    automatically covers Debian packages or this downstream configuration.
 
-No contact message, license grant, written source offer, repo visibility change,
-public release or ISO rebuild was issued during this audit.
+The original audit issued no license grant. The subsequent maintainer approval
+is now applied to original software in LICENSE, COPYRIGHT.md and the integration
+notice/generator. Future packages include the full GPL text; Build 35 remains
+unchanged. No written source offer, repo visibility change, public release or
+ISO rebuild was issued.
 
 ## Primary references reviewed
 

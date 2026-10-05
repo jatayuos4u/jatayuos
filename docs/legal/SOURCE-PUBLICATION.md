@@ -65,8 +65,11 @@ a Debian source archive does not establish permissions beyond its actual terms.
 ## Add the project and modified-source materials
 
 - Export the exact Build 35 repository tree, including scripts, configuration,
-  source, packaging, tests and source asset inputs; make it accessible publicly
-  only after original licensing and provenance decisions are recorded.
+  source, packaging, tests and source asset inputs. Include the approved LICENSE
+  and COPYRIGHT.md as a licensing supplement to the original Build 35 export;
+  preserve historical source bytes. Original software is now GPL-3.0-or-later;
+  resolve separate asset rights and retain existing third-party terms before
+  publishing the full mixed source bundle.
 - Include vendor/jatayu-tools-2.0.2-source.tar.gz as a recovered source supplement.
 - Include Wallpaper Changer application source/build metadata, existing notices
   and required collection input assets. The original source ZIP with masters is
