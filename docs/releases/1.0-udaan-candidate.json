@@ -135,8 +135,10 @@
     "iso_host": "SourceForge",
     "source_host": "SourceForge",
     "website": "https://jatayuos.in",
-    "sourceforge_project_url": null,
+    "sourceforge_project_url": "https://sourceforge.net/projects/jatayuos",
     "website_repository": null,
-    "status": "preparation_in_progress_access_and_artifact_verification_pending"
+    "status": "project_url_recorded_artifact_source_and_upload_verification_pending",
+    "sourceforge_project_slug": "jatayuos",
+    "project_url_evidence": "Provided by maintainer; public page verification unavailable in this session"
   }
 }

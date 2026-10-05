@@ -2,7 +2,10 @@
 
 Selected by the maintainer on 5 October 2026 UTC:
 ISO and source hosting on SourceForge; website https://jatayuos.in.
-The SourceForge project slug and website code repository have not been supplied.
+The maintainer supplied the SourceForge project URL:
+https://sourceforge.net/projects/jatayuos (slug: jatayuos).
+Public page verification was unavailable in this session. The website code
+repository has not yet been supplied.
 No SourceForge project, public file or website change is claimed here.
 
 ## Selected release
