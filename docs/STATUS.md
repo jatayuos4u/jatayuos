@@ -14,8 +14,9 @@ problems; it is not an itemized certification of every installation or hardware 
 
 Build #35 replaces Build #33 as the accepted testing candidate. No public final
 release or permanent download has been published by this preparation.
-Keep the integration package at `1.0~rc3` and Calamares at
-`3.3.14-1+jatayu3`; the tested ISO has not been rebuilt or relabeled internally.
+Build #35 retains integration `1.0~rc3` and Calamares `3.3.14-1+jatayu3`.
+Final-version source now prepares integration `1.0`; the installer pin remains
+unchanged. No final ISO has been built, and Build #35 has not been relabeled.
 
 ## Corrections included in Build 35
 
@@ -48,14 +49,21 @@ Plymouth, live welcome, desktop, menu, Creative Studio, Wallpaper Changer,
 Kavach, Sarkar Setu and Utsav. Images show the captured interfaces and are not
 evidence of unseen operations or other hardware. See [capture provenance](SCREENSHOTS.md).
 
-## Release documents prepared after the ISO
+## Final-version source preparation
 
-The owner-facing User Manual (16 pages), Installation Guide (6 pages) and FAQ
-(5 pages) were created and visually checked after Build #35. Their filenames,
-page counts and exact hashes are recorded in [the documentation inventory](DOCUMENTATION.md)
-and [candidate metadata](releases/1.0-udaan-candidate.json).
-They have been delivered separately; they are not newly embedded in the existing ISO.
-The older bundled PDFs in assets remain unchanged.
+Integration packaging and build output paths now agree on version `1.0`.
+The build regenerates all three illustrated offline guides and About before
+packaging, using the ten preserved owner VM captures. Edition 2 contains a
+16-page User Manual, 6-page Installation Guide and 5-page FAQ, rendered and
+visually checked. See [document inventory](DOCUMENTATION.md) and
+[final preparation metadata](releases/1.0-udaan-final.json).
+These files are committed as future runtime assets; the existing Build #35 ISO
+still contains its earlier bundled documents.
+
+GitHub release preparation comes first. The website remains the public entry
+point, and SourceForge ISO launch is planned for 11 October 2026 after validation.
+No workflow, tag, public release, repository visibility change or upload is
+performed by this preparation.
 
 ## Remaining publication work
 
@@ -63,14 +71,14 @@ The older bundled PDFs in assets remain unchanged.
   downloaded bundle. The ISO digest is not yet independently recorded here.
 - Provide permanent hosting for the exact ISO, checksum, guides, notices,
   package/source manifest and required corresponding source/build material.
-- Resolve original-code/artwork licensing, rights and upstream redistribution
+- GPL-3.0-or-later is approved for original software. Resolve artwork/documentation
+  publication permissions and upstream redistribution
   obligations; preserve the existing [compliance checklist](COMPLIANCE.md).
 - Record which installation/hardware scenarios were actually tested before
   making specific compatibility claims. BIOS, Secure Boot, encryption,
   Windows dual boot and Android compatibility are not broadly certified.
-- Decide whether to release the accepted candidate as a candidate or schedule
-  an explicitly authorized final-version build. Version changes require a new
-  artifact and validation; no rebuild is scheduled by this commit.
+- Run the privileged Debian dependency precheck, build the final-version ISO once,
+  preserve its exact provenance/checksum, and validate that new artifact.
 - Document the Jatayu app update delivery decision. Debian updates work through
   APT/Discover; a signed Jatayu repository is not configured.
 
@@ -84,5 +92,5 @@ See [draft release notes](RELEASE-1.0.md), [release checklist](RELEASE-CHECKLIST
   approximately 2 minutes 23 seconds. Packaging was corrected in `93694cb7`.
 - Build #35: successful corrected candidate, downloaded and accepted by the owner.
 
-This documentation-only preparation leaves the build trigger, workflow, runtime
-assets, package versions and installer code unchanged.
+This preparation changes source versions and documentation only. The build
+trigger and installer logic remain unchanged; it does not certify a final ISO.

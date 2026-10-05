@@ -51,6 +51,23 @@ for name in ('USER-MANUAL.pdf','FAQ.pdf','INSTALLATION-GUIDE.pdf'):
     path=ROOT/'assets'/name
     if not path.is_file() or not path.read_bytes().startswith(b'%PDF-'):
         errors.append('Missing or invalid offline PDF: '+name)
+# Final-version integration and regenerated illustrated guides must agree.
+package_script=(ROOT/'scripts/package.sh').read_text()
+build_script=(ROOT/'scripts/build.sh').read_text()
+if 'Version: 1.0\n' not in package_script:
+    errors.append('Final integration package version must be 1.0')
+if 'out/jatayu-integration_1.0_all.deb' not in package_script or 'out/jatayu-integration_1.0_all.deb' not in build_script:
+    errors.append('Integration package output/copy paths must match version 1.0')
+if 'python3 scripts/generate-documentation.py' not in build_script:
+    errors.append('Offline guides must regenerate before packaging')
+if 'python3-reportlab' not in build_script:
+    errors.append('Offline guide generator dependency is missing')
+for name in ('GPL-3','copyright'):
+    if not (ROOT/'overlay/usr/share/doc/jatayu-integration'/name).is_file():
+        errors.append('Missing integration license material: '+name)
+for name in ('boot-menu.png','plymouth-screen.png','Welcome-screen.png','desktop.png','Menu(1).png','jatayu-tools.png','walpaper-changer.png','kavach-app.png','sarkar-setu.png','utsav-app.png'):
+    if not (ROOT/'docs/screenshots/build35'/name).is_file():
+        errors.append('Missing illustrated guide capture: '+name)
 # package.sh installs assets/* into /usr/share/jatayu. Validate the smoke-test
 # input before source compilation or live-build can spend runner minutes.
 for hook in (ROOT/'hooks').glob('*.hook.chroot'):

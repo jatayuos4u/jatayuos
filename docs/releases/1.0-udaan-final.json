@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "project": "JatayuOS",
+  "version_name": "1.0 Udaan",
+  "status": "final_source_prepared_iso_build_and_publication_pending",
+  "prepared_on": "2026-10-05",
+  "integration_version": "1.0",
+  "calamares_version": "3.3.14-1+jatayu3",
+  "final_build": {
+    "run_id": null,
+    "source_commit": null,
+    "conclusion": null
+  },
+  "iso": {
+    "filename": "JatayuOS-1.0-Udaan-amd64.iso",
+    "sha256": null,
+    "size_bytes": null,
+    "download_url": null
+  },
+  "documents": [
+    {
+      "file": "assets/USER-MANUAL.pdf",
+      "size_bytes": 8920494,
+      "sha256": "bd52f1a2dd0880578109539d8450e179f69a2753da71d478e505c448babd6ba4",
+      "pages": 16,
+      "edition": 2,
+      "in_build35_iso": false
+    },
+    {
+      "file": "assets/INSTALLATION-GUIDE.pdf",
+      "size_bytes": 4395160,
+      "sha256": "ebb102d5d070d7b261fef0e39fd710324e78c869567100958e9ffddc4974b502",
+      "pages": 6,
+      "edition": 2,
+      "in_build35_iso": false
+    },
+    {
+      "file": "assets/FAQ.pdf",
+      "size_bytes": 53126,
+      "sha256": "5a72ea8722969745c32ab046e3aa92de949c8ccd90d9c4a1f699c3da0e211979",
+      "pages": 5,
+      "edition": 2,
+      "in_build35_iso": false
+    }
+  ],
+  "testing_reference": "1.0-udaan-candidate.json",
+  "original_software_license": "GPL-3.0-or-later",
+  "publication_gates": [
+    "final_builder_precheck_and_new_ISO_validation",
+    "exact_corresponding_source_and_permanent_access",
+    "artwork_and_documentation_permissions",
+    "third_party_redistribution_and_browser_review",
+    "public_repository_and_release_access_review"
+  ],
+  "delivery": {
+    "github": "https://github.com/jatayuos4u/jatayuos",
+    "website": "https://jatayuos.in",
+    "sourceforge": "https://sourceforge.net/projects/jatayuos",
+    "planned_sourceforge_launch": "2026-10-11"
+  },
+  "release_published": false,
+  "tag_created": false,
+  "workflow_dispatched": false
+}

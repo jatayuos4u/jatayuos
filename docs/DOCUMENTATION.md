@@ -1,43 +1,40 @@
 # JatayuOS documentation inventory
 
-The following illustrated guides were prepared for the owner after the tested
-Build #35 ISO and visually reviewed as PDFs. They cover the candidate's actual
-interfaces and distinguish live-session screenshots from installed behavior.
+Edition 2, prepared 5 October 2026 for final-version source. The original ten
+owner VM captures are preserved under `docs/screenshots/build35/`. The images
+show Build 35; they do not prove a final-version ISO has been built or tested.
 
-| Document | Edition | Pages | Bytes |
+| Committed document | Edition | Pages | Bytes |
 | --- | --- | ---: | ---: |
-| JatayuOS-FAQ.pdf | 1 | 5 | 53163 |
-| JatayuOS-Installation-Guide.pdf | 1 | 6 | 4395179 |
-| JatayuOS-User-Manual.pdf | 1 | 16 | 8920430 |
+| [USER-MANUAL.pdf](../assets/USER-MANUAL.pdf) | 2 | 16 | 8920494 |
+| [INSTALLATION-GUIDE.pdf](../assets/INSTALLATION-GUIDE.pdf) | 2 | 6 | 4395160 |
+| [FAQ.pdf](../assets/FAQ.pdf) | 2 | 5 | 53126 |
 
-## Exact SHA256 values
+## Committed-file SHA256 values
 
 ```text
-28ff7a3651b25c3b1e2e49a8ec72325f7e600dc4865c24010deba4a190ff2f70  JatayuOS-FAQ.pdf
-1a331c19f873897b1d02538f568944a15658f6575bda866f3a4303b484501d82  JatayuOS-Installation-Guide.pdf
-7e9fa1b0c450989dbba014fdffd4c8e384caad346be89b9888fc6bb4ccd06734  JatayuOS-User-Manual.pdf
+bd52f1a2dd0880578109539d8450e179f69a2753da71d478e505c448babd6ba4  assets/USER-MANUAL.pdf
+ebb102d5d070d7b261fef0e39fd710324e78c869567100958e9ffddc4974b502  assets/INSTALLATION-GUIDE.pdf
+5a72ea8722969745c32ab046e3aa92de949c8ccd90d9c4a1f699c3da0e211979  assets/FAQ.pdf
 ```
 
-The PDFs have been delivered separately to the owner. They are not committed
-as replacement runtime assets in this preparation, and no public download URLs
-have been assigned. Publish those exact files to permanent documentation hosting,
-verify the hashes and then add the URLs here. Avoid linking private conversation
-or temporary workspace paths from a public website.
+Regenerate with `python3 scripts/generate-documentation.py`. ReportLab and
+DejaVu fonts are required. This command writes the three illustrated PDFs,
+About and the offline README; the build runs it before packaging. PDF metadata
+is deterministic in the same runtime; hashes may differ with dependency versions.
+Verify the actual ISO-bundled files and publish hashes for the delivered files.
 
-The accepted ISO retains its earlier bundled PDFs under assets/. Do not claim
-the new 16-page manual, 6-page installation guide or 5-page FAQ is already inside
-that ISO. Updating those bundled documents requires a future package update or
-an explicitly authorized rebuild.
+The accepted Build 35 ISO still contains the older bundled PDFs. The separately
+delivered edition 1 guides and their hashes remain preserved in
+[candidate metadata](releases/1.0-udaan-candidate.json). Do not substitute these
+edition 2 hashes for those historical files.
 
-## Coverage
+The User Manual covers all ten captures, desktop applications, updates, time,
+Waydroid, troubleshooting and credits. The Installation Guide covers checksum
+verification, live boot, clean installation, Windows UEFI manual dual boot and
+first installed login. The FAQ covers installation, updates, application scope,
+Android, backups and support. All 27 pages were rendered and visually reviewed.
 
-- User Manual: all ten supplied VM captures; boot, welcome/Aarambh, desktop/menu,
-  files/software, Creative Studio, Wallpaper Changer, Kavach, Sarkar Setu,
-  Utsav, updates/time, Waydroid, troubleshooting and credits.
-- Installation Guide: download verification, live boot, clean installation,
-  Windows UEFI manual dual boot, first installed login and verification.
-- FAQ: installation, update behavior, application scope, Android, backups and support.
-
-The [quick user guide](USER-GUIDE.md) is directly readable in this repository.
-The [screenshot record](SCREENSHOTS.md) and
-[candidate metadata](releases/1.0-udaan-candidate.json) preserve the image inventory.
+See [quick guide](USER-GUIDE.md), [screenshot provenance](SCREENSHOTS.md) and
+[final preparation metadata](releases/1.0-udaan-final.json). Documentation/artwork
+publication permissions remain a separate release gate from software licensing.

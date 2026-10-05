@@ -8,7 +8,9 @@ JatayuOS is an independent AMD64 desktop distribution based on Debian 13 (Trixie
 
 ## Release status
 
-[Build #35](https://github.com/jatayuos4u/jatayuos/actions/runs/37208707920) completed successfully from `95afcb80e3517d8930557d4fb1ba9a20a92b7f7f`. The owner downloaded it and reported the observed problems solved and the OS working properly. This is the accepted testing candidate; public final publication is still pending checksum preservation, hosting and the existing source/license gates. Runtime integration remains `1.0~rc3`.
+**Final-version source preparation is in progress; the final ISO has not been built or published.** Integration is now prepared as `1.0`, with updated offline guides and About information. The accepted testing reference is [Build #35](https://github.com/jatayuos4u/jatayuos/actions/runs/37208707920), built from `95afcb80e3517d8930557d4fb1ba9a20a92b7f7f` with integration `1.0~rc3`. Its owner reported the observed problems solved.
+
+GitHub will hold the release record, source and documents. [jatayuos.in](https://jatayuos.in) will be the public download entry point, linking to [SourceForge](https://sourceforge.net/projects/jatayuos). The planned SourceForge launch is **11 October 2026**, subject to final validation and publication requirements. No public release or ISO upload has occurred.
 
 See [current status](docs/STATUS.md), [draft release notes](docs/RELEASE-1.0.md) and [publication checklist](docs/RELEASE-CHECKLIST.md). Specific hardware and installation scenarios should only be advertised when individually verified.
 
@@ -16,9 +18,9 @@ See [current status](docs/STATUS.md), [draft release notes](docs/RELEASE-1.0.md)
 
 - [Repository quick user guide](docs/USER-GUIDE.md)
 - [New illustrated documentation inventory and hashes](docs/DOCUMENTATION.md)
-- [Earlier ISO-bundled User Manual](assets/USER-MANUAL.pdf)
-- [Earlier ISO-bundled Frequently Asked Questions](assets/FAQ.pdf)
-- [Earlier ISO-bundled Installation Guide](assets/INSTALLATION-GUIDE.pdf)
+- [User Manual — edition 2](assets/USER-MANUAL.pdf)
+- [Frequently Asked Questions — edition 2](assets/FAQ.pdf)
+- [Installation Guide — edition 2](assets/INSTALLATION-GUIDE.pdf)
 - [Screenshots and capture provenance](docs/SCREENSHOTS.md)
 - [Testing checklist](docs/TESTING.md)
 - [Windows dual boot, protection policy and responsiveness validation](docs/DUAL-BOOT.md)

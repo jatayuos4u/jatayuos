@@ -1,6 +1,7 @@
 # JatayuOS 1.0 Udaan release checklist
 
-This is a publication checklist for the accepted Build #35 candidate.
+This is a publication checklist for final-version preparation, with Build #35
+retained as the accepted testing reference.
 Checked entries describe completed work; unchecked entries are not assertions
 that the work failed, only that evidence or a decision is still needed.
 
@@ -44,7 +45,8 @@ items do not mark public distribution cleared.
 ## Delivery and website
 
 - [x] Select SourceForge for ISO and corresponding-source hosting; jatayuos.in for the website.
-- [ ] Obtain SourceForge project access and upload/verify permanent downloads.
+- [x] Record the existing SourceForge project: https://sourceforge.net/projects/jatayuos.
+- [ ] Authenticate project access and upload/verify permanent downloads.
 - [ ] Connect the website's source repository and add verified release URLs.
 - [ ] Publish verified SHA256SUMS for that exact ISO.
 - [ ] Publish the newer guides as separate downloads with versions and hashes.
@@ -52,14 +54,19 @@ items do not mark public distribution cleared.
 - [ ] Publish evidence-based requirements, supported scenarios and limitations.
 - [ ] Define support/reporting instructions and Jatayu app update delivery policy.
 
-## Final version decision
+## Final version and release
 
-- [ ] Choose candidate publication or a later final-version ISO.
-- [ ] If choosing a final-version build, explicitly authorize it, update versions,
-      run prechecks, build once and validate the new artifact.
-- [ ] Tag the exact artifact-producing commit rather than a later documentation-only commit.
-- [ ] Publish the release only after the preceding required gates have evidence.
+- [x] Choose a final-version ISO with GitHub release preparation before the planned SourceForge launch on 11 October 2026.
+- [x] Prepare integration version `1.0` and matching package paths.
+- [x] Commit edition 2 guides and preserve the ten original VM captures.
+- [x] Regenerate guides and About before packaging; require their source inputs in preflight.
+- [ ] Run the full dependency/source precheck on a privileged Debian 13 builder.
+- [ ] Build the final ISO once; preserve checksum, byte size, package manifest, notices and source commit.
+- [ ] Boot and install-test the final artifact; record the actual tested scenarios.
+- [ ] Review private repository contents and arrange public access to required source and release documents.
+- [ ] Tag the exact artifact-producing commit.
+- [ ] Publish the GitHub release after required gates have evidence.
+- [ ] Verify SourceForge files and website links before the planned launch.
 
-Integration remains `1.0~rc3`; no tag, final-version bump, ISO rebuild or public
-release is created by this preparation. Preserve the working candidate and do
-not spend additional Actions minutes solely to update documentation.
+No final ISO, tag or public release is created by this preparation. No workflow
+is dispatched; retain the working candidate while the new artifact is pending.
