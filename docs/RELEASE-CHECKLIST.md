@@ -21,7 +21,8 @@ that the work failed, only that evidence or a decision is still needed.
 - [x] Recover missing Creative Studio core source and preserve the complete source/payload archive.
 - [x] Rebuild Creative Studio package and compare its installed payload with the shipped package.
 - [x] Add component credit/license-scope notices and exact-source collection tooling.
-- [ ] Obtain exact Build 35 package-manifest.tsv and third-party-notices output.
+- [x] Receive the owner-supplied Build 35 manifest and third-party-notices ZIP; verify integrity and notice-name coverage.
+- [x] Preserve exact manifest/source plan; locate all 805 upstream source versions in current catalogues (signature authentication pending).
 - [ ] Run exact-source collection and review covered package/source completeness.
 - [ ] Verify the Firefox downstream redistribution route, including the titlebar preference override.
 
@@ -33,7 +34,8 @@ items do not mark public distribution cleared.
 - [ ] Select and record licenses for original Jatayu code and artwork.
 - [ ] Record logo/wallpaper rights or permission and relevant provenance.
 - [ ] Complete corresponding-source and build/patch-material availability for covered shipped components.
-- [ ] Preserve the exact package/source-version manifest and third-party notices.
+- [x] Preserve exact manifest and notice integrity/coverage records; owner retains original notice ZIP.
+- [ ] Publish the full third-party notice texts with the ISO.
 - [ ] Complete firmware, codec and browser redistribution/trademark review using COMPLIANCE.md.
 - [ ] Make required source/notices accessible alongside the published artifact.
 - [ ] Review screenshots and reports for private data before publication.

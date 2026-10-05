@@ -3,9 +3,18 @@
 This procedure implements source collection and delivery, not a legal clearance.
 Read [the audit](PUBLICATION-AUDIT.md) and [copyright scope](../../COPYRIGHT.md).
 
-## Obtain the exact release evidence
+## Preserved manifest and notice evidence
 
-From the already downloaded Build 35 ZIP, preserve:
+The uploaded manifest is now preserved at
+[build35/package-manifest.tsv](build35/package-manifest.tsv). See
+[the verification record](build35/README.md) for notice coverage, input hashes
+and the exact source plan. Keep the original notice ZIP for publication; the
+repository's notice index is not a replacement for its full copyright texts.
+
+## Complete the release evidence
+
+From the already downloaded Build 35 ZIP, preserve the remaining evidence and
+retain these original files:
 
 - package-manifest.tsv
 - third-party-notices/ (all files)
@@ -24,6 +33,11 @@ On a machine with Python 3:
 ```sh
 python3 scripts/collect-release-sources.py package-manifest.tsv --output source-release
 ```
+
+A plan generated from the supplied manifest is preserved in
+build35/source-plan.tsv. All 805 upstream versions were found in current source
+catalogues, requiring about 6.74 GB of archive downloads, before extraction.
+That lookup is not signature authentication or source publication.
 
 Review source-release/source-plan.json. It lists exact Debian sources and local
 project packages separately. Unknown `+jatayu` versions are rejected.

@@ -17,7 +17,7 @@ for assets the maintainer does not own or declare an ISO legally cleared.
 | Wallpaper Changer 1.2.1 | Preserved source, GPL-3.0-or-later text, separate artwork/CC0 metadata notices | Publish complete source/build inputs; resolve artwork permission scope |
 | Calamares 3.3.14-1+jatayu3 | Pinned Debian 3.3.14-1 plus scripts/patch-calamares.py and build.sh | Publish exact Debian source archives and applicable notices plus modifications |
 | Fcitx5 5.1.12-2+jatayu1 family | Pinned Debian 5.1.12-2 plus scripts/build-fcitx.sh | Publish exact Debian sources and modification/build materials |
-| Other installed Debian packages | Build hook emits exact source/version manifest and copyright notices | Obtain that exact Build 35 output; collect and review the covered sources |
+| Other installed Debian packages | Owner supplied manifest: 1,474 binaries / 808 source-version pairs; matching notice names for every binary | Authenticate and collect exact source archives; review license/source completeness |
 | Logo and OS artwork | Owner supplied inputs, but final permission record absent | Origin/ownership/terms confirmation; keep separate from code licenses |
 | Firefox ESR | Debian package retained; titlebar preference override present | Verify the applicable downstream distribution/trademark route |
 | New guides and captures | Prepared separately after Build 35 | Confirm publication rights/terms; host the guides and record URLs |
@@ -42,23 +42,31 @@ unavailable historical build tooling is not invented.
 Existing package hash:
 `1482544a10ec927187566396067d94009eff00b7c4866cf805d809b46f515235`.
 
-## Why the ISO source set is still pending
+## Uploaded Build 35 evidence
 
-The build collects `package-manifest.tsv` with binary package/version and source
-package/version columns, as well as `third-party-notices/`. These files are in
-the downloaded Build 35 bundle. They are needed to identify all installed
-dependencies and exact versions; `packages.list` is not an adequate substitute.
+The owner supplied package-manifest.tsv and third-party-notices.zip on 5 October
+2026 UTC. [The evidence record](build35/README.md) preserves their SHA256 hashes,
+the exact manifest, source plan and an index of every notice.
 
-The new [source collector](../../scripts/collect-release-sources.py) deduplicates
-that manifest, maps the two known patched source families to their pinned Debian
-bases, and preserves patch-material references. It fails on unknown patched
-versions. A download mode fetches exact source archives and verifies their
-Checksums-Sha256 fields and extraction. It never substitutes a newer version.
+The manifest has 1,474 unique binary package rows and 808 source/version pairs:
+803 Debian sources, two patched Debian sources and three local project sources.
+The ZIP passes CRC and entry-path checks. Every manifest binary has a matching
+copyright-notice filename; one additional notice is present. Filename coverage
+does not mean that every notice's terms have been reviewed.
 
-The collector has been locally tested with controlled manifests and tampered
-archives. No full-ISO source collection was run because the exact manifest is
-not available in this workspace. Successful source downloading alone does not
-review every license, firmware term, generated input or source completeness.
+All 805 required upstream source versions were found in the current Trixie,
+updates, security and backports source catalogues. The archive files total
+6,741,476,731 bytes. This was an HTTPS catalogue lookup, without Release-signature
+authentication; no full source archive collection or public hosting is claimed.
+The owner has not attached SOURCE-COMMIT.txt or the ISO SHA256 in this upload,
+so association with Build 35 remains owner-provided evidence.
+
+The [source collector](../../scripts/collect-release-sources.py) has generated
+an exact-version plan from the uploaded manifest. It maps patched Calamares and
+Fcitx to their pinned Debian bases, preserves patch references, and rejects
+unknown patched versions. Its download mode verifies .dsc SHA256 entries and
+extraction. Use authenticated Debian source indices for the actual collection.
+Package license, firmware and required build-input review remains necessary.
 
 ## Publication decisions still needed
 
@@ -71,7 +79,7 @@ review every license, firmware term, generated input or source completeness.
    rights for every input or a trademark clearance.
 3. Clarify permission for the wallpaper collection. Its existing generated-artwork
    notice says included for use with JatayuOS; it is not silently relicensed.
-4. Obtain the exact manifest/notices and publish the covered source/build material
+4. Publish the preserved exact manifest/notices and collect/publish the covered source/build material
    via accessible hosting with the ISO. A private GitHub repository is not a public
    source-download route.
 5. Verify the branded Firefox distribution route, including the project's

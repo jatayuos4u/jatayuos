@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "evidence_origin": "owner supplied as Build 35 release bundle outputs; SOURCE-COMMIT and ISO checksum not supplied in this attachment",
+  "expected_source_commit": "95afcb80e3517d8930557d4fb1ba9a20a92b7f7f",
+  "manifest_sha256": "6f964ab87bc2969cf62cede0281e956a67e72b3e5b5e3b3cd6e9b02ae783c858",
+  "notices_zip_sha256": "42cc525296c43aa4f21b1d145ff5d373d24f1d852a5bc3a3dcd07aa4d1751958",
+  "binary_packages": 1474,
+  "source_version_pairs": 808,
+  "source_kinds": {
+    "debian": 803,
+    "modified-debian": 2,
+    "local-project": 3
+  },
+  "notice_files": 1475,
+  "notice_uncompressed_bytes": 41632212,
+  "missing_notice_names": [],
+  "extra_notice_names": [
+    "wpa_supplicant"
+  ],
+  "zip_crc_check": "passed",
+  "safe_entry_paths": "passed",
+  "full_source_archives_collected": false,
+  "license_clearance": false,
+  "source_catalogue_lookup": {
+    "expected_upstream_versions": 805,
+    "found_exact_versions": 805,
+    "archive_bytes": 6741476731,
+    "release_signatures_verified": false
+  }
+}
