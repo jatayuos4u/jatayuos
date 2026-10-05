@@ -8,12 +8,17 @@ JatayuOS is an independent AMD64 desktop distribution based on Debian 13 (Trixie
 
 ## Release status
 
-1.0 (Udaan) is the approved first official release name. This repository is preparing its release candidate; a final 1.0 ISO has not yet been validated or published. Previous testing images have been built and used in VM and real-PC testing. The owner confirmed the corrected Firefox native-title-bar setting. Approved Fastfetch artwork, complete release testing and source/licensing publication checks remain pending.
+[Build #35](https://github.com/jatayuos4u/jatayuos/actions/runs/37208707920) completed successfully from `95afcb80e3517d8930557d4fb1ba9a20a92b7f7f`. The owner downloaded it and reported the observed problems solved and the OS working properly. This is the accepted testing candidate; public final publication is still pending checksum preservation, hosting and the existing source/license gates. Runtime integration remains `1.0~rc3`.
+
+See [current status](docs/STATUS.md), [draft release notes](docs/RELEASE-1.0.md) and [publication checklist](docs/RELEASE-CHECKLIST.md). Specific hardware and installation scenarios should only be advertised when individually verified.
 
 ## Documentation
 
-- [User Manual](assets/USER-MANUAL.pdf)
-- [Frequently Asked Questions](assets/FAQ.pdf)
+- [Repository quick user guide](docs/USER-GUIDE.md)
+- [New illustrated documentation inventory and hashes](docs/DOCUMENTATION.md)
+- [Earlier ISO-bundled User Manual](assets/USER-MANUAL.pdf)
+- [Earlier ISO-bundled Frequently Asked Questions](assets/FAQ.pdf)
+- [Earlier ISO-bundled Installation Guide](assets/INSTALLATION-GUIDE.pdf)
 - [Screenshots and capture provenance](docs/SCREENSHOTS.md)
 - [Testing checklist](docs/TESTING.md)
 - [Windows dual boot, protection policy and responsiveness validation](docs/DUAL-BOOT.md)
@@ -33,7 +38,7 @@ sudo bash scripts/build.sh
 
 The full build also runs the dependency/source precheck before compilation. Output: `out/JatayuOS-1.0-Udaan-amd64.iso`, `SHA256SUMS`, package manifest and notices. Documentation can be regenerated with `python3 scripts/generate-documentation.py` (ReportLab and DejaVu fonts required).
 
-GitHub Actions builds require the BUILD confirmation and retain the 60-minute job cap. Normal source edits do not trigger an ISO build. No release is automatically published. Testing remains required after successful assembly.
+Manual GitHub Actions builds require the BUILD confirmation and target main. A push changing the dedicated trigger file on main also starts a build. The job cap is 50 minutes and artifact retention is one day. Normal source edits do not trigger an ISO build. No release is automatically published. Testing remains required after successful assembly.
 
 ## Updates and support
 

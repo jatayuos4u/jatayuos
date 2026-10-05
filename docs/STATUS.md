@@ -1,97 +1,88 @@
-# JatayuOS 1.0 (Udaan) testing status - 4 October 2026
+# JatayuOS 1.0 Udaan release preparation status
 
-Official website: https://jatayuos.in
+Updated 5 October 2026 UTC. Website: https://jatayuos.in
 
-## Final-candidate source preparation
+## Accepted testing candidate
 
-The build workflow now targets `main` and refuses manual dispatches from other
-branches. Checkout is pinned to the triggering commit SHA, which is verified and
-saved as `SOURCE-COMMIT.txt` with the build reports. The existing trigger-file
-path filter remains: this preparation commit does not request an ISO build.
-The 50-minute timeout and one-day artifact retention remain unchanged.
+[Build #35](https://github.com/jatayuos4u/jatayuos/actions/runs/37208707920)
+completed successfully on 4 October 2026 from `main` at
+`95afcb80e3517d8930557d4fb1ba9a20a92b7f7f`.
+The run finished at 14:44:19 UTC, approximately 27 minutes after starting.
+The owner downloaded the ISO and reported: “i downloaded and cheeked all problem
+solved and working properly”. This records owner acceptance of the observed
+problems; it is not an itemized certification of every installation or hardware scenario.
 
-Current source also includes Dolphin thumbnail backends, default previews and
-cache initialization; the approved simple Fastfetch logo with system modules;
-and explicit `en_IN.UTF-8` system/KDE locale defaults. These changes, including
-time synchronization, require verification in the next ISO. Build #33 is not a
-public final release. Keep integration version `1.0~rc3` until acceptance passes.
+Build #35 replaces Build #33 as the accepted testing candidate. No public final
+release or permanent download has been published by this preparation.
+Keep the integration package at `1.0~rc3` and Calamares at
+`3.3.14-1+jatayu3`; the tested ISO has not been rebuilt or relabeled internally.
 
-## Post-install update defect: source correction pending next ISO
+## Corrections included in Build 35
 
-The owner confirmed installation and installed-system startup succeed. Windows
-boot success has not yet been confirmed. Installed updates initially failed:
-APT reported repository signatures not yet valid because the clock was behind.
-`timedatectl` reported NTP unavailable; manually correcting time and installing
-systemd-timesyncd restored updates, as confirmed by the owner.
+- Explicit systemd-timesyncd package, service enablement and image validation.
+- Dolphin preview backend packages, default previews and thumbnail cache initialization.
+- Explicit `LANG=en_IN.UTF-8` and `LC_CTYPE=en_IN.UTF-8` in system/KDE defaults.
+- The approved simple Fastfetch logo with normal system-information modules.
+- Runtime asset packaging excludes reference/design subdirectories, fixing
+  Build #34's early `cp assets/*` failure.
+- Builds target main, verify checkout against the triggering SHA and record
+  SOURCE-COMMIT.txt. The timeout is 50 minutes and artifact retention one day.
+- Existing installer, Firefox pin/titlebar defaults, Places initialization,
+  Aarambh, Jatayu Tools, Wallpaper Changer, LibreOffice and Waydroid integration retained.
 
-The build disables recommended packages, so it omitted the default time daemon.
-Current source explicitly includes systemd-timesyncd and enables its service
-for live and installed boot. Source preflight now requires it and assembled-image
-validation checks the unit and enablement link. The existing build #33 ISO does
-not contain this correction. No replacement build has been started.
+The successful gated workflow establishes that its source/dependency prechecks,
+build and configured assembled-image validations completed. It does not establish
+a real-hardware test matrix by itself.
 
-Before release, verify fresh live/installed boot synchronizes with working internet,
-APT/Discover refresh succeeds, and the clock remains correct after Windows/Linux
-reboots. Without internet/NTP access, automatic synchronization cannot occur.
+## Evidence and limits
 
-## Delivered candidate
+Before the new ISO acceptance report, the owner supplied an installed-system
+`timedatectl` result with synchronized clock and active NTP, followed by an
+error-free APT refresh against trixie, trixie-security, trixie-updates and
+trixie-backports reporting all packages up to date. This confirms the update
+path on that tested installation. It is separate evidence, not a claim that
+those terminal outputs came from a fresh Build #35 installation.
 
-[Build #33](https://github.com/jatayuos4u/jatayuos/actions/runs/37128272039)
-completed successfully from source `8dc7b0e40693b5b64b8c7c93ab7a8e2d16693689`.
-One build took approximately 32 minutes, within its 50-minute cap and the
-owner's 60-minute budget. No retry was needed.
+The owner later supplied ten VM screenshots for documentation: boot menu,
+Plymouth, live welcome, desktop, menu, Creative Studio, Wallpaper Changer,
+Kavach, Sarkar Setu and Utsav. Images show the captured interfaces and are not
+evidence of unseen operations or other hardware. See [capture provenance](SCREENSHOTS.md).
 
-[Download the ISO bundle](https://github.com/jatayuos4u/jatayuos/actions/runs/37128272039/artifacts/11276158606).
-The ISO is 2,322,923,520 bytes (2.16 GiB). The bundle includes SHA256SUMS,
-package reports and third-party notices. Artifact retention is one day;
-the ISO bundle expires on 4 October 2026 at 14:34 UTC.
+## Release documents prepared after the ISO
 
-## Changes
+The owner-facing User Manual (16 pages), Installation Guide (6 pages) and FAQ
+(5 pages) were created and visually checked after Build #35. Their filenames,
+page counts and exact hashes are recorded in [the documentation inventory](DOCUMENTATION.md)
+and [candidate metadata](releases/1.0-udaan-candidate.json).
+They have been delivered separately; they are not newly embedded in the existing ISO.
+The older bundled PDFs in assets remain unchanged.
 
-- Removed build #32's overbroad Windows/EFI partition rejection job.
-- Restored upstream Calamares partition and bootloader module code, retaining
-  Debian Live sequencing, manual partitioning and an explicit partition choice.
-- Retained Windows OS detection, the eight-second GRUB menu, JatayuOS EFI ID,
-  and disabled firmware fallback replacement. Offline GRUB platform binaries
-  remain preinstalled through the existing helper adaptation.
-- Added a five-page installation PDF to the live desktop, Aarambh and menu.
-  It covers Windows preparation, manual partitioning, EFI reuse, erase/reinstall
-  and first-boot troubleshooting.
-- Retained six installation slides, Firefox native titlebar defaults,
-  Dolphin Places initialization and the gold Fastfetch eagle with default modules.
-- Retained UPower/KDE portals and reduced animations for the reported responsiveness
-  issue; these are not proof that all missed-click symptoms are resolved.
-- Integration package is 1.0~rc3; Calamares is 3.3.14-1+jatayu3.
+## Remaining publication work
 
-## Verified
+- Obtain and verify the ISO's SHA256SUMS and SOURCE-COMMIT.txt from the preserved
+  downloaded bundle. The ISO digest is not yet independently recorded here.
+- Provide permanent hosting for the exact ISO, checksum, guides, notices,
+  package/source manifest and required corresponding source/build material.
+- Resolve original-code/artwork licensing, rights and upstream redistribution
+  obligations; preserve the existing [compliance checklist](COMPLIANCE.md).
+- Record which installation/hardware scenarios were actually tested before
+  making specific compatibility claims. BIOS, Secure Boot, encryption,
+  Windows dual boot and Android compatibility are not broadly certified.
+- Decide whether to release the accepted candidate as a candidate or schedule
+  an explicitly authorized final-version build. Version changes require a new
+  artifact and validation; no rebuild is scheduled by this commit.
+- Document the Jatayu app update delivery decision. Debian updates work through
+  APT/Discover; a signed Jatayu repository is not configured.
 
-- Source preflight and Debian package/dependency/source checks passed.
-- All ten existing application and user-defaults regression tests passed locally.
-- The new PDF rendered correctly as five pages. The actual live startup function
-  copied it into a localized desktop path in a test using GUI substitutes; it
-  did not create the file in the completed installed-session path.
-- The UI patch applied to pinned upstream sources. Build-time hashes confirmed
-  partition and bootloader module files were unchanged by that patch.
-- Calamares compiled successfully and the rc3 package was installed in the image.
-- Assembled-image checks passed for manual partitioning, bootloader settings,
-  OS detection, GRUB binaries, UPower/KDE portal files, PDF help, Firefox defaults,
-  Fastfetch configuration and slideshow files.
-- Existing image smoke tests and BIOS/UEFI ISO structure checks passed.
-- ISO and build-log artifacts uploaded successfully.
+See [draft release notes](RELEASE-1.0.md), [release checklist](RELEASE-CHECKLIST.md),
+[testing](TESTING.md), [dual boot](DUAL-BOOT.md) and [update policy](UPDATES.md).
 
-## Still required before a public release
+## Build history
 
-1. Test offline blank-disk installation, explicit erase/reinstall, and manual
-   Windows UEFI dual boot on disposable/backed-up media. Preserve Microsoft EFI
-   files and Windows Boot Manager and boot both OSes. A successful build does not
-   establish this. The earlier PC's missing Microsoft files need separate recovery.
-2. Verify first-click menu/app response with mouse and touchpad on the affected PC.
-3. Confirm Firefox controls, Dolphin Places, Fastfetch and slides in the live ISO.
-4. Test installed updates, branding persistence, networking, audio, suspend and input.
-5. Validate BIOS, Secure Boot, encryption and Waydroid separately before claiming support.
-6. Complete Jatayu update delivery, licensing/corresponding-source arrangements,
-   final screenshots and permanent download hosting before publication.
+- Build #33: earlier delivered candidate; missing the later NTP/preview/locale corrections.
+- Build #34: failed before ISO assembly on copying a reference-assets directory;
+  approximately 2 minutes 23 seconds. Packaging was corrected in `93694cb7`.
+- Build #35: successful corrected candidate, downloaded and accepted by the owner.
 
-See [installation/dual boot](DUAL-BOOT.md), [testing](TESTING.md),
-[updates](UPDATES.md), and [distribution checklist](COMPLIANCE.md).
-No public release has been published.
+This documentation-only preparation leaves the build trigger, workflow, runtime
+assets, package versions and installer code unchanged.

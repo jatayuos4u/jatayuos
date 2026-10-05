@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "project": "JatayuOS",
+  "version_name": "1.0 Udaan",
+  "status": "owner_accepted_candidate_publication_pending",
+  "build": {
+    "number": 35,
+    "run_id": 37208707920,
+    "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37208707920",
+    "source_commit": "95afcb80e3517d8930557d4fb1ba9a20a92b7f7f",
+    "conclusion": "success",
+    "completed_at_utc": "2026-10-04T14:44:19Z"
+  },
+  "iso": {
+    "filename": "JatayuOS-1.0-Udaan-amd64.iso",
+    "sha256": null,
+    "size_bytes": null,
+    "permanent_download_url": null,
+    "verification": "pending_preserved_SHA256SUMS_and_SOURCE_COMMIT"
+  },
+  "temporary_actions_artifact": {
+    "id": 11307040257,
+    "size_bytes": 2388806030,
+    "archive_sha256": "6b353368976cfe777c10fbc5c07474d398fde8797fa3bdd3501f730f2313e110",
+    "expires_at_utc": "2026-10-05T14:43:59Z",
+    "note": "These size and digest values describe the artifact ZIP, not the ISO"
+  },
+  "runtime_packages": {
+    "jatayu-integration": "1.0~rc3",
+    "calamares": "3.3.14-1+jatayu3"
+  },
+  "owner_acceptance": {
+    "reported_iso_downloaded": true,
+    "reported_observed_problems_resolved": true,
+    "scope": "broad_owner_report_not_itemized_hardware_or_partition_matrix"
+  },
+  "documents": [
+    {
+      "file": "JatayuOS-FAQ.pdf",
+      "size_bytes": 53163,
+      "sha256": "28ff7a3651b25c3b1e2e49a8ec72325f7e600dc4865c24010deba4a190ff2f70",
+      "pages": 5,
+      "edition": 1,
+      "prepared_after_iso": true,
+      "publication_url": null,
+      "in_current_iso": false
+    },
+    {
+      "file": "JatayuOS-Installation-Guide.pdf",
+      "size_bytes": 4395179,
+      "sha256": "1a331c19f873897b1d02538f568944a15658f6575bda866f3a4303b484501d82",
+      "pages": 6,
+      "edition": 1,
+      "prepared_after_iso": true,
+      "publication_url": null,
+      "in_current_iso": false
+    },
+    {
+      "file": "JatayuOS-User-Manual.pdf",
+      "size_bytes": 8920430,
+      "sha256": "7e9fa1b0c450989dbba014fdffd4c8e384caad346be89b9888fc6bb4ccd06734",
+      "pages": 16,
+      "edition": 1,
+      "prepared_after_iso": true,
+      "publication_url": null,
+      "in_current_iso": false
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "Menu(1).png",
+      "sha256": "a83220c9ebb90373a4ee2c54d901461d41417a09bd702b3a7cfdd5b918826294",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "Welcome-screen.png",
+      "sha256": "a4a8f209294c583b1a24157693782b7e494b80d980027f4185d761e55c5c7d78",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "boot-menu.png",
+      "sha256": "1c32531b3e378d2af93fe5116da655094caa208eda315f25bd25c89ba7fb1982",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "file": "desktop.png",
+      "sha256": "cdf83d2517f2674be79321693dbda9345c877def17159d4ec76a053c7074d122",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "jatayu-tools.png",
+      "sha256": "2132f485af5224d412eafedc98ba580e8e634229039247c84de856ebbf7d7823",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "kavach-app.png",
+      "sha256": "03e09020d30a9ce75ceb76c33501ff68c9ded186fedcdf54d3f17ffa586b3843",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "plymouth-screen.png",
+      "sha256": "7eb886f824b6dd2dfd7a77846994ef986dc0bf6e428813799a62ba8710578d90",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "sarkar-setu.png",
+      "sha256": "89027f22c4f5d0a824de9c45ec3fe3ea9ef65fbc9d961188a4be209a7850d742",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "utsav-app.png",
+      "sha256": "97a6540b16c1e6f57c7d96c6e423755884154442cda4865c0f37dfb32b23cd10",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "walpaper-changer.png",
+      "sha256": "5b75cb6f8952e01618ecb9effa740eddc028c6a0ea8e041ee7605ccf4958e9cc",
+      "width": 1280,
+      "height": 800
+    }
+  ],
+  "release_published": false,
+  "tag_created": false,
+  "rebuild_requested": false
+}

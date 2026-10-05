@@ -4,7 +4,18 @@ Official website: https://jatayuos.in
 
 Use disposable virtual disks and snapshots. Never test partitioning against your only copy of Windows or personal files.
 
-## Current candidate priorities
+## Build 35 acceptance record
+
+Build #35 completed successfully and the owner downloaded it and reported the
+observed problems solved. See [STATUS.md](STATUS.md) for the exact source SHA
+and evidence limits. The checklist below remains the per-scenario test matrix;
+blank items must not be assumed passed from the broad acceptance report.
+
+The newer separately delivered Installation Guide has six pages. The ISO still
+contains the earlier five-page guide; documentation-only preparation does not
+replace files in the already-built ISO.
+
+## Per-scenario verification
 
 - Open the five-page Installation Guide PDF from the live desktop while offline.
 - Check all six installation slides rotate and stop when installation finishes.
