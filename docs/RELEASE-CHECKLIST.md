@@ -67,10 +67,11 @@ items do not mark public distribution cleared.
 - [ ] Preserve the bundle before its 7 October 2026, 03:23:38 UTC expiry; independently verify and record the ISO checksum.
 - [ ] Boot and install-test the final artifact; record the actual tested scenarios.
 - [ ] Review private repository contents and arrange public access to required source and release documents.
-- [ ] Tag the exact artifact-producing commit.
-- [ ] Publish the GitHub release after required gates have evidence.
+- [x] Tag the exact artifact-producing commit `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` as `v1.0-udaan`.
+- [x] Publish the private [GitHub release record](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) with jatayuos.in as the download destination.
+- [ ] Complete remaining validation/source/rights gates before public ISO distribution.
 - [ ] Verify SourceForge files and website links before the planned launch.
 
-The final ISO has been assembled successfully. No tag or public release has
-been published. Final boot/install validation and permanent download delivery
-remain pending. Website creation can proceed using the verified build record.
+The final ISO has been assembled successfully and the private GitHub release
+record/tag published. Final boot/install validation and public permanent download
+delivery remain pending. Website creation can proceed using the verified build record.

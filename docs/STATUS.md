@@ -56,8 +56,10 @@ GitHub now records the successful final ISO build, source and documents.
 Website creation is the next project step. https://jatayuos.in will be the public
 entry point linking to SourceForge. SourceForge launch remains planned for
 **11 October 2026**, subject to final validation and publication requirements.
-The repository remains private; no tag, public release or permanent download
-has been published.
+The repository remains private. The [GitHub release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) was published
+on 6 October 2026 with tag `v1.0-udaan` pointing to the artifact-producing
+source. It records the build and directs downloads to https://jatayuos.in;
+public ISO delivery and permanent downloads remain pending.
 
 ## Remaining validation and publication work
 

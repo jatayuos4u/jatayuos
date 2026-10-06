@@ -1,7 +1,8 @@
-# JatayuOS 1.0 Udaan release notes — final draft
+# JatayuOS 1.0 Udaan release notes
 
-Draft for publication review. Final ISO Build #37 succeeded on 6 October 2026;
-final boot/install validation and public publication remain pending.
+[GitHub release: v1.0-udaan](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) published in the private repository
+on 6 October 2026. Final ISO Build #37 succeeded; final boot/install validation
+and public ISO distribution remain pending.
 Website: https://jatayuos.in
 
 ## Overview
@@ -87,7 +88,8 @@ recorded in [final build metadata](releases/1.0-udaan-final.json).
 Independent ISO checksum verification and final boot/install evidence remain pending.
 GitHub will hold the release record and source/docs; jatayuos.in will link users
 to SourceForge for ISO downloads. SourceForge launch is planned for 11 October
-2026, after the required checks. This draft does not announce availability.
+2026, after the required checks. The private GitHub release records this build; public ISO availability remains pending.
+The download destination is [jatayuos.in](https://jatayuos.in).
 
 ## Using updates
 

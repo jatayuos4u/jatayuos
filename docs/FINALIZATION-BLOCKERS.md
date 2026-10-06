@@ -33,6 +33,7 @@ The successful build does not establish final installation acceptance.
 
 Website creation is the next project step. SourceForge launch remains planned
 for 11 October 2026; https://jatayuos.in is the planned download entry point.
-The repository remains private. No public release, tag or visibility change
-has occurred. See [current status](STATUS.md) and
+The repository remains private. The GitHub release record and `v1.0-udaan`
+tag are published, pointing downloads to https://jatayuos.in. No public ISO
+delivery or repository visibility change has occurred. See [current status](STATUS.md) and
 [final build metadata](releases/1.0-udaan-final.json).
