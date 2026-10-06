@@ -2,20 +2,32 @@
   "schema_version": 1,
   "project": "JatayuOS",
   "version_name": "1.0 Udaan",
-  "status": "final_source_prepared_iso_build_and_publication_pending",
+  "status": "iso_built_validation_and_publication_pending",
   "prepared_on": "2026-10-05",
   "integration_version": "1.0",
   "calamares_version": "3.3.14-1+jatayu3",
   "final_build": {
-    "run_id": null,
-    "source_commit": null,
-    "conclusion": null
+    "run_id": 37406898100,
+    "run_number": 37,
+    "source_commit": "45b7d1f76dea0184b0fcf7dd1c900f4edf139552",
+    "branch": "main",
+    "conclusion": "success",
+    "started_at": "2026-10-06T03:00:23Z",
+    "completed_at": "2026-10-06T03:24:06Z",
+    "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100",
+    "ci_checks": [
+      "static_precheck",
+      "dependency_and_source_precheck",
+      "assembled_image_checks",
+      "iso_structure_check"
+    ]
   },
   "iso": {
     "filename": "JatayuOS-1.0-Udaan-amd64.iso",
     "sha256": null,
-    "size_bytes": null,
-    "download_url": null
+    "size_bytes": 2354036736,
+    "download_url": null,
+    "checksum_status": "pending_independent_verification_of_bundled_SHA256SUMS"
   },
   "documents": [
     {
@@ -46,7 +58,7 @@
   "testing_reference": "1.0-udaan-candidate.json",
   "original_software_license": "GPL-3.0-or-later",
   "publication_gates": [
-    "final_builder_precheck_and_new_ISO_validation",
+    "final_ISO_checksum_verification_and_boot_install_validation",
     "exact_corresponding_source_and_permanent_access",
     "artwork_and_documentation_permissions",
     "third_party_redistribution_and_browser_review",
@@ -60,5 +72,17 @@
   },
   "release_published": false,
   "tag_created": false,
-  "workflow_dispatched": false
+  "workflow_dispatched": true,
+  "updated_on": "2026-10-06",
+  "actions_artifact": {
+    "id": 11388251943,
+    "name": "JatayuOS-1.0-Udaan-ISO",
+    "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943",
+    "expires_at": "2026-10-07T03:23:38Z",
+    "archive_size_bytes": 2396326519,
+    "archive_sha256": "2632f324a71ae7e4979dadb0f41c1243aeca23e44e3a35400a3c892c2c8a4be6",
+    "digest_scope": "Actions artifact ZIP, not ISO"
+  },
+  "document_hash_scope": "Committed repository PDFs; build-regenerated PDF hashes are supplied in the artifact.",
+  "final_boot_install_validation": "pending"
 }

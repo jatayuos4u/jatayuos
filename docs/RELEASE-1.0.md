@@ -1,6 +1,7 @@
 # JatayuOS 1.0 Udaan release notes — final draft
 
-Draft for publication review. Final ISO build pending; testing reference: Build #35.
+Draft for publication review. Final ISO Build #37 succeeded on 6 October 2026;
+final boot/install validation and public publication remain pending.
 Website: https://jatayuos.in
 
 ## Overview
@@ -37,7 +38,29 @@ Debian Live sequencing. Alongside choices depend on the detected layout; manual
 UEFI dual boot requires preserving the existing EFI filesystem and Windows
 partitions. Read the Installation Guide before changing disks.
 
-## Testing reference identity
+## Final ISO build identity
+
+| Field | Value |
+| --- | --- |
+| Build | [37](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100) — success |
+| Exact source | `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` |
+| Completed | 6 October 2026, 03:24:06 UTC |
+| Base / architecture | Debian 13 Trixie / AMD64 |
+| ISO filename | `JatayuOS-1.0-Udaan-amd64.iso` |
+| ISO byte size | 2,354,036,736 (2.19 GiB) |
+| Integration package | `1.0` |
+| Calamares package | `3.3.14-1+jatayu3` |
+| Private CI bundle | [Actions artifact](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943) |
+| Artifact expiry | 7 October 2026, 03:23:38 UTC (08:53:38 IST) |
+| ISO SHA256 | Pending independent verification of bundled SHA256SUMS |
+| Permanent download | Pending publication |
+
+Dependency/source prechecks, assembled-image checks and ISO structure validation
+passed. Final boot/install acceptance is still pending. Preserve the temporary
+bundle before expiry; its ZIP digest is not the ISO checksum.
+See [final build metadata](releases/1.0-udaan-final.json).
+
+## Earlier testing reference identity
 
 | Field | Value |
 | --- | --- |
@@ -58,10 +81,10 @@ The historical run link is not permanent download hosting.
 
 ## Final-version preparation
 
-The source prepares integration `1.0`, updated About information and edition 2
-offline guides. A final ISO requires a new build and its own checksum, byte size,
-source commit and boot/install evidence. Those values are pending in
-[final preparation metadata](releases/1.0-udaan-final.json).
+Build #37 assembled integration `1.0`, updated About information and edition 2
+offline guides from the merged main source. Its source commit and byte size are
+recorded in [final build metadata](releases/1.0-udaan-final.json).
+Independent ISO checksum verification and final boot/install evidence remain pending.
 GitHub will hold the release record and source/docs; jatayuos.in will link users
 to SourceForge for ISO downloads. SourceForge launch is planned for 11 October
 2026, after the required checks. This draft does not announce availability.
@@ -76,9 +99,9 @@ Do not switch APT suites to another Debian release without a tested migration.
 ## Documentation
 
 See [documentation inventory](DOCUMENTATION.md) for the committed edition 2
-16-page User Manual, 6-page Installation Guide and 5-page FAQ. The next build
-will regenerate and bundle these guides; they are absent from the existing
-Build #35 ISO. The [quick user guide](USER-GUIDE.md) provides repository-readable instructions.
+16-page User Manual, 6-page Installation Guide and 5-page FAQ. Build #37 regenerated and bundled these guides; the existing
+Build #35 ISO retains its earlier documents. Repository hashes describe the
+committed PDFs; regenerated document hashes are in the final build bundle. The [quick user guide](USER-GUIDE.md) provides repository-readable instructions.
 
 ## Known limits
 

@@ -1,4 +1,4 @@
-# Final-version upload status
+# Final-version upload and build status
 
 ## Upload completed — 5 October 2026
 
@@ -12,8 +12,27 @@ All five previously blocked files were committed to prepare/final-1.0-udaan in e
 
 The manual and installation guide were regenerated from the unchanged branch generator and all ten supplied VM captures. Both match the prepared final-version hashes exactly. The earlier Library PDF editions were not substituted. All ten captures are now present on the branch.
 
-## Remaining release preparation
+## Final build completed — 6 October 2026
 
-The final-version preparation remains on draft PR #4, not merged to main. The earlier session reported ten regression tests passed and visually checked all 27 guide pages. This upload recovery verified file hashes; it did not rerun the full precheck or assemble a new ISO.
+The full source tree was verified, local preflight and ten regression tests
+passed, and privileged Debian precheck Build #36 succeeded. PR #4 was merged
+into main. [Build #37](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100) then assembled the final-version ISO successfully
+from `45b7d1f76dea0184b0fcf7dd1c900f4edf139552`.
 
-Next: verify the full source tree and complete the precheck, run the gated build once, preserve ISO provenance/checksums, validate the new ISO and complete corresponding-source delivery and artwork/documentation publication review. SourceForge launch remains planned for 11 October 2026; website https://jatayuos.in is the download entry point. The repository remains private. No final release, tag or visibility change has occurred.
+The ISO is 2,354,036,736 bytes (2.19 GiB), with integration `1.0`.
+Dependency/source, assembled-image and ISO structure checks passed.
+The [private ISO bundle](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943) expires on
+7 October 2026 at 03:23:38 UTC (08:53:38 IST).
+
+## Remaining validation and publication
+
+Preserve the final bundle, independently verify its ISO checksum/provenance,
+and boot/install-test this exact artifact. Complete corresponding-source
+delivery and artwork/documentation publication review before public launch.
+The successful build does not establish final installation acceptance.
+
+Website creation is the next project step. SourceForge launch remains planned
+for 11 October 2026; https://jatayuos.in is the planned download entry point.
+The repository remains private. No public release, tag or visibility change
+has occurred. See [current status](STATUS.md) and
+[final build metadata](releases/1.0-udaan-final.json).
