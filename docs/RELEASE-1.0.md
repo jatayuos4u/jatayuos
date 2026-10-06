@@ -1,6 +1,6 @@
-# JatayuOS 1.0 Udaan candidate release notes
+# JatayuOS 1.0 Udaan release notes — final draft
 
-Draft for publication review. Accepted testing candidate: Build #35.
+Draft for publication review. Final ISO build pending; testing reference: Build #35.
 Website: https://jatayuos.in
 
 ## Overview
@@ -25,7 +25,7 @@ preparation; this document does not announce a public final release.
 - Waydroid packages are included; Android images and initialization remain on demand.
 - Fastfetch uses the approved compact Jatayu design with system information.
 
-## Corrections in this candidate
+## Corrections established in Build 35
 
 Time synchronization is installed and enabled automatically. Dolphin thumbnail
 backends, default previews and cache initialization are included. UTF-8 India
@@ -37,7 +37,7 @@ Debian Live sequencing. Alongside choices depend on the detected layout; manual
 UEFI dual boot requires preserving the existing EFI filesystem and Windows
 partitions. Read the Installation Guide before changing disks.
 
-## Artifact identity
+## Testing reference identity
 
 | Field | Value |
 | --- | --- |
@@ -56,6 +56,16 @@ provenance and document hashes are recorded in
 [the candidate metadata](releases/1.0-udaan-candidate.json).
 The historical run link is not permanent download hosting.
 
+## Final-version preparation
+
+The source prepares integration `1.0`, updated About information and edition 2
+offline guides. A final ISO requires a new build and its own checksum, byte size,
+source commit and boot/install evidence. Those values are pending in
+[final preparation metadata](releases/1.0-udaan-final.json).
+GitHub will hold the release record and source/docs; jatayuos.in will link users
+to SourceForge for ISO downloads. SourceForge launch is planned for 11 October
+2026, after the required checks. This draft does not announce availability.
+
 ## Using updates
 
 Debian packages receive updates from the configured repositories via
@@ -65,10 +75,10 @@ Do not switch APT suites to another Debian release without a tested migration.
 
 ## Documentation
 
-See [documentation inventory](DOCUMENTATION.md) for the separately delivered
-16-page User Manual, 6-page Installation Guide and 5-page FAQ. These newer guides
-were prepared after the ISO; the PDFs inside that ISO remain the earlier editions.
-The [quick user guide](USER-GUIDE.md) provides repository-readable instructions.
+See [documentation inventory](DOCUMENTATION.md) for the committed edition 2
+16-page User Manual, 6-page Installation Guide and 5-page FAQ. The next build
+will regenerate and bundle these guides; they are absent from the existing
+Build #35 ISO. The [quick user guide](USER-GUIDE.md) provides repository-readable instructions.
 
 ## Known limits
 
@@ -87,4 +97,5 @@ distribution maintainer, not the author of every component.
 Public distribution remains subject to completing the project's existing
 [license/source checklist](COMPLIANCE.md), checksum verification, permanent
 hosting and final metadata decision. See [release checklist](RELEASE-CHECKLIST.md).
-No license choice or rights clearance is implied by these draft notes.
+Original software is licensed GPL-3.0-or-later. Separate artwork/documentation
+permissions and third-party distribution requirements remain under review.

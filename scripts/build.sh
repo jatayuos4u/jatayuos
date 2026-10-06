@@ -9,7 +9,7 @@ cap_hex=$(awk '/^CapEff:/{print $2}' /proc/self/status)
 (( (16#$cap_hex & (1<<21)) && (16#$cap_hex & (1<<18)) )) || { echo 'Builder needs mount and chroot capabilities; stop before downloads.' >&2; exit 2; }
 mkdir -p out
 exec > >(tee -a out/build.log) 2>&1
-echo "JatayuOS release candidate build started: $(date -u +%FT%TZ)"
+echo "JatayuOS 1.0 final-version build started: $(date -u +%FT%TZ)"
 precheck_only=false
 case "${1:-}" in --precheck-only) precheck_only=true ;; "") ;; *) echo "Unknown build option" >&2; exit 2 ;; esac
 export DEBIAN_FRONTEND=noninteractive
@@ -50,6 +50,10 @@ apt-get update
 apt-get install -y --no-install-recommends live-build debootstrap squashfs-tools xorriso isolinux syslinux-common syslinux-utils grub-pc-bin grub-efi-amd64-bin mtools dosfstools python3 python3-yaml python3-pil poppler-utils fonts-dejavu-core dpkg-dev zstd ca-certificates
 python3 scripts/prepare-wallpaper.py
 python3 scripts/generate-files.py
+# Regenerate all offline guides and About before dependency checks/packaging.
+apt-get install -y --no-install-recommends python3-reportlab
+python3 scripts/generate-documentation.py
+sha256sum assets/USER-MANUAL.pdf assets/FAQ.pdf assets/INSTALLATION-GUIDE.pdf > out/DOCUMENT-SHA256SUMS
 python3 scripts/preflight.py --apt | tee out/precheck.txt
 if $precheck_only; then echo "Precheck passed. ISO build was not requested."; exit 0; fi
 printf '%s  %s\n' '1482544a10ec927187566396067d94009eff00b7c4866cf805d809b46f515235' jatayu-tools_2.0.2_all.deb | sha256sum -c -
@@ -71,7 +75,7 @@ mkdir -p build/auto build/config/package-lists build/config/packages.chroot buil
 cp auto-config.sh build/auto/config
 chmod +x build/auto/config
 cp packages.list build/config/package-lists/jatayu.list.chroot
-cp out/jatayu-integration_1.0~rc3_all.deb jatayu-tools_2.0.2_all.deb out/jatayu-wallpaper_1.2.1_all.deb build/config/packages.chroot/
+cp out/jatayu-integration_1.0_all.deb jatayu-tools_2.0.2_all.deb out/jatayu-wallpaper_1.2.1_all.deb build/config/packages.chroot/
 cp out/calamares-src/calamares_3.3.14-1+jatayu3_amd64.deb build/config/packages.chroot/
 cp hooks/*.hook.chroot build/config/hooks/live/
 chmod +x build/config/hooks/live/*
@@ -108,5 +112,5 @@ cp build/chroot/usr/share/jatayu/build-package-manifest.tsv out/package-manifest
 cp -a build/chroot/usr/share/jatayu/notices out/third-party-notices
 python3 scripts/iso-check.py out/JatayuOS-1.0-Udaan-amd64.iso
 (cd out && sha256sum JatayuOS-1.0-Udaan-amd64.iso > SHA256SUMS)
-echo 'Release Candidate ISO assembled. It is NOT boot-tested or cleared for public redistribution.'
+echo 'Final-version ISO assembled. Boot/installation validation and publication review are still required.'
 echo 'Run the VM/hardware checklist in docs/TESTING.md. See source obligations in docs/COMPLIANCE.md.'

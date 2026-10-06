@@ -1,4 +1,4 @@
-name: JatayuOS 1.0 Udaan - final candidate (gated)
+name: JatayuOS 1.0 Udaan - final release (gated)
 on:
   push:
     branches: [main]
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm:
-        description: 'Type BUILD to spend runner minutes on one JatayuOS 1.0 Udaan final-candidate ISO'
+        description: 'Type BUILD to spend runner minutes on one JatayuOS 1.0 Udaan final-version ISO'
         required: true
         type: string
       precheck_only:
@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.confirm == 'BUILD')
+    if: (github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.confirm == 'BUILD')) || (github.ref == 'refs/heads/prepare/final-1.0-udaan' && github.event_name == 'workflow_dispatch' && inputs.confirm == 'BUILD' && inputs.precheck_only == true)
     runs-on: ubuntu-24.04
     timeout-minutes: 50
     steps:
@@ -67,6 +67,7 @@ jobs:
             out/SHA256SUMS
             out/SOURCE-COMMIT.txt
             out/*manifest*
+            out/DOCUMENT-SHA256SUMS
             out/third-party-notices/
             out/precheck*.txt
             out/*smoke*.png

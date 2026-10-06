@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small shared Qt front end for the Jatayu development suite."""
+"""Small shared Qt front end for the Jatayu desktop suite."""
 import argparse, json, os, shutil, subprocess, sys
 from pathlib import Path
 from PySide6.QtCore import Qt, QThread, Signal, QProcess, QUrl, QTimer
@@ -170,7 +170,7 @@ class Window(QMainWindow):
         self.text('Create a dated personal-file backup, preferably on an external drive. Restore into a NEW folder. This is not full-system recovery or an encrypted backup.')
         self.button('Back up a folder',self.backup_folder)
         self.button('Restore a Jatayu backup',self.restore_folder)
-        self.text('Automatic scheduling and bootable recovery are not implemented in this release candidate.')
+        self.text('Automatic scheduling and bootable recovery are not implemented in this version.')
     def backup_folder(self):
         src=QFileDialog.getExistingDirectory(self,'Folder to back up',str(Path.home()))
         if not src:return
