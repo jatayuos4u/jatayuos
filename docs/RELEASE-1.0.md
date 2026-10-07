@@ -58,7 +58,7 @@ partitions. Read the Installation Guide before changing disks.
 | Calamares package | `3.3.14-1+jatayu3` |
 | Private CI bundle | [Actions artifact](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270/artifacts/11468269941) |
 | Artifact expiry | 8 October 2026, 08:09:32 UTC (13:39:32 IST) |
-| ISO SHA256 | Pending independent verification of bundled SHA256SUMS |
+| ISO SHA256 | `5a5dbc79f724c8353f1173e55edde3f905d9ddb287272d492930e6730650e040` |
 | Permanent download | Pending publication |
 
 Dependency/source prechecks, assembled-image checks and ISO structure validation
@@ -92,7 +92,10 @@ The historical run link is not permanent download hosting.
 Build #38 assembled integration `1.0`, updated About information and edition 2
 offline guides from the merged main source. Its source commit and byte size are
 recorded in [final build metadata](releases/1.0-udaan-final.json).
-Independent ISO checksum verification and final boot/install evidence remain pending.
+The maintainer verified the downloaded Build #38 ISO against bundled SHA256SUMS
+on 7 October 2026 and confirmed the correct source commit. See
+[the verification result](VERIFY-ISO.md#recorded-build-38-verification).
+Final boot/install evidence remains pending.
 GitHub will hold the release record and source/docs; jatayuos.in will link users
 to SourceForge for ISO downloads. SourceForge launch is planned for 11 October
 2026, after the required checks. The existing private GitHub release tag records Build #37; it has not been moved.
@@ -130,7 +133,7 @@ upstream projects retain their authorship, licenses and marks. Anup Yadav is the
 distribution maintainer, not the author of every component.
 
 Public distribution remains subject to completing the project's existing
-[license/source checklist](COMPLIANCE.md), checksum verification, permanent
+[license/source checklist](COMPLIANCE.md), verification after permanent upload, permanent
 hosting and final metadata decision. See [release checklist](RELEASE-CHECKLIST.md).
 Original software is licensed GPL-3.0-or-later. Separate artwork/documentation
 permissions and third-party distribution requirements remain under review.

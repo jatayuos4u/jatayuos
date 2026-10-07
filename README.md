@@ -81,11 +81,15 @@ The latest ISO was assembled successfully on **7 October 2026**.
 | ISO filename | `JatayuOS-1.0-Udaan-amd64.iso` |
 | ISO size | 2,373,058,560 bytes (2.21 GiB) |
 | Integration / installer | `1.0` / Calamares `3.3.14-1+jatayu3` |
-| ISO SHA256 | Bundled `SHA256SUMS` generated; independent download verification pending |
+| ISO SHA256 | `5a5dbc79f724c8353f1173e55edde3f905d9ddb287272d492930e6730650e040` |
 
 Static and dependency/source prechecks, assembled-image checks and ISO structure
 validation passed. The CI suite ran 15 tests: 14 passed and one backup round-trip
 test was skipped because the builder lacks rsync. All 15 passed in local validation.
+The maintainer verified the downloaded ISO against bundled SHA256SUMS on
+7 October 2026 and confirmed the Build #38 source commit. See the
+[recorded checksum](docs/releases/1.0-udaan-build38.SHA256SUMS) and
+[verification result](docs/VERIFY-ISO.md#recorded-build-38-verification).
 Final boot/install acceptance and public download delivery remain pending.
 
 Build #38 adds explicit Info Center helpers, RTKit, Flatpak/Discover/Flathub,

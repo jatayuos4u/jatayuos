@@ -15,7 +15,7 @@ The run started at 07:42:39 UTC and completed at 08:09:51 UTC on 7 October 2026.
 | ISO size | 2,373,058,560 bytes (2.21 GiB) |
 | Base / desktop / architecture | Debian 13 Trixie / KDE Plasma 6.3.6 / AMD64 |
 | Integration / installer | 1.0 / Calamares 3.3.14-1+jatayu3 |
-| ISO checksum | Generated in bundled SHA256SUMS; independent verification pending |
+| ISO SHA256 | `5a5dbc79f724c8353f1173e55edde3f905d9ddb287272d492930e6730650e040` |
 | Artifact expiry | 8 October 2026 at 08:09:32 UTC (13:39:32 IST) |
 
 ## Checks confirmed in the build log
@@ -50,10 +50,13 @@ contains SHA256SUMS, SOURCE-COMMIT.txt, package manifests, document checksums,
 notices and the smoke capture. Preserve it before expiry and follow
 [ISO verification](VERIFY-ISO.md).
 
-The ISO checksum is not recorded as verified here: the connected artifact
-download tool has a 512 MiB limit, below this bundle's size. A downloaded copy
-must still be independently hashed and matched against the original SHA256SUMS.
-The ZIP digest is recorded separately in [build metadata](releases/1.0-udaan-final.json).
+The maintainer independently hashed the downloaded ISO outside the CI builder
+on 7 October 2026. The supplied terminal output shows SHA256SUMS verification
+returned OK and SOURCE-COMMIT.txt matched the Build #38 commit. The exact ISO
+hash is recorded above and in [the checksum file](releases/1.0-udaan-build38.SHA256SUMS).
+See [the verification evidence](VERIFY-ISO.md#recorded-build-38-verification).
+The ISO byte size was recorded by CI; no separate local stat output was supplied.
+The ZIP digest remains separately recorded in [build metadata](releases/1.0-udaan-final.json).
 
 ## Source, tag and publication
 
@@ -72,7 +75,6 @@ have separate scopes; use DOCUMENT-SHA256SUMS from the latest bundle for its PDF
 
 ## Next evidence to record
 
-- Independent ISO checksum and source/size verification.
 - Live boot, installation, first-login and hardware runtime tests on this ISO,
   including Discover app installation, audio/Bluetooth, webcam and suspend.
 - Supported boot and installation scenarios before advertising compatibility.

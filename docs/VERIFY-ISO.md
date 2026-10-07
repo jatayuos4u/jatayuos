@@ -2,6 +2,26 @@
 
 These instructions apply to [Build #38](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270).
 
+## Recorded Build #38 verification
+
+**Completed by the maintainer on 7 October 2026**, using sha256sum on the
+downloaded ISO on the Acer test laptop, independently of the CI builder.
+The maintainer supplied this terminal output:
+
+```text
+JatayuOS-1.0-Udaan-amd64.iso: OK
+eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3
+5a5dbc79f724c8353f1173e55edde3f905d9ddb287272d492930e6730650e040  JatayuOS-1.0-Udaan-amd64.iso
+```
+
+This records a matching checksum and the correct build source.
+Evidence is the maintainer's supplied command output; the assistant did not
+download or independently hash the ISO. The ISO size of 2,373,058,560 bytes is
+from CI; no local stat output was supplied. Boot/install testing and verification
+of a later public-hosted download remain separate steps.
+
+[Download the recorded checksum](releases/1.0-udaan-build38.SHA256SUMS).
+
 ## Download and extract the bundle
 
 Download the private **JatayuOS-1.0-Udaan-ISO** artifact from that run.

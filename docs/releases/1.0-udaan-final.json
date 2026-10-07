@@ -34,10 +34,22 @@
   },
   "iso": {
     "filename": "JatayuOS-1.0-Udaan-amd64.iso",
-    "sha256": null,
+    "sha256": "5a5dbc79f724c8353f1173e55edde3f905d9ddb287272d492930e6730650e040",
     "size_bytes": 2373058560,
     "download_url": null,
-    "checksum_status": "pending_independent_verification_of_bundled_SHA256SUMS"
+    "checksum_status": "verified_against_bundled_SHA256SUMS_by_maintainer",
+    "checksum_file": "1.0-udaan-build38.SHA256SUMS",
+    "checksum_verification": {
+      "date": "2026-10-07",
+      "timezone": "Asia/Kolkata",
+      "verified_by": "maintainer",
+      "method": "sha256sum --check SHA256SUMS; cat SOURCE-COMMIT.txt; sha256sum JatayuOS-1.0-Udaan-amd64.iso",
+      "result": "OK",
+      "source_commit_matches": true,
+      "evidence": "Maintainer-supplied terminal output from downloaded Build #38 bundle, outside CI builder",
+      "assistant_independently_hashed": false,
+      "local_byte_size_confirmed": false
+    }
   },
   "documents": [
     {
@@ -68,7 +80,7 @@
   "testing_reference": "1.0-udaan-candidate.json",
   "original_software_license": "GPL-3.0-or-later",
   "publication_gates": [
-    "final_ISO_checksum_verification_and_boot_install_validation",
+    "final_ISO_boot_install_validation",
     "exact_corresponding_source_and_permanent_access",
     "artwork_and_documentation_permissions",
     "third_party_redistribution_and_browser_review",

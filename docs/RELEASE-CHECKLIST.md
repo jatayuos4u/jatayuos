@@ -13,7 +13,7 @@ that the work failed, only that evidence or a decision is still needed.
 - [x] Ten owner-supplied VM captures recorded for documentation.
 - [x] User Manual, Installation Guide and FAQ prepared and visually checked.
 - [x] Current release status, draft notes and document hashes recorded in source.
-- [ ] Verify and record ISO SHA256, byte size and SOURCE-COMMIT.txt from the preserved bundle.
+- [x] Record Build #38 ISO SHA256 and source commit from the maintainer's downloaded-copy verification; byte size is recorded from CI.
 - [ ] Record hardware/VM configurations and individually tested scenarios where compatibility will be advertised.
 
 ## Source audit preparation
@@ -66,7 +66,8 @@ items do not mark public distribution cleared.
 - [x] Build #38 succeeded from `eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3`, with ISO byte size 2,373,058,560.
 - [x] Build #38 image assertions verified desktop helpers, RTKit, Flatpak/Flathub, branding and on-demand Android defaults.
 - [x] Upload the private CI bundle containing checksums, provenance, manifests and notices.
-- [ ] Preserve the bundle before its 8 October 2026, 08:09:32 UTC (13:39:32 IST) expiry; independently verify and record the ISO checksum.
+- [x] Maintainer downloaded the Build #38 bundle and verified the ISO against bundled SHA256SUMS on 7 October 2026; source commit matches. See [verification evidence](VERIFY-ISO.md#recorded-build-38-verification).
+- [ ] Retain a backup of the full downloaded bundle before its 8 October 2026, 08:09:32 UTC (13:39:32 IST) expiry.
 - [ ] Boot and install-test the Build #38 artifact; record the actual tested scenarios.
 - [ ] Review private repository contents and arrange public access to required source and release documents.
 - [x] Tag the exact artifact-producing commit `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` as `v1.0-udaan`.
@@ -76,6 +77,6 @@ items do not mark public distribution cleared.
 
 The final ISO has been assembled successfully and the private GitHub release
 record/tag published for Build #37. The latest Build #38 source is recorded separately;
-the existing tag has not moved. Follow [ISO verification](VERIFY-ISO.md) to complete
-the pending checksum record. Final boot/install validation and public permanent download
+the existing tag has not moved. The [downloaded ISO checksum verification](VERIFY-ISO.md#recorded-build-38-verification)
+is complete and recorded. Final boot/install validation and public permanent download
 delivery remain pending. Website creation can proceed using the verified build record.
