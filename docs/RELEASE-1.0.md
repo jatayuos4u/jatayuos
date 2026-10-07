@@ -1,8 +1,9 @@
 # JatayuOS 1.0 Udaan release notes
 
 [GitHub release: v1.0-udaan](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) published in the private repository
-on 6 October 2026. Final ISO Build #37 succeeded; final boot/install validation
-and public ISO distribution remain pending.
+on 6 October 2026; its existing tag records Build #37. The latest ISO,
+**Build #38**, succeeded on 7 October 2026. Final boot/install validation and
+public ISO distribution remain pending.
 Website: https://jatayuos.in
 
 ## Overview
@@ -24,7 +25,11 @@ preparation; this document does not announce a public final release.
 - Kavach provides safety information and shortcuts to system tools.
 - Sarkar Setu is a directory of external service links, without government affiliation.
 - Utsav provides festival/calendar information; important dates need local verification.
-- Waydroid packages are included; Android images and initialization remain on demand.
+- Discover supports Debian APT packages and Flatpak apps from the signed Flathub remote.
+- Info Center and its graphics, Wayland, audio and firmware helpers are included.
+- RTKit is included for audio realtime scheduling.
+- Waydroid starts on demand through authenticated Android Setup controls; Android images and initialization are separate.
+- Baloo indexing and its KRunner file-search provider are disabled by default; launcher favourites contain installed applications.
 - Fastfetch uses the approved compact Jatayu design with system information.
 
 ## Corrections established in Build 35
@@ -43,23 +48,25 @@ partitions. Read the Installation Guide before changing disks.
 
 | Field | Value |
 | --- | --- |
-| Build | [37](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100) — success |
-| Exact source | `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` |
-| Completed | 6 October 2026, 03:24:06 UTC |
+| Build | [38](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270) — success |
+| Exact source | `eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3` |
+| Completed | 7 October 2026, 08:09:51 UTC |
 | Base / architecture | Debian 13 Trixie / AMD64 |
 | ISO filename | `JatayuOS-1.0-Udaan-amd64.iso` |
-| ISO byte size | 2,354,036,736 (2.19 GiB) |
+| ISO byte size | 2,373,058,560 (2.21 GiB) |
 | Integration package | `1.0` |
 | Calamares package | `3.3.14-1+jatayu3` |
-| Private CI bundle | [Actions artifact](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943) |
-| Artifact expiry | 7 October 2026, 03:23:38 UTC (08:53:38 IST) |
+| Private CI bundle | [Actions artifact](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270/artifacts/11468269941) |
+| Artifact expiry | 8 October 2026, 08:09:32 UTC (13:39:32 IST) |
 | ISO SHA256 | Pending independent verification of bundled SHA256SUMS |
 | Permanent download | Pending publication |
 
 Dependency/source prechecks, assembled-image checks and ISO structure validation
-passed. Final boot/install acceptance is still pending. Preserve the temporary
+passed. CI ran 15 regression tests: 14 passed and one backup round-trip was skipped
+because rsync is unavailable in the builder; all 15 passed locally. Final boot/install acceptance is still pending. Preserve the temporary
 bundle before expiry; its ZIP digest is not the ISO checksum.
-See [final build metadata](releases/1.0-udaan-final.json).
+See [ISO checksum verification instructions](VERIFY-ISO.md) and
+[final build metadata](releases/1.0-udaan-final.json).
 
 ## Earlier testing reference identity
 
@@ -82,26 +89,29 @@ The historical run link is not permanent download hosting.
 
 ## Final-version preparation
 
-Build #37 assembled integration `1.0`, updated About information and edition 2
+Build #38 assembled integration `1.0`, updated About information and edition 2
 offline guides from the merged main source. Its source commit and byte size are
 recorded in [final build metadata](releases/1.0-udaan-final.json).
 Independent ISO checksum verification and final boot/install evidence remain pending.
 GitHub will hold the release record and source/docs; jatayuos.in will link users
 to SourceForge for ISO downloads. SourceForge launch is planned for 11 October
-2026, after the required checks. The private GitHub release records this build; public ISO availability remains pending.
+2026, after the required checks. The existing private GitHub release tag records Build #37; it has not been moved.
+Build #38's exact source is recorded above. Public ISO availability remains pending.
 The download destination is [jatayuos.in](https://jatayuos.in).
 
 ## Using updates
 
 Debian packages receive updates from the configured repositories via
-APT/Discover. This candidate does not enable a signed Jatayu application
+APT/Discover. Flatpak applications receive updates through Flatpak/Discover.
+This candidate does not enable a signed Jatayu application
 repository; GitHub source commits do not automatically update installed apps.
 Do not switch APT suites to another Debian release without a tested migration.
 
 ## Documentation
 
 See [documentation inventory](DOCUMENTATION.md) for the committed edition 2
-16-page User Manual, 6-page Installation Guide and 5-page FAQ. Build #37 regenerated and bundled these guides; the existing
+16-page User Manual, 6-page Installation Guide and 5-page FAQ. Build #38 regenerated and bundled these guides with updated Flatpak and
+on-demand Android instructions; the existing
 Build #35 ISO retains its earlier documents. Repository hashes describe the
 committed PDFs; regenerated document hashes are in the final build bundle. The [quick user guide](USER-GUIDE.md) provides repository-readable instructions.
 

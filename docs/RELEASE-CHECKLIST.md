@@ -1,6 +1,6 @@
 # JatayuOS 1.0 Udaan release checklist
 
-This is a publication checklist after successful final ISO Build #37, with
+This is a publication checklist after successful latest ISO Build #38, with
 Build #35 retained as the earlier accepted testing reference.
 Checked entries describe completed work; unchecked entries are not assertions
 that the work failed, only that evidence or a decision is still needed.
@@ -60,12 +60,14 @@ items do not mark public distribution cleared.
 - [x] Prepare integration version `1.0` and matching package paths.
 - [x] Commit edition 2 guides and preserve the ten original VM captures.
 - [x] Regenerate guides and About before packaging; require their source inputs in preflight.
-- [x] Run the full dependency/source precheck on a privileged Debian 13 builder (Builds #36 and #37).
+- [x] Run the full dependency/source precheck on a privileged Debian 13 builder (Builds #36, #37 and #38).
 - [x] Merge PR #4 and build the final ISO successfully in [Build #37](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100).
 - [x] Record artifact-producing source `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` and ISO byte size 2,354,036,736.
+- [x] Build #38 succeeded from `eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3`, with ISO byte size 2,373,058,560.
+- [x] Build #38 image assertions verified desktop helpers, RTKit, Flatpak/Flathub, branding and on-demand Android defaults.
 - [x] Upload the private CI bundle containing checksums, provenance, manifests and notices.
-- [ ] Preserve the bundle before its 7 October 2026, 03:23:38 UTC expiry; independently verify and record the ISO checksum.
-- [ ] Boot and install-test the final artifact; record the actual tested scenarios.
+- [ ] Preserve the bundle before its 8 October 2026, 08:09:32 UTC (13:39:32 IST) expiry; independently verify and record the ISO checksum.
+- [ ] Boot and install-test the Build #38 artifact; record the actual tested scenarios.
 - [ ] Review private repository contents and arrange public access to required source and release documents.
 - [x] Tag the exact artifact-producing commit `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` as `v1.0-udaan`.
 - [x] Publish the private [GitHub release record](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) with jatayuos.in as the download destination.
@@ -73,5 +75,7 @@ items do not mark public distribution cleared.
 - [ ] Verify SourceForge files and website links before the planned launch.
 
 The final ISO has been assembled successfully and the private GitHub release
-record/tag published. Final boot/install validation and public permanent download
+record/tag published for Build #37. The latest Build #38 source is recorded separately;
+the existing tag has not moved. Follow [ISO verification](VERIFY-ISO.md) to complete
+the pending checksum record. Final boot/install validation and public permanent download
 delivery remain pending. Website creation can proceed using the verified build record.

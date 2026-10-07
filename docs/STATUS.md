@@ -1,90 +1,92 @@
-# JatayuOS 1.0 Udaan release status
+# JatayuOS 1.0 Udaan build and release status
 
-Updated 6 October 2026 UTC. Website: https://jatayuos.in
+Updated 7 October 2026. Website: https://jatayuos.in
 
-## Successful final-version ISO build
+## Latest successful ISO: Build #38
 
-[Build #37](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100) completed successfully on `main` from
-`45b7d1f76dea0184b0fcf7dd1c900f4edf139552`. It started at 03:00:23 UTC and
-completed at 03:24:06 UTC on 6 October 2026, approximately 23 minutes 43 seconds later.
+[Build #38](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270)
+completed successfully on main from
+`eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3`.
+The run started at 07:42:39 UTC and completed at 08:09:51 UTC on 7 October 2026.
 
-- ISO: `JatayuOS-1.0-Udaan-amd64.iso`.
-- ISO size: **2,354,036,736 bytes (2.19 GiB)**.
-- Integration: `1.0`; Calamares: `3.3.14-1+jatayu3`.
-- Static and privileged Debian dependency/source prechecks passed.
-- Assembled installer, bootloader, desktop service, branding and help checks passed.
-- ISO structure check passed.
-- ISO bundle and build log uploaded to private Actions artifacts.
+| Detail | Verified value |
+| --- | --- |
+| ISO filename | `JatayuOS-1.0-Udaan-amd64.iso` |
+| ISO size | 2,373,058,560 bytes (2.21 GiB) |
+| Base / desktop / architecture | Debian 13 Trixie / KDE Plasma 6.3.6 / AMD64 |
+| Integration / installer | 1.0 / Calamares 3.3.14-1+jatayu3 |
+| ISO checksum | Generated in bundled SHA256SUMS; independent verification pending |
+| Artifact expiry | 8 October 2026 at 08:09:32 UTC (13:39:32 IST) |
 
-The [ISO bundle](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943) expires on
-**7 October 2026 at 03:23:38 UTC (08:53:38 IST)** under the one-day retention policy.
-Preserve the bundle before expiry. It contains checksum and provenance files,
-package manifests and notices. Its ZIP digest is not the ISO SHA256.
-The ISO checksum has not yet been independently recorded in the repository.
+## Checks confirmed in the build log
 
-PR #4 was merged into main before this build. The separate privileged precheck
-[Build #36](https://github.com/jatayuos4u/jatayuos/actions/runs/37406502297)
-also passed. See [final build metadata](releases/1.0-udaan-final.json).
+- Source syntax, required assets and 134 package declarations: pass.
+- Privileged Debian APT dependency and pinned-source precheck: pass.
+- Regression suite: 15 tests, 14 passed and one backup round-trip skipped
+  because rsync was unavailable in the builder. All 15 passed locally before
+  committing the build source.
+- Upstream partition/bootloader policy check: pass.
+- Assembled image checks: pass, including installed Info Center helpers, RTKit,
+  Flatpak/Discover backend, signed Flathub configuration, logo path, disabled
+  Waydroid boot autostart, Android launcher and disabled indexing defaults.
+- Desktop runtime import checks and Creative Studio offscreen smoke check: pass.
+- ISO structure: pass; BIOS and UEFI boot entries present.
+- ISO bundle and build log uploads: successful.
 
-## Earlier accepted testing reference
+Boot entries and image assembly checks do not by themselves establish successful
+installation on every supported disk layout or hardware platform.
 
-[Build #35](https://github.com/jatayuos4u/jatayuos/actions/runs/37208707920)
-completed on 4 October 2026 from `95afcb80e3517d8930557d4fb1ba9a20a92b7f7f`,
-with integration `1.0~rc3`. The owner downloaded it and reported the observed
-problems solved and the OS working properly. That acceptance belongs to Build #35;
-final Build #37 still needs its own boot/install evidence.
+The owner-supplied Info Center screenshot received on 7 October displays the
+JatayuOS shield, JatayuOS 1.0 Udaan, Plasma 6.3.6, Frameworks 6.13.0, Qt 6.8.2
+and a Wayland session on an Acer Aspire R3-131T. This confirms the visible
+branding on that machine; it is not a checksum or a record of every runtime test.
 
-Corrections carried forward include automatic time synchronization, Dolphin
-preview backends/defaults, explicit India UTF-8 locale defaults, the approved
-Fastfetch logo and the asset-copy fix after Build #34. Existing installer and
-desktop application integration remain included.
+See [the build changes and hardware acceptance checklist](FINAL-BUILD-2026-10-07.md).
 
-Earlier owner-supplied clock/APT outputs confirmed synchronization and updates
-on the tested installation. Ten VM screenshots preserve the captured interfaces;
-they do not establish unseen operations or other hardware compatibility.
-See [capture provenance](SCREENSHOTS.md).
+## Preserve and verify this artifact
 
-## Documentation and website handoff
+The [Build #38 ISO bundle](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270/artifacts/11468269941)
+contains SHA256SUMS, SOURCE-COMMIT.txt, package manifests, document checksums,
+notices and the smoke capture. Preserve it before expiry and follow
+[ISO verification](VERIFY-ISO.md).
 
-Edition 2 guides were committed and regenerated during the final build:
-16-page User Manual, 6-page Installation Guide and 5-page FAQ, together with
-updated About information. Repository document hashes describe the committed
-PDFs; build-generated document hashes are supplied in the artifact.
-See [document inventory](DOCUMENTATION.md).
+The ISO checksum is not recorded as verified here: the connected artifact
+download tool has a 512 MiB limit, below this bundle's size. A downloaded copy
+must still be independently hashed and matched against the original SHA256SUMS.
+The ZIP digest is recorded separately in [build metadata](releases/1.0-udaan-final.json).
 
-GitHub now records the successful final ISO build, source and documents.
-Website creation is the next project step. https://jatayuos.in will be the public
-entry point linking to SourceForge. SourceForge launch remains planned for
-**11 October 2026**, subject to final validation and publication requirements.
-The repository remains private. The [GitHub release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) was published
-on 6 October 2026 with tag `v1.0-udaan` pointing to the artifact-producing
-source. It records the build and directs downloads to https://jatayuos.in;
-public ISO delivery and permanent downloads remain pending.
+## Source, tag and publication
 
-## Remaining validation and publication work
+The existing private `v1.0-udaan` tag and
+[GitHub release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan)
+record Build #37's source
+`45b7d1f76dea0184b0fcf7dd1c900f4edf139552`.
+They have not been moved to Build #38. Use the exact Build #38 source SHA above
+for this latest ISO; README/documentation commits are not new ISO builds.
 
-- Preserve the Build #37 bundle and independently verify/record the exact ISO
-  SHA256 against SHA256SUMS and SOURCE-COMMIT.txt.
-- Boot and install-test this final artifact and record the actual VM/hardware
-  configurations and scenarios tested.
-- Provide permanent hosting for the ISO, checksum, guides, notices,
-  package/source manifests and required corresponding source/build material.
-- Complete the existing [compliance checklist](COMPLIANCE.md), including
-  artwork/documentation permissions and upstream redistribution requirements.
-- Build the website with verified release information; connect permanent
-  downloads after their upload and verification.
-- Document Jatayu app update delivery. Debian updates use APT/Discover;
-  a signed Jatayu repository is not configured.
+The current repository remains private. Permanent public ISO delivery through
+SourceForge and https://jatayuos.in remains planned for 11 October 2026.
+Edition 2 guides were regenerated in Build #38 with Flatpak and on-demand
+Android instructions. Committed PDF hashes and build-generated document hashes
+have separate scopes; use DOCUMENT-SHA256SUMS from the latest bundle for its PDFs.
 
-BIOS, Secure Boot, encryption, Windows dual boot and Android compatibility are
-not broadly certified by CI assembly. See [release notes](RELEASE-1.0.md),
-[release checklist](RELEASE-CHECKLIST.md), [testing](TESTING.md),
-[dual boot](DUAL-BOOT.md) and [update policy](UPDATES.md).
+## Next evidence to record
+
+- Independent ISO checksum and source/size verification.
+- Live boot, installation, first-login and hardware runtime tests on this ISO,
+  including Discover app installation, audio/Bluetooth, webcam and suspend.
+- Supported boot and installation scenarios before advertising compatibility.
+- Permanent artifact hosting and verification after download.
+- Existing source, notice and publication requirements from
+  [the release checklist](RELEASE-CHECKLIST.md) and [compliance record](COMPLIANCE.md).
+
+APT/Discover supplies Debian package updates. Flatpak/Discover supplies updates
+from configured Flatpak remotes. A separate signed Jatayu application repository
+is not configured; GitHub commits do not automatically update installed systems.
 
 ## Build history
 
-- Build #33: earlier candidate before the NTP/preview/locale corrections.
-- Build #34: failed during asset copying; fixed in `93694cb7`.
-- Build #35: successful corrected candidate, downloaded and accepted by the owner.
-- Build #36: successful privileged dependency/source precheck for final preparation.
-- Build #37: successful final-version ISO assembly from the merged main source.
+- #35: corrected earlier candidate, downloaded and accepted by the owner.
+- #36: privileged precheck for final-version preparation.
+- #37: successful ISO on 6 October; source retained by the existing release tag.
+- #38: latest successful ISO on 7 October with the desktop integration fixes.

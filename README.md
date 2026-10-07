@@ -6,7 +6,7 @@
 
 **Udaan Aapki. Shakti Bharat Ki.**
 
-Made in India · Debian 13 · KDE Plasma · AMD64
+Made in India · Debian 13 Trixie · KDE Plasma 6.3.6 · AMD64
 
 ### [Download & explore JatayuOS](https://jatayuos.in)
 
@@ -22,8 +22,7 @@ offline help and a desktop prepared for browsing, documents and creative work.
 
 ![JatayuOS KDE Plasma desktop](docs/screenshots/build35/desktop.png)
 
-*Desktop captured from the earlier Build #35 testing installation. See
-[screenshot provenance](docs/SCREENSHOTS.md) for the original captures.*
+*Desktop overview. See [screenshot provenance](docs/SCREENSHOTS.md) for the original testing captures.*
 
 ## Get JatayuOS
 
@@ -34,8 +33,8 @@ SourceForge. Website setup and permanent ISO delivery are in progress.
 The planned SourceForge launch is **11 October 2026**, after final validation
 and publication checks.
 
-The [GitHub 1.0 Udaan release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) records the final-version source and
-successful build. This repository and its release remain **private**.
+The [GitHub 1.0 Udaan release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) records the earlier Build #37 source.
+The latest successful ISO is **Build #38**, recorded below. This repository and its release remain **private**.
 The ISO is not attached to the GitHub release.
 
 ## Your desktop, ready for everyday work
@@ -48,39 +47,61 @@ The ISO is not attached to the GitHub release.
 | Creative work | Jatayu Tools Creative Studio for local image and PDF workflows |
 | Personalization | Wallpaper Changer with an offline collection |
 | Information and shortcuts | Kavach, Sarkar Setu and Utsav |
-| Android setup | Waydroid packages; Android images and initialization are separate |
+| Software installation | Debian APT packages and Flatpak apps from Flathub through Discover |
+| System information and audio | Info Center with JatayuOS branding, diagnostic helpers and RTKit |
+| Android setup | Waydroid on demand through Android Setup; Android images and initialization are separate |
 
 Sarkar Setu links to external services and does not imply government affiliation.
 Waydroid requires compatible session, kernel and graphics support; Google apps
 and ARM translation are not bundled.
 
+## System requirements
+
+| Component | Requirement |
+| --- | --- |
+| Processor / architecture | 64-bit x86 processor; AMD64 (x86-64) |
+| RAM | **4 GB minimum; 8 GB recommended** |
+| Installation storage | At least 25 GB available; allow more for applications and personal files |
+| Internet | Not required for installation; required for updates, new downloads and Android image setup |
+
+Calamares retains a 1.5 GB installer threshold. This allows installation on
+lower-memory systems; the product's usable-performance minimum remains 4 GB.
+
 ## 1.0 Udaan build record
 
-The final ISO was assembled successfully on **6 October 2026**.
+The latest ISO was assembled successfully on **7 October 2026**.
 
 | Detail | Verified value |
 | --- | --- |
-| Release tag | `v1.0-udaan` |
-| Build | [GitHub Actions #37](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100) — successful |
-| Artifact-producing source | `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` |
-| Base / desktop | Debian 13 Trixie / KDE Plasma |
+| Existing release tag | `v1.0-udaan` (earlier Build #37 source) |
+| Build | [GitHub Actions #38](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270) — successful |
+| Artifact-producing source | `eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3` |
+| Base / desktop | Debian 13 Trixie / KDE Plasma 6.3.6 |
 | Architecture | AMD64 (x86-64) |
 | ISO filename | `JatayuOS-1.0-Udaan-amd64.iso` |
-| ISO size | 2,354,036,736 bytes (2.19 GiB) |
+| ISO size | 2,373,058,560 bytes (2.21 GiB) |
 | Integration / installer | `1.0` / Calamares `3.3.14-1+jatayu3` |
-| ISO SHA256 | Pending independent verification of bundled `SHA256SUMS` |
+| ISO SHA256 | Bundled `SHA256SUMS` generated; independent download verification pending |
 
 Static and dependency/source prechecks, assembled-image checks and ISO structure
-validation passed. Final boot/install acceptance and public download delivery
-remain pending. The owner's earlier acceptance applies to Build #35.
+validation passed. The CI suite ran 15 tests: 14 passed and one backup round-trip
+test was skipped because the builder lacks rsync. All 15 passed in local validation.
+Final boot/install acceptance and public download delivery remain pending.
+
+Build #38 adds explicit Info Center helpers, RTKit, Flatpak/Discover/Flathub,
+JatayuOS Info Center branding and authenticated on-demand Waydroid controls.
+Baloo indexing and its KRunner file-search provider are disabled by default;
+launcher favourites contain installed applications. See the
+[full change record and acceptance checklist](docs/FINAL-BUILD-2026-10-07.md).
 
 <details>
 <summary>Maintainer: temporary build artifact and validation records</summary>
 
-The [private ISO bundle](https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943)
-expires **7 October 2026 at 03:23:38 UTC (08:53:38 IST)**. Preserve it before
+The [private ISO bundle](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270/artifacts/11468269941)
+expires **8 October 2026 at 08:09:32 UTC (13:39:32 IST)**. Preserve it before
 expiry. The bundle includes checksum/provenance files, package manifests and
-notices. The Actions ZIP digest is not the ISO checksum.
+notices. The Actions ZIP digest is not the ISO checksum. See
+[how to verify the downloaded ISO](docs/VERIFY-ISO.md).
 
 [Current status](docs/STATUS.md) · [Release notes](docs/RELEASE-1.0.md) ·
 [Build metadata](docs/releases/1.0-udaan-final.json) ·
@@ -100,12 +121,14 @@ notices. The Actions ZIP digest is not the ISO checksum.
 | [Update policy](docs/UPDATES.md) | Debian updates and Jatayu application delivery |
 | [Document inventory](docs/DOCUMENTATION.md) | Versions, committed PDF hashes and capture provenance |
 
-Build #37 regenerated and bundled the edition 2 guides. Repository PDF hashes
+Build #38 regenerated and bundled the edition 2 guides with updated Flatpak
+and on-demand Android instructions. Repository PDF hashes
 describe committed documents; generated document hashes are in the build bundle.
 
 ## Updates and support
 
-Debian package updates are available through **APT/Discover**. A signed Jatayu
+Debian package updates are available through **APT/Discover**. Flatpak apps
+receive updates through **Flatpak/Discover** from their configured remote. A signed Jatayu
 application repository is not yet configured. New ISO releases do not
 automatically upgrade installed systems.
 

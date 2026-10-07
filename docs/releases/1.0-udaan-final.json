@@ -7,25 +7,35 @@
   "integration_version": "1.0",
   "calamares_version": "3.3.14-1+jatayu3",
   "final_build": {
-    "run_id": 37406898100,
-    "run_number": 37,
-    "source_commit": "45b7d1f76dea0184b0fcf7dd1c900f4edf139552",
+    "run_id": 37589010270,
+    "run_number": 38,
+    "source_commit": "eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3",
     "branch": "main",
     "conclusion": "success",
-    "started_at": "2026-10-06T03:00:23Z",
-    "completed_at": "2026-10-06T03:24:06Z",
-    "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100",
+    "started_at": "2026-10-07T07:42:39Z",
+    "completed_at": "2026-10-07T08:09:51Z",
+    "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270",
     "ci_checks": [
       "static_precheck",
       "dependency_and_source_precheck",
+      "regression_tests",
+      "upstream_partition_bootloader_policy",
       "assembled_image_checks",
+      "runtime_import_and_creative_studio_smoke",
       "iso_structure_check"
-    ]
+    ],
+    "regression_tests": {
+      "total": 15,
+      "passed": 14,
+      "skipped": 1,
+      "skip_reason": "rsync unavailable in builder for backup round-trip",
+      "local_passed": 15
+    }
   },
   "iso": {
     "filename": "JatayuOS-1.0-Udaan-amd64.iso",
     "sha256": null,
-    "size_bytes": 2354036736,
+    "size_bytes": 2373058560,
     "download_url": null,
     "checksum_status": "pending_independent_verification_of_bundled_SHA256SUMS"
   },
@@ -73,14 +83,14 @@
   "release_published": true,
   "tag_created": true,
   "workflow_dispatched": true,
-  "updated_on": "2026-10-06",
+  "updated_on": "2026-10-07",
   "actions_artifact": {
-    "id": 11388251943,
+    "id": 11468269941,
     "name": "JatayuOS-1.0-Udaan-ISO",
-    "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943",
-    "expires_at": "2026-10-07T03:23:38Z",
-    "archive_size_bytes": 2396326519,
-    "archive_sha256": "2632f324a71ae7e4979dadb0f41c1243aeca23e44e3a35400a3c892c2c8a4be6",
+    "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270/artifacts/11468269941",
+    "expires_at": "2026-10-08T08:09:32Z",
+    "archive_size_bytes": 2415647569,
+    "archive_sha256": "78f1fdd5e2b4989ee74c0dbb02e084e79d82c8ff250f39e0fe2aaf71ff46cb77",
     "digest_scope": "Actions artifact ZIP, not ISO"
   },
   "document_hash_scope": "Committed repository PDFs; build-regenerated PDF hashes are supplied in the artifact.",
@@ -95,5 +105,48 @@
     "download_destination": "https://jatayuos.in",
     "iso_attached": false
   },
-  "public_iso_published": false
+  "public_iso_published": false,
+  "previous_builds": [
+    {
+      "final_build": {
+        "run_id": 37406898100,
+        "run_number": 37,
+        "source_commit": "45b7d1f76dea0184b0fcf7dd1c900f4edf139552",
+        "branch": "main",
+        "conclusion": "success",
+        "started_at": "2026-10-06T03:00:23Z",
+        "completed_at": "2026-10-06T03:24:06Z",
+        "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100",
+        "ci_checks": [
+          "static_precheck",
+          "dependency_and_source_precheck",
+          "assembled_image_checks",
+          "iso_structure_check"
+        ]
+      },
+      "iso": {
+        "filename": "JatayuOS-1.0-Udaan-amd64.iso",
+        "sha256": null,
+        "size_bytes": 2354036736,
+        "download_url": null,
+        "checksum_status": "pending_independent_verification_of_bundled_SHA256SUMS"
+      },
+      "actions_artifact": {
+        "id": 11388251943,
+        "name": "JatayuOS-1.0-Udaan-ISO",
+        "url": "https://github.com/jatayuos4u/jatayuos/actions/runs/37406898100/artifacts/11388251943",
+        "expires_at": "2026-10-07T03:23:38Z",
+        "archive_size_bytes": 2396326519,
+        "archive_sha256": "2632f324a71ae7e4979dadb0f41c1243aeca23e44e3a35400a3c892c2c8a4be6",
+        "digest_scope": "Actions artifact ZIP, not ISO"
+      }
+    }
+  ],
+  "checksum_verification_instructions": "../VERIFY-ISO.md",
+  "desktop_version": "6.3.6",
+  "system_requirements": {
+    "minimum_ram_gb": 4,
+    "recommended_ram_gb": 8,
+    "installer_ram_threshold_gb": 1.5
+  }
 }
