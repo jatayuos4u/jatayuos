@@ -1,0 +1,4 @@
+[General]
+LogoPath=/usr/share/jatayu/logo.png
+Website=https://jatayuos.in
+UseOSReleaseVersion=true

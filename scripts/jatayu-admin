@@ -15,6 +15,11 @@ def run(args): subprocess.run(args,check=True)
 action=sys.argv[1] if len(sys.argv)>1 else ''
 try:
  if action=='refresh' and len(sys.argv)==2: run(['/usr/bin/apt-get','update'])
+ elif action=='android-start' and len(sys.argv)==2:
+  if not Path('/var/lib/waydroid/waydroid.cfg').is_file(): sys.exit('Initialize Waydroid first using the official setup instructions.')
+  run(['/usr/bin/systemctl','start','waydroid-container.service'])
+ elif action=='android-stop' and len(sys.argv)==2:
+  run(['/usr/bin/systemctl','stop','waydroid-container.service'])
  elif action=='install' and len(sys.argv)>2:
   choices=sys.argv[2:]
   if not all(x in CATALOG for x in choices): sys.exit('Unrecognized software selection.')

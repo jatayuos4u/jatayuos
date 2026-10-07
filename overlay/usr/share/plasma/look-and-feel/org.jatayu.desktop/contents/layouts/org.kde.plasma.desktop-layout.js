@@ -5,6 +5,7 @@ panel.floating = false;
 var launcher = panel.addWidget("org.kde.plasma.kickoff");
 launcher.currentConfigGroup = ["General"];
 launcher.writeConfig("icon", "/usr/share/jatayu/logo.png");
+launcher.writeConfig("favorites", ["firefox-esr.desktop", "systemsettings.desktop", "org.kde.dolphin.desktop", "org.kde.discover.desktop", "org.kde.konsole.desktop", "org.kde.kate.desktop"]);
 var tasks = panel.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
 tasks.writeConfig("launchers", ["applications:org.kde.dolphin.desktop", "applications:firefox-esr.desktop", "applications:systemsettings.desktop"]);

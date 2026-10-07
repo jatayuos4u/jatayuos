@@ -2,6 +2,18 @@
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 python3 /usr/share/jatayu/configure-image.py
+# Fail inside the chroot before squashfs/ISO assembly if helpers are incomplete.
+for helper in flatpak kinfocenter aha clinfo dmidecode di-edid-decode glxinfo lspci pactl vulkaninfo wayland-info fwupdmgr rfkill; do
+    command -v "$helper" >/dev/null
+done
+test -s /usr/lib/systemd/system/rtkit-daemon.service
+test -s /usr/share/jatayu/logo.png
+grep -q '^LogoPath=/usr/share/jatayu/logo.png$' /etc/xdg/kcm-about-distrorc
+flatpak --system remotes --columns=name | grep -qx flathub
+if systemctl is-enabled --quiet waydroid-container.service; then
+    echo 'Waydroid must start on demand, not at boot' >&2
+    exit 1
+fi
 # Fail before creating an ISO if offline installer or input-method prerequisites are absent.
 test -x /usr/bin/unsquashfs
 mksquashfs /usr/share/jatayu/FAQ.pdf /tmp/jatayu-unpacker-test.squashfs -noappend -processors 1 >/dev/null

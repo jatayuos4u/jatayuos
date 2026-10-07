@@ -93,6 +93,23 @@ for path in ('apps/app.py','apps/configure-image.py','auto-config.sh','scripts/g
     if 'Development Preview' in (ROOT/path).read_text() or 'development preview' in (ROOT/path).read_text():
         errors.append('Outdated user-facing branding: '+path)
 packages=[s.strip() for s in (ROOT/'packages.list').read_text().splitlines() if s.strip() and not s.startswith('#')]
+for name in ('rtkit','flatpak','plasma-discover-backend-flatpak','kinfocenter','aha','clinfo','dmidecode','iproute2','libdisplay-info-bin','mesa-utils','pciutils','pulseaudio-utils','vulkan-tools','wayland-utils','fwupd','rfkill'):
+    if name not in packages: errors.append('Missing final desktop helper: '+name)
+for name,content in (
+    ('overlay/etc/xdg/kcm-about-distrorc','LogoPath=/usr/share/jatayu/logo.png'),
+    ('overlay/etc/skel/.config/krunnerrc','baloosearchEnabled=false'),
+    ('overlay/usr/share/applications/org.jatayu.android.desktop','Exec=jatayu android')):
+    path=ROOT/name
+    if not path.is_file() or content not in path.read_text():errors.append('Missing final desktop configuration: '+name)
+if layout.is_file() and ('launcher.writeConfig("favorites"' not in layout.read_text() or 'org.kde.kontact.desktop' in layout.read_text()):
+    errors.append('Kickoff favourites must contain only installed applications')
+policy=ROOT/'overlay/usr/share/polkit-1/actions/org.jatayu.admin.policy'
+if policy.is_file():
+    try:
+        action_ids={node.get('id') for node in ET.parse(policy).getroot().findall('action')}
+        if not {'org.jatayu.android-start','org.jatayu.android-stop'}<=action_ids:
+            errors.append('Missing authenticated Android actions')
+    except ET.ParseError:errors.append('Invalid Jatayu PolicyKit XML')
 for name in ('user-setup','sddm-theme-breeze','papirus-icon-theme','libreoffice','python3-pyqt6','waydroid','xdg-user-dirs','upower','systemd-timesyncd','xdg-desktop-portal','xdg-desktop-portal-kde','os-prober','ntfs-3g','kio-extras','kimageformat6-plugins','kdegraphics-thumbnailers','ffmpegthumbs','qt6-image-formats-plugins'):
     if name not in packages: errors.append(f'Missing live-login package: {name}')
 # Default previews and cache initialization must survive future build edits.

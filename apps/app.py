@@ -60,11 +60,13 @@ class Window(QMainWindow):
     def launch(self,args):
         if not shutil.which(args[0]):return self.error('Not installed: '+args[0])
         if not QProcess.startDetached(args[0],args[1:]):self.error('Could not launch '+args[0])
-    def admin(self,args):
+    def admin(self,args,on_success=None):
         if self.proc and self.proc.state()!=QProcess.NotRunning:return
         self.proc=QProcess(self);self.proc.setProcessChannelMode(QProcess.MergedChannels)
         self.proc.readyReadStandardOutput.connect(lambda:self.log.appendPlainText(bytes(self.proc.readAllStandardOutput()).decode(errors='replace')))
         self.proc.finished.connect(lambda code,status:(self.busy(False),self.log.appendPlainText('Completed.' if code==0 else 'Operation failed or authentication was cancelled.')))
+        if on_success:
+            self.proc.finished.connect(lambda code,status:on_success() if code==0 and status==QProcess.NormalExit else None)
         self.proc.errorOccurred.connect(lambda err:(self.busy(False),self.error('Unable to start authenticated operation.')))
         self.busy(True);self.log.setVisible(True);self.proc.start('pkexec',['/usr/libexec/jatayu-admin',*args])
     def closeEvent(self,e):
@@ -210,10 +212,18 @@ class Window(QMainWindow):
     def page_android(self):
         self.text('Waydroid is included from Debian Trixie backports. A Wayland session, compatible kernel binder support, and a separate Android image download are required. No Google apps or ARM translation libraries are bundled.')
         self.button('Check Android readiness',lambda:self.work(self.android_check))
-        self.button('Start installed Waydroid UI',lambda:self.launch(['waydroid','show-full-ui']))
+        self.text('The Android container does not start at boot. Start it here when needed; administrator authentication is required.')
+        self.button('Start installed Waydroid UI',self.start_android)
         self.button('Stop Waydroid session',lambda:self.launch(['waydroid','session','stop']))
+        self.button('Stop Android container',lambda:self.admin(['android-stop']))
         self.button('Open official setup documentation',lambda:QDesktopServices.openUrl(QUrl('https://docs.waydro.id/usage/install-on-desktops')))
         self.text('Initialize Waydroid after installation using its official setup documentation. Hardware and app compatibility still require testing.')
+    def start_android(self):
+        if os.environ.get('XDG_SESSION_TYPE')!='wayland':
+            return self.error('Log into a Plasma Wayland session before starting Android.')
+        if not Path('/var/lib/waydroid/waydroid.cfg').is_file():
+            return self.error('Initialize Waydroid first using the official setup documentation below. A separate Android image download is required.')
+        self.admin(['android-start'],lambda:self.launch(['waydroid','show-full-ui']))
     def android_check(self):
         mem=next((int(x.split()[1])//1024 for x in Path('/proc/meminfo').read_text().splitlines() if x.startswith('MemTotal:')),0)
         return f'RAM: {mem} MiB\nWayland session: {os.environ.get("XDG_SESSION_TYPE")=="wayland"}\nWaydroid installed: {bool(shutil.which("waydroid"))}\nBinder device present: {any(Path(x).exists() for x in ["/dev/binder","/dev/binderfs/binder-control"])}\nThis is a basic check; GPU and app compatibility still require testing.'

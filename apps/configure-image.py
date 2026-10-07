@@ -87,4 +87,11 @@ subprocess.run(['ufw','default','deny','incoming'],check=True)
 subprocess.run(['ufw','default','allow','outgoing'],check=True)
 p=Path('/etc/ufw/ufw.conf');p.write_text(p.read_text().replace('ENABLED=no','ENABLED=yes'))
 subprocess.run(['systemctl','enable','ufw','zramswap'],check=True)
+# Android is available on demand, rather than on the boot critical path.
+# Do not mask it: Android Setup starts the container after authentication.
+subprocess.run(['systemctl','disable','waydroid-container.service'],check=True)
+# Register the signed upstream Flatpak remote in the system installation.
+# Network failure is a build failure, not a silently incomplete release image.
+subprocess.run(['flatpak','--system','remote-add','--if-not-exists','flathub',
+                'https://dl.flathub.org/repo/flathub.flatpakrepo'],check=True)
 print('Jatayu image integration configured. VM installation tests remain required.')

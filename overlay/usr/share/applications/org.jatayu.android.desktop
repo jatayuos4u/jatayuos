@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Android Setup (Waydroid)
+Comment=Set up and start Android on demand
+Exec=jatayu android
+Icon=waydroid
+Terminal=false
+Categories=System;
+StartupNotify=true

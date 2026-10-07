@@ -12,6 +12,7 @@ assert partition['efi']['mountPoint']=='/boot/efi'
 boot=config('modules/bootloader.conf')
 assert boot['efiBootloaderId']=='JatayuOS'
 assert boot['installEFIFallback'] is False
+assert config('modules/welcome.conf')['requirements']['requiredRam']==1.5
 settings=config('settings.conf')
 assert settings['branding']=='jatayu' and settings['prompt-install'] is True
 assert 'GRUB_DISABLE_OS_PROBER=false' in read('/etc/default/grub.d/jatayu.cfg')
@@ -41,4 +42,33 @@ system_locale=read('/etc/default/locale')
 for key in ('LANG','LC_CTYPE'):
     values=[line.split('=',1)[1].strip().strip('"') for line in system_locale.splitlines() if line.startswith(key+'=')]
     assert values==['en_IN.UTF-8'], 'Incorrect system locale: '+key
-print('Assembled image installer, bootloader, desktop service, branding and help checks PASS.')
+# Catch missing optional desktop helpers caused by --no-install-recommends.
+package_status={}
+for paragraph in read('/var/lib/dpkg/status').split('\n\n'):
+    fields=dict(line.split(': ',1) for line in paragraph.splitlines() if ': ' in line and not line.startswith(' '))
+    if 'Package' in fields:package_status[fields['Package']]=fields.get('Status')
+for package in ('rtkit','flatpak','plasma-discover-backend-flatpak','kinfocenter','aha','clinfo','dmidecode','iproute2','libdisplay-info-bin','mesa-utils','pciutils','pulseaudio-utils','vulkan-tools','wayland-utils','fwupd','rfkill'):
+    assert package_status.get(package)=='install ok installed', package
+for file in ('usr/lib/systemd/system/rtkit-daemon.service','usr/bin/flatpak',
+             'usr/bin/kinfocenter','usr/bin/aha','usr/bin/clinfo','usr/sbin/dmidecode',
+             'usr/bin/di-edid-decode','usr/bin/glxinfo','usr/bin/lspci',
+             'usr/bin/pactl','usr/bin/vulkaninfo','usr/bin/wayland-info',
+             'usr/bin/fwupdmgr','usr/sbin/rfkill'):
+    assert (root/file).is_file(), 'Missing desktop helper: '+file
+about=configparser.ConfigParser(interpolation=None);about.optionxform=str
+about.read(root/'etc/xdg/kcm-about-distrorc')
+assert about['General']['LogoPath']=='/usr/share/jatayu/logo.png'
+assert (root/about['General']['LogoPath'].lstrip('/')).is_file()
+assert about['General']['UseOSReleaseVersion']=='true'
+remotes=configparser.ConfigParser(interpolation=None)
+remotes.read(root/'var/lib/flatpak/repo/config')
+assert remotes.has_section('remote "flathub"'), 'Flathub is not configured'
+assert remotes.get('remote "flathub"','gpg-verify')=='true'
+assert 'baloosearchEnabled=false' in read('/etc/skel/.config/krunnerrc')
+assert 'Indexing-Enabled=false' in read('/etc/skel/.config/baloofilerc')
+assert not list((root/'etc/systemd/system').glob('*.wants/waydroid-container.service')), 'Waydroid must not start at boot'
+assert (root/'usr/lib/systemd/system/waydroid-container.service').is_file()
+assert 'Exec=jatayu android' in read('/usr/share/applications/org.jatayu.android.desktop')
+assert 'launcher.writeConfig("favorites"' in read('/usr/share/plasma/look-and-feel/org.jatayu.desktop/contents/layouts/org.kde.plasma.desktop-layout.js')
+assert 'org.kde.kontact.desktop' not in read('/usr/share/plasma/look-and-feel/org.jatayu.desktop/contents/layouts/org.kde.plasma.desktop-layout.js')
+print('Assembled image installer, bootloader, desktop helpers, Flatpak, Android defaults, branding and help checks PASS.')

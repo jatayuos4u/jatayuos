@@ -53,6 +53,7 @@ python3 scripts/generate-files.py
 # Regenerate all offline guides and About before dependency checks/packaging.
 apt-get install -y --no-install-recommends python3-reportlab
 python3 scripts/generate-documentation.py
+python3 -m unittest discover -s tests -p 'test_*.py' -v
 sha256sum assets/USER-MANUAL.pdf assets/FAQ.pdf assets/INSTALLATION-GUIDE.pdf > out/DOCUMENT-SHA256SUMS
 python3 scripts/preflight.py --apt | tee out/precheck.txt
 if $precheck_only; then echo "Precheck passed. ISO build was not requested."; exit 0; fi

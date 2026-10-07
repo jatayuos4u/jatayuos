@@ -29,4 +29,18 @@
     <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-live-installer</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
+  <action id="org.jatayu.android-start">
+    <description>Start the Android container</description>
+    <message>Administrator authentication is required to start Android</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">android-start</annotate>
+  </action>
+  <action id="org.jatayu.android-stop">
+    <description>Stop the Android container</description>
+    <message>Administrator authentication is required to stop Android</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">android-stop</annotate>
+  </action>
 </policyconfig>

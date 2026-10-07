@@ -191,3 +191,27 @@ put('overlay/etc/skel/.config/gtk-4.0/settings.ini','[Settings]\ngtk-decoration-
 put('overlay/etc/skel/.config/fastfetch/config.jsonc',json.dumps({'logo':{'type':'file','source':'/usr/share/jatayu/fastfetch-jatayu.txt','color':{'1':'yellow'}}},indent=2)+'\n')
 put('overlay/etc/default/grub.d/jatayu.cfg','GRUB_DISTRIBUTOR="JatayuOS"\nGRUB_DISABLE_OS_PROBER=false\nGRUB_CMDLINE_LINUX_DEFAULT="quiet splash"\nGRUB_THEME="/usr/share/grub/themes/jatayu/theme.txt"\nGRUB_TERMINAL_OUTPUT="gfxterm"\nGRUB_GFXMODE="auto"\nGRUB_TIMEOUT_STYLE="menu"\nGRUB_TIMEOUT=8\n')
 put('overlay/etc/sddm.conf.d/20-jatayu.conf','[Theme]\nCurrent=breeze\n[General]\nInputMethod=\n')
+
+# Info Center uses os-release for identity and the approved owner logo.
+put('overlay/etc/xdg/kcm-about-distrorc','[General]\nLogoPath=/usr/share/jatayu/logo.png\nWebsite=https://jatayuos.in\nUseOSReleaseVersion=true\n')
+# Match the already-disabled indexer; users can enable both in System Settings.
+put('overlay/etc/skel/.config/krunnerrc','[Plugins]\nbaloosearchEnabled=false\n')
+# Seed only installed applications when Kickoff creates its first favourites.
+layout_path=R/(base+'contents/layouts/org.kde.plasma.desktop-layout.js')
+layout=layout_path.read_text()
+layout=layout.replace('var tasks = panel.addWidget',
+    'launcher.writeConfig("favorites", ["firefox-esr.desktop", "systemsettings.desktop", "org.kde.dolphin.desktop", "org.kde.discover.desktop", "org.kde.konsole.desktop", "org.kde.kate.desktop"]);\nvar tasks = panel.addWidget')
+layout_path.write_text(layout)
+put('overlay/usr/share/applications/org.jatayu.android.desktop','[Desktop Entry]\nType=Application\nName=Android Setup (Waydroid)\nComment=Set up and start Android on demand\nExec=jatayu android\nIcon=waydroid\nTerminal=false\nCategories=System;\nStartupNotify=true\n')
+policy_path=R/'overlay/usr/share/polkit-1/actions/org.jatayu.admin.policy'
+actions=''
+for action,verb in [('android-start','Start'),('android-stop','Stop')]:
+    actions+=f'''  <action id="org.jatayu.{action}">
+    <description>{verb} the Android container</description>
+    <message>Administrator authentication is required to {verb.lower()} Android</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/jatayu-admin</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">{action}</annotate>
+  </action>
+'''
+policy_path.write_text(policy_path.read_text().replace('</policyconfig>',actions+'</policyconfig>'))

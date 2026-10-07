@@ -119,3 +119,21 @@ kimageformat6-plugins
 kdegraphics-thumbnailers
 ffmpegthumbs
 qt6-image-formats-plugins
+
+# Explicit desktop helpers: the image is assembled without APT Recommends.
+rtkit
+flatpak
+plasma-discover-backend-flatpak
+kinfocenter
+aha
+clinfo
+dmidecode
+iproute2
+libdisplay-info-bin
+mesa-utils
+pciutils
+pulseaudio-utils
+vulkan-tools
+wayland-utils
+fwupd
+rfkill
