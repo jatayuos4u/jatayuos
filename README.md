@@ -34,7 +34,7 @@ The planned SourceForge launch is **11 October 2026**, after final validation
 and publication checks.
 
 The [GitHub 1.0 Udaan release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) records the earlier Build #37 source.
-The latest successful ISO is **Build #38**, recorded below. This repository and its release remain **private**.
+The final, maintainer-tested and accepted ISO is **Build #38**, recorded below. This repository and its release remain **private**.
 The ISO is not attached to the GitHub release.
 
 ## Your desktop, ready for everyday work
@@ -90,7 +90,10 @@ The maintainer verified the downloaded ISO against bundled SHA256SUMS on
 7 October 2026 and confirmed the Build #38 source commit. See the
 [recorded checksum](docs/releases/1.0-udaan-build38.SHA256SUMS) and
 [verification result](docs/VERIFY-ISO.md#recorded-build-38-verification).
-Final boot/install acceptance and public download delivery remain pending.
+The maintainer confirmed on **9 October 2026** that the final Build #38 ISO was
+tested and passed, completing final boot/install acceptance. This records the
+maintainer's acceptance, rather than independent certification of every hardware
+or installation scenario. Public ISO download delivery remains pending.
 
 Build #38 adds explicit Info Center helpers, RTKit, Flatpak/Discover/Flathub,
 JatayuOS Info Center branding and authenticated on-demand Waydroid controls.
