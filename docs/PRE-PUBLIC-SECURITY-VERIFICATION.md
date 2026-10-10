@@ -6,6 +6,17 @@ This repository is still private. Do **not** change visibility based solely on k
 
 The final Build #38 GitHub Actions job 112685755564 (run 37589010270) was retrievable. A bounded preliminary review of its 4.36-million-character log found no matches for common GitHub token prefixes, PEM private-key headers, or simple password/token/key assignments. This is **not** comprehensive clearance. GitHub may mask secrets in logs, and other builds and Git history were not examined.
 
+## Maintainer-reported Gitleaks scan — 10 October 2026
+
+The maintainer reported running Gitleaks against a local authenticated clone of the private repository. The terminal output stated:
+
+- **192 commits scanned**
+- **Approximately 11,669,486 bytes (11.67 MB) scanned**
+- **Runtime 1.86 seconds**
+- **Result: no leaks found**
+
+The user supplied the displayed output, not the full redacted report or a verified process exit code. The exact scanner version, full set of locally fetched Git refs and scanner exclusions were not independently confirmed in this review. Therefore this is a successful **reported** default-rule scan, not a guarantee that every historic or embedded credential is absent. Additional review of binaries, screenshots and past Actions logs remains outstanding.
+
 ## Full local repository scan (maintainer action)
 
 Do this in a trusted workstation with Git and a reputable secret scanner installed. Avoid pasting scan output containing suspected credentials into public GitHub issues or chats.
