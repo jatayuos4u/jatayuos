@@ -14,6 +14,7 @@ that the work failed, only that evidence or a decision is still needed.
 - [x] User Manual, Installation Guide and FAQ prepared and visually checked.
 - [x] Current release status, draft notes and document hashes recorded in source.
 - [x] Record Build #38 ISO SHA256 and source commit from the maintainer's downloaded-copy verification; byte size is recorded from CI.
+- [x] Maintainer confirmed Build #38 is the final, tested and approved ISO on 10 October 2026.
 - [ ] Record hardware/VM configurations and individually tested scenarios where compatibility will be advertised.
 
 ## Source audit preparation
