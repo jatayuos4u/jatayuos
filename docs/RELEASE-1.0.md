@@ -2,7 +2,7 @@
 
 [GitHub release: v1.0-udaan](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) published in the private repository
 on 6 October 2026; its existing tag records Build #37. The latest ISO,
-**Build #38**, succeeded on 7 October 2026. The maintainer reported Build #38 boot/install testing passed on 9 October 2026; the tested scenarios have not yet been documented individually. Public ISO distribution remains pending.
+**Build #38**, succeeded on 7 October 2026. The maintainer confirmed Build #38 passed final boot/install testing and is approved as the release ISO. Individual hardware and installation scenarios have not yet been recorded; this is not a universal compatibility certification. Public ISO distribution remains pending.
 Website: https://jatayuos.in
 
 ## Overview
@@ -11,9 +11,7 @@ JatayuOS is an independent AMD64 desktop distribution by Anup Yadav, made in
 India and based on Debian 13 Trixie with KDE Plasma.
 “Udaan Aapki. Shakti Bharat Ki.” is the project tagline.
 
-The owner downloaded Build #35 and reported the previously observed problems
-resolved and the OS working properly. The candidate is accepted for release
-preparation; this document does not announce a public final release.
+Build #35 was an earlier accepted testing reference. **Build #38 is the final ISO, tested and approved for release by the maintainer on 9–10 October 2026.** The release remains unpublished until public distribution and source/licensing requirements are fulfilled.
 
 ## Included desktop and applications
 
