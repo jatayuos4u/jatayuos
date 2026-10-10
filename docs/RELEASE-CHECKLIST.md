@@ -33,7 +33,8 @@ items do not mark public distribution cleared.
 ## Public distribution
 
 - [x] Record maintainer approval and apply GPL-3.0-or-later to original Jatayu software, including preserved Build 35 sources.
-- [ ] Record original documentation and artwork publication terms separately.
+- [x] Record maintainer's CC BY-SA 4.0 permission for original documentation and project-owned artwork, with logo/brand excluded; see `ARTWORK-AND-DOCS-LICENSE.md`.
+- [ ] Verify ownership and embedded third-party rights for each published document, screenshot, wallpaper and icon.
 - [ ] Record logo/wallpaper rights or permission and relevant provenance.
 - [ ] Complete corresponding-source and build/patch-material availability for covered shipped components.
 - [x] Preserve exact manifest and notice integrity/coverage records; owner retains original notice ZIP.
