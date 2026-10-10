@@ -1840,7 +1840,7 @@ function renderSpotlight() {
                     <div class="greeting-box">
                         <div class="greeting-text">${next.greetings.en}</div>
                         <div class="greeting-hindi">${next.greetings.hi}</div>
-                        <button class="copy-btn" onclick="copyGreeting('${next.greetings.hi}')">📋 Copy Greeting</button>
+                        <button class="copy-btn" data-copy-greeting-id="${escapeHtml(next.id)}">📋 Copy Greeting</button>
                     </div>
                 </div>
             </div>
@@ -1885,7 +1885,7 @@ function renderSpotlight() {
                     <div class="greeting-box">
                         <div class="greeting-text">${f.greetings.en}</div>
                         <div class="greeting-hindi">${f.greetings.hi}</div>
-                        <button class="copy-btn" onclick="copyGreeting('${f.greetings.hi}')">📋 Copy Greeting</button>
+                        <button class="copy-btn" data-copy-greeting-id="${escapeHtml(f.id)}">📋 Copy Greeting</button>
                     </div>
                 </div>
             </div>
@@ -1899,6 +1899,21 @@ function switchSpotlightTab(tab, festivalId) {
     document.querySelectorAll('.spotlight-content').forEach(c => c.classList.remove('active'));
     document.getElementById(`spotlight-${tab}-${festivalId}`).classList.add('active');
 }
+
+// Escape attribute values before including festival IDs in HTML templates.
+function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[ch]);
+}
+
+// Keep greeting text out of inline JavaScript and HTML attribute handlers.
+document.addEventListener('click', event => {
+    const button = event.target.closest('button[data-copy-greeting-id]');
+    if (!button) return;
+    const festival = festivals.find(f => f.id === button.dataset.copyGreetingId);
+    if (festival && festival.greetings) copyGreeting(festival.greetings.hi);
+});
 
 function copyGreeting(text) {
     navigator.clipboard.writeText(text).then(() => {
@@ -2172,7 +2187,7 @@ function openFestivalModal(id) {
                     <div class="greeting-text">${festival.greetings.en}</div>
                     <div class="greeting-hindi">${festival.greetings.hi}</div>
                     ${festival.greetings.ta ? `<div style="margin-top:10px;font-size:1.2em;color:var(--indigo);">${festival.greetings.ta}</div>` : ''}
-                    <button class="copy-btn" onclick="copyGreeting('${festival.greetings.hi.replace(/'/g, "\\'")}')">📋 Copy Greeting</button>
+                    <button class="copy-btn" data-copy-greeting-id="${escapeHtml(festival.id)}">📋 Copy Greeting</button>
                 </div>
             </div>
         </div>
