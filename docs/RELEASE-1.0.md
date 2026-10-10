@@ -2,8 +2,7 @@
 
 [GitHub release: v1.0-udaan](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) published in the private repository
 on 6 October 2026; its existing tag records Build #37. The latest ISO,
-**Build #38**, succeeded on 7 October 2026. Final boot/install validation and
-public ISO distribution remain pending.
+**Build #38**, succeeded on 7 October 2026. The maintainer reported Build #38 boot/install testing passed on 9 October 2026; the tested scenarios have not yet been documented individually. Public ISO distribution remains pending.
 Website: https://jatayuos.in
 
 ## Overview
@@ -63,7 +62,7 @@ partitions. Read the Installation Guide before changing disks.
 
 Dependency/source prechecks, assembled-image checks and ISO structure validation
 passed. CI ran 15 regression tests: 14 passed and one backup round-trip was skipped
-because rsync is unavailable in the builder; all 15 passed locally. Final boot/install acceptance is still pending. Preserve the temporary
+because rsync is unavailable in the builder; all 15 passed locally. The maintainer reported final boot/install acceptance on 9 October 2026; detailed test configurations and coverage remain to be recorded. Preserve the temporary
 bundle before expiry; its ZIP digest is not the ISO checksum.
 See [ISO checksum verification instructions](VERIFY-ISO.md) and
 [final build metadata](releases/1.0-udaan-final.json).
@@ -95,9 +94,8 @@ recorded in [final build metadata](releases/1.0-udaan-final.json).
 The maintainer verified the downloaded Build #38 ISO against bundled SHA256SUMS
 on 7 October 2026 and confirmed the correct source commit. See
 [the verification result](VERIFY-ISO.md#recorded-build-38-verification).
-Final boot/install evidence remains pending.
-GitHub will hold the release record and source/docs; jatayuos.in will link users
-to SourceForge for ISO downloads. SourceForge launch is planned for 11 October
+The maintainer reported a successful Build #38 test on 9 October 2026; detailed evidence and platform coverage remain pending.
+GitHub will hold the release record and source/docs; jatayuos.in will link users to a download host only after that host and the served ISO checksum are verified. The SourceForge project is currently under a restoration request. SourceForge launch is planned for 11 October
 2026, after the required checks. The existing private GitHub release tag records Build #37; it has not been moved.
 Build #38's exact source is recorded above. Public ISO availability remains pending.
 The download destination is [jatayuos.in](https://jatayuos.in).
