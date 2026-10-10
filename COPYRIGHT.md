@@ -45,11 +45,7 @@ third-party code; it does not relicense the upstream work.
 
 ## Material outside this new software grant
 
-Documentation (including guides, PDFs, screenshots and About prose), logos,
-wallpapers, icons, other artwork, bundled binary packages and third-party
-source archives are not newly licensed by this approval. Existing notices
-continue to apply where present. Outstanding original artwork/documentation
-permissions and publication terms must be recorded separately.
+The maintainer separately approved **CC BY-SA 4.0 on 10 October 2026** for original documentation, screenshots and project-owned artwork subject to the scope and third-party exclusions in [ARTWORK-AND-DOCS-LICENSE.md](ARTWORK-AND-DOCS-LICENSE.md). The JatayuOS name, wordmark and official logo/identity are excluded from that blanket grant pending a separate branding policy. Bundled binaries, upstream works and third-party material retain their own terms. Verify original ownership and permissions before declaring each asset cleared.
 
 The software license does not grant rights to project or third-party trademarks.
 JatayuOS branding does not imply government affiliation or endorsement by
