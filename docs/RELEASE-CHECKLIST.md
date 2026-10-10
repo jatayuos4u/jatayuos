@@ -44,7 +44,7 @@ items do not mark public distribution cleared.
 
 ## Delivery and website
 
-- [x] Select SourceForge for ISO and corresponding-source hosting; jatayuos.in for the website.
+- [x] Originally select SourceForge for ISO hosting and jatayuos.in for the website; SourceForge restoration is pending and a replacement public host has not been verified.
 - [x] Record the existing SourceForge project: https://sourceforge.net/projects/jatayuos.
 - [ ] Authenticate project access and upload/verify permanent downloads.
 - [ ] Connect the website's source repository and add verified release URLs.
@@ -68,8 +68,10 @@ items do not mark public distribution cleared.
 - [x] Upload the private CI bundle containing checksums, provenance, manifests and notices.
 - [x] Maintainer downloaded the Build #38 bundle and verified the ISO against bundled SHA256SUMS on 7 October 2026; source commit matches. See [verification evidence](VERIFY-ISO.md#recorded-build-38-verification).
 - [ ] Retain a backup of the full downloaded bundle before its 8 October 2026, 08:09:32 UTC (13:39:32 IST) expiry.
-- [ ] Boot and install-test the Build #38 artifact; record the actual tested scenarios.
-- [ ] Review private repository contents and arrange public access to required source and release documents.
+- [x] Maintainer reported Build #38 boot/install testing passed on 9 October 2026.
+- [ ] Record the exact tested hardware/VM scenarios and evidence before claiming broad compatibility.
+- [ ] Complete Git history/Actions artifact secret scanning and public visibility review before switching repository visibility.
+- [ ] Arrange public access to required corresponding source and release documents (repository build scripts alone may not meet all obligations).
 - [x] Tag the exact artifact-producing commit `45b7d1f76dea0184b0fcf7dd1c900f4edf139552` as `v1.0-udaan`.
 - [x] Publish the private [GitHub release record](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) with jatayuos.in as the download destination.
 - [ ] Complete remaining validation/source/rights gates before public ISO distribution.

@@ -1,6 +1,6 @@
 # JatayuOS 1.0 Udaan build and release status
 
-Updated 7 October 2026. Website: https://jatayuos.in
+Updated 10 October 2026 for publication readiness. Website: https://jatayuos.in
 
 ## Latest successful ISO: Build #38
 
@@ -72,6 +72,10 @@ SourceForge and https://jatayuos.in remains planned for 11 October 2026.
 Edition 2 guides were regenerated in Build #38 with Flatpak and on-demand
 Android instructions. Committed PDF hashes and build-generated document hashes
 have separate scopes; use DOCUMENT-SHA256SUMS from the latest bundle for its PDFs.
+
+## Publication update — 10 October 2026
+
+The maintainer reported on 9 October that Build #38 final boot/install testing passed. Exact tested hardware/VM layouts and step-by-step evidence still need recording; do not equate a general acceptance with universal compatibility. SourceForge project restoration is pending and permanent ISO hosting is not confirmed. The existing `v1.0-udaan` tag still records Build #37, not the accepted Build #38 ISO. Source/license and artwork clearance gates remain open under `docs/COMPLIANCE.md`.
 
 ## Next evidence to record
 
