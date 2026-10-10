@@ -28,13 +28,10 @@ offline help and a desktop prepared for browsing, documents and creative work.
 
 **[jatayuos.in — official website and download destination](https://jatayuos.in)**
 
-The website will provide ISO downloads, installation guidance and links to
-SourceForge. Website setup and permanent ISO delivery are in progress.
-The planned SourceForge launch is **11 October 2026**, after final validation
-and publication checks.
+The official website is the canonical source for release announcements and verified downloads. As of 10 October 2026, permanent ISO hosting is not yet confirmed; do not treat a download as official until its checksum matches the Build #38 checksum below. SourceForge project restoration is pending.
 
-The [GitHub 1.0 Udaan release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) records the earlier Build #37 source.
-The final, maintainer-tested and accepted ISO is **Build #38**, recorded below. This repository and its release remain **private**.
+The existing [GitHub 1.0 Udaan release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) records the earlier Build #37 source. **Do not identify that tag as the Build #38 ISO source.**
+The final, maintainer-tested and accepted ISO is **Build #38**, recorded below. The repository is under pre-publication review; public access and ISO redistribution are separate approval steps.
 The ISO is not attached to the GitHub release.
 
 ## Your desktop, ready for everyday work
@@ -187,8 +184,7 @@ grant trademark rights or imply endorsement by upstream projects or government.
 [Corresponding-source procedure](docs/legal/SOURCE-PUBLICATION.md) ·
 [Creative Studio source bundle](vendor/jatayu-tools-2.0.2-source.tar.gz)
 
-Corresponding-source delivery, artwork/documentation permissions and upstream
-redistribution review remain tracked before public ISO distribution.
+**Public ISO distribution is not yet legally cleared.** Corresponding-source delivery, artwork/documentation permissions and upstream redistribution review remain outstanding; see the compliance checklist before publishing any binary.
 
 ---
 
