@@ -87,10 +87,7 @@ The maintainer verified the downloaded ISO against bundled SHA256SUMS on
 7 October 2026 and confirmed the Build #38 source commit. See the
 [recorded checksum](docs/releases/1.0-udaan-build38.SHA256SUMS) and
 [verification result](docs/VERIFY-ISO.md#recorded-build-38-verification).
-The maintainer confirmed on **9 October 2026** that the final Build #38 ISO was
-tested and passed, completing final boot/install acceptance. This records the
-maintainer's acceptance, rather than independent certification of every hardware
-or installation scenario. Public ISO download delivery remains pending.
+**Build #38 is the final, maintainer-tested and approved JatayuOS 1.0 (Udaan) ISO.** The maintainer confirmed successful final boot and installation testing on 9 October 2026 and reconfirmed release eligibility on 10 October. This is maintainer acceptance, not independent certification for every hardware or installation scenario. Public distribution remains subject to the separate licensing/source and hosting checks. Public ISO download delivery remains pending.
 
 Build #38 adds explicit Info Center helpers, RTKit, Flatpak/Discover/Flathub,
 JatayuOS Info Center branding and authenticated on-demand Waydroid controls.
