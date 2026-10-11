@@ -31,8 +31,12 @@ offline help and a desktop prepared for browsing, documents and creative work.
 The official website is the canonical source for release announcements and verified downloads. As of 10 October 2026, permanent ISO hosting is not yet confirmed; do not treat a download as official until its checksum matches the Build #38 checksum below. SourceForge project restoration is pending.
 
 The existing [GitHub 1.0 Udaan release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) records the earlier Build #37 source. **Do not identify that tag as the Build #38 ISO source.**
-The final ISO is **Build #38 — maintainer-tested and approved for release**. Technical acceptance does not replace the separate distribution and licensing checks. The repository is under pre-publication review; public access and ISO redistribution are separate approval steps.
+The final ISO is **Build #38 — maintainer-tested and approved for release**. Technical acceptance does not replace the separate distribution and licensing checks. The source repository is public; availability of source code and authorization to redistribute the entire ISO are separate matters.
 The ISO is not attached to the GitHub release.
+
+## Public source code
+
+The [JatayuOS source code and exact Build #38 source snapshot](docs/SOURCE-CODE.md) are publicly available. The accepted Build #38 source revision is [`eb7d73a1`](https://github.com/jatayuos4u/jatayuos/tree/eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3). The existing `v1.0-udaan` release tag points to Build #37; do not confuse these revisions. Complete third-party corresponding-source distribution and legal review are separate requirements and are not yet confirmed.
 
 ## Your desktop, ready for everyday work
 
