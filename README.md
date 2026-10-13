@@ -2,154 +2,142 @@
 
 <img src="assets/logo.png" alt="JatayuOS logo" width="160">
 
-# JatayuOS 1.0 · Udaan
+# JatayuOS 1.0 (Udaan)
 
-**Udaan Aapki. Shakti Bharat Ki.**
+**India’s Own Digital Experience**
 
-Made in India · Debian 13 Trixie · KDE Plasma 6.3.6 · AMD64
+*Udaan Aapki. Shakti Bharat Ki.*
 
-### [Download & explore JatayuOS](https://jatayuos.in)
+Made in India · Debian 13 (Trixie) · KDE Plasma · amd64
 
-[Release 1.0 Udaan](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) · [User Manual](assets/USER-MANUAL.pdf) · [Installation Guide](assets/INSTALLATION-GUIDE.pdf) · [FAQ](assets/FAQ.pdf)
+### [Download JatayuOS 1.0 (Udaan)](https://jatayuos.in/download/)
+
+[Official Website](https://jatayuos.in/) · [User Documentation](https://jatayuos.in/docs/) · [Installation Guide](https://jatayuos.in/docs/installation/) · [Support](https://jatayuos.in/support/)
 
 </div>
 
 ---
 
-JatayuOS is an independent desktop Linux distribution maintained by **Anup Yadav**.
-It combines Debian 13 Trixie and KDE Plasma with Jatayu applications, illustrated
-offline help and a desktop prepared for browsing, documents and creative work.
+JatayuOS is a free desktop Linux distribution made in India for everyday work, learning and creativity. Maintained by **Anup Yadav**, it combines Debian 13 (Trixie), KDE Plasma and Jatayu applications in a familiar desktop environment.
 
-![JatayuOS KDE Plasma desktop](docs/screenshots/build35/desktop.png)
+![JatayuOS desktop](docs/screenshots/build35/desktop.png)
 
-*Desktop overview. See [screenshot provenance](docs/SCREENSHOTS.md) for the original testing captures.*
+*Desktop overview from an earlier test installation. See [screenshot provenance](docs/SCREENSHOTS.md) for capture details.*
 
-## Get JatayuOS
+## Download and verify
 
-**[jatayuos.in — official website and download destination](https://jatayuos.in)**
+**JatayuOS 1.0 (Udaan) is available now.** Download the final tested ISO through the [official download page](https://jatayuos.in/download/), which links to [SourceForge](https://sourceforge.net/projects/jatayuos/files/1.0-Udaan/JatayuOS-1.0-Udaan-amd64.iso/download).
 
-The official website is the canonical source for release announcements and verified downloads. As of 10 October 2026, permanent ISO hosting is not yet confirmed; do not treat a download as official until its checksum matches the Build #38 checksum below. SourceForge project restoration is pending.
+| Release detail | Value |
+| --- | --- |
+| Version | JatayuOS 1.0 (Udaan) |
+| Architecture | amd64 / x86-64 — 64-bit Intel and AMD PCs |
+| ISO filename | `JatayuOS-1.0-Udaan-amd64.iso` |
+| ISO size | 2,373,058,560 bytes (2.37 GB / 2.21 GiB) |
+| Installation | No internet required to install from the ISO |
+| Availability | Free to download and use |
 
-The existing [GitHub 1.0 Udaan release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) records the earlier Build #37 source. **Do not identify that tag as the Build #38 ISO source.**
-The final ISO is **Build #38 — maintainer-tested and approved for release**. Technical acceptance does not replace the separate distribution and licensing checks. The source repository is public; availability of source code and authorization to redistribute the entire ISO are separate matters.
-The ISO is not attached to the GitHub release.
+The maintainer tested the final ISO for boot and installation and verified downloaded copies against its SHA256 on **13 October 2026**. This is maintainer verification, not certification for every hardware configuration.
 
-## Public source code
+Expected ISO SHA256:
 
-The [JatayuOS source code and exact Build #38 source snapshot](docs/SOURCE-CODE.md) are publicly available. The accepted Build #38 source revision is [`eb7d73a1`](https://github.com/jatayuos4u/jatayuos/tree/eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3). The existing `v1.0-udaan` release tag points to Build #37; do not confuse these revisions. Complete third-party corresponding-source distribution and legal review are separate requirements and are not yet confirmed.
+```text
+5a5dbc79f724c8353f1173e55edde3f905d9ddb287272d492930e6730650e040
+```
+
+Linux:
+
+```bash
+sha256sum JatayuOS-1.0-Udaan-amd64.iso
+```
+
+Windows PowerShell:
+
+```powershell
+Get-FileHash .\JatayuOS-1.0-Udaan-amd64.iso -Algorithm SHA256
+```
+
+Compare the complete result before using the ISO. Uppercase and lowercase letters are equivalent. The checksum applies to the ISO, not a ZIP containing it. You can also [download SHA256SUMS directly from the website](https://jatayuos.in/SHA256SUMS).
+
+If a SourceForge download is slow or pauses, use **Problems Downloading?** on its download page to choose another mirror.
 
 ## Your desktop, ready for everyday work
 
 | Experience | Included tools |
 | --- | --- |
-| Desktop and files | KDE Plasma, Dolphin and image/thumbnail preview backends |
+| Desktop and files | KDE Plasma and Dolphin |
 | Browsing and productivity | Firefox ESR and LibreOffice |
-| Welcome and help | Aarambh with help, settings and application shortcuts |
-| Creative work | Jatayu Tools Creative Studio for local image and PDF workflows |
-| Personalization | Wallpaper Changer with an offline collection |
-| Information and shortcuts | Kavach, Sarkar Setu and Utsav |
-| Software installation | Debian APT packages and Flatpak apps from Flathub through Discover |
-| System information and audio | Info Center with JatayuOS branding, diagnostic helpers and RTKit |
-| Android setup | Waydroid on demand through Android Setup; Android images and initialization are separate |
+| Welcome and shortcuts | Aarambh |
+| Image and PDF workflows | Jatayu Tools Creative Studio |
+| Personalization | Wallpaper Changer |
+| Information and guidance | Kavach, Sarkar Setu and Utsav |
+| Software management | APT and Flatpak support through Discover |
+| Installation | Calamares graphical installer |
 
-Sarkar Setu links to external services and does not imply government affiliation.
-Waydroid requires compatible session, kernel and graphics support; Google apps
-and ARM translation are not bundled.
+Sarkar Setu links to external services and does not imply government affiliation. Kavach provides guidance and security shortcuts. Optional Android setup uses Waydroid; images and initialization require separate setup and compatible hardware/session support.
 
 ## System requirements
 
-| Component | Requirement |
-| --- | --- |
-| Processor / architecture | 64-bit x86 processor; AMD64 (x86-64) |
-| RAM | **4 GB minimum; 8 GB recommended** |
-| Installation storage | At least 25 GB available; allow more for applications and personal files |
-| Internet | Not required for installation; required for updates, new downloads and Android image setup |
+| Component | Minimum | Recommended |
+| --- | --- | --- |
+| Processor | 64-bit Intel / AMD (x86-64) | Modern 64-bit Intel / AMD |
+| Memory | **4 GB RAM** | 8 GB RAM or more |
+| Free storage | 25 GB | 40 GB or more |
+| Display | 1024 × 768 | Full HD (1920 × 1080) |
 
-Calamares retains a 1.5 GB installer threshold. This allows installation on
-lower-memory systems; the product's usable-performance minimum remains 4 GB.
+Allow extra storage for your files and applications. Internet is needed to download the ISO, install additional software, receive updates and use online services.
 
-## 1.0 Udaan build record
+Try the live USB to check your display, Wi-Fi, audio and input devices before installation. Back up important files before changing disk partitions.
 
-The latest ISO was assembled successfully on **7 October 2026**.
+## Documentation and support
 
-| Detail | Verified value |
-| --- | --- |
-| Existing release tag | `v1.0-udaan` (earlier Build #37 source) |
-| Build | [GitHub Actions #38](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270) — successful |
-| Artifact-producing source | `eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3` |
-| Base / desktop | Debian 13 Trixie / KDE Plasma 6.3.6 |
-| Architecture | AMD64 (x86-64) |
-| ISO filename | `JatayuOS-1.0-Udaan-amd64.iso` |
-| ISO size | 2,373,058,560 bytes (2.21 GiB) |
-| Integration / installer | `1.0` / Calamares `3.3.14-1+jatayu3` |
-| ISO SHA256 | `5a5dbc79f724c8353f1173e55edde3f905d9ddb287272d492930e6730650e040` |
+Read the guides on the official website:
 
-Static and dependency/source prechecks, assembled-image checks and ISO structure
-validation passed. The CI suite ran 15 tests: 14 passed and one backup round-trip
-test was skipped because the builder lacks rsync. All 15 passed in local validation.
-The maintainer verified the downloaded ISO against bundled SHA256SUMS on
-7 October 2026 and confirmed the Build #38 source commit. See the
-[recorded checksum](docs/releases/1.0-udaan-build38.SHA256SUMS) and
-[verification result](docs/VERIFY-ISO.md#recorded-build-38-verification).
-**Build #38 is the final, maintainer-tested and approved JatayuOS 1.0 (Udaan) ISO.** The maintainer confirmed successful final boot and installation testing on 9 October 2026 and reconfirmed release eligibility on 10 October. This is maintainer acceptance, not independent certification for every hardware or installation scenario. Public distribution remains subject to the separate licensing/source and hosting checks. Public ISO download delivery remains pending.
+- [User Manual and documentation](https://jatayuos.in/docs/)
+- [Installation Guide](https://jatayuos.in/docs/installation/)
+- [Support and contact](https://jatayuos.in/support/)
+- [Community Discussions](https://github.com/jatayuos4u/jatayuos/discussions)
+- [Report a bug](https://github.com/jatayuos4u/jatayuos/issues)
 
-Build #38 adds explicit Info Center helpers, RTKit, Flatpak/Discover/Flathub,
-JatayuOS Info Center branding and authenticated on-demand Waydroid controls.
-Baloo indexing and its KRunner file-search provider are disabled by default;
-launcher favourites contain installed applications. See the
-[full change record and acceptance checklist](docs/FINAL-BUILD-2026-10-07.md).
+When reporting a problem, include your release version, ISO checksum, hardware details, boot mode, steps to reproduce it and the exact error message. Remove private information from logs and screenshots.
+
+Debian packages receive updates through APT/Discover. Flatpak applications receive updates through their configured remote. A signed Jatayu application repository is not yet configured; a new ISO does not automatically upgrade an installed system.
+
+## Source code
+
+- [Archived release sources — Internet Archive](https://archive.org/details/jatayuos-1-0-udaan-build38-sources)
+- [Exact source revision for the downloadable ISO](https://github.com/jatayuos4u/jatayuos/tree/eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3)
+- [Source documentation](docs/SOURCE-CODE.md)
+- [Third-party notices](THIRD-PARTY-NOTICES.md)
+
+Release source commit:
+
+```text
+eb7d73a1b1b7ea55174a9caeda2ff2824ec259a3
+```
+
+The archive URL retains its original internal identifier. The public product name is **JatayuOS 1.0 (Udaan)**.
 
 <details>
-<summary>Maintainer: temporary build artifact and validation records</summary>
+<summary>Source tags and developer build records</summary>
 
-The [private ISO bundle](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270/artifacts/11468269941)
-expires **8 October 2026 at 08:09:32 UTC (13:39:32 IST)**. Preserve it before
-expiry. The bundle includes checksum/provenance files, package manifests and
-notices. The Actions ZIP digest is not the ISO checksum. See
-[how to verify the downloaded ISO](docs/VERIFY-ISO.md).
+The existing `v1.0-udaan` tag remains at the earlier revision `45b7d1f76dea0184b0fcf7dd1c900f4edf139552`. Its automatic GitHub source archives do not represent the current downloadable ISO. Use the exact source revision and archived release collection above.
 
-[Current status](docs/STATUS.md) · [Release notes](docs/RELEASE-1.0.md) ·
-[Build metadata](docs/releases/1.0-udaan-final.json) ·
-[Release checklist](docs/RELEASE-CHECKLIST.md)
+The final ISO was produced by [Actions run #38](https://github.com/jatayuos4u/jatayuos/actions/runs/37589010270). The `v1.0-udaan-build38` release record remains a draft.
+
+[Build and acceptance record](docs/FINAL-BUILD-2026-10-07.md) · [ISO verification](docs/VERIFY-ISO.md) · [Release checklist](docs/RELEASE-CHECKLIST.md)
 
 </details>
 
-## Documentation
+## Known limitations
 
-| Guide | Purpose |
-| --- | --- |
-| [User Manual · edition 2](assets/USER-MANUAL.pdf) | 16 illustrated pages covering the desktop and Jatayu apps |
-| [Installation Guide · edition 2](assets/INSTALLATION-GUIDE.pdf) | 6 pages of installation guidance and precautions |
-| [FAQ · edition 2](assets/FAQ.pdf) | 5 pages of common questions |
-| [Quick user guide](docs/USER-GUIDE.md) | Repository-readable help |
-| [Windows dual boot](docs/DUAL-BOOT.md) | Partition preservation and validation guidance |
-| [Update policy](docs/UPDATES.md) | Debian updates and Jatayu application delivery |
-| [Document inventory](docs/DOCUMENTATION.md) | Versions, committed PDF hashes and capture provenance |
+The Utsav greeting-handler security correction merged after the final ISO was generated. It is present in the current repository, but the unchanged ISO does not include that later patch.
 
-Build #38 regenerated and bundled the edition 2 guides with updated Flatpak
-and on-demand Android instructions. Repository PDF hashes
-describe committed documents; generated document hashes are in the build bundle.
-
-## Updates and support
-
-Debian package updates are available through **APT/Discover**. Flatpak apps
-receive updates through **Flatpak/Discover** from their configured remote. A signed Jatayu
-application repository is not yet configured. New ISO releases do not
-automatically upgrade installed systems.
-
-For support, use [GitHub Issues](https://github.com/jatayuos4u/jatayuos/issues)
-when you have repository access, or email **jatayuos4u@gmail.com**. Include the
-ISO checksum, boot mode, hardware/VM details, reproduction steps and relevant
-logs. Remove private data before sharing.
-
-Secure Boot, encryption, every Windows disk layout and universal Android
-compatibility have not been certified. Check the [testing checklist](docs/TESTING.md)
-and installation guidance before changing disks.
+Secure Boot, encryption, every Windows partition layout and universal Android compatibility have not been certified. Review the installation guidance and [testing checklist](docs/TESTING.md) for your setup.
 
 ## Build from source
 
-Use a dedicated privileged Debian 13 builder with mount/chroot support and
-sufficient disk space.
+Use a dedicated privileged Debian 13 builder with mount/chroot support and sufficient disk space:
 
 ```sh
 python3 scripts/preflight.py
@@ -157,42 +145,26 @@ sudo bash scripts/build.sh --precheck-only
 sudo bash scripts/build.sh
 ```
 
-The full build runs the dependency/source precheck before compilation.
-Output includes `out/JatayuOS-1.0-Udaan-amd64.iso`, `SHA256SUMS`,
-package manifests and notices. Regenerate offline guides with
-`python3 scripts/generate-documentation.py` using ReportLab and DejaVu fonts.
+The build runs dependency/source prechecks before compilation. Output includes the ISO, `SHA256SUMS`, package manifests and notices.
 
-Manual full Actions builds target main and require the BUILD confirmation.
-The job cap is 50 minutes; artifact retention is one day. Ordinary source and
-documentation edits do not start an ISO build. Builds do not automatically
-publish a release.
+[Build documentation](docs/FINAL-BUILD-2026-10-07.md) · [Source publication procedure](docs/legal/SOURCE-PUBLICATION.md)
 
 ## Credits and licensing
 
-Created and maintained by **Anup Yadav**. JatayuOS builds on the work of
-**Debian, Linux, KDE, Mozilla, LibreOffice, Qt, Calamares, Fcitx, Waydroid**
-and many other upstream contributors, who retain their authorship, licences
-and marks.
+Created and maintained by **Anup Yadav**. JatayuOS builds on Debian, Linux, KDE, Mozilla, LibreOffice, Qt, Calamares, Fcitx, Waydroid and many other upstream projects.
 
-Original Jatayu software is **GPL-3.0-or-later**, within the scope recorded in
-[COPYRIGHT.md](COPYRIGHT.md); see [LICENSE](LICENSE). Third-party components,
-documentation and artwork have separate terms. The software licence does not
-grant trademark rights or imply endorsement by upstream projects or government.
+Original Jatayu software uses **GPL-3.0-or-later** within the scope recorded in [COPYRIGHT.md](COPYRIGHT.md); see [LICENSE](LICENSE). Third-party software, documentation and artwork retain their respective licenses and attribution requirements.
 
-[Third-party credits](THIRD-PARTY-NOTICES.md) ·
-[Publication checklist](docs/COMPLIANCE.md) ·
-[Source audit](docs/legal/PUBLICATION-AUDIT.md) ·
-[Corresponding-source procedure](docs/legal/SOURCE-PUBLICATION.md) ·
-[Creative Studio source bundle](vendor/jatayu-tools-2.0.2-source.tar.gz)
+The release source archive is linked above. Its completeness and all redistribution conditions have not been independently audited in this update. Consult the [publication checklist](docs/COMPLIANCE.md) and [source audit](docs/legal/PUBLICATION-AUDIT.md) for the recorded review status.
 
-**Public ISO distribution is not yet legally cleared.** Corresponding-source delivery, artwork/documentation permissions and upstream redistribution review remain outstanding; see the compliance checklist before publishing any binary.
+JatayuOS is an independent project made in India. It is not affiliated with, funded by or endorsed by the Government of India. Software is provided without warranty, subject to its applicable licenses.
 
 ---
 
 <div align="center">
 
-**JatayuOS · Made in India**
+**JatayuOS 1.0 (Udaan) · Made in India**
 
-[Official website & downloads](https://jatayuos.in) · [Release](https://github.com/jatayuos4u/jatayuos/releases/tag/v1.0-udaan) · [Documentation](docs/DOCUMENTATION.md)
+[Download](https://jatayuos.in/download/) · [Documentation](https://jatayuos.in/docs/) · [Support](https://jatayuos.in/support/)
 
 </div>
